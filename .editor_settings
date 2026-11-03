@@ -73,28 +73,12 @@
         :html
       ]
       [
-        "/assets/ground.tilemap"
-        :scene
-      ]
-      [
-        "/game.project"
-        :form
-      ]
-      [
         "/main/camera.script"
         :code
       ]
       [
         "/main/character.script"
         :code
-      ]
-      [
-        "/main/camera.go"
-        :scene
-      ]
-      [
-        "/main/main.collection"
-        :scene
       ]
       [
         "/input/game.input_binding"
@@ -106,6 +90,22 @@
       ]
       [
         "/assets/character.atlas"
+        :scene
+      ]
+      [
+        "/game.project"
+        :form
+      ]
+      [
+        "/main/camera.go"
+        :scene
+      ]
+      [
+        "/assets/ground.tilemap"
+        :scene
+      ]
+      [
+        "/main/main.collection"
         :scene
       ]
     ]

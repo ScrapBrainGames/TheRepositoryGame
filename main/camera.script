@@ -1,7 +1,7 @@
+go.property("Player", msg.url())
+
 function init(self)
-	-- Add initialization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	msg.post(self.Player, "player control")
 end
 
 function final(self)

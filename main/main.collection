@@ -7,6 +7,14 @@ instances {
     y: 200.0
     z: 50.0
   }
+  component_properties {
+    id: "control"
+    properties {
+      id: "Player"
+      value: "/character#character"
+      type: PROPERTY_TYPE_URL
+    }
+  }
 }
 instances {
   id: "character"

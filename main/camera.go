@@ -1,5 +1,5 @@
 components {
-  id: "player"
+  id: "control"
   component: "/main/camera.script"
 }
 embedded_components {

@@ -1,2 +1,38 @@
 name: "main"
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    x: 200.0
+    y: 200.0
+    z: 50.0
+  }
+  component_properties {
+    id: "control"
+    properties {
+      id: "Player"
+      value: "/character#character"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+}
+instances {
+  id: "character"
+  prototype: "/main/character.go"
+  position {
+    x: 200.0
+    y: 200.0
+  }
+}
 scale_along_z: 0
+embedded_instances {
+  id: "Ground"
+  data: "components {\n"
+  "  id: \"ground\"\n"
+  "  component: \"/assets/ground.tilemap\"\n"
+  "}\n"
+  ""
+  position {
+    z: -1.0
+  }
+}

@@ -20,8 +20,8 @@ instances {
   id: "character"
   prototype: "/main/character.go"
   position {
-    x: 323.0
-    y: 254.0
+    x: 200.0
+    y: 200.0
   }
 }
 scale_along_z: 0

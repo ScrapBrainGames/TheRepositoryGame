@@ -11,15 +11,19 @@ function final(self)
 end
 
 function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+
 end
 
 function late_update(self, dt)
-	-- This function is called at the end of update cycle but before render
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	local target
+	if self.Player then
+		target = go.get_position(self.Player)
+	else
+		target = go.get_position()
+	end
+	target.z = 50
+
+	go.set_position(target)
 end
 
 function fixed_update(self, dt)

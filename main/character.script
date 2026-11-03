@@ -58,7 +58,7 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("up") then
 		self.direction.y = 1
 	elseif action_id == hash("down") then
-		self.direction.y = self.direction.x - 1
+		self.direction.y = self.direction.y - 1
 	elseif action_id == hash("fire") and action.pressed then
 		factory.create("#factory")
 	end

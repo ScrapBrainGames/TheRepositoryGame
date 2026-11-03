@@ -1,3 +1,7 @@
+components {
+  id: "player"
+  component: "/main/camera.script"
+}
 embedded_components {
   id: "camera"
   type: "camera"

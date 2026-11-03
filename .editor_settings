@@ -5,6 +5,29 @@
   }
   :scene {
     :resource-settings {
+      "/assets/character.atlas" {
+        :camera {
+          :focus-point [
+            42.91720368045236
+            34.725333854524465
+            0.0
+          ]
+          :fov-x 227.50776930006631
+          :fov-y 105.85557023299175
+          :position [
+            42.91720368045236
+            34.725333854524465
+            5000.0
+          ]
+          :projection :orthographic
+          :rotation [
+            0.0
+            0.0
+            0.0
+            1.0
+          ]
+        }
+      }
     }
   }
   :workflow {
@@ -38,14 +61,6 @@
           "/main/character.go"
           :scene
         ]
-        [
-          "/assets/character.atlas"
-          :scene
-        ]
-        [
-          "/main/camera.script"
-          :code
-        ]
       ]
     ]
     :recent-files [
@@ -66,11 +81,15 @@
         :form
       ]
       [
-        "/assets/character.atlas"
-        :scene
+        "/main/camera.script"
+        :code
       ]
       [
-        "/main/character.go"
+        "/main/character.script"
+        :code
+      ]
+      [
+        "/main/camera.go"
         :scene
       ]
       [
@@ -78,12 +97,16 @@
         :scene
       ]
       [
-        "/main/camera.go"
+        "/input/game.input_binding"
+        :form
+      ]
+      [
+        "/main/character.go"
         :scene
       ]
       [
-        "/main/camera.script"
-        :code
+        "/assets/character.atlas"
+        :scene
       ]
     ]
   }

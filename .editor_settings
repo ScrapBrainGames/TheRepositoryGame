@@ -14,12 +14,76 @@
           "/README.md"
           :html
         ]
+        [
+          "/assets/ground.tilesource"
+          :scene
+        ]
+        [
+          "/main/main.collection"
+          :scene
+        ]
+        [
+          "/assets/ground.tilemap"
+          :scene
+        ]
+        [
+          "/main/camera.go"
+          :scene
+        ]
+        [
+          "/game.project"
+          :form
+        ]
+        [
+          "/main/character.go"
+          :scene
+        ]
+        [
+          "/assets/character.atlas"
+          :scene
+        ]
+        [
+          "/main/camera.script"
+          :code
+        ]
       ]
     ]
     :recent-files [
       [
+        "/assets/ground.tilesource"
+        :scene
+      ]
+      [
         "/README.md"
         :html
+      ]
+      [
+        "/assets/ground.tilemap"
+        :scene
+      ]
+      [
+        "/game.project"
+        :form
+      ]
+      [
+        "/assets/character.atlas"
+        :scene
+      ]
+      [
+        "/main/character.go"
+        :scene
+      ]
+      [
+        "/main/main.collection"
+        :scene
+      ]
+      [
+        "/main/camera.go"
+        :scene
+      ]
+      [
+        "/main/camera.script"
+        :code
       ]
     ]
   }

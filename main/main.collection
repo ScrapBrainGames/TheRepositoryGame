@@ -1,2 +1,30 @@
 name: "main"
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    x: 200.0
+    y: 200.0
+    z: 50.0
+  }
+}
+instances {
+  id: "character"
+  prototype: "/main/character.go"
+  position {
+    x: 323.0
+    y: 254.0
+  }
+}
 scale_along_z: 0
+embedded_instances {
+  id: "Ground"
+  data: "components {\n"
+  "  id: \"ground\"\n"
+  "  component: \"/assets/ground.tilemap\"\n"
+  "}\n"
+  ""
+  position {
+    z: -1.0
+  }
+}

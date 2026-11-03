@@ -1,4 +1,7 @@
 images {
   image: "/assets/images/square_round_32.png"
 }
+images {
+  image: "/assets/images/circle_24.png"
+}
 extrude_borders: 2

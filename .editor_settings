@@ -61,6 +61,14 @@
           "/main/character.go"
           :scene
         ]
+        [
+          "/main/bullet.go"
+          :scene
+        ]
+        [
+          "/assets/character.atlas"
+          :scene
+        ]
       ]
     ]
     :recent-files [
@@ -85,7 +93,11 @@
         :form
       ]
       [
-        "/main/character.go"
+        "/main/camera.go"
+        :scene
+      ]
+      [
+        "/assets/ground.tilemap"
         :scene
       ]
       [
@@ -97,11 +109,11 @@
         :form
       ]
       [
-        "/main/camera.go"
+        "/main/character.go"
         :scene
       ]
       [
-        "/assets/ground.tilemap"
+        "/main/bullet.go"
         :scene
       ]
       [

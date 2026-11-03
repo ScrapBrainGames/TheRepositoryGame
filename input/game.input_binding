@@ -32,9 +32,9 @@ key_trigger {
 }
 mouse_trigger {
   input: MOUSE_BUTTON_1
-  action: "left click"
+  action: "fire"
 }
 mouse_trigger {
   input: MOUSE_BUTTON_2
-  action: "right click"
+  action: "aim"
 }

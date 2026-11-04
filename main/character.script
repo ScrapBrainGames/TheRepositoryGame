@@ -1,9 +1,31 @@
 -- Which character is this?
 go.property("Character", "Clint")
+go.property("radius", 18)
+
+local function fire(self)
+	local position = go.get_position()
+	local direction = self.mouse - position
+	direction.z = 0
+	direction = vmath.normalize(direction)
+	position = position + direction * 32
+
+	local props = {
+		direction = direction,
+		speed = 400,
+		damage = 1,
+		sender = go.get_id()
+	}
+	local bullet = factory.create("#factory", position, nil, props)
+end
 
 function init(self)
 	self.player = false
-	self.direction = vmath.vector3(0, 0, 0)
+	self.direction = vmath.vector3()
+	self.mouse = vmath.vector3()
+	self.health = 3
+	self.aim_movement = 60
+	self.normal_movement = 180
+	self.aiming = false
 end
 
 function final(self)
@@ -13,16 +35,16 @@ function final(self)
 end
 
 function update(self, dt)
-	local speed = 180
+	-- Set speed dependent on aiming or not
+	local speed = self.aiming and self.aim_movement or self.normal_movement
+
 	local position = go.get_position()
 
-	print(self.direction)
 	if self.direction.x ~= 0 or self.direction.y ~= 0 then
 		self.direction = vmath.normalize(self.direction)
+		position = position + self.direction * speed * dt
+		go.set_position(position)
 	end
-
-	position = position + self.direction * speed * dt
-	go.set_position(position)
 
 	self.direction.x = 0
 	self.direction.y = 0
@@ -47,6 +69,16 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("player control") then
 		self.player = true
 		msg.post(".", "acquire_input_focus")
+	elseif message_id == hash("contact_point_response") then
+		-- Handle collisions with walls and barriers
+		local position = go.get_position()
+		position = position + message.normal * (message.distance + 1)
+		go.set_position(position)
+	elseif message_id == hash("damage") then
+		self.health = self.health - message.damage
+		if self.health <= 0 then
+			go.delete()
+		end
 	end
 end
 
@@ -60,7 +92,17 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("down") then
 		self.direction.y = self.direction.y - 1
 	elseif action_id == hash("fire") and action.pressed then
-		factory.create("#factory")
+		if self.aiming then
+			fire(self)
+		end
+	elseif action_id == hash("aim") then
+		if action.pressed then
+			self.aiming = true
+		elseif action.released then
+			self.aiming = false
+		end
+	elseif action.x then
+		self.mouse = camera.screen_xy_to_world(action.screen_x, action.screen_y)
 	end
 end
 

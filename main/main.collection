@@ -24,6 +24,25 @@ instances {
     y: 200.0
   }
 }
+instances {
+  id: "barrier"
+  prototype: "/main/barrier.go"
+  position {
+    x: 400.0
+    y: 200.0
+  }
+}
+instances {
+  id: "wall"
+  prototype: "/main/wall.go"
+  position {
+    x: 400.0
+  }
+}
+instances {
+  id: "character1"
+  prototype: "/main/character.go"
+}
 scale_along_z: 0
 embedded_instances {
   id: "Ground"

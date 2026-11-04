@@ -1,0 +1,87 @@
+script: "/main/weapon.gui_script"
+textures {
+  name: "hud"
+  texture: "/assets/hud.atlas"
+}
+nodes {
+  position {
+    x: 700.0
+    y: 100.0
+  }
+  size {
+    x: 200.0
+    y: 200.0
+  }
+  type: TYPE_BOX
+  id: "cylinder"
+  xanchor: XANCHOR_RIGHT
+  yanchor: YANCHOR_BOTTOM
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    y: 40.0
+  }
+  type: TYPE_BOX
+  texture: "hud/loaded"
+  id: "chamber1"
+  parent: "cylinder"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -34.0
+    y: 20.0
+  }
+  type: TYPE_BOX
+  texture: "hud/loaded"
+  id: "chamber2"
+  parent: "cylinder"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -34.0
+    y: -20.0
+  }
+  type: TYPE_BOX
+  texture: "hud/loaded"
+  id: "chamber3"
+  parent: "cylinder"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    y: -40.0
+  }
+  type: TYPE_BOX
+  texture: "hud/loaded"
+  id: "chamber4"
+  parent: "cylinder"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 34.0
+    y: -20.0
+  }
+  type: TYPE_BOX
+  texture: "hud/loaded"
+  id: "chamber5"
+  parent: "cylinder"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 34.0
+    y: 20.0
+  }
+  type: TYPE_BOX
+  texture: "hud/loaded"
+  id: "chamber6"
+  parent: "cylinder"
+  size_mode: SIZE_MODE_AUTO
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

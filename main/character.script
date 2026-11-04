@@ -1,21 +1,47 @@
+local weapons = require "main.weapons"
+
 -- Which character is this?
 go.property("Character", "Clint")
 go.property("radius", 18)
 
-local function fire(self)
-	local position = go.get_position()
-	local direction = self.mouse - position
-	direction.z = 0
-	direction = vmath.normalize(direction)
-	position = position + direction * 32
+local function aim(self)
+	self.aiming = true
+	self.weapon:cycle()
+end
 
-	local props = {
-		direction = direction,
-		speed = 400,
-		damage = 1,
-		sender = go.get_id()
-	}
-	local bullet = factory.create("#factory", position, nil, props)
+local function lower(self)
+	self.aiming = false
+	self.weapon.cocked = false
+end
+
+local function fire(self)
+	if self.weapon.cocked then
+		if self.weapon:fire() then
+			-- Bang!
+			print("bang")
+
+			local position = go.get_position()
+			local direction = self.mouse - position
+			direction.z = 0
+			direction = vmath.normalize(direction)
+			position = position + direction * 32
+
+			local props = {
+				direction = direction,
+				speed = 400,
+				damage = 1,
+				sender = go.get_id()
+			}
+			local bullet = factory.create("#factory", position, nil, props)
+		else
+			-- Click!
+			print("click")
+		end
+	else
+		-- Do we want the weapon to cycle on left click?
+		--self.weapon:cycle()
+	end
+	pprint(self.weapon.chambers)
 end
 
 function init(self)
@@ -26,6 +52,9 @@ function init(self)
 	self.aim_movement = 60
 	self.normal_movement = 180
 	self.aiming = false
+
+	-- Fill your hand, you son of a bitch
+	self.weapon = weapons.get()
 end
 
 function final(self)
@@ -97,12 +126,14 @@ function on_input(self, action_id, action)
 		end
 	elseif action_id == hash("aim") then
 		if action.pressed then
-			self.aiming = true
+			aim(self)
 		elseif action.released then
-			self.aiming = false
+			lower(self)
 		end
 	elseif action.x then
 		self.mouse = camera.screen_xy_to_world(action.screen_x, action.screen_y)
+	elseif action_id == hash("reload") then
+		self.weapon:reload()
 	end
 end
 

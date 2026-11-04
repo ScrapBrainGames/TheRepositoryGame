@@ -23,6 +23,9 @@ function init(self)
 	self.direction = vmath.vector3()
 	self.mouse = vmath.vector3()
 	self.health = 3
+	self.aim_movement = 30
+	self.normal_movement = 180
+	self.aiming = false
 end
 
 function final(self)
@@ -32,7 +35,9 @@ function final(self)
 end
 
 function update(self, dt)
-	local speed = 180
+	-- Set speed dependent on aiming or not
+	local speed = self.aiming and self.aim_movement or self.normal_movement
+
 	local position = go.get_position()
 
 	if self.direction.x ~= 0 or self.direction.y ~= 0 then
@@ -87,7 +92,15 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("down") then
 		self.direction.y = self.direction.y - 1
 	elseif action_id == hash("fire") and action.pressed then
-		fire(self)
+		if self.aiming then
+			fire(self)
+		end
+	elseif action_id == hash("aim") then
+		if action.pressed then
+			self.aiming = true
+		elseif action.released then
+			self.aiming = false
+		end
 	elseif action.x then
 		self.mouse = camera.screen_xy_to_world(action.screen_x, action.screen_y)
 	end

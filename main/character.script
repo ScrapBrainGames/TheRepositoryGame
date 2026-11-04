@@ -23,7 +23,7 @@ function init(self)
 	self.direction = vmath.vector3()
 	self.mouse = vmath.vector3()
 	self.health = 3
-	self.aim_movement = 30
+	self.aim_movement = 60
 	self.normal_movement = 180
 	self.aiming = false
 end

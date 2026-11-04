@@ -1,0 +1,15 @@
+animations {
+  id: "loaded"
+  images {
+    image: "/assets/images/circle_32.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "empty"
+  images {
+    image: "/assets/images/donut_32.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+extrude_borders: 2

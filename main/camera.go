@@ -2,6 +2,10 @@ components {
   id: "control"
   component: "/main/camera.script"
 }
+components {
+  id: "weapon"
+  component: "/main/weapon.gui"
+}
 embedded_components {
   id: "camera"
   type: "camera"

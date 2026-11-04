@@ -1,3 +1,7 @@
+components {
+  id: "bullet"
+  component: "/main/bullet.script"
+}
 embedded_components {
   id: "sprite"
   type: "sprite"

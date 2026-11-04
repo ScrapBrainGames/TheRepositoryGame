@@ -8,15 +8,153 @@
       "/assets/character.atlas" {
         :camera {
           :focus-point [
-            42.91720368045236
-            34.725333854524465
+            39.721279848183926
+            37.41325553425165
             0.0
           ]
-          :fov-x 227.50776930006631
-          :fov-y 105.85557023299175
+          :fov-x 270.96539336068776
+          :fov-y 126.0756778366169
           :position [
-            42.91720368045236
-            34.725333854524465
+            39.721279848183926
+            37.41325553425165
+            5000.0
+          ]
+          :projection :orthographic
+          :rotation [
+            0.0
+            0.0
+            0.0
+            1.0
+          ]
+        }
+      }
+      "/assets/ground.tilemap" {
+        :camera {
+          :focus-point [
+            878.1729434546301
+            355.1196483167424
+            0.0
+          ]
+          :fov-x 2904.5170704498555
+          :fov-y 1351.4233456283048
+          :position [
+            878.1729434546301
+            355.1196483167424
+            5000.0
+          ]
+          :projection :orthographic
+          :rotation [
+            0.0
+            0.0
+            0.0
+            1.0
+          ]
+        }
+      }
+      "/assets/ground.tilesource" {
+        :camera {
+          :focus-point [
+            41.929119047253735
+            32.83224491280205
+            0.0
+          ]
+          :fov-x 189.75421920641088
+          :fov-y 88.28947310242422
+          :position [
+            41.929119047253735
+            32.83224491280205
+            5000.0
+          ]
+          :projection :orthographic
+          :rotation [
+            0.0
+            0.0
+            0.0
+            1.0
+          ]
+        }
+      }
+      "/main/bullet.go" {
+        :camera {
+          :focus-point [
+            7.391985394088704
+            -3.2571890004482578
+            0.0
+          ]
+          :fov-x 226.80487127538487
+          :fov-y 105.5285235064241
+          :position [
+            7.391985394088704
+            -3.2571890004482578
+            5000.0
+          ]
+          :projection :orthographic
+          :rotation [
+            0.0
+            0.0
+            0.0
+            1.0
+          ]
+        }
+      }
+      "/main/camera.go" {
+        :camera {
+          :focus-point [
+            543.7102829702044
+            241.09907557711688
+            0.0
+          ]
+          :fov-x 3261.912587408181
+          :fov-y 1517.7135183232
+          :position [
+            543.7102829702044
+            241.09907557711688
+            5000.0
+          ]
+          :projection :orthographic
+          :rotation [
+            0.0
+            0.0
+            0.0
+            1.0
+          ]
+        }
+      }
+      "/main/character.go" {
+        :camera {
+          :focus-point [
+            15.440122461609981
+            18.732962498507106
+            0.0
+          ]
+          :fov-x 344.17369675766923
+          :fov-y 160.13828029506877
+          :position [
+            15.440122461609981
+            18.732962498507106
+            5000.0
+          ]
+          :projection :orthographic
+          :rotation [
+            0.0
+            0.0
+            0.0
+            1.0
+          ]
+        }
+      }
+      "/main/main.collection" {
+        :camera {
+          :focus-point [
+            359.94121140977614
+            231.12364874497518
+            0.0
+          ]
+          :fov-x 1044.7756943678169
+          :fov-y 486.116703764116
+          :position [
+            359.94121140977614
+            231.12364874497518
             5000.0
           ]
           :projection :orthographic
@@ -73,14 +211,6 @@
     ]
     :recent-files [
       [
-        "/assets/ground.tilesource"
-        :scene
-      ]
-      [
-        "/README.md"
-        :html
-      ]
-      [
         "/main/camera.script"
         :code
       ]
@@ -93,8 +223,24 @@
         :form
       ]
       [
+        "/README.md"
+        :html
+      ]
+      [
+        "/assets/ground.tilesource"
+        :scene
+      ]
+      [
+        "/main/main.collection"
+        :scene
+      ]
+      [
         "/main/camera.go"
         :scene
+      ]
+      [
+        "/game.project"
+        :form
       ]
       [
         "/assets/ground.tilemap"
@@ -105,8 +251,8 @@
         :scene
       ]
       [
-        "/game.project"
-        :form
+        "/main/bullet.script"
+        :code
       ]
       [
         "/main/character.go"
@@ -114,10 +260,6 @@
       ]
       [
         "/main/bullet.go"
-        :scene
-      ]
-      [
-        "/main/main.collection"
         :scene
       ]
     ]

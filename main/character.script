@@ -22,6 +22,7 @@ function init(self)
 	self.player = false
 	self.direction = vmath.vector3()
 	self.mouse = vmath.vector3()
+	self.health = 3
 end
 
 function final(self)
@@ -69,7 +70,10 @@ function on_message(self, message_id, message, sender)
 		position = position + message.normal * (message.distance + 1)
 		go.set_position(position)
 	elseif message_id == hash("damage") then
-		print(message.damage)
+		self.health = self.health - message.damage
+		if self.health <= 0 then
+			go.delete()
+		end
 	end
 end
 

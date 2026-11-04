@@ -1,6 +1,7 @@
 go.property("direction", vmath.vector3())
 go.property("speed", 1)
 go.property("damage", 1)
+go.property("sender", hash(""))
 
 go.property("ricochet", -0.5)
 
@@ -40,7 +41,12 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("contact_point_response") then
-		if message.other_id ~= self.last then
+		print(message.other_group)
+		-- Hit a character?
+		if message.other_group == hash("player") then
+			msg.post(message.other_id, "damage", { damage = self.damage })
+			go.delete()
+		elseif message.other_id ~= self.last then
 			-- Check for deflection
 			local normal = message.normal
 			local dot = vmath.dot(self.direction, normal)

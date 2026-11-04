@@ -39,6 +39,10 @@ instances {
     x: 400.0
   }
 }
+instances {
+  id: "character1"
+  prototype: "/main/character.go"
+}
 scale_along_z: 0
 embedded_instances {
   id: "Ground"

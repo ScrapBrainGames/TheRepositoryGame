@@ -12,7 +12,7 @@
             37.41325553425165
             0.0
           ]
-          :fov-x 270.96539336068776
+          :fov-x 275.2139796677369
           :fov-y 126.0756778366169
           :position [
             39.721279848183926
@@ -63,6 +63,52 @@
           :position [
             41.929119047253735
             32.83224491280205
+            5000.0
+          ]
+          :projection :orthographic
+          :rotation [
+            0.0
+            0.0
+            0.0
+            1.0
+          ]
+        }
+      }
+      "/main/barrel.go" {
+        :camera {
+          :focus-point [
+            -6.047181417311476
+            -2.7372255719485254
+            0.0
+          ]
+          :fov-x 115.53748214454599
+          :fov-y 52.927785116495926
+          :position [
+            -6.047181417311476
+            -2.7372255719485254
+            5000.0
+          ]
+          :projection :orthographic
+          :rotation [
+            0.0
+            0.0
+            0.0
+            1.0
+          ]
+        }
+      }
+      "/main/barrier.go" {
+        :camera {
+          :focus-point [
+            24.29630165729309
+            5.8160433081940255
+            0.0
+          ]
+          :fov-x 169.39476622044063
+          :fov-y 77.59983703953145
+          :position [
+            24.29630165729309
+            5.8160433081940255
             5000.0
           ]
           :projection :orthographic
@@ -166,6 +212,29 @@
           ]
         }
       }
+      "/main/wall.go" {
+        :camera {
+          :focus-point [
+            -18.134089447037525
+            21.716747093365008
+            0.0
+          ]
+          :fov-x 787.8122776922628
+          :fov-y 360.89724452941647
+          :position [
+            -18.134089447037525
+            21.716747093365008
+            5000.0
+          ]
+          :projection :orthographic
+          :rotation [
+            0.0
+            0.0
+            0.0
+            1.0
+          ]
+        }
+      }
     }
   }
   :workflow {
@@ -197,22 +266,6 @@
         ]
         [
           "/main/bullet.go"
-          :scene
-        ]
-        [
-          "/assets/character.atlas"
-          :scene
-        ]
-        [
-          "/main/barrier.go"
-          :scene
-        ]
-        [
-          "/main/barrel.go"
-          :scene
-        ]
-        [
-          "/main/wall.go"
           :scene
         ]
       ]
@@ -247,10 +300,6 @@
         :form
       ]
       [
-        "/assets/character.atlas"
-        :scene
-      ]
-      [
         "/main/camera.go"
         :scene
       ]
@@ -259,15 +308,19 @@
         :form
       ]
       [
-        "/main/bullet.go"
+        "/main/main.collection"
         :scene
       ]
       [
-        "/main/barrel.go"
+        "/assets/character.atlas"
         :scene
       ]
       [
         "/main/barrier.go"
+        :scene
+      ]
+      [
+        "/main/barrel.go"
         :scene
       ]
       [
@@ -279,7 +332,7 @@
         :scene
       ]
       [
-        "/main/main.collection"
+        "/main/bullet.go"
         :scene
       ]
     ]

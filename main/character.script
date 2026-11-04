@@ -7,13 +7,15 @@ local function fire(self)
 	local direction = self.mouse - position
 	direction.z = 0
 	direction = vmath.normalize(direction)
+	position = position + direction * 32
 
 	local props = {
 		direction = direction,
 		speed = 400,
-		damage = 1
+		damage = 1,
+		sender = go.get_id()
 	}
-	local bullet = factory.create("#factory", nil, nil, props)
+	local bullet = factory.create("#factory", position, nil, props)
 end
 
 function init(self)
@@ -64,8 +66,10 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("contact_point_response") then
 		-- Handle collisions with walls and barriers
 		local position = go.get_position()
-		position = position + message.normal * message.distance
+		position = position + message.normal * (message.distance + 1)
 		go.set_position(position)
+	elseif message_id == hash("damage") then
+		print(message.damage)
 	end
 end
 

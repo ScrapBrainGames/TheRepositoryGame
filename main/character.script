@@ -1,9 +1,14 @@
 -- Which character is this?
 go.property("Character", "Clint")
 
-local function fire()
+local function fire(self)
+	local position = go.get_position()
+	local direction = self.mouse - position
+	direction.z = 0
+	direction = vmath.normalize(direction)
+
 	local props = {
-		direction = vmath.vector3(1, 0, 0),
+		direction = direction,
 		speed = 400,
 		damage = 1
 	}
@@ -12,7 +17,8 @@ end
 
 function init(self)
 	self.player = false
-	self.direction = vmath.vector3(0, 0, 0)
+	self.direction = vmath.vector3()
+	self.mouse = vmath.vector3()
 end
 
 function final(self)
@@ -55,7 +61,6 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("player control") then
 		self.player = true
 		msg.post(".", "acquire_input_focus")
-		self.camera = sender
 	end
 end
 
@@ -69,7 +74,9 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("down") then
 		self.direction.y = self.direction.y - 1
 	elseif action_id == hash("fire") and action.pressed then
-		fire()
+		fire(self)
+	elseif action.x then
+		self.mouse = camera.screen_xy_to_world(action.screen_x, action.screen_y)
 	end
 end
 

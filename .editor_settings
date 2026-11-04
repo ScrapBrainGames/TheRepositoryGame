@@ -219,10 +219,6 @@
         :code
       ]
       [
-        "/input/game.input_binding"
-        :form
-      ]
-      [
         "/README.md"
         :html
       ]
@@ -247,10 +243,6 @@
         :scene
       ]
       [
-        "/assets/character.atlas"
-        :scene
-      ]
-      [
         "/main/bullet.script"
         :code
       ]
@@ -261,6 +253,14 @@
       [
         "/main/bullet.go"
         :scene
+      ]
+      [
+        "/assets/character.atlas"
+        :scene
+      ]
+      [
+        "/input/game.input_binding"
+        :form
       ]
     ]
   }

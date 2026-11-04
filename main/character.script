@@ -33,7 +33,7 @@ local function fire(self)
 
 			local props = {
 				direction = direction,
-				speed = 400,
+				speed = 600,
 				damage = 1,
 				sender = go.get_id()
 			}

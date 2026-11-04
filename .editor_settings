@@ -192,10 +192,6 @@
           :scene
         ]
         [
-          "/game.project"
-          :form
-        ]
-        [
           "/main/character.go"
           :scene
         ]
@@ -205,6 +201,18 @@
         ]
         [
           "/assets/character.atlas"
+          :scene
+        ]
+        [
+          "/main/barrier.go"
+          :scene
+        ]
+        [
+          "/main/barrel.go"
+          :scene
+        ]
+        [
+          "/main/wall.go"
           :scene
         ]
       ]
@@ -227,7 +235,19 @@
         :scene
       ]
       [
-        "/main/main.collection"
+        "/assets/ground.tilemap"
+        :scene
+      ]
+      [
+        "/main/bullet.script"
+        :code
+      ]
+      [
+        "/input/game.input_binding"
+        :form
+      ]
+      [
+        "/assets/character.atlas"
         :scene
       ]
       [
@@ -239,28 +259,28 @@
         :form
       ]
       [
-        "/assets/ground.tilemap"
+        "/main/bullet.go"
         :scene
       ]
       [
-        "/main/bullet.script"
-        :code
+        "/main/barrel.go"
+        :scene
+      ]
+      [
+        "/main/barrier.go"
+        :scene
+      ]
+      [
+        "/main/wall.go"
+        :scene
       ]
       [
         "/main/character.go"
         :scene
       ]
       [
-        "/main/bullet.go"
+        "/main/main.collection"
         :scene
-      ]
-      [
-        "/assets/character.atlas"
-        :scene
-      ]
-      [
-        "/input/game.input_binding"
-        :form
       ]
     ]
   }

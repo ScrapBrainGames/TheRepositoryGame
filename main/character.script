@@ -1,5 +1,6 @@
 -- Which character is this?
 go.property("Character", "Clint")
+go.property("radius", 18)
 
 local function fire(self)
 	local position = go.get_position()
@@ -33,10 +34,9 @@ function update(self, dt)
 
 	if self.direction.x ~= 0 or self.direction.y ~= 0 then
 		self.direction = vmath.normalize(self.direction)
+		position = position + self.direction * speed * dt
+		go.set_position(position)
 	end
-
-	position = position + self.direction * speed * dt
-	go.set_position(position)
 
 	self.direction.x = 0
 	self.direction.y = 0
@@ -61,6 +61,11 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("player control") then
 		self.player = true
 		msg.post(".", "acquire_input_focus")
+	elseif message_id == hash("contact_point_response") then
+		-- Handle collisions with walls and barriers
+		local position = go.get_position()
+		position = position + message.normal * message.distance
+		go.set_position(position)
 	end
 end
 

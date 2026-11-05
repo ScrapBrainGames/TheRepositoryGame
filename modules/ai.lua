@@ -15,14 +15,18 @@ local current =
 }
 
 local function get_destination(agent)
-    return vmath.vector3(math.random(1000), math.random(1000), 0)
+    local nodes = {}
+    for key in pairs(path) do
+        table.insert(nodes, key)
+    end
+    return nodes[math.random(#nodes)]
 end
 
 local actions = {
     move = {
         name = "move", --for debugging
         duration = 3,
-        next = { "wait" },
+        next = { "move", "wait" },
         enter = function(agent) agent.destination = get_destination(agent) end,
         act = function(agent)
             local direction = agent.destination - agent.position
@@ -60,8 +64,6 @@ function M.add_barrier(id, params)
             end
         end
     end
-    print("Path:")
-    for position in pairs(path) do print(position) end
 end
 
 function M.remove_barrier(id)

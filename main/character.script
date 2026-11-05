@@ -1,5 +1,6 @@
 local weapons = require "modules.weapons"
 local characters = require "modules.characters"
+local ai = require "modules.ai"
 
 -- Which character is this?
 go.property("Character", "Clint")
@@ -69,7 +70,6 @@ end
 function update(self, dt)
 	-- Set speed dependent on aiming or not
 	local speed = self.aiming and self.aim_movement or self.normal_movement
-
 	local position = go.get_position()
 
 	if self.direction.x ~= 0 or self.direction.y ~= 0 then

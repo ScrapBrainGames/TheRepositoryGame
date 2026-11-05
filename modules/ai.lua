@@ -1,4 +1,14 @@
--- Put functions in this file to use them in several other scripts.
--- To get access to the functions, you need to put:
--- require "my_directory.my_file"
--- in any script using the functions.
+local M = {}
+
+local barriers = {}
+local player = vmath.vector3()
+
+function M.add_barrier(id, position)
+    barriers[id] = position
+end
+
+function M.player_position(position)
+    player = position
+end
+
+return M

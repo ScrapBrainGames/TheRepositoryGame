@@ -53,12 +53,9 @@ function init(self)
 	self.direction = vmath.vector3()
 	self.mouse = vmath.vector3()
 	self.health = 3
-	self.aim_movement = 60
-	self.normal_movement = 180
+	self.aim_movement = 250
+	self.normal_movement = 500
 	self.aiming = false
-
-	self.velocity = vmath.vector3()
-	self.acceleration = 100
 
 	-- Fill your hand, you son of a bitch
 	self.weapon = weapons.get()
@@ -78,15 +75,7 @@ function update(self, dt)
 
 	if self.direction.x ~= 0 or self.direction.y ~= 0 then
 		self.direction = vmath.normalize(self.direction)
-		self.velocity = self.velocity + self.direction * self.acceleration * dt
-		if vmath.dot(self.velocity, self.velocity) > speed * speed then
-			self.velocity = vmath.normalize(self.velocity) * speed
-		end
-	end
-
-	if vmath.dot(self.velocity, self.velocity) > 0 then
-		position = position + self.velocity * dt
-		go.set_position(position)
+		msg.post("#collisionobject", "apply_force", { force = self.direction * speed, position = position })
 	end
 
 	self.direction.x = 0

@@ -1,6 +1,8 @@
 local M = {}
 
 local barriers = {}
+local path = {}
+
 local player =
 {
     position = vmath.vector3(),
@@ -39,8 +41,27 @@ local actions = {
     }
 }
 
-function M.add_barrier(id, position)
-    barriers[id] = position
+function M.add_barrier(id, params)
+    -- Add the barrier
+    barriers[id] = params
+    -- Add nodes around the barrier for pathfinding
+    local position = params.position
+    local width = params.width
+    for x = position.x - width, position.x + width, width do
+        for y = position.y - width, position.y + width, width do
+            path[vmath.vector3(x, y, 0)] = true
+        end
+    end
+    -- Remove any nodes covered by barriers
+    for _, params in pairs(barriers) do
+        for position in pairs(path) do
+            if math.abs(position.x - params.position.x) <= params.width * 0.5 and math.abs(position.y - params.position.y) <= params.width * 0.5 then
+                path[position] = nil
+            end
+        end
+    end
+    print("Path:")
+    for position in pairs(path) do print(position) end
 end
 
 function M.remove_barrier(id)

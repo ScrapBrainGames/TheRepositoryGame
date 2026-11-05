@@ -56,6 +56,7 @@ function init(self)
 	self.direction = vmath.vector3()
 	self.mouse = vmath.vector3()
 	self.aiming = false
+	self.ai = ai.new()
 
 	-- Fill your hand, you son of a bitch
 	self.weapon = weapons.get()
@@ -79,7 +80,7 @@ function update(self, dt)
 		local target, movement = ai.get_player_position()
 		local cast = physics.raycast(position, target, { hash("walls") })
 		local sighted = cast == nil
-		self.direction = ai.update(dt, position, sighted, movement)
+		self.direction = ai.update(self.ai, dt, position, sighted, movement)
 	end
 
 	if self.direction.x ~= 0 or self.direction.y ~= 0 then

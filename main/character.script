@@ -57,6 +57,9 @@ function init(self)
 	self.normal_movement = 180
 	self.aiming = false
 
+	self.velocity = vmath.vector3()
+	self.acceleration = 100
+
 	-- Fill your hand, you son of a bitch
 	self.weapon = weapons.get()
 end
@@ -75,7 +78,14 @@ function update(self, dt)
 
 	if self.direction.x ~= 0 or self.direction.y ~= 0 then
 		self.direction = vmath.normalize(self.direction)
-		position = position + self.direction * speed * dt
+		self.velocity = self.velocity + self.direction * self.acceleration * dt
+		if vmath.dot(self.velocity, self.velocity) > speed * speed then
+			self.velocity = vmath.normalize(self.velocity) * speed
+		end
+	end
+
+	if vmath.dot(self.velocity, self.velocity) > 0 then
+		position = position + self.velocity * dt
 		go.set_position(position)
 	end
 

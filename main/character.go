@@ -22,8 +22,8 @@ embedded_components {
 embedded_components {
   id: "collisionobject"
   type: "collisionobject"
-  data: "type: COLLISION_OBJECT_TYPE_KINEMATIC\n"
-  "mass: 0.0\n"
+  data: "type: COLLISION_OBJECT_TYPE_DYNAMIC\n"
+  "mass: 1.0\n"
   "friction: 0.1\n"
   "restitution: 0.5\n"
   "group: \"player\"\n"
@@ -45,5 +45,7 @@ embedded_components {
   "  data: 16.0\n"
   "  data: 10.0\n"
   "}\n"
+  "linear_damping: 0.5\n"
+  "locked_rotation: true\n"
   ""
 }

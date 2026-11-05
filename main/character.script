@@ -1,4 +1,5 @@
-local weapons = require "main.weapons"
+local weapons = require "modules.weapons"
+local characters = require "modules.characters"
 
 -- Which character is this?
 go.property("Character", "Clint")
@@ -49,12 +50,10 @@ local function fire(self)
 end
 
 function init(self)
+	characters.initialize(self)
 	self.player = false
 	self.direction = vmath.vector3()
 	self.mouse = vmath.vector3()
-	self.health = 3
-	self.aim_movement = 750
-	self.normal_movement = 1500
 	self.aiming = false
 
 	-- Fill your hand, you son of a bitch

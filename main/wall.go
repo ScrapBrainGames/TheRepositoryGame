@@ -9,7 +9,7 @@ embedded_components {
   "}\n"
   ""
   scale {
-    x: 10.0
+    x: 50.0
   }
 }
 embedded_components {
@@ -33,7 +33,7 @@ embedded_components {
   "    count: 3\n"
   "    id: \"outline\"\n"
   "  }\n"
-  "  data: 160.0\n"
+  "  data: 800.0\n"
   "  data: 16.0\n"
   "  data: 10.0\n"
   "}\n"

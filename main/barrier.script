@@ -1,0 +1,17 @@
+local ai = require "modules.ai"
+go.property("width", 64)
+
+function init(self)
+	local id = go.get_id()
+	local position = go.get_position()
+
+	ai.add_barrier(id, {
+		position = position,
+		width = self.width
+	})
+end
+
+function final(self)
+	local id = go.get_id()
+	ai.remove_barrier(id)
+end

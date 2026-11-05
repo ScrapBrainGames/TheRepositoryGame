@@ -1,4 +1,6 @@
-local weapons = require "main.weapons"
+local weapons = require "modules.weapons"
+local characters = require "modules.characters"
+local ai = require "modules.ai"
 
 -- Which character is this?
 go.property("Character", "Clint")
@@ -49,13 +51,12 @@ local function fire(self)
 end
 
 function init(self)
+	characters.initialize(self)
 	self.player = false
 	self.direction = vmath.vector3()
 	self.mouse = vmath.vector3()
-	self.health = 3
-	self.aim_movement = 750
-	self.normal_movement = 1500
 	self.aiming = false
+	self.ai = ai.new()
 
 	-- Fill your hand, you son of a bitch
 	self.weapon = weapons.get()
@@ -70,8 +71,17 @@ end
 function update(self, dt)
 	-- Set speed dependent on aiming or not
 	local speed = self.aiming and self.aim_movement or self.normal_movement
-
 	local position = go.get_position()
+
+	if self.player then
+		local velocity = go.get("#collisionobject", "linear_velocity")
+		ai.set_player_position(position, velocity)
+	else
+		local target, movement = ai.get_player_position()
+		local cast = physics.raycast(position, target, { hash("walls") })
+		local sighted = cast == nil
+		self.direction = ai.update(self.ai, dt, position, sighted, movement)
+	end
 
 	if self.direction.x ~= 0 or self.direction.y ~= 0 then
 		self.direction = vmath.normalize(self.direction)

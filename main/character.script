@@ -79,7 +79,7 @@ function update(self, dt)
 		local target, movement = ai.player_position()
 		local cast = physics.raycast(position, target, { hash("walls") })
 		local sighted = cast ~= nil
-		ai.update(dt, position, sighted, movement)
+		self.direction = ai.update(dt, position, sighted, movement)
 	end
 
 	if self.direction.x ~= 0 or self.direction.y ~= 0 then

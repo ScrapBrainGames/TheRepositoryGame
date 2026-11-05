@@ -53,8 +53,8 @@ function init(self)
 	self.direction = vmath.vector3()
 	self.mouse = vmath.vector3()
 	self.health = 3
-	self.aim_movement = 60
-	self.normal_movement = 180
+	self.aim_movement = 750
+	self.normal_movement = 1500
 	self.aiming = false
 
 	-- Fill your hand, you son of a bitch
@@ -75,8 +75,7 @@ function update(self, dt)
 
 	if self.direction.x ~= 0 or self.direction.y ~= 0 then
 		self.direction = vmath.normalize(self.direction)
-		position = position + self.direction * speed * dt
-		go.set_position(position)
+		msg.post("#collisionobject", "apply_force", { force = self.direction * speed, position = position })
 	end
 
 	self.direction.x = 0
@@ -104,11 +103,6 @@ function on_message(self, message_id, message, sender)
 		self.hud = msg.url(sender.socket, sender.path, "weapon")
 		update_hud(self)
 		msg.post(".", "acquire_input_focus")
-	elseif message_id == hash("contact_point_response") then
-		-- Handle collisions with walls and barriers
-		local position = go.get_position()
-		position = position + message.normal * (message.distance + 1)
-		go.set_position(position)
 	elseif message_id == hash("damage") then
 		self.health = self.health - message.damage
 		if self.health <= 0 then

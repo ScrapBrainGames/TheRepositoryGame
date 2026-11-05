@@ -76,6 +76,7 @@ function M.update(agent, dt, position, sighted, movement)
     if done or agent.timer <= 0 then
         local next = agent.action.next
         enter_action(agent, next[math.random(#next)])
+        print(agent.action.name, agent.timer)
     end
     return direction
 end

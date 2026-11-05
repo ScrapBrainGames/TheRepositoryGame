@@ -13,7 +13,7 @@ local current =
 }
 
 local function get_destination()
-    return vmath.vector3()
+    return vmath.vector3(math.random(1000), math.random(1000), 0)
 end
 
 local zero = vmath.vector3()
@@ -28,12 +28,14 @@ local actions = {
                 current.destination = get_destination()
             end
             local direction = current.destination - current.position
-            return direction
+            direction.z = 0
+            local done = vmath.dot(direction, direction) < 100
+            return direction, done
         end
     },
     wait = {
         name = "wait", --for debugging
-        duration = 2,
+        duration = 1,
         next = { "move", "wait" },
         act = function()
             return zero
@@ -48,9 +50,17 @@ function M.add_barrier(id, position)
     barriers[id] = position
 end
 
-function M.player_position(position, velocity)
+function M.remove_barrier(id)
+    barriers[id] = nil
+end
+
+function M.set_player_position(position, velocity)
     player.position = position or player.position
     player.velocity = velocity or player.velocity
+    return player.position, player.velocity
+end
+
+function M.get_player_position(position, velocity)
     return player.position, player.velocity
 end
 
@@ -63,7 +73,9 @@ function M.update(dt, position, sighted, movement)
         timer = action.duration
         print(action.name)
     end
-    return action.act()
+    local direction, done = action.act()
+    if done then timer = 0 end
+    return direction
 end
 
 return M

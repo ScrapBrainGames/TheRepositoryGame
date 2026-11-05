@@ -18,7 +18,7 @@ embedded_components {
   data: "type: COLLISION_OBJECT_TYPE_STATIC\n"
   "mass: 0.0\n"
   "friction: 0.1\n"
-  "restitution: 0.5\n"
+  "restitution: 0.0\n"
   "group: \"walls\"\n"
   "mask: \"bullets\"\n"
   "mask: \"player\"\n"

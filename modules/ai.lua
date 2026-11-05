@@ -16,8 +16,6 @@ local function get_destination()
     return vmath.vector3(math.random(1000), math.random(1000), 0)
 end
 
-local zero = vmath.vector3()
-
 local actions = {
     move = {
         name = "move", --for debugging
@@ -38,7 +36,7 @@ local actions = {
         duration = 1,
         next = { "move", "wait" },
         act = function()
-            return zero
+            return vmath.vector3()
         end
     }
 }

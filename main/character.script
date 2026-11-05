@@ -72,6 +72,16 @@ function update(self, dt)
 	local speed = self.aiming and self.aim_movement or self.normal_movement
 	local position = go.get_position()
 
+	if self.player then
+		local velocity = go.get("#collisionobject", "linear_velocity")
+		ai.player_position(position, velocity)
+	else
+		local target, movement = ai.player_position()
+		local cast = physics.raycast(position, target, { hash("walls") })
+		local sighted = cast ~= nil
+		ai.update(dt, position, sighted, movement)
+	end
+
 	if self.direction.x ~= 0 or self.direction.y ~= 0 then
 		self.direction = vmath.normalize(self.direction)
 		msg.post("#collisionobject", "apply_force", { force = self.direction * speed, position = position })

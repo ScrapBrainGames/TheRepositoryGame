@@ -25,34 +25,14 @@ local function lower(self)
 end
 
 local function fire(self)
-	if self.weapon.cocked then
-		if self.weapon:fire() then
-			-- Bang!
-			local position = self.position
-			local direction = self.target - position
-			direction.z = 0
-			direction = vmath.normalize(direction)
-			position = position + direction * 32
-
-			local props = {
-				direction = direction,
-				speed = 600,
-				damage = 1,
-				sender = go.get_id()
-			}
-			local bullet = factory.create("#factory", position, nil, props)
-		else
-			-- Click!
-		end
-	else
-		-- Do we want the weapon to cycle on left click?
-		--self.weapon:cycle()
-	end
+	local direction = self.target - self.position
+	self.weapon:fire(self.position, direction)
 	update_hud(self)
 end
 
 function init(self)
 	-- self state is used by both player and AI control
+	self.id = go.get_id()
 	self.position = vmath.vector3()
 	self.direction = vmath.vector3()
 	self.target = vmath.vector3()
@@ -63,7 +43,7 @@ function init(self)
 	self.player = false
 	self.ai = ai.new(self)
 	-- Fill your hand, you son of a bitch
-	self.weapon = weapons.get()
+	self.weapon = weapons.get(self.id, "#factory")
 end
 
 function update(self, dt)

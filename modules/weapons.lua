@@ -1,7 +1,13 @@
 local sixgun = {}
 
-function sixgun:new()
-    local instance = {}
+function sixgun:new(id, factory)
+    local instance = {
+        factory = factory or "#factory",
+        speed = 600,
+        damage = 1,
+        offset = 32,
+        id = id,
+    }
     instance.chambers = { true, true, true, true, true, true }
     instance.cocked = false
 
@@ -16,11 +22,23 @@ function sixgun:cycle()
     self.cocked = true
 end
 
-function sixgun:fire()
-    local current = self.chambers[1]
-    self.chambers[1] = false
-    self.cocked = false
-    return current
+function sixgun:fire(position, direction)
+    if self.chambers[1] and self.cocked then
+        self.chambers[1] = false
+        self.cocked = false
+        direction.z = 0
+        direction = vmath.normalize(direction)
+        position = position + direction * self.offset
+        local props = {
+            direction = direction,
+            speed = self.speed,
+            damage = self.damage,
+            sender = self.id
+        }
+        factory.create(self.factory, position, nil, props)
+    else
+        self.cocked = false
+    end
 end
 
 function sixgun:reload()
@@ -38,8 +56,8 @@ function sixgun:rounds()
 end
 
 local M = {}
-function M.get()
-    return sixgun:new()
+function M.get(id, factory)
+    return sixgun:new(id, factory)
 end
 
 return M

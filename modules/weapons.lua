@@ -29,6 +29,14 @@ function sixgun:reload()
     end
 end
 
+function sixgun:rounds()
+    local count = 0
+    for _, value in ipairs(self.chambers) do
+        count = value and count + 1 or count
+    end
+    return count
+end
+
 local M = {}
 function M.get()
     return sixgun:new()

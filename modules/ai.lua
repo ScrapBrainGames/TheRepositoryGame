@@ -74,7 +74,6 @@ actions.combat = {
         local agent = agent
         local timer = 5
         local next = "wait"
-        agent.state.direction = vmath.vector3()
         return function(dt, sighted)
             timer = timer - dt
             if timer <= 0 then

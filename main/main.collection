@@ -11,7 +11,7 @@ instances {
     id: "control"
     properties {
       id: "player"
-      value: "/character#character"
+      value: "/character"
       type: PROPERTY_TYPE_URL
     }
   }

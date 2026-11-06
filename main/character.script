@@ -28,7 +28,7 @@ local function fire(self)
 	if self.weapon.cocked then
 		if self.weapon:fire() then
 			-- Bang!
-			local position = go.get_position()
+			local position = self.position
 			local direction = self.target - position
 			direction.z = 0
 			direction = vmath.normalize(direction)

@@ -39,7 +39,6 @@ end
 local actions = {}
 actions.movement = {
     move = function(agent)
-        local agent = agent
         local timer = 3
         local destination = get_destination(agent)
         local next = "wait"
@@ -57,7 +56,6 @@ actions.movement = {
         end
     end,
     wait = function(agent)
-        local agent = agent
         local timer = 1
         local next = "move"
         agent.state.direction = vmath.vector3()
@@ -71,7 +69,6 @@ actions.movement = {
 }
 actions.combat = {
     wait = function(agent)
-        local agent = agent
         local timer = 5
         local next = "wait"
         return function(dt, sighted)

@@ -36,8 +36,9 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("remove player") then
-		self.player = nil
+	if message_id == hash("new player") then
+		self.player = message.id
+		msg.post(self.player, "player control")
 	end
 end
 

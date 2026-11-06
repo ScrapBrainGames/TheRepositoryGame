@@ -111,6 +111,7 @@ actions.combat = {
         local position = agent.state.position
         local direction = agent.state.target - position
         agent.state.weapon:fire(position, direction)
+        agent.state.aiming = false
         return function()
             return "wait"
         end

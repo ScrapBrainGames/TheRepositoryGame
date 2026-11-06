@@ -73,12 +73,16 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("player control") then
 		self.player = true
+		self.camera = sender
 		self.hud = msg.url(sender.socket, sender.path, "weapon")
 		update_hud(self)
 		msg.post(".", "acquire_input_focus")
 	elseif message_id == hash("damage") then
 		self.health = self.health - message.damage
 		if self.health <= 0 then
+			if self.camera then
+				msg.post(self.camera, "new player", { id = message.sender })
+			end
 			go.delete()
 		end
 	end

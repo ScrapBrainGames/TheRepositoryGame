@@ -10,8 +10,8 @@ instances {
   component_properties {
     id: "control"
     properties {
-      id: "Player"
-      value: "/character#character"
+      id: "player"
+      value: "/character"
       type: PROPERTY_TYPE_URL
     }
   }

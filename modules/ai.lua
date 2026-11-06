@@ -3,48 +3,6 @@ local M = {}
 local barriers = {}
 local path = {}
 
-local player =
-{
-    position = vmath.vector3(),
-    velocity = vmath.vector3(),
-}
-
-local current =
-{
-    position = vmath.vector3(),
-}
-
-local function get_destination(agent)
-    local nodes = {}
-    for key in pairs(path) do
-        table.insert(nodes, key)
-    end
-    return nodes[math.random(#nodes)]
-end
-
-local actions = {
-    move = {
-        name = "move", --for debugging
-        duration = 3,
-        next = { "move", "wait" },
-        enter = function(agent) agent.destination = get_destination(agent) end,
-        act = function(agent)
-            local direction = agent.destination - agent.position
-            direction.z = 0
-            local done = vmath.dot(direction, direction) < 100
-            return direction, done
-        end
-    },
-    wait = {
-        name = "wait", --for debugging
-        duration = 1,
-        next = { "move", "wait" },
-        act = function()
-            return vmath.vector3()
-        end
-    }
-}
-
 function M.add_barrier(id, params)
     -- Add the barrier
     barriers[id] = params
@@ -70,38 +28,97 @@ function M.remove_barrier(id)
     barriers[id] = nil
 end
 
+local function get_destination(agent)
+    local nodes = {}
+    for key in pairs(path) do
+        table.insert(nodes, key)
+    end
+    return nodes[math.random(#nodes)]
+end
+
+local actions = {}
+actions.movement = {
+    move = function(agent)
+        local agent = agent
+        local timer = 3
+        local destination = get_destination(agent)
+        return function(dt, sighted)
+            timer = timer - dt
+            if timer <= 0 then
+                return "wait"
+            end
+            local direction = destination - agent.state.position
+            direction.z = 0
+            if vmath.length_sqr(direction) < 100 then
+                return "wait"
+            end
+            agent.state.direction = direction
+        end
+    end,
+    wait = function(agent)
+        local agent = agent
+        local timer = 1
+        agent.state.direction = vmath.vector3()
+        return function(dt, sighted)
+            timer = timer - dt
+            if timer <= 0 then
+                return "move"
+            end
+        end
+    end
+}
+actions.combat = {
+    wait = function(agent)
+        local agent = agent
+        local timer = 1
+        agent.state.direction = vmath.vector3()
+        return function(dt, sighted)
+            timer = timer - dt
+            if timer <= 0 then
+                return "wait"
+            end
+        end
+    end
+}
+
+local player =
+{
+    position = vmath.vector3(),
+    velocity = vmath.vector3(),
+}
+
 function M.set_player_position(position, velocity)
     player.position = position or player.position
     player.velocity = velocity or player.velocity
     return player.position, player.velocity
 end
 
-function M.get_player_position(position, velocity)
+function M.get_player_position()
     return player.position, player.velocity
 end
 
-local function enter_action(agent, name)
-    local action = actions[name]
-    agent.action, agent.timer = action, action.duration
-    if action.enter then action.enter(agent) end
-end
-
-function M.new(start)
-    local agent = { position = vmath.vector3() }
-    enter_action(agent, start or "wait")
+function M.new(state)
+    local agent = {
+        state = state,
+        action = {}
+    }
+    agent.action.movement = actions.movement.move(agent)
+    agent.action.combat = actions.combat.wait(agent)
     return agent
 end
 
-function M.update(agent, dt, position, sighted, movement)
-    agent.position = position
-    agent.timer = agent.timer - dt
-    local direction, done = agent.action.act(agent, dt, sighted, movement)
-    if done or agent.timer <= 0 then
-        local next = agent.action.next
-        enter_action(agent, next[math.random(#next)])
-        print(agent.action.name, agent.timer)
+function M.update(agent, dt, sighted)
+    local next
+    -- Movement
+    next = agent.action.movement(dt, sighted)
+    if next then
+        agent.action.movement = actions.movement[next](agent)
     end
-    return direction
+    -- Combat
+    next = agent.action.combat(dt, sighted)
+    if next then
+        agent.action.combat = actions.combat[next](agent)
+    end
 end
 
 return M

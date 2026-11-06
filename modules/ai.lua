@@ -36,6 +36,22 @@ local function get_destination(agent)
     return nodes[math.random(#nodes)]
 end
 
+local player =
+{
+    position = vmath.vector3(),
+    velocity = vmath.vector3(),
+}
+
+function M.set_player_position(position, velocity)
+    player.position = position or player.position
+    player.velocity = velocity or player.velocity
+    return player.position, player.velocity
+end
+
+function M.get_player_position()
+    return player.position, player.velocity
+end
+
 local actions = {}
 actions.movement = {
     move = function(agent)
@@ -69,32 +85,37 @@ actions.movement = {
 }
 actions.combat = {
     wait = function(agent)
-        local timer = 5
-        local next = "wait"
+        local timer = 3
+        local next = "aim"
         return function(dt, sighted)
             timer = timer - dt
             if timer <= 0 then
                 return next
             end
         end
+    end,
+    aim = function(agent)
+        local timer = 1
+        local next = "fire"
+        agent.state.aiming = true
+        agent.state.weapon:cycle()
+        return function(dt)
+            agent.state.target = player.position
+            timer = timer - dt
+            if timer <= 0 then
+                return next
+            end
+        end
+    end,
+    fire = function(agent)
+        local position = agent.state.position
+        local direction = agent.state.target - position
+        agent.state.weapon:fire(position, direction)
+        return function()
+            return "wait"
+        end
     end
 }
-
-local player =
-{
-    position = vmath.vector3(),
-    velocity = vmath.vector3(),
-}
-
-function M.set_player_position(position, velocity)
-    player.position = position or player.position
-    player.velocity = velocity or player.velocity
-    return player.position, player.velocity
-end
-
-function M.get_player_position()
-    return player.position, player.velocity
-end
 
 function M.new(state)
     local agent = {

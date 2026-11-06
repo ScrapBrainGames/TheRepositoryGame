@@ -42,15 +42,16 @@ actions.movement = {
         local agent = agent
         local timer = 3
         local destination = get_destination(agent)
+        local next = "wait"
         return function(dt, sighted)
             timer = timer - dt
             if timer <= 0 then
-                return "wait"
+                return next
             end
             local direction = destination - agent.state.position
             direction.z = 0
             if vmath.length_sqr(direction) < 100 then
-                return "wait"
+                return next
             end
             agent.state.direction = direction
         end
@@ -58,11 +59,12 @@ actions.movement = {
     wait = function(agent)
         local agent = agent
         local timer = 1
+        local next = "move"
         agent.state.direction = vmath.vector3()
         return function(dt, sighted)
             timer = timer - dt
             if timer <= 0 then
-                return "move"
+                return next
             end
         end
     end
@@ -70,12 +72,13 @@ actions.movement = {
 actions.combat = {
     wait = function(agent)
         local agent = agent
-        local timer = 1
+        local timer = 5
+        local next = "wait"
         agent.state.direction = vmath.vector3()
         return function(dt, sighted)
             timer = timer - dt
             if timer <= 0 then
-                return "wait"
+                return next
             end
         end
     end
@@ -112,11 +115,13 @@ function M.update(agent, dt, sighted)
     -- Movement
     next = agent.action.movement(dt, sighted)
     if next then
+        print("Movement: ", next)
         agent.action.movement = actions.movement[next](agent)
     end
     -- Combat
     next = agent.action.combat(dt, sighted)
     if next then
+        print("Combat: ", next)
         agent.action.combat = actions.combat[next](agent)
     end
 end

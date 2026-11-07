@@ -23,7 +23,7 @@ embedded_components {
   id: "collisionobject"
   type: "collisionobject"
   data: "type: COLLISION_OBJECT_TYPE_DYNAMIC\n"
-  "mass: 1.0\n"
+  "mass: 0.1\n"
   "friction: 0.0\n"
   "restitution: 0.0\n"
   "group: \"player\"\n"

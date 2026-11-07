@@ -3,8 +3,8 @@ local M = {}
 local characters = {
     default = {
         health = 3,
-        aim_movement = 750,
-        normal_movement = 1500,
+        aim_movement = 100,
+        normal_movement = 200,
     }
 }
 

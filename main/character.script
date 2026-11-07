@@ -107,10 +107,16 @@ function on_input(self, action_id, action)
 		elseif action.released then
 			lower(self)
 		end
-	elseif action.x then
-		self.target = camera.screen_xy_to_world(action.screen_x, action.screen_y)
 	elseif action_id == hash("reload") then
 		self.weapon:reload()
 		update_hud(self)
+	elseif action_id == hash("spin left") and action.value == 1 then
+		self.weapon:spin_left()
+		update_hud(self)
+	elseif action_id == hash("spin right") and action.value == 1 then
+		self.weapon:spin_right()
+		update_hud(self)
+	elseif action.x then
+		self.target = camera.screen_xy_to_world(action.screen_x, action.screen_y)
 	end
 end

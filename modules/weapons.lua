@@ -22,6 +22,16 @@ function sixgun:cycle()
     self.cocked = true
 end
 
+function sixgun:spin_right()
+    table.insert(self.chambers, 7, self.chambers[1])
+    table.remove(self.chambers, 1)
+end
+
+function sixgun:spin_left()
+    table.insert(self.chambers, 1, self.chambers[6])
+    table.remove(self.chambers, 7)
+end
+
 function sixgun:fire(position, direction)
     if self.chambers[1] and self.cocked then
         self.chambers[1] = false

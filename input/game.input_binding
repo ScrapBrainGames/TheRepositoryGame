@@ -44,9 +44,9 @@ mouse_trigger {
 }
 mouse_trigger {
   input: MOUSE_WHEEL_DOWN
-  action: "spin left"
+  action: "spin"
 }
 mouse_trigger {
   input: MOUSE_WHEEL_UP
-  action: "spin right"
+  action: "spin"
 }

@@ -1,7 +1,28 @@
-image: "/assets/images/grid64.png"
-tile_width: 64
-tile_height: 64
-collision_groups: "default"
+image: "/assets/images/tilemap.png"
+tile_width: 32
+tile_height: 32
+collision: "/assets/images/tilemap_collision.png"
+convex_hulls {
+  index: 0
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 0
+  count: 4
+  collision_group: "level"
+}
+convex_hulls {
+  index: 4
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 4
+  count: 0
+  collision_group: ""
+}
+collision_groups: "level"
 animations {
   id: "anim"
   start_tile: 1

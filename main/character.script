@@ -56,7 +56,7 @@ function update(self, dt)
 		ai.set_player_position(self.position, velocity)
 	else
 		local target = ai.get_player_position()
-		local cast = physics.raycast(self.position, target, { hash("walls") })
+		local cast = physics.raycast(self.position, target, { hash("level") })
 		local sighted = cast == nil
 		ai.update(self.ai, dt, sighted)
 	end

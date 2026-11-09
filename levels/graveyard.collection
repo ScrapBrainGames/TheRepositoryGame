@@ -1,0 +1,97 @@
+name: "mine"
+instances {
+  id: "character"
+  prototype: "/main/character.go"
+  position {
+    x: 690.0
+    y: 699.0
+  }
+}
+instances {
+  id: "character1"
+  prototype: "/main/character.go"
+  position {
+    x: 704.0
+    y: 320.0
+  }
+}
+instances {
+  id: "barrier"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 640.0
+    y: 320.0
+  }
+}
+instances {
+  id: "boulder"
+  prototype: "/levels/pieces/boulder.go"
+  position {
+    x: 640.0
+    y: 128.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+  component_properties {
+    id: "control"
+    properties {
+      id: "player"
+      value: "/character"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+}
+instances {
+  id: "gate"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 688.0
+    y: 770.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "level"
+      value: "mine"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  children: "barrier"
+  children: "boulder"
+  children: "gate"
+  data: "components {\n"
+  "  id: \"graveyard\"\n"
+  "  component: \"/levels/graveyard.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/graveyard.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "characters"
+  children: "character"
+  children: "character1"
+  data: ""
+}

@@ -1,0 +1,42 @@
+local level = hash("station")
+
+local function load_level(self, level)
+	local url = msg.url()
+	url.fragment = level
+	self.current = url
+	msg.post(url, "load")
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	load_level(self, level)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("proxy_loaded") then
+		msg.post(sender, "init")
+		msg.post(sender, "enable")
+	elseif message_id == hash("change level") then
+		if self.next then return end
+		self.next = message.level
+		print(self.next)
+		msg.post(self.current, "disable")
+		msg.post(self.current, "final")
+		msg.post(self.current, "unload")
+	elseif message_id == hash("proxy_unloaded") then
+		load_level(self, self.next)
+		self.next = nil
+	end
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here. The game object this script is attached to
+	-- must have acquired input focus:
+	--
+	--    msg.post(".", "acquire_input_focus")
+	--
+	-- All mapped input bindings will be received. Mouse and touch input will
+	-- be received regardless of where on the screen it happened.
+	-- Learn more: https://defold.com/manuals/input/
+	-- Remove this function if not needed
+end

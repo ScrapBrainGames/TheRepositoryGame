@@ -1,6 +1,6 @@
 components {
   id: "barrier"
-  component: "/main/barrier.script"
+  component: "/levels/barrier.script"
 }
 embedded_components {
   id: "sprite"

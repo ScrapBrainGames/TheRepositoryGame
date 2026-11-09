@@ -1,6 +1,6 @@
 components {
   id: "barrier"
-  component: "/main/barrier.script"
+  component: "/levels/barrier.script"
   properties {
     id: "width"
     value: "32.0"

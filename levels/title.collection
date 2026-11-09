@@ -1,0 +1,70 @@
+name: "station"
+instances {
+  id: "character"
+  prototype: "/main/character.go"
+  position {
+    x: 496.0
+    y: 176.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+  component_properties {
+    id: "control"
+    properties {
+      id: "player"
+      value: "/character"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+}
+instances {
+  id: "gate"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 561.0
+    y: 171.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "level"
+      value: "station"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  children: "gate"
+  data: "components {\n"
+  "  id: \"title\"\n"
+  "  component: \"/levels/title.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/title.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "characters"
+  children: "character"
+  data: ""
+}

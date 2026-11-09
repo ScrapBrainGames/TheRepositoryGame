@@ -27,7 +27,7 @@ embedded_components {
   "friction: 0.0\n"
   "restitution: 0.0\n"
   "group: \"player\"\n"
-  "mask: \"walls\"\n"
+  "mask: \"level\"\n"
   "mask: \"player\"\n"
   "mask: \"bullets\"\n"
   "embedded_collision_shape {\n"

@@ -7,21 +7,21 @@ function M.add_barrier(id, params)
     barriers[id] = params
 
     -- Nodes on all 4 sides of the barrier
-    barriers[id].sides = {}
+    barriers[id].nodes = {}
     for i = -1, 1, 2 do
-        table.insert(barriers[id].sides, 1,
+        table.insert(barriers[id].nodes, 1,
             params.position + vmath.vector3(0, i * (params.height * 0.5 + 32), 0)
         )
-        table.insert(barriers[id].sides, 1,
+        table.insert(barriers[id].nodes, 1,
             params.position + vmath.vector3(i * (params.width * 0.5 + 32), 0, 0)
         )
     end
 
     -- Nodes at the corners
-    barriers[id].corners = {}
+    barriers[id].nodes = {}
     for i = -1, 1, 2 do
         for j = -1, 1, 2 do
-            table.insert(barriers[id].corners, 1,
+            table.insert(barriers[id].nodes, 1,
                 params.position + vmath.vector3(i * (params.width * 0.5 + 32), j * (params.height * 0.5 + 32), 0)
             )
         end
@@ -35,7 +35,7 @@ end
 local function get_destination(agent)
     local nodes = {}
     for _, value in pairs(barriers) do
-        for _, point in ipairs(value.sides) do
+        for _, point in ipairs(value.nodes) do
             table.insert(nodes, 1, point)
         end
     end

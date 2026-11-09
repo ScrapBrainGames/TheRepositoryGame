@@ -5,8 +5,8 @@ main_collection = /main/main.collectionc
 shared_state = 1
 
 [display]
-width = 800
-height = 600
+width = 480
+height = 320
 high_dpi = 1
 
 [android]
@@ -21,4 +21,8 @@ scale_mode = stretch
 
 [project]
 title = High Plains Grifter
+
+[graphics]
+default_texture_min_filter = nearest
+default_texture_mag_filter = nearest
 

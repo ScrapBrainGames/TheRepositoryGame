@@ -410,67 +410,67 @@ layers {
   cell {
     x: 0
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 1
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 2
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 3
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 4
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 5
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 6
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 7
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 8
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 9
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 10
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 11
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 12
     y: 5
-    tile: 3
+    tile: 0
   }
   cell {
     x: 13
@@ -495,93 +495,67 @@ layers {
   cell {
     x: 0
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 1
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 2
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 3
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 4
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 5
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 6
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 7
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 8
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 9
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 10
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 11
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 12
     y: 6
-    tile: 2
-    h_flip: 1
-    v_flip: 1
+    tile: 0
   }
   cell {
     x: 13
@@ -1015,7 +989,6 @@ layers {
 layers {
   id: "boundary"
   z: 0.0
-  is_visible: 0
   cell {
     x: 0
     y: -1
@@ -1144,6 +1117,21 @@ layers {
   cell {
     x: -1
     y: 3
+    tile: 1
+  }
+  cell {
+    x: -1
+    y: 4
+    tile: 1
+  }
+  cell {
+    x: -1
+    y: 5
+    tile: 1
+  }
+  cell {
+    x: -1
+    y: 6
     tile: 1
   }
   cell {

@@ -1,0 +1,66 @@
+name: "station"
+instances {
+  id: "character"
+  prototype: "/main/character.go"
+  position {
+    x: 44.0
+    y: 256.0
+  }
+}
+instances {
+  id: "character1"
+  prototype: "/main/character.go"
+  position {
+    x: 447.0
+    y: 137.0
+  }
+}
+instances {
+  id: "barrier"
+  prototype: "/main/barrier.go"
+  position {
+    x: 128.0
+    y: 256.0
+  }
+}
+instances {
+  id: "boulder"
+  prototype: "/main/boulder.go"
+  position {
+    x: 320.0
+    y: 128.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  children: "barrier"
+  children: "boulder"
+  data: "components {\n"
+  "  id: \"station\"\n"
+  "  component: \"/levels/station.tilemap\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/station.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"default\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "characters"
+  children: "character"
+  children: "character1"
+  data: ""
+}

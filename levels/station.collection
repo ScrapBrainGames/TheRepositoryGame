@@ -34,6 +34,17 @@ instances {
 instances {
   id: "camera"
   prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+  component_properties {
+    id: "control"
+    properties {
+      id: "player"
+      value: "/character"
+      type: PROPERTY_TYPE_URL
+    }
+  }
 }
 scale_along_z: 0
 embedded_instances {
@@ -43,6 +54,9 @@ embedded_instances {
   data: "components {\n"
   "  id: \"station\"\n"
   "  component: \"/levels/station.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"collisionobject\"\n"
@@ -50,10 +64,10 @@ embedded_instances {
   "  data: \"collision_shape: \\\"/levels/station.tilemap\\\"\\n"
   "type: COLLISION_OBJECT_TYPE_STATIC\\n"
   "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
   "group: \\\"default\\\"\\n"
-  "mask: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
   "\"\n"
   "}\n"
   ""

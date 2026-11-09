@@ -18,7 +18,6 @@ function M.add_barrier(id, params)
     end
 
     -- Nodes at the corners
-    barriers[id].nodes = {}
     for i = -1, 1, 2 do
         for j = -1, 1, 2 do
             table.insert(barriers[id].nodes,

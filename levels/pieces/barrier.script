@@ -8,6 +8,7 @@ function init(self)
 	local width, height
 	if shape.diameter then
 		width = shape.diameter
+		height = shape.diameter
 	elseif shape.dimensions then
 		width = shape.dimensions.x
 		height = shape.dimensions.y

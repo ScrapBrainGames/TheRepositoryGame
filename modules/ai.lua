@@ -1,25 +1,29 @@
 local M = {}
 
 local barriers = {}
-local path = {}
 
 function M.add_barrier(id, params)
     -- Add the barrier
     barriers[id] = params
-    -- Add nodes around the barrier for pathfinding
-    local position = params.position
-    local width = params.width
-    for x = position.x - width, position.x + width, width do
-        for y = position.y - width, position.y + width, width do
-            path[vmath.vector3(x, y, 0)] = true
-        end
+
+    -- Nodes on all 4 sides of the barrier
+    barriers[id].sides = {}
+    for i = -1, 1, 2 do
+        table.insert(barriers[id].sides, 1,
+            params.position + vmath.vector3(0, i * (params.height * 0.5 + 32), 0)
+        )
+        table.insert(barriers[id].sides, 1,
+            params.position + vmath.vector3(i * (params.width * 0.5 + 32), 0, 0)
+        )
     end
-    -- Remove any nodes covered by barriers
-    for _, params in pairs(barriers) do
-        for position in pairs(path) do
-            if math.abs(position.x - params.position.x) <= params.width * 0.5 and math.abs(position.y - params.position.y) <= params.width * 0.5 then
-                path[position] = nil
-            end
+
+    -- Nodes at the corners
+    barriers[id].corners = {}
+    for i = -1, 1, 2 do
+        for j = -1, 1, 2 do
+            table.insert(barriers[id].corners, 1,
+                params.position + vmath.vector3(i * (params.width * 0.5 + 32), j * (params.height * 0.5 + 32), 0)
+            )
         end
     end
 end
@@ -30,8 +34,10 @@ end
 
 local function get_destination(agent)
     local nodes = {}
-    for key in pairs(path) do
-        table.insert(nodes, key)
+    for _, value in pairs(barriers) do
+        for _, point in ipairs(value.sides) do
+            table.insert(nodes, 1, point)
+        end
     end
     return nodes[math.random(#nodes)]
 end
@@ -65,7 +71,7 @@ actions.movement = {
             end
             local direction = destination - agent.state.position
             direction.z = 0
-            if vmath.length_sqr(direction) < 100 then
+            if vmath.length_sqr(direction) < 1000 then
                 return next
             end
             agent.state.direction = direction

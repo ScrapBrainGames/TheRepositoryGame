@@ -20,7 +20,7 @@ instances {
   prototype: "/levels/pieces/barrier.go"
   position {
     x: 640.0
-    y: 320.0
+    y: 304.0
   }
 }
 instances {

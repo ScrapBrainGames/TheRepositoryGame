@@ -3,8 +3,7 @@ local characters = require "modules.characters"
 local ai = require "modules.ai"
 
 -- Which character is this?
-go.property("Character", "Clint")
-go.property("radius", 18)
+go.property("character", "default")
 
 local function update_hud(self)
 	if self.player then
@@ -78,8 +77,8 @@ function on_message(self, message_id, message, sender)
 		update_hud(self)
 		msg.post(".", "acquire_input_focus")
 	elseif message_id == hash("damage") then
-		self.health = self.health - message.damage
-		if self.health <= 0 then
+		self.state.health = self.state.health - message.damage
+		if self.state.health <= 0 then
 			if self.camera then
 				msg.post(self.camera, "new player", { id = message.sender })
 			end

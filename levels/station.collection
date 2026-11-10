@@ -8,14 +8,6 @@ instances {
   }
 }
 instances {
-  id: "character1"
-  prototype: "/main/character.go"
-  position {
-    x: 447.0
-    y: 137.0
-  }
-}
-instances {
   id: "barrier"
   prototype: "/levels/pieces/barrier.go"
   position {
@@ -47,7 +39,7 @@ instances {
   }
 }
 instances {
-  id: "gate"
+  id: "mine"
   prototype: "/levels/pieces/gate.go"
   position {
     x: 561.0
@@ -63,7 +55,7 @@ instances {
   }
 }
 instances {
-  id: "gate1"
+  id: "title"
   prototype: "/levels/pieces/gate.go"
   position {
     x: -46.0
@@ -78,13 +70,19 @@ instances {
     }
   }
 }
+instances {
+  id: "spawn"
+  prototype: "/main/spawn.go"
+  position {
+    x: 400.0
+    y: 80.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
   children: "barrier"
   children: "boulder"
-  children: "gate"
-  children: "gate1"
   data: "components {\n"
   "  id: \"station\"\n"
   "  component: \"/levels/station.tilemap\"\n"
@@ -109,6 +107,12 @@ embedded_instances {
 embedded_instances {
   id: "characters"
   children: "character"
-  children: "character1"
+  data: ""
+}
+embedded_instances {
+  id: "points"
+  children: "mine"
+  children: "spawn"
+  children: "title"
   data: ""
 }

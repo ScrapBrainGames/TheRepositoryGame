@@ -2,27 +2,45 @@ local weapons = require "modules.weapons"
 
 local M = {}
 
+local player = "sixgun"
+
 local characters = {
-    sixgun = {
-        health = 1,
+    default = {
+        state = {
+            health = 1,
+        },
         aim_movement = 100,
         normal_movement = 300,
-        weapon = weapons.sixgun,
+        weapon = weapons.sixgun(),
+    },
+    sixgun = {
+        state = {
+            health = 1,
+        },
+        aim_movement = 100,
+        normal_movement = 300,
+        weapon = weapons.sixgun(),
     },
     singlegun = {
-        health = 1,
+        state = {
+            health = 1,
+        },
         aim_movement = 0,
         normal_movement = 250,
-        weapon = weapons.singlegun,
+        weapon = weapons.singlegun(),
     },
 }
 
-function M.initialize(character)
-    local params = characters["sixgun"]
-    character.health = params.health
+function M.initialize(character, name)
+    local params = characters[name] or characters.default
+    character.state = params.state
     character.aim_movement = params.aim_movement
     character.normal_movement = params.normal_movement
-    character.weapon = params.weapon()
+    character.weapon = params.weapon
+end
+
+function M.check(name)
+    return characters[name] and characters[name].state.health > 0
 end
 
 return M

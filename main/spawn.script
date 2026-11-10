@@ -1,9 +1,11 @@
-go.property("default", "sixgun")
+local characters = require "modules.characters"
+
+go.property("enemy", "sixgun")
 
 function init(self)
-	-- Add initialization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	if characters.check(self.default) then
+		factory.create("#factory", go.get_position(), nil, { character = self.enemy })
+	end
 end
 
 function final(self)

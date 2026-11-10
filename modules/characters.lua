@@ -7,13 +7,13 @@ local characters = {
         health = 1,
         aim_movement = 100,
         normal_movement = 300,
-        weapon = weapons.sixgun(),
+        weapon = weapons.sixgun,
     },
     singlegun = {
         health = 1,
         aim_movement = 0,
         normal_movement = 250,
-        weapon = weapons.singlegun(),
+        weapon = weapons.singlegun,
     },
 }
 
@@ -22,7 +22,7 @@ function M.initialize(character)
     character.health = params.health
     character.aim_movement = params.aim_movement
     character.normal_movement = params.normal_movement
-    character.weapon = params.weapon
+    character.weapon = params.weapon()
 end
 
 return M

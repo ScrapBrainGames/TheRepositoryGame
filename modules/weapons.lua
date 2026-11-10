@@ -19,7 +19,7 @@ function gun:new()
         chambers = { true },
         cocked = false,
         factory = "#factory",
-        noise = 0.1,
+        noise = 0.0,
     }
     return setmetatable(instance, self)
 end
@@ -75,6 +75,7 @@ function sixgun:new()
     local instance = gun.new(self)
     instance.speed = 600
     instance.chambers = { true, true, true, true, true, true }
+    instance.noise = 0.1
     return instance
 end
 
@@ -92,7 +93,48 @@ singlegun.__index = singlegun
 function singlegun:new()
     local instance = gun.new(self)
     instance.speed = 1200
+    instance.noise = 0.0
     return instance
+end
+
+-- Shotgun (double barrel shotgun)
+---@class Shotgun: Gun
+local shotgun = setmetatable({}, { __index = gun })
+shotgun.__index = shotgun
+
+function shotgun:new()
+    local instance = gun.new(self)
+    instance.speed = 200
+    instance.chambers = { true, true }
+    instance.noise = 0.2
+    return instance
+end
+
+function shotgun:fire(position, direction)
+    if self.cocked then
+        if self.chambers[1] then
+            self.chambers[1] = false
+        elseif self.chambers[2] then
+            self.chambers[2] = false
+        else
+            self.cocked = false
+            return
+        end
+        self.cocked = false
+        direction.z = 0
+        direction = vmath.normalize(direction)
+        position = position + direction * self.offset
+        local props = {
+            direction = direction,
+            speed = self.speed,
+            damage = self.damage,
+            sender = self.id
+        }
+        for i = 1, 8 do
+            props.direction = direction + self.noise * vmath.vector3(math.random(-1.0, 1.0), math.random(-1.0, 1.0), 0)
+            factory.create(self.factory, position, nil, props)
+        end
+    end
 end
 
 -- The weapons module
@@ -101,5 +143,7 @@ local M = {}
 function M.sixgun() return sixgun:new() end
 
 function M.singlegun() return singlegun:new() end
+
+function M.shotgun() return shotgun:new() end
 
 return M

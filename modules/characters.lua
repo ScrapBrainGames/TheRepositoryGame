@@ -35,7 +35,7 @@ local characters = {
         },
         aim_movement = 0,
         normal_movement = 250,
-        weapon = weapons.singlegun(),
+        weapon = weapons.shotgun(),
     },
 }
 

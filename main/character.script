@@ -36,6 +36,7 @@ local function set_player(self)
 	msg.post("/camera#control", "set_player", { id = go.get_id() })
 	self.hud = msg.url("/camera#weapon")
 	update_hud(self)
+	characters.player = self.character
 end
 
 function init(self)

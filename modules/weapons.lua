@@ -7,6 +7,7 @@
 ---@field cocked boolean
 ---@field factory string
 ---@field id hash?
+---@field noise number
 local gun = {}
 gun.__index = gun
 
@@ -18,6 +19,7 @@ function gun:new()
         chambers = { true },
         cocked = false,
         factory = "#factory",
+        noise = 0.1,
     }
     return setmetatable(instance, self)
 end
@@ -35,7 +37,8 @@ function gun:fire(position, direction)
         self.chambers[1] = false
         self.cocked = false
         direction.z = 0
-        direction = vmath.normalize(direction)
+        direction = vmath.normalize(direction) +
+            self.noise * vmath.vector3(math.random(-1.0, 1.0), math.random(-1.0, 1.0), 0)
         position = position + direction * self.offset
         local props = {
             direction = direction,

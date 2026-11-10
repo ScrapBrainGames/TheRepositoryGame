@@ -30,6 +30,14 @@ local function fire(self)
 	update_hud(self)
 end
 
+local function set_player(self)
+	self.player = true
+	msg.post(".", "acquire_input_focus")
+	msg.post("/camera#control", "set_player", { id = go.get_id() })
+	self.hud = msg.url("/camera#weapon")
+	update_hud(self)
+end
+
 function init(self)
 	-- self state is used by both player and AI control
 	self.id = go.get_id()
@@ -41,10 +49,7 @@ function init(self)
 	characters.initialize(self, self.character)
 	-- Set camera to follow or AI to control
 	if self.player then
-		msg.post(".", "acquire_input_focus")
-		msg.post("/camera#control", "set_player", { id = go.get_id() })
-		self.hud = msg.url("/camera#weapon")
-		update_hud(self)
+		set_player(self)
 	else
 		self.ai = ai.new(self)
 	end
@@ -81,13 +86,10 @@ function on_message(self, message_id, message, sender)
 		self.state.health = self.state.health - message.damage
 		if self.state.health <= 0 then
 			go.delete()
-			msg.post(sender, "set_player")
+			msg.post(message.sender, "set_player")
 		end
 	elseif message_id == hash("set_player") then
-		msg.post(".", "acquire_input_focus")
-		msg.post("/camera#control", "set_player", { id = go.get_id() })
-		self.hud = msg.url("/camera#control")
-		update_hud(self)
+		set_player(self)
 	end
 end
 

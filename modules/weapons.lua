@@ -1,3 +1,4 @@
+-- Sixgun (single action revolver)
 local sixgun = {}
 
 function sixgun:new(id, factory)
@@ -55,9 +56,61 @@ function sixgun:rounds()
     return count
 end
 
+-- Singlegun (single shot rifle)
+local singlegun = {}
+
+function singlegun:new(id, factory)
+    local instance = {
+        factory = factory or "#factory",
+        speed = 1200,
+        damage = 1,
+        offset = 32,
+        id = id,
+    }
+    instance.chambers = { true }
+    instance.cocked = false
+
+    setmetatable(instance, self)
+    self.__index = self
+    return instance
+end
+
+function singlegun:cycle()
+    self.cocked = true
+end
+
+function singlegun:fire(position, direction)
+    if self.chambers[1] and self.cocked then
+        self.chambers[1] = false
+        self.cocked = false
+        direction.z = 0
+        direction = vmath.normalize(direction)
+        position = position + direction * self.offset
+        local props = {
+            direction = direction,
+            speed = self.speed,
+            damage = self.damage,
+            sender = self.id
+        }
+        factory.create(self.factory, position, nil, props)
+    else
+        self.cocked = false
+    end
+end
+
+function singlegun:reload()
+    self.chambers[1] = true
+end
+
+function singlegun:rounds()
+    return self.chambers[1] and 1 or 0
+end
+
+-- The weapons module
 local M = {}
 function M.get(id, factory)
-    return sixgun:new(id, factory)
+    --return sixgun:new(id, factory)
+    return singlegun:new(id, factory)
 end
 
 return M

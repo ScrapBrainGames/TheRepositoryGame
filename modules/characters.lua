@@ -15,8 +15,4 @@ function M.initialize(character)
     character.normal_movement = params.normal_movement
 end
 
-function M.ai()
-
-end
-
 return M

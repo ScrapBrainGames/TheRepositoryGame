@@ -42,8 +42,8 @@ function init(self)
 	-- AI controls by default
 	self.player = false
 	self.ai = ai.new(self)
-	-- Fill your hand, you son of a bitch
-	self.weapon = weapons.get(self.id, "#factory")
+	-- Somewhere out there is a bullet with your name on it
+	self.weapon:set(self.id)
 end
 
 function update(self, dt)

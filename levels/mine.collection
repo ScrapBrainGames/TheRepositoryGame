@@ -112,11 +112,28 @@ instances {
     }
   }
 }
+instances {
+  id: "cart"
+  prototype: "/levels/pieces/cart.go"
+  position {
+    x: 123.0
+    y: 208.0
+  }
+  component_properties {
+    id: "cart"
+    properties {
+      id: "anchor"
+      value: "/level#collisionobject"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
   children: "barrier"
   children: "boulder"
+  children: "cart"
   data: "components {\n"
   "  id: \"mine\"\n"
   "  component: \"/levels/mine.tilemap\"\n"
@@ -134,6 +151,7 @@ embedded_instances {
   "restitution: 0.0\\n"
   "group: \\\"default\\\"\\n"
   "mask: \\\"player\\\"\\n"
+  "locked_rotation: true\\n"
   "\"\n"
   "}\n"
   ""

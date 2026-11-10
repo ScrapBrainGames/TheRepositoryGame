@@ -115,6 +115,7 @@ embedded_instances {
   "restitution: 0.0\\n"
   "group: \\\"default\\\"\\n"
   "mask: \\\"player\\\"\\n"
+  "locked_rotation: true\\n"
   "\"\n"
   "}\n"
   ""

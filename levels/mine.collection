@@ -1,21 +1,5 @@
 name: "mine"
 instances {
-  id: "character"
-  prototype: "/main/character.go"
-  position {
-    x: 47.0
-    y: 176.0
-  }
-}
-instances {
-  id: "character1"
-  prototype: "/main/character.go"
-  position {
-    x: 704.0
-    y: 320.0
-  }
-}
-instances {
   id: "barrier"
   prototype: "/levels/pieces/barrier.go"
   position {
@@ -39,7 +23,7 @@ instances {
   }
 }
 instances {
-  id: "gate"
+  id: "station_exit"
   prototype: "/levels/pieces/gate.go"
   position {
     x: -48.0
@@ -55,7 +39,7 @@ instances {
   }
 }
 instances {
-  id: "gate1"
+  id: "graveyard_exit"
   prototype: "/levels/pieces/gate.go"
   position {
     x: 689.0
@@ -70,13 +54,69 @@ instances {
     }
   }
 }
+instances {
+  id: "enemy"
+  prototype: "/main/spawn.go"
+  position {
+    x: 720.0
+    y: 128.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: "singlegun"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+instances {
+  id: "station_entrance"
+  prototype: "/main/spawn.go"
+  position {
+    x: 16.0
+    y: 176.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: ""
+      type: PROPERTY_TYPE_TEXT
+    }
+    properties {
+      id: "scene"
+      value: "station"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
+instances {
+  id: "graveyard_entrance"
+  prototype: "/main/spawn.go"
+  position {
+    x: 688.0
+    y: 16.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: ""
+      type: PROPERTY_TYPE_TEXT
+    }
+    properties {
+      id: "scene"
+      value: "graveyard"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
   children: "barrier"
   children: "boulder"
-  children: "gate"
-  children: "gate1"
   data: "components {\n"
   "  id: \"mine\"\n"
   "  component: \"/levels/mine.tilemap\"\n"
@@ -99,8 +139,11 @@ embedded_instances {
   ""
 }
 embedded_instances {
-  id: "characters"
-  children: "character"
-  children: "character1"
+  id: "points"
+  children: "enemy"
+  children: "graveyard_entrance"
+  children: "graveyard_exit"
+  children: "station_entrance"
+  children: "station_exit"
   data: ""
 }

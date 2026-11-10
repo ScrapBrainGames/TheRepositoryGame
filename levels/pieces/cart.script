@@ -1,0 +1,9 @@
+go.property("axis", vmath.vector3(1, 0, 0))
+go.property("anchor", msg.url())
+
+function init(self)
+	local offset = go.get_world_position() - go.get_world_position(self.anchor)
+	physics.create_joint(physics.JOINT_TYPE_SLIDER, "#collisionobject", "rail", vmath.vector3(), self.anchor, offset, {
+		local_axis_a = self.axis,
+	})
+end

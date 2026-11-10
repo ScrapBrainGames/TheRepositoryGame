@@ -9,16 +9,16 @@ local characters = {
         state = {
             health = 1,
         },
-        aim_movement = 100,
-        normal_movement = 300,
+        aim_movement = 50,
+        normal_movement = 250,
         weapon = weapons.sixgun(),
     },
     sixgun = {
         state = {
             health = 1,
         },
-        aim_movement = 100,
-        normal_movement = 300,
+        aim_movement = 50,
+        normal_movement = 250,
         weapon = weapons.sixgun(),
     },
     singlegun = {
@@ -33,8 +33,8 @@ local characters = {
         state = {
             health = 1,
         },
-        aim_movement = 0,
-        normal_movement = 250,
+        aim_movement = 100,
+        normal_movement = 200,
         weapon = weapons.shotgun(),
     },
 }

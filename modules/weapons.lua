@@ -38,7 +38,7 @@ function gun:fire(position, direction)
         self.cocked = false
         direction.z = 0
         direction = vmath.normalize(direction) +
-            self.noise * vmath.vector3(math.random(-1.0, 1.0), math.random(-1.0, 1.0), 0)
+            self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
         position = position + direction * self.offset
         local props = {
             direction = direction,
@@ -104,7 +104,7 @@ shotgun.__index = shotgun
 
 function shotgun:new()
     local instance = gun.new(self)
-    instance.speed = 200
+    instance.speed = 500
     instance.chambers = { true, true }
     instance.noise = 0.2
     return instance
@@ -131,7 +131,8 @@ function shotgun:fire(position, direction)
             sender = self.id
         }
         for i = 1, 8 do
-            props.direction = direction + self.noise * vmath.vector3(math.random(-1.0, 1.0), math.random(-1.0, 1.0), 0)
+            props.direction = direction +
+                self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
             factory.create(self.factory, position, nil, props)
         end
     end

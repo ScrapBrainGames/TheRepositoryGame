@@ -29,6 +29,14 @@ local characters = {
         normal_movement = 250,
         weapon = weapons.singlegun(),
     },
+    shotgun = {
+        state = {
+            health = 1,
+        },
+        aim_movement = 0,
+        normal_movement = 250,
+        weapon = weapons.singlegun(),
+    },
 }
 
 function M.initialize(character, name)

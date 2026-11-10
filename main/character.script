@@ -38,7 +38,7 @@ function init(self)
 	self.target = vmath.vector3()
 	self.aiming = false
 	-- Initialize per-character parameters like health, speed, and weapon
-	characters.initialize(self)
+	characters.initialize(self, self.character)
 	-- Set camera to follow or AI to control
 	if self.player then
 		msg.post(".", "acquire_input_focus")

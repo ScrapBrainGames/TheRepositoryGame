@@ -57,6 +57,10 @@ instances {
 instances {
   id: "mine_entrance"
   prototype: "/main/spawn.go"
+  position {
+    x: 688.0
+    y: 720.0
+  }
   component_properties {
     id: "spawn"
     properties {
@@ -77,6 +81,14 @@ instances {
   position {
     x: 480.0
     y: 320.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: "shotgun"
+      type: PROPERTY_TYPE_TEXT
+    }
   }
 }
 scale_along_z: 0

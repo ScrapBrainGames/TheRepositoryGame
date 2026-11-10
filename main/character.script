@@ -3,8 +3,8 @@ local characters = require "modules.characters"
 local ai = require "modules.ai"
 
 -- Which character is this?
-go.property("Character", "Clint")
-go.property("radius", 18)
+go.property("character", "default")
+go.property("player", false)
 
 local function update_hud(self)
 	if self.player then
@@ -30,6 +30,15 @@ local function fire(self)
 	update_hud(self)
 end
 
+local function set_player(self)
+	self.player = true
+	msg.post(".", "acquire_input_focus")
+	msg.post("/camera#control", "set_player", { id = go.get_id() })
+	self.hud = msg.url("/camera#weapon")
+	update_hud(self)
+	characters.player = self.character
+end
+
 function init(self)
 	-- self state is used by both player and AI control
 	self.id = go.get_id()
@@ -38,12 +47,15 @@ function init(self)
 	self.target = vmath.vector3()
 	self.aiming = false
 	-- Initialize per-character parameters like health, speed, and weapon
-	characters.initialize(self)
-	-- AI controls by default
-	self.player = false
-	self.ai = ai.new(self)
-	-- Fill your hand, you son of a bitch
-	self.weapon = weapons.get(self.id, "#factory")
+	characters.initialize(self, self.character)
+	-- Set camera to follow or AI to control
+	if self.player then
+		set_player(self)
+	else
+		self.ai = ai.new(self)
+	end
+	-- Somewhere out there is a bullet with your name on it
+	self.weapon:set(self.id)
 end
 
 function update(self, dt)
@@ -71,20 +83,14 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("player control") then
-		self.player = true
-		self.camera = sender
-		self.hud = msg.url(sender.socket, sender.path, "weapon")
-		update_hud(self)
-		msg.post(".", "acquire_input_focus")
-	elseif message_id == hash("damage") then
-		self.health = self.health - message.damage
-		if self.health <= 0 then
-			if self.camera then
-				msg.post(self.camera, "new player", { id = message.sender })
-			end
+	if message_id == hash("damage") then
+		self.state.health = self.state.health - message.damage
+		if self.state.health <= 0 then
 			go.delete()
+			msg.post(message.sender, "set_player")
 		end
+	elseif message_id == hash("set_player") then
+		set_player(self)
 	end
 end
 

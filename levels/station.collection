@@ -1,21 +1,5 @@
 name: "station"
 instances {
-  id: "character"
-  prototype: "/main/character.go"
-  position {
-    x: 44.0
-    y: 256.0
-  }
-}
-instances {
-  id: "character1"
-  prototype: "/main/character.go"
-  position {
-    x: 447.0
-    y: 137.0
-  }
-}
-instances {
   id: "barrier"
   prototype: "/levels/pieces/barrier.go"
   position {
@@ -37,21 +21,13 @@ instances {
   position {
     z: 10.0
   }
-  component_properties {
-    id: "control"
-    properties {
-      id: "player"
-      value: "/character"
-      type: PROPERTY_TYPE_URL
-    }
-  }
 }
 instances {
-  id: "gate"
+  id: "mine_exit"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: 561.0
-    y: 171.0
+    x: 560.0
+    y: 176.0
   }
   component_properties {
     id: "gate"
@@ -63,11 +39,11 @@ instances {
   }
 }
 instances {
-  id: "gate1"
+  id: "title_exit"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: -46.0
-    y: 171.0
+    x: -48.0
+    y: 176.0
   }
   component_properties {
     id: "gate"
@@ -78,13 +54,69 @@ instances {
     }
   }
 }
+instances {
+  id: "enemy"
+  prototype: "/main/spawn.go"
+  position {
+    x: 400.0
+    y: 80.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "scene"
+      value: ""
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
+instances {
+  id: "title_entrance"
+  prototype: "/main/spawn.go"
+  position {
+    x: 16.0
+    y: 176.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: ""
+      type: PROPERTY_TYPE_TEXT
+    }
+    properties {
+      id: "scene"
+      value: "title"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
+instances {
+  id: "mine_entrance"
+  prototype: "/main/spawn.go"
+  position {
+    x: 496.0
+    y: 176.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: ""
+      type: PROPERTY_TYPE_TEXT
+    }
+    properties {
+      id: "scene"
+      value: "mine"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
   children: "barrier"
   children: "boulder"
-  children: "gate"
-  children: "gate1"
   data: "components {\n"
   "  id: \"station\"\n"
   "  component: \"/levels/station.tilemap\"\n"
@@ -107,8 +139,11 @@ embedded_instances {
   ""
 }
 embedded_instances {
-  id: "characters"
-  children: "character"
-  children: "character1"
+  id: "points"
+  children: "enemy"
+  children: "mine_entrance"
+  children: "mine_exit"
+  children: "title_entrance"
+  children: "title_exit"
   data: ""
 }

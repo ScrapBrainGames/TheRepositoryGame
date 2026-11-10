@@ -1,5 +1,14 @@
 -- Parent gun with default methods and properties
+---@class Gun
+---@field speed number
+---@field damage number
+---@field offset number
+---@field chambers boolean[]
+---@field cocked boolean
+---@field factory string
+---@field id hash?
 local gun = {}
+gun.__index = gun
 
 function gun:new()
     local instance = {
@@ -10,9 +19,7 @@ function gun:new()
         cocked = false,
         factory = "#factory",
     }
-    setmetatable(instance, self)
-    self.__index = self
-    return instance
+    return setmetatable(instance, self)
 end
 
 function gun:set(id)
@@ -57,10 +64,12 @@ function gun:rounds()
 end
 
 -- Sixgun (single action revolver)
-local sixgun = {}
+---@class Sixgun : Gun
+local sixgun = setmetatable({}, { __index = gun })
+sixgun.__index = sixgun
 
 function sixgun:new()
-    local instance = gun:new()
+    local instance = gun.new(self)
     instance.speed = 600
     instance.chambers = { true, true, true, true, true, true }
     return instance
@@ -73,10 +82,12 @@ function sixgun:cycle()
 end
 
 -- Singlegun (single shot rifle)
-local singlegun = {}
+---@class Singlegun : Gun
+local singlegun = setmetatable({}, { __index = gun })
+singlegun.__index = singlegun
 
-function singlegun:new(id, factory)
-    local instance = gun:new()
+function singlegun:new()
+    local instance = gun.new(self)
     instance.speed = 1200
     return instance
 end

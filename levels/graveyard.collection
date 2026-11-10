@@ -37,14 +37,6 @@ instances {
   position {
     z: 10.0
   }
-  component_properties {
-    id: "control"
-    properties {
-      id: "player"
-      value: "/character"
-      type: PROPERTY_TYPE_URL
-    }
-  }
 }
 instances {
   id: "gate"

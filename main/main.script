@@ -1,3 +1,5 @@
+local transition = require "modules.transition"
+
 local level = hash("station")
 
 local function load_level(self, level)
@@ -16,10 +18,10 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("proxy_loaded") then
 		msg.post(sender, "init")
 		msg.post(sender, "enable")
-	elseif message_id == hash("change level") then
+	elseif message_id == hash("change_level") then
 		if self.next then return end
 		self.next = message.level
-		print(self.next)
+		transition.previous = self.current.fragment
 		msg.post(self.current, "disable")
 		msg.post(self.current, "final")
 		msg.post(self.current, "unload")

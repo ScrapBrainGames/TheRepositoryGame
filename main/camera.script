@@ -1,7 +1,5 @@
-go.property("player", msg.url())
-
 function init(self)
-	msg.post(self.player, "player control")
+
 end
 
 function final(self)
@@ -36,10 +34,10 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("new player") then
+	if message_id == hash("set_player") then
 		self.player = message.id
 		if go.exists(self.player) then
-			msg.post(self.player, "player control")
+
 		else
 			print("Everybody dead.")
 		end

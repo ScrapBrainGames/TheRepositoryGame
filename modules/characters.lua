@@ -2,7 +2,7 @@ local weapons = require "modules.weapons"
 
 local M = {}
 
-local player = "sixgun"
+M.player = "default"
 
 local characters = {
     default = {

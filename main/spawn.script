@@ -1,9 +1,13 @@
 local characters = require "modules.characters"
+local transition = require "modules.transition"
 
 go.property("enemy", "sixgun")
+go.property("scene", hash(""))
 
 function init(self)
-	if characters.check(self.default) then
+	if transition.previous == self.scene then
+		factory.create("#factory", go.get_position(), nil, { character = characters.player, player = true })
+	elseif characters.check(self.enemy) then
 		factory.create("#factory", go.get_position(), nil, { character = self.enemy })
 	end
 end

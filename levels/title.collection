@@ -1,33 +1,17 @@
 name: "station"
 instances {
-  id: "character"
-  prototype: "/main/character.go"
-  position {
-    x: 496.0
-    y: 176.0
-  }
-}
-instances {
   id: "camera"
   prototype: "/main/camera.go"
   position {
     z: 10.0
   }
-  component_properties {
-    id: "control"
-    properties {
-      id: "player"
-      value: "/character"
-      type: PROPERTY_TYPE_URL
-    }
-  }
 }
 instances {
-  id: "gate"
+  id: "station_exit"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: 561.0
-    y: 171.0
+    x: 560.0
+    y: 176.0
   }
   component_properties {
     id: "gate"
@@ -38,10 +22,30 @@ instances {
     }
   }
 }
+instances {
+  id: "spawn"
+  prototype: "/main/spawn.go"
+  position {
+    x: 496.0
+    y: 176.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: ""
+      type: PROPERTY_TYPE_TEXT
+    }
+    properties {
+      id: "scene"
+      value: "station"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
-  children: "gate"
   data: "components {\n"
   "  id: \"title\"\n"
   "  component: \"/levels/title.tilemap\"\n"
@@ -64,7 +68,8 @@ embedded_instances {
   ""
 }
 embedded_instances {
-  id: "characters"
-  children: "character"
+  id: "points"
+  children: "spawn"
+  children: "station_exit"
   data: ""
 }

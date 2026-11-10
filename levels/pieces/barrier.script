@@ -1,14 +1,26 @@
 local ai = require "modules.ai"
-go.property("width", 64)
 
 function init(self)
 	local id = go.get_id()
 	local position = go.get_position()
 
-	ai.add_barrier(id, {
-		position = position,
-		width = self.width
-	})
+	local shape = physics.get_shape("#collisionobject", "outline")
+	local width, height
+	if shape.diameter then
+		width = shape.diameter
+		height = shape.diameter
+	elseif shape.dimensions then
+		width = shape.dimensions.x
+		height = shape.dimensions.y
+	end
+
+	if width and height then
+		ai.add_barrier(id, {
+			position = position,
+			width = width,
+			height = height
+		})
+	end
 end
 
 function final(self)

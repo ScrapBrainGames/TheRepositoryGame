@@ -1,11 +1,6 @@
 components {
   id: "barrier"
   component: "/levels/pieces/barrier.script"
-  properties {
-    id: "width"
-    value: "32.0"
-    type: PROPERTY_TYPE_NUMBER
-  }
 }
 embedded_components {
   id: "sprite"

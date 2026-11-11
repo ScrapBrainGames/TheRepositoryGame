@@ -15,7 +15,7 @@ function gun:new()
     local instance = {
         speed = 100,
         damage = 1,
-        offset = 32,
+        offset = 48,
         chambers = { true },
         cocked = false,
         factory = "#factory",
@@ -39,6 +39,7 @@ function gun:fire(position, direction)
         direction.z = 0
         direction = vmath.normalize(direction) +
             self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
+        direction = vmath.normalize(direction)
         position = position + direction * self.offset
         local props = {
             direction = direction,
@@ -46,7 +47,14 @@ function gun:fire(position, direction)
             damage = self.damage,
             sender = self.id
         }
-        factory.create(self.factory, position, nil, props)
+        local rotation = vmath.quat(
+            0, 0,
+            (direction.y > 0 and 1 or -1) * (direction.x < 1 and math.sqrt(0.5 * (1 - direction.x)) or 0),
+            (direction.x > -1 and math.sqrt(direction.x * 0.5 + 0.5) or 0)
+        )
+        local scale = vmath.vector3(1)
+        --if (direction.x < 0) then scale.x = -1 end
+        factory.create(self.factory, position, rotation, props, scale)
     else
         self.cocked = false
     end

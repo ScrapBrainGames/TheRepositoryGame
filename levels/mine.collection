@@ -4,7 +4,7 @@ instances {
   prototype: "/levels/pieces/barrier.go"
   position {
     x: 640.0
-    y: 304.0
+    y: 288.0
   }
 }
 instances {
@@ -128,10 +128,19 @@ instances {
     }
   }
 }
+instances {
+  id: "barrier1"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 512.0
+    y: 64.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
   children: "barrier"
+  children: "barrier1"
   children: "boulder"
   children: "cart"
   data: "components {\n"

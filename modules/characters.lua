@@ -4,43 +4,40 @@ local M = {}
 
 M.player = "default"
 
+local health = function(health, max)
+    return {
+        health = health,
+        max_health = max or health
+    }
+end
+
 local characters = {
     default = {
-        state = {
-            health = 10,
-        },
+        state = health(10),
         aim_movement = 50,
         normal_movement = 250,
         weapon = weapons.sixgun(),
     },
     sixgun = {
-        state = {
-            health = 10,
-        },
+        state = health(10),
         aim_movement = 50,
         normal_movement = 250,
         weapon = weapons.sixgun(),
     },
     singlegun = {
-        state = {
-            health = 10,
-        },
+        state = health(10),
         aim_movement = 0,
         normal_movement = 250,
         weapon = weapons.singlegun(),
     },
     shotgun = {
-        state = {
-            health = 10,
-        },
+        state = health(10),
         aim_movement = 100,
         normal_movement = 150,
         weapon = weapons.shotgun(),
     },
     shotgun2 = {
-        state = {
-            health = 10,
-        },
+        state = health(10),
         aim_movement = 100,
         normal_movement = 150,
         weapon = weapons.shotgun(),

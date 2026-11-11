@@ -53,7 +53,7 @@ function M.initialize(character, name)
 end
 
 function M.check(name)
-    return characters[name] and characters[name].state.health > 0
+    return characters[name] and name ~= M.player and characters[name].state.health > 0
 end
 
 return M

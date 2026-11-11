@@ -126,7 +126,7 @@ actions.movement = {
     move = function(agent)
         local timer = 3
         local destination = get_destination(agent)
-        local next = "wait"
+        local next = math.random() < 0.5 and "wait" or "move"
         return function(dt, sighted)
             timer = timer - dt
             if timer <= 0 then
@@ -184,7 +184,8 @@ actions.combat = {
         agent.state.aiming = true
         agent.state.weapon:cycle()
         return function(dt, sighted)
-            agent.state.target = player.position
+            local t = vmath.length(player.position - agent.state.position) / agent.state.weapon.speed
+            agent.state.target = player.position + t * player.velocity
             timer = timer - dt
             if timer <= 0 then
                 if sighted then

@@ -58,6 +58,7 @@ function init(self)
 	self.weapon:set(self.id)
 	-- Hide the health bar until hit
 	--go.set("#health", "scale.x", 0)
+	go.set("#health", "scale.x", self.state.health / self.state.max_health)
 end
 
 function update(self, dt)

@@ -112,11 +112,29 @@ instances {
     }
   }
 }
+instances {
+  id: "barrier1"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 352.0
+    y: 272.0
+  }
+}
+instances {
+  id: "boulder1"
+  prototype: "/levels/pieces/boulder.go"
+  position {
+    x: 176.0
+    y: 64.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
   children: "barrier"
+  children: "barrier1"
   children: "boulder"
+  children: "boulder1"
   data: "components {\n"
   "  id: \"station\"\n"
   "  component: \"/levels/station.tilemap\"\n"

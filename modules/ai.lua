@@ -145,6 +145,9 @@ actions.movement = {
         local next = "move"
         agent.state.direction = vmath.vector3()
         return function(dt, sighted)
+            if sighted then
+                return next
+            end
             timer = timer - dt
             if timer <= 0 then
                 return next

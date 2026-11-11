@@ -51,6 +51,14 @@ function on_message(self, message_id, message, sender)
 			local dot = vmath.dot(self.direction, normal)
 			if dot < 0 and dot > self.ricochet then
 				self.direction = self.direction - 2 * dot * normal
+				local direction = self.direction
+				go.set_rotation(
+					vmath.quat(
+						0, 0,
+						(direction.y > 0 and 1 or -1) * (direction.x < 1 and math.sqrt(0.5 * (1 - direction.x)) or 0),
+						(direction.x > -1 and math.sqrt(direction.x * 0.5 + 0.5) or 0)
+					)
+				)
 				self.last = message.other_id
 			else
 				go.delete()

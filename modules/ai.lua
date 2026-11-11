@@ -180,7 +180,7 @@ actions.combat = {
         end
     end,
     aim = function(agent)
-        local timer = 1
+        local timer = 0.5
         agent.state.aiming = true
         agent.state.weapon:cycle()
         return function(dt, sighted)
@@ -200,9 +200,8 @@ actions.combat = {
         local direction = agent.state.target - position
         agent.state.weapon:fire(position, direction)
         agent.state.aiming = false
-        local next = "wait"
-        return function(dt, sighted)
-            if sighted then
+        return function()
+            if agent.state.weapon:ready() then
                 return math.random() < 0.5 and "aim" or "wait"
             else
                 return "wait"
@@ -216,6 +215,7 @@ actions.combat = {
         return function(dt, sighted)
             timer = timer - dt
             if timer <= 0 then
+                agent.state.aiming = false
                 if sighted then
                     return "aim"
                 else

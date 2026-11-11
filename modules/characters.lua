@@ -7,7 +7,7 @@ M.player = "default"
 local characters = {
     default = {
         state = {
-            health = 1,
+            health = 10,
         },
         aim_movement = 50,
         normal_movement = 250,
@@ -15,7 +15,7 @@ local characters = {
     },
     sixgun = {
         state = {
-            health = 1,
+            health = 10,
         },
         aim_movement = 50,
         normal_movement = 250,
@@ -23,7 +23,7 @@ local characters = {
     },
     singlegun = {
         state = {
-            health = 1,
+            health = 10,
         },
         aim_movement = 0,
         normal_movement = 250,
@@ -31,7 +31,15 @@ local characters = {
     },
     shotgun = {
         state = {
-            health = 1,
+            health = 10,
+        },
+        aim_movement = 100,
+        normal_movement = 150,
+        weapon = weapons.shotgun(),
+    },
+    shotgun2 = {
+        state = {
+            health = 10,
         },
         aim_movement = 100,
         normal_movement = 150,

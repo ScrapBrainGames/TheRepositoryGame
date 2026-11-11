@@ -12,6 +12,10 @@ embedded_components {
   "  texture: \"/assets/character.atlas\"\n"
   "}\n"
   ""
+  scale {
+    x: 1.5
+    y: 1.5
+  }
 }
 embedded_components {
   id: "collisionobject"
@@ -34,8 +38,8 @@ embedded_components {
   "    count: 3\n"
   "    id: \"outline\"\n"
   "  }\n"
-  "  data: 16.0\n"
-  "  data: 16.0\n"
+  "  data: 24.0\n"
+  "  data: 24.0\n"
   "  data: 10.0\n"
   "}\n"
   "linear_damping: 0.1\n"

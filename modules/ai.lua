@@ -104,7 +104,7 @@ local function get_destination(agent)
     local target
     for _, point in ipairs(nodes) do
         -- Skip any node we're already on
-        if vmath.length_sqr(point - agent.state.position) > 100 then
+        if vmath.length_sqr(point - agent.state.position) > 1000 then
             -- Check that agent can see the node
             if sightline(agent.state.position, point) then
                 -- Check that player can't see the node
@@ -141,7 +141,7 @@ actions.movement = {
         end
     end,
     wait = function(agent)
-        local timer = 1
+        local timer = 2
         local next = "move"
         agent.state.direction = vmath.vector3()
         return function(dt, sighted)
@@ -242,13 +242,13 @@ function M.update(agent, dt, sighted)
     -- Movement
     next = agent.action.movement(dt, sighted)
     if next then
-        --print("Movement: ", next)
+        print("Movement: ", next)
         agent.action.movement = actions.movement[next](agent)
     end
     -- Combat
     next = agent.action.combat(dt, sighted)
     if next then
-        print("Combat: ", next)
+        --print("Combat: ", next)
         agent.action.combat = actions.combat[next](agent)
     end
 end

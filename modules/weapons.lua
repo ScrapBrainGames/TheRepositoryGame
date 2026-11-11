@@ -52,9 +52,7 @@ function gun:fire(position, direction)
             (direction.y > 0 and 1 or -1) * (direction.x < 1 and math.sqrt(0.5 * (1 - direction.x)) or 0),
             (direction.x > -1 and math.sqrt(direction.x * 0.5 + 0.5) or 0)
         )
-        local scale = vmath.vector3(1)
-        --if (direction.x < 0) then scale.x = -1 end
-        factory.create(self.factory, position, rotation, props, scale)
+        factory.create(self.factory, position, rotation, props)
     else
         self.cocked = false
     end

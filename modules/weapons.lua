@@ -72,6 +72,10 @@ function gun:rounds()
     return count
 end
 
+function gun:ready()
+    return self:rounds() > 0
+end
+
 -- Sixgun (single action revolver)
 ---@class Sixgun : Gun
 local sixgun = setmetatable({}, { __index = gun })

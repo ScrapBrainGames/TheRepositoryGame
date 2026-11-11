@@ -145,6 +145,9 @@ actions.movement = {
         local next = "move"
         agent.state.direction = vmath.vector3()
         return function(dt, sighted)
+            if sighted then
+                return next
+            end
             timer = timer - dt
             if timer <= 0 then
                 return next
@@ -154,25 +157,41 @@ actions.movement = {
 }
 actions.combat = {
     wait = function(agent)
-        local timer = 3
-        local next = "aim"
+        local timer = 1
+        local next = "wait"
         return function(dt, sighted)
             timer = timer - dt
             if timer <= 0 then
+                if agent.state.weapon:ready() then
+                    if sighted then
+                        return "aim"
+                    else
+                        return "wait"
+                    end
+                else
+                    if sighted then
+                        return "wait"
+                    else
+                        return "reload"
+                    end
+                end
                 return next
             end
         end
     end,
     aim = function(agent)
-        local timer = 1
-        local next = "fire"
+        local timer = 0.5
         agent.state.aiming = true
         agent.state.weapon:cycle()
-        return function(dt)
+        return function(dt, sighted)
             agent.state.target = player.position
             timer = timer - dt
             if timer <= 0 then
-                return next
+                if sighted then
+                    return "fire"
+                else
+                    return "wait"
+                end
             end
         end
     end,
@@ -182,7 +201,27 @@ actions.combat = {
         agent.state.weapon:fire(position, direction)
         agent.state.aiming = false
         return function()
-            return "wait"
+            if agent.state.weapon:ready() then
+                return math.random() < 0.5 and "aim" or "wait"
+            else
+                return "wait"
+            end
+        end
+    end,
+    reload = function(agent)
+        local timer = 1
+        agent.state.weapon:reload()
+        agent.state.aiming = true
+        return function(dt, sighted)
+            timer = timer - dt
+            if timer <= 0 then
+                agent.state.aiming = false
+                if sighted then
+                    return "aim"
+                else
+                    return "wait"
+                end
+            end
         end
     end
 }
@@ -202,7 +241,7 @@ function M.update(agent, dt, sighted)
     -- Movement
     next = agent.action.movement(dt, sighted)
     if next then
-        print("Movement: ", next)
+        --print("Movement: ", next)
         agent.action.movement = actions.movement[next](agent)
     end
     -- Combat

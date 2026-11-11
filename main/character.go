@@ -104,7 +104,7 @@ embedded_components {
   "}\n"
   ""
   position {
-    y: 50.0
+    y: 48.0
   }
   scale {
     y: 0.25

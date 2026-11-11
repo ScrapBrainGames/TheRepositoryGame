@@ -136,12 +136,39 @@ instances {
     y: 64.0
   }
 }
+instances {
+  id: "barrier2"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 473.0
+    y: 394.0
+  }
+}
+instances {
+  id: "boulder1"
+  prototype: "/levels/pieces/boulder.go"
+  position {
+    x: 106.0
+    y: 415.0
+  }
+}
+instances {
+  id: "boulder2"
+  prototype: "/levels/pieces/boulder.go"
+  position {
+    x: 292.0
+    y: 344.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
   children: "barrier"
   children: "barrier1"
+  children: "barrier2"
   children: "boulder"
+  children: "boulder1"
+  children: "boulder2"
   children: "cart"
   data: "components {\n"
   "  id: \"mine\"\n"

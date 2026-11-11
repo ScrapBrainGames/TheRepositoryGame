@@ -56,6 +56,8 @@ function init(self)
 	end
 	-- Somewhere out there is a bullet with your name on it
 	self.weapon:set(self.id)
+	-- Hide the health bar until hit
+	--go.set("#health", "scale.x", 0)
 end
 
 function update(self, dt)
@@ -88,6 +90,8 @@ function on_message(self, message_id, message, sender)
 		if self.state.health <= 0 then
 			go.delete()
 			msg.post(message.sender, "set_player")
+		else
+			go.set("#health", "scale.x", self.state.health / self.state.max_health)
 		end
 	elseif message_id == hash("set_player") then
 		set_player(self)

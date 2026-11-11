@@ -34,6 +34,7 @@ embedded_components {
   "  shapes {\n"
   "    shape_type: TYPE_SPHERE\n"
   "    position {\n"
+  "      y: -18.0\n"
   "    }\n"
   "    rotation {\n"
   "    }\n"
@@ -41,7 +42,7 @@ embedded_components {
   "    count: 1\n"
   "    id: \"outline\"\n"
   "  }\n"
-  "  data: 16.0\n"
+  "  data: 24.0\n"
   "}\n"
   "linear_damping: 0.9999\n"
   "locked_rotation: true\n"
@@ -79,4 +80,7 @@ embedded_components {
   "  texture: \"/assets/characters/clint/clint_walk.tilesource\"\n"
   "}\n"
   ""
+  position {
+    z: 1.0
+  }
 }

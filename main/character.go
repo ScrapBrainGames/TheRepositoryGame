@@ -12,6 +12,9 @@ embedded_components {
   "  texture: \"/assets/characters/clint/clint_walk.tilesource\"\n"
   "}\n"
   ""
+  position {
+    y: 12.0
+  }
 }
 embedded_components {
   id: "factory"
@@ -34,7 +37,6 @@ embedded_components {
   "  shapes {\n"
   "    shape_type: TYPE_SPHERE\n"
   "    position {\n"
-  "      y: -18.0\n"
   "    }\n"
   "    rotation {\n"
   "    }\n"
@@ -58,6 +60,9 @@ embedded_components {
   "  texture: \"/assets/characters/clint/clint_walk.tilesource\"\n"
   "}\n"
   ""
+  position {
+    y: 12.0
+  }
 }
 embedded_components {
   id: "gun"
@@ -69,6 +74,9 @@ embedded_components {
   "  texture: \"/assets/characters/clint/clint_walk.tilesource\"\n"
   "}\n"
   ""
+  position {
+    y: 12.0
+  }
 }
 embedded_components {
   id: "hat"
@@ -81,6 +89,7 @@ embedded_components {
   "}\n"
   ""
   position {
+    y: 12.0
     z: 1.0
   }
 }

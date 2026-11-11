@@ -3,13 +3,13 @@ components {
   component: "/main/character.script"
 }
 embedded_components {
-  id: "sprite"
+  id: "body"
   type: "sprite"
-  data: "default_animation: \"square_round_32\"\n"
+  data: "default_animation: \"body\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/character.atlas\"\n"
+  "  texture: \"/assets/characters/clint/clint_walk.tilesource\"\n"
   "}\n"
   ""
 }
@@ -45,5 +45,38 @@ embedded_components {
   "}\n"
   "linear_damping: 0.9999\n"
   "locked_rotation: true\n"
+  ""
+}
+embedded_components {
+  id: "hand"
+  type: "sprite"
+  data: "default_animation: \"hand\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "textures {\n"
+  "  sampler: \"texture_sampler\"\n"
+  "  texture: \"/assets/characters/clint/clint_walk.tilesource\"\n"
+  "}\n"
+  ""
+}
+embedded_components {
+  id: "gun"
+  type: "sprite"
+  data: "default_animation: \"gun\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "textures {\n"
+  "  sampler: \"texture_sampler\"\n"
+  "  texture: \"/assets/characters/clint/clint_walk.tilesource\"\n"
+  "}\n"
+  ""
+}
+embedded_components {
+  id: "hat"
+  type: "sprite"
+  data: "default_animation: \"hat\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "textures {\n"
+  "  sampler: \"texture_sampler\"\n"
+  "  texture: \"/assets/characters/clint/clint_walk.tilesource\"\n"
+  "}\n"
   ""
 }

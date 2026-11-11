@@ -1,0 +1,12 @@
+image: "/assets/characters/clint/walk/spr_clint_walk_hat.png"
+tile_width: 144
+tile_height: 128
+collision_groups: "default"
+animations {
+  id: "walk"
+  start_tile: 1
+  end_tile: 4
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+}
+extrude_borders: 2

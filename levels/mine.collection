@@ -3,16 +3,16 @@ instances {
   id: "barrier"
   prototype: "/levels/pieces/barrier.go"
   position {
-    x: 640.0
-    y: 288.0
+    x: 605.0
+    y: 330.0
   }
 }
 instances {
   id: "boulder"
   prototype: "/levels/pieces/boulder.go"
   position {
-    x: 640.0
-    y: 128.0
+    x: 318.0
+    y: 480.0
   }
 }
 instances {
@@ -129,35 +129,35 @@ instances {
   }
 }
 instances {
-  id: "barrier1"
-  prototype: "/levels/pieces/barrier.go"
-  position {
-    x: 512.0
-    y: 64.0
-  }
-}
-instances {
   id: "barrier2"
   prototype: "/levels/pieces/barrier.go"
   position {
-    x: 473.0
-    y: 394.0
+    x: 466.0
+    y: 446.0
   }
 }
 instances {
   id: "boulder1"
   prototype: "/levels/pieces/boulder.go"
   position {
-    x: 106.0
-    y: 415.0
+    x: 131.0
+    y: 457.0
   }
 }
 instances {
   id: "boulder2"
   prototype: "/levels/pieces/boulder.go"
   position {
-    x: 292.0
-    y: 344.0
+    x: 640.0
+    y: 480.0
+  }
+}
+instances {
+  id: "barrier1"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 619.0
+    y: 108.0
   }
 }
 scale_along_z: 0

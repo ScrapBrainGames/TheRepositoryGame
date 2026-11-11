@@ -157,8 +157,9 @@ actions.movement = {
 }
 actions.combat = {
     wait = function(agent)
-        local timer = 1
+        local timer = 0.5
         local next = "wait"
+        agent.state.aiming = false
         return function(dt, sighted)
             timer = timer - dt
             if timer <= 0 then
@@ -180,7 +181,7 @@ actions.combat = {
         end
     end,
     aim = function(agent)
-        local timer = 0.5
+        local timer = 0.25
         agent.state.aiming = true
         agent.state.weapon:cycle()
         return function(dt, sighted)

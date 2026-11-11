@@ -98,6 +98,7 @@ function on_message(self, message_id, message, sender)
 		end
 	elseif message_id == hash("set_player") then
 		set_player(self)
+		self.aiming = false
 	end
 end
 

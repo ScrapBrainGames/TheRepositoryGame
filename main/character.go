@@ -93,3 +93,20 @@ embedded_components {
     z: 1.0
   }
 }
+embedded_components {
+  id: "health"
+  type: "sprite"
+  data: "default_animation: \"square_sharp_32\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "textures {\n"
+  "  sampler: \"texture_sampler\"\n"
+  "  texture: \"/assets/character.atlas\"\n"
+  "}\n"
+  ""
+  position {
+    y: 50.0
+  }
+  scale {
+    y: 0.25
+  }
+}

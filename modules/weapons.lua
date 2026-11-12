@@ -8,6 +8,8 @@
 ---@field factory string
 ---@field id hash?
 ---@field noise number
+---@field reloading boolean
+---@field cycletime number
 local gun = {}
 gun.__index = gun
 
@@ -20,6 +22,8 @@ function gun:new()
         cocked = false,
         factory = "#factory",
         noise = 0.0,
+        reloading = false,
+        cycletime = 0.125,
     }
     return setmetatable(instance, self)
 end
@@ -29,8 +33,24 @@ function gun:set(id)
 end
 
 function gun:cycle()
-    self.cocked = true
+    if self.timer then
+        timer.cancel(self.timer)
+    end
+    self.timer = timer.delay(self.cycletime, false, function()
+        self.cocked = true
+        self.timer = nil
+    end)
 end
+
+function gun:decock()
+    if self.timer then
+        timer.cancel(self.timer)
+    end
+    self.timer = nil
+    self.cocked = false
+end
+
+function gun:spin() end
 
 function gun:fire(position, direction)
     if self.chambers[1] and self.cocked then
@@ -58,10 +78,27 @@ function gun:fire(position, direction)
     end
 end
 
-function gun:reload()
-    for index, _ in ipairs(self.chambers) do
-        self.chambers[index] = true
+function gun:reload(time)
+    if self.reloading and not time then return end
+    local delay = 0
+    if time then
+        delay = time
+    else
+        for index, _ in ipairs(self.chambers) do
+            if self.chambers[index] == false then
+                delay = delay + 1
+            end
+        end
+        if delay <= 0 then return end
     end
+    self.reloading = true
+    return timer.delay(delay, false,
+        function()
+            self.reloading = false
+            for index, _ in ipairs(self.chambers) do
+                self.chambers[index] = true
+            end
+        end)
 end
 
 function gun:rounds()
@@ -73,7 +110,7 @@ function gun:rounds()
 end
 
 function gun:ready()
-    return self:rounds() > 0
+    return (self.chambers[1] or self.chambers[2]) and not self.reloading
 end
 
 -- Sixgun (single action revolver)
@@ -91,9 +128,22 @@ function sixgun:new()
 end
 
 function sixgun:cycle()
-    table.insert(self.chambers, 7, self.chambers[1])
-    table.remove(self.chambers, 1)
-    self.cocked = true
+    if self.timer then
+        timer.cancel(self.timer)
+    end
+    self.timer = timer.delay(self.cycletime, false, function()
+        table.insert(self.chambers, 7, self.chambers[1])
+        table.remove(self.chambers, 1)
+        self.cocked = true
+        self.timer = nil
+    end)
+end
+
+function sixgun:spin()
+    if not self.cocked then
+        table.insert(self.chambers, 7, self.chambers[1])
+        table.remove(self.chambers, 1)
+    end
 end
 
 -- Singlegun (single shot rifle)
@@ -104,7 +154,7 @@ singlegun.__index = singlegun
 function singlegun:new()
     local instance = gun.new(self)
     instance.speed = 1200
-    instance.noise = 0.0
+    instance.noise = 0.01
     instance.damage = 10
     return instance
 end

@@ -159,7 +159,6 @@ actions.combat = {
     wait = function(agent)
         local timer = 0.5
         local next = "wait"
-        agent.state.aiming = false
         return function(dt, sighted)
             timer = timer - dt
             if timer <= 0 then
@@ -173,7 +172,7 @@ actions.combat = {
                     if sighted then
                         return "wait"
                     else
-                        return "reload"
+                        return agent.state.weapon.reloading and "wait" or "reload"
                     end
                 end
                 return next
@@ -181,7 +180,7 @@ actions.combat = {
         end
     end,
     aim = function(agent)
-        local timer = 0.25
+        local timer = agent.state.weapon.cycletime + agent.state.aim_delay
         agent.state.aiming = true
         agent.state.weapon:cycle()
         return function(dt, sighted)
@@ -189,6 +188,7 @@ actions.combat = {
             agent.state.target = player.position + t * player.velocity
             timer = timer - dt
             if timer <= 0 then
+                agent.state.aiming = false
                 if sighted then
                     return "fire"
                 else
@@ -201,7 +201,6 @@ actions.combat = {
         local position = agent.state.position
         local direction = agent.state.target - position
         agent.state.weapon:fire(position, direction)
-        agent.state.aiming = false
         return function()
             if agent.state.weapon:ready() then
                 return math.random() < 0.5 and "aim" or "wait"
@@ -243,13 +242,13 @@ function M.update(agent, dt, sighted)
     -- Movement
     next = agent.action.movement(dt, sighted)
     if next then
-        print("Movement: ", next)
+        --print("Movement: ", next)
         agent.action.movement = actions.movement[next](agent)
     end
     -- Combat
     next = agent.action.combat(dt, sighted)
     if next then
-        --print("Combat: ", next)
+        print("Combat: ", next)
         agent.action.combat = actions.combat[next](agent)
     end
 end

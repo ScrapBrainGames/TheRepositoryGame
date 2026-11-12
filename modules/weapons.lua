@@ -8,6 +8,7 @@
 ---@field factory string
 ---@field id hash?
 ---@field noise number
+---@field reloading boolean
 local gun = {}
 gun.__index = gun
 
@@ -20,6 +21,7 @@ function gun:new()
         cocked = false,
         factory = "#factory",
         noise = 0.0,
+        reloading = false
     }
     return setmetatable(instance, self)
 end
@@ -59,9 +61,22 @@ function gun:fire(position, direction)
 end
 
 function gun:reload()
+    if self.reloading then return end
+    local delay = 0
     for index, _ in ipairs(self.chambers) do
-        self.chambers[index] = true
+        if self.chambers[index] == false then
+            delay = delay + 1
+        end
     end
+    if delay <= 0 then return end
+    self.reloading = true
+    timer.delay(delay, false,
+        function()
+            self.reloading = false
+            for index, _ in ipairs(self.chambers) do
+                self.chambers[index] = true
+            end
+        end)
 end
 
 function gun:rounds()
@@ -73,7 +88,7 @@ function gun:rounds()
 end
 
 function gun:ready()
-    return self:rounds() > 0
+    return (self.chambers[1] or self.chambers[2]) and not self.reloading
 end
 
 -- Sixgun (single action revolver)

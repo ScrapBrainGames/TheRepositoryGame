@@ -14,7 +14,9 @@ end
 
 local function aim(self)
 	self.aiming = true
-	self.weapon:cycle()
+	if not self.weapon.reloading then
+		self.weapon:cycle()
+	end
 
 	update_hud(self)
 end
@@ -26,8 +28,9 @@ end
 
 local function fire(self)
 	local direction = self.target - self.position
-	self.weapon:fire(self.position, direction)
-	update_hud(self)
+	if not self.weapon.reloading then
+		self.weapon:fire(self.position, direction)
+	end
 end
 
 local function set_player(self)
@@ -35,7 +38,6 @@ local function set_player(self)
 	msg.post(".", "acquire_input_focus")
 	msg.post("/camera#control", "set_player", { id = go.get_id() })
 	self.hud = msg.url("/camera#weapon")
-	update_hud(self)
 	characters.player = self.character
 end
 
@@ -63,10 +65,11 @@ end
 
 function update(self, dt)
 	-- Set speed dependent on aiming or not
-	local speed = self.aiming and self.aim_movement or self.normal_movement
+	local speed = (self.aiming or self.weapon.reloading) and self.aim_movement or self.normal_movement
 	self.position = go.get_position()
 
 	if self.player then
+		update_hud(self)
 		local velocity = go.get("#collisionobject", "linear_velocity")
 		ai.set_player_position(self.position, velocity)
 	else
@@ -126,9 +129,7 @@ function on_input(self, action_id, action)
 		end
 	elseif action_id == hash("reload") then
 		self.weapon:reload()
-		update_hud(self)
 	elseif action_id == hash("spin") and action.pressed then
 		self.weapon:cycle()
-		update_hud(self)
 	end
 end

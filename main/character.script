@@ -83,6 +83,10 @@ function update(self, dt)
 		update_hud(self)
 		local velocity = go.get("#collisionobject", "linear_velocity")
 		ai.set_player_position(self.position, velocity)
+		-- If holding trigger, fire when ready (input buffer)
+		if self.aiming and self.trigger and self.weapon.cocked then
+			fire(self)
+		end
 	else
 		local target = ai.get_player_position()
 		local cast = physics.raycast(self.position, target, { hash("level") })
@@ -128,9 +132,12 @@ function on_input(self, action_id, action)
 		self.direction.y = 1
 	elseif action_id == hash("down") then
 		self.direction.y = self.direction.y - 1
-	elseif action_id == hash("fire") and action.pressed then
-		if self.aiming then
+	elseif action_id == hash("fire") and self.aiming then
+		if action.pressed then
+			self.trigger = true
 			fire(self)
+		elseif action.released then
+			self.trigger = false
 		end
 	elseif action_id == hash("aim") then
 		if action.pressed then

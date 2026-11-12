@@ -23,7 +23,7 @@ function gun:new()
         factory = "#factory",
         noise = 0.0,
         reloading = false,
-        cycletime = 0.25
+        cycletime = 0.25,
     }
     return setmetatable(instance, self)
 end

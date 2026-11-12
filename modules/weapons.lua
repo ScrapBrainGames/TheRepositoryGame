@@ -33,7 +33,13 @@ function gun:set(id)
 end
 
 function gun:cycle()
-    self.cocked = true
+    if self.timer then
+        timer.cancel(self.timer)
+    end
+    self.timer = timer.delay(self.cycletime, false, function()
+        self.cocked = true
+        self.timer = nil
+    end)
 end
 
 function gun:spin() end
@@ -114,14 +120,22 @@ function sixgun:new()
 end
 
 function sixgun:cycle()
-    table.insert(self.chambers, 7, self.chambers[1])
-    table.remove(self.chambers, 1)
-    self.cocked = true
+    if self.timer then
+        timer.cancel(self.timer)
+    end
+    self.timer = timer.delay(self.cycletime, false, function()
+        table.insert(self.chambers, 7, self.chambers[1])
+        table.remove(self.chambers, 1)
+        self.cocked = true
+        self.timer = nil
+    end)
 end
 
 function sixgun:spin()
-    table.insert(self.chambers, 7, self.chambers[1])
-    table.remove(self.chambers, 1)
+    if not self.cocked then
+        table.insert(self.chambers, 7, self.chambers[1])
+        table.remove(self.chambers, 1)
+    end
 end
 
 -- Singlegun (single shot rifle)

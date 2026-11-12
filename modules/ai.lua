@@ -172,7 +172,7 @@ actions.combat = {
                     if sighted then
                         return "wait"
                     else
-                        return "reload"
+                        return agent.state.weapon.reloading and "wait" or "reload"
                     end
                 end
                 return next

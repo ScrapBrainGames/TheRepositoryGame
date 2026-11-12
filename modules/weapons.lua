@@ -64,17 +64,21 @@ function gun:fire(position, direction)
     end
 end
 
-function gun:reload()
-    if self.reloading then return end
+function gun:reload(time)
+    if self.reloading and not time then return end
     local delay = 0
-    for index, _ in ipairs(self.chambers) do
-        if self.chambers[index] == false then
-            delay = delay + 1
+    if time then
+        delay = time
+    else
+        for index, _ in ipairs(self.chambers) do
+            if self.chambers[index] == false then
+                delay = delay + 1
+            end
         end
+        if delay <= 0 then return end
     end
-    if delay <= 0 then return end
     self.reloading = true
-    timer.delay(delay, false,
+    return timer.delay(delay, false,
         function()
             self.reloading = false
             for index, _ in ipairs(self.chambers) do

@@ -54,6 +54,7 @@ function M.initialize(character, name)
     character.state = params.state
     character.aim_movement = params.aim_movement
     character.normal_movement = params.normal_movement
+    character.reload_movement = params.reload_movement
     character.weapon = params.weapon
 end
 

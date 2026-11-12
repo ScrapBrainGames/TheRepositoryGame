@@ -53,8 +53,13 @@ function init(self)
 	-- Set camera to follow or AI to control
 	if self.player then
 		set_player(self)
+		if reloadtime then
+			self.reloadtimer = self.weapon:reload(reloadtime)
+			reloadtime = nil
+		end
 	else
 		self.ai = ai.new(self)
+		self.weapon:reload(0)
 	end
 	-- Somewhere out there is a bullet with your name on it
 	self.weapon:set(self.id)
@@ -133,16 +138,18 @@ function on_input(self, action_id, action)
 		elseif action.released then
 			lower(self)
 		end
-	elseif action_id == hash("reload") then
-		self.weapon:reload()
+	elseif action_id == hash("reload") and action.pressed then
+		self.reloadtimer = self.weapon:reload() or self.reloadtimer
 	elseif action_id == hash("spin") and action.pressed then
 		self.weapon:spin()
 	end
 end
 
 function final(self)
-	-- If player leaves, reload
-	if not self.player then
-		self.weapon:reload()
+	if self.player and self.reloadtimer then
+		local timer = timer.get_info(self.reloadtimer)
+		if timer then
+			reloadtime = timer.time_remaining
+		end
 	end
 end

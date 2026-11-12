@@ -18,6 +18,7 @@ local characters = {
         normal_movement = 250,
         reload_movement = 100,
         weapon = weapons.sixgun(),
+        aim_delay = 0.125,
     },
     sixgun = {
         state = health(10),
@@ -25,6 +26,7 @@ local characters = {
         normal_movement = 250,
         reload_movement = 100,
         weapon = weapons.sixgun(),
+        aim_delay = 0.125,
     },
     singlegun = {
         state = health(10),
@@ -32,6 +34,7 @@ local characters = {
         normal_movement = 250,
         reload_movement = 100,
         weapon = weapons.singlegun(),
+        aim_delay = 0.25,
     },
     shotgun = {
         state = health(10),
@@ -39,6 +42,7 @@ local characters = {
         normal_movement = 150,
         reload_movement = 100,
         weapon = weapons.shotgun(),
+        aim_delay = 0.125,
     },
     shotgun2 = {
         state = health(10),
@@ -46,6 +50,7 @@ local characters = {
         normal_movement = 150,
         reload_movement = 100,
         weapon = weapons.shotgun(),
+        aim_delay = 0.125,
     },
 }
 
@@ -56,6 +61,7 @@ function M.initialize(character, name)
     character.normal_movement = params.normal_movement
     character.reload_movement = params.reload_movement
     character.weapon = params.weapon
+    character.aim_delay = params.aim_delay
 end
 
 function M.check(name)

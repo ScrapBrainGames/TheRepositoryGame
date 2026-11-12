@@ -180,7 +180,7 @@ actions.combat = {
         end
     end,
     aim = function(agent)
-        local timer = 0.25
+        local timer = agent.state.weapon.cycletime + agent.state.aim_delay
         agent.state.aiming = true
         agent.state.weapon:cycle()
         return function(dt, sighted)

@@ -23,7 +23,7 @@ function gun:new()
         factory = "#factory",
         noise = 0.0,
         reloading = false,
-        cycletime = 0.25,
+        cycletime = 0.125,
     }
     return setmetatable(instance, self)
 end
@@ -154,7 +154,7 @@ singlegun.__index = singlegun
 function singlegun:new()
     local instance = gun.new(self)
     instance.speed = 1200
-    instance.noise = 0.0
+    instance.noise = 0.01
     instance.damage = 10
     return instance
 end

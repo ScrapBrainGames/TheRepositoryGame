@@ -36,6 +36,8 @@ local function set_player(self)
 	msg.post("/camera#control", "set_player", { id = go.get_id() })
 	self.hud = msg.url("/camera#weapon")
 	characters.player = self.character
+	-- Give the player a slight health advantage
+	self.state.health = self.state.health + 1
 end
 
 function init(self)

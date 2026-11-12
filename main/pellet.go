@@ -39,7 +39,7 @@ embedded_components {
   "    count: 1\n"
   "    id: \"outline\"\n"
   "  }\n"
-  "  data: 9.0\n"
+  "  data: 8.0\n"
   "}\n"
   ""
 }

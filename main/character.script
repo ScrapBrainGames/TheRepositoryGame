@@ -17,8 +17,6 @@ local function aim(self)
 	if not self.weapon.reloading then
 		self.weapon:cycle()
 	end
-
-	update_hud(self)
 end
 
 local function lower(self)
@@ -28,9 +26,8 @@ end
 
 local function fire(self)
 	local direction = self.target - self.position
-	if not self.weapon.reloading then
-		self.weapon:fire(self.position, direction)
-	end
+	self.weapon:fire(self.position, direction)
+	self.trigger = false
 end
 
 local function set_player(self)
@@ -135,7 +132,6 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("fire") and self.aiming then
 		if action.pressed then
 			self.trigger = true
-			fire(self)
 		elseif action.released then
 			self.trigger = false
 		end

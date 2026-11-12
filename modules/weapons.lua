@@ -33,6 +33,7 @@ function gun:set(id)
 end
 
 function gun:cycle()
+    if self.reloading then return end
     if self.timer then
         timer.cancel(self.timer)
     end
@@ -92,6 +93,7 @@ function gun:reload(time)
         if delay <= 0 then return end
     end
     self.reloading = true
+    self.cocked = false
     return timer.delay(delay, false,
         function()
             self.reloading = false
@@ -170,6 +172,7 @@ function shotgun:new()
     instance.chambers = { true, true }
     instance.noise = 0.25
     instance.damage = 2
+    instance.factory = "#shotgun"
     return instance
 end
 
@@ -196,7 +199,8 @@ function shotgun:fire(position, direction)
         for i = 1, 8 do
             props.direction = direction +
                 self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
-            factory.create(self.factory, position, nil, props)
+            local pellet = factory.create(self.factory, position, nil, props)
+            sprite.play_flipbook(pellet, "pellet")
         end
     end
 end

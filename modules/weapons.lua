@@ -9,6 +9,7 @@
 ---@field id hash?
 ---@field noise number
 ---@field reloading boolean
+---@field cycletime number
 local gun = {}
 gun.__index = gun
 
@@ -21,7 +22,8 @@ function gun:new()
         cocked = false,
         factory = "#factory",
         noise = 0.0,
-        reloading = false
+        reloading = false,
+        cycletime = 0.5
     }
     return setmetatable(instance, self)
 end
@@ -33,6 +35,8 @@ end
 function gun:cycle()
     self.cocked = true
 end
+
+function gun:spin() end
 
 function gun:fire(position, direction)
     if self.chambers[1] and self.cocked then
@@ -109,6 +113,11 @@ function sixgun:cycle()
     table.insert(self.chambers, 7, self.chambers[1])
     table.remove(self.chambers, 1)
     self.cocked = true
+end
+
+function sixgun:spin()
+    table.insert(self.chambers, 7, self.chambers[1])
+    table.remove(self.chambers, 1)
 end
 
 -- Singlegun (single shot rifle)

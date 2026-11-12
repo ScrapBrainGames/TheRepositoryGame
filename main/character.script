@@ -65,9 +65,15 @@ end
 
 function update(self, dt)
 	-- Set speed dependent on aiming or not
-	local speed = (self.aiming or self.weapon.reloading) and self.aim_movement or self.normal_movement
+	local speed = self.normal_movement
+	if self.aiming then
+		speed = self.aim_movement
+	elseif self.weapon.reloading then
+		speed = self.reload_movement
+	end
+	-- Get current position
 	self.position = go.get_position()
-
+	-- Player has a HUD and sends info to AI, enemy listens to AI
 	if self.player then
 		update_hud(self)
 		local velocity = go.get("#collisionobject", "linear_velocity")
@@ -78,12 +84,12 @@ function update(self, dt)
 		local sighted = cast == nil
 		ai.update(self.ai, dt, sighted)
 	end
-
+	-- Move by forces
 	if self.direction.x ~= 0 or self.direction.y ~= 0 then
 		self.direction = vmath.normalize(self.direction)
 		msg.post("#collisionobject", "apply_force", { force = self.direction * speed, position = self.position })
 	end
-
+	-- Reset move direction
 	self.direction.x = 0
 	self.direction.y = 0
 end
@@ -130,7 +136,7 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("reload") then
 		self.weapon:reload()
 	elseif action_id == hash("spin") and action.pressed then
-		self.weapon:cycle()
+		self.weapon:spin()
 	end
 end
 

@@ -133,3 +133,10 @@ function on_input(self, action_id, action)
 		self.weapon:cycle()
 	end
 end
+
+function final(self)
+	-- If player leaves, reload
+	if not self.player then
+		self.weapon:reload()
+	end
+end

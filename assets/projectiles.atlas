@@ -1,4 +1,10 @@
 images {
   image: "/assets/objects/spr_bullet.png"
 }
+images {
+  image: "/assets/objects/bullet.png"
+}
+images {
+  image: "/assets/objects/pellet.png"
+}
 extrude_borders: 2

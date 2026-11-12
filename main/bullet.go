@@ -10,17 +10,13 @@ components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "default_animation: \"spr_bullet\"\n"
+  data: "default_animation: \"bullet\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
   "  texture: \"/assets/projectiles.atlas\"\n"
   "}\n"
   ""
-  position {
-    x: -2.0
-    y: -1.0
-  }
 }
 embedded_components {
   id: "collisionobject"

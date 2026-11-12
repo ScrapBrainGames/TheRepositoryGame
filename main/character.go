@@ -110,3 +110,9 @@ embedded_components {
     y: 0.25
   }
 }
+embedded_components {
+  id: "shotgun"
+  type: "factory"
+  data: "prototype: \"/main/pellet.go\"\n"
+  ""
+}

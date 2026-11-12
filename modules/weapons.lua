@@ -23,7 +23,7 @@ function gun:new()
         factory = "#factory",
         noise = 0.0,
         reloading = false,
-        cycletime = 0.5
+        cycletime = 0.25
     }
     return setmetatable(instance, self)
 end
@@ -40,6 +40,14 @@ function gun:cycle()
         self.cocked = true
         self.timer = nil
     end)
+end
+
+function gun:decock()
+    if self.timer then
+        timer.cancel(self.timer)
+    end
+    self.timer = nil
+    self.cocked = false
 end
 
 function gun:spin() end

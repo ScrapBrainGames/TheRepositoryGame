@@ -23,7 +23,7 @@ end
 
 local function lower(self)
 	self.aiming = false
-	self.weapon.cocked = false
+	self.weapon:decock()
 end
 
 local function fire(self)

@@ -1,9 +1,21 @@
 local transition = require "modules.transition"
 
-function init(self)
-	-- Get level bounds
-	--self.bounds = ???
+local function start(self)
+	-- Move to entry gate
+	go.set_position(transition.start)
+	-- Set bounds from tilemap
+	local tilesize = 32
+	local x, y, w, h = tilemap.get_bounds(transition.tilemap)
+	local ww, wh = window.get_size()
+	self.bounds = {
+		left = (x - 1) * tilesize + ww * 0.5,
+		right = (w - x - 1) * tilesize - ww * 0.5,
+		top = (h - y - 1) * tilesize - wh * 0.5,
+		bottom = (y - 1) * tilesize + wh * 0.5,
+	}
+end
 
+function init(self)
 	-- Start at first gate
 	msg.post(".", "start")
 end
@@ -35,8 +47,21 @@ function late_update(self, dt)
 	end
 
 	target.z = 50
-	local current = go.get_position()
+	--local current = go.get_position()
 	--target = (target + 9 * current) * 0.1
+
+	-- Constrain within level
+	if target.x < self.bounds.left then
+		target.x = self.bounds.left
+	elseif target.x > self.bounds.right then
+		target.x = self.bounds.right
+	end
+	if target.y < self.bounds.bottom then
+		target.y = self.bounds.bottom
+	elseif target.y > self.bounds.top then
+		target.y = self.bounds.top
+	end
+
 	go.set_position(target)
 end
 
@@ -51,7 +76,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start") then
-		go.set_position(transition.start)
+		start(self)
 	end
 end
 

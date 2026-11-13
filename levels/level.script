@@ -1,0 +1,11 @@
+local transition = require "modules.transition"
+
+go.property("tilemap", msg.url())
+
+function init(self)
+	transition.tilemap = self.tilemap
+end
+
+function final(self)
+	transition.tilemap = nil
+end

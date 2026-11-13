@@ -10,8 +10,8 @@ instances {
   id: "station_exit"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: 560.0
-    y: 176.0
+    x: 909.0
+    y: 496.0
   }
   component_properties {
     id: "gate"
@@ -26,8 +26,8 @@ instances {
   id: "spawn"
   prototype: "/main/spawn.go"
   position {
-    x: 496.0
-    y: 176.0
+    x: 846.0
+    y: 496.0
   }
   component_properties {
     id: "spawn"
@@ -51,6 +51,15 @@ embedded_instances {
   "  component: \"/levels/title.tilemap\"\n"
   "  position {\n"
   "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "  properties {\n"
+  "    id: \"tilemap\"\n"
+  "    value: \"/level#title\"\n"
+  "    type: PROPERTY_TYPE_URL\n"
   "  }\n"
   "}\n"
   "embedded_components {\n"

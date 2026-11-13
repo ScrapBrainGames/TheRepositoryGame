@@ -1,6 +1,7 @@
 local M = {
     previous = hash("title"),
     start = vmath.vector3(),
+    tilemap = msg.url(),
 }
 
 M.characters = {}

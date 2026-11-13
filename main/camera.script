@@ -20,7 +20,11 @@ function late_update(self, dt)
 		count = count + 1
 		local position = go.get_position(char)
 		target = target + position
-		if play then player = position end
+		if play then
+			player = position
+			count = count + 1
+			target = target + position
+		end
 	end
 	if count > 0 then
 		target = target / count

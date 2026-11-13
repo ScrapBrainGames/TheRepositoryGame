@@ -37,7 +37,7 @@ local function set_player(self)
 	self.hud = msg.url("/camera#weapon")
 	characters.player = self.character
 	-- Give the player a slight health advantage
-	self.state.health = self.state.health + 1
+	self.state.health = self.state.health + 2
 	self.state.max_health = 12
 	if self.state.health > self.state.max_health then self.state.health = self.state.max_health end
 end

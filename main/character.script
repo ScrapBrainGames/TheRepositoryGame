@@ -35,6 +35,7 @@ local function set_player(self)
 	msg.post(".", "acquire_input_focus")
 	msg.post("/camera#control", "set_player", { id = go.get_id() })
 	self.hud = msg.url("/camera#weapon")
+	msg.post(self.hud, "set", { weapon = self.weapon.name })
 	characters.player = self.character
 	-- Give the player a slight health advantage
 	self.state.max_health = 12

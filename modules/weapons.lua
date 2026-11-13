@@ -1,5 +1,6 @@
 -- Parent gun with default methods and properties
 ---@class Gun
+---@field name string
 ---@field speed number
 ---@field damage number
 ---@field offset number
@@ -15,6 +16,7 @@ gun.__index = gun
 
 function gun:new()
     local instance = {
+        name = "",
         speed = 100,
         damage = 1,
         offset = 48,
@@ -122,6 +124,7 @@ sixgun.__index = sixgun
 
 function sixgun:new()
     local instance = gun.new(self)
+    instance.name = "sixgun"
     instance.speed = 900
     instance.chambers = { true, true, true, true, true, true }
     instance.noise = 0.1
@@ -155,6 +158,7 @@ singlegun.__index = singlegun
 
 function singlegun:new()
     local instance = gun.new(self)
+    instance.name = "singlegun"
     instance.speed = 1200
     instance.noise = 0.01
     instance.damage = 9
@@ -168,6 +172,7 @@ shotgun.__index = shotgun
 
 function shotgun:new()
     local instance = gun.new(self)
+    instance.name = "shotgun"
     instance.speed = 800
     instance.chambers = { true, true }
     instance.noise = 0.2

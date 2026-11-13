@@ -125,7 +125,7 @@ function sixgun:new()
     instance.speed = 900
     instance.chambers = { true, true, true, true, true, true }
     instance.noise = 0.1
-    instance.damage = 5
+    instance.damage = 4
     return instance
 end
 
@@ -157,7 +157,7 @@ function singlegun:new()
     local instance = gun.new(self)
     instance.speed = 1200
     instance.noise = 0.01
-    instance.damage = 10
+    instance.damage = 9
     return instance
 end
 
@@ -171,7 +171,7 @@ function shotgun:new()
     instance.speed = 800
     instance.chambers = { true, true }
     instance.noise = 0.2
-    instance.damage = 2
+    instance.damage = 1
     instance.factory = "#shotgun"
     return instance
 end

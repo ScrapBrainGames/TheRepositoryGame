@@ -17,7 +17,7 @@ local characters = {
         aim_movement = 50,
         normal_movement = 250,
         reload_movement = 100,
-        weapon = weapons.sixgun(),
+        weapon = weapons.shotgun(),
         aim_delay = 0.125,
     },
     sixgun = {

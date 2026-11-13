@@ -103,8 +103,8 @@ instances {
   id: "boulder2"
   prototype: "/levels/pieces/boulder.go"
   position {
-    x: 606.0
-    y: 563.0
+    x: 559.0
+    y: 627.0
   }
 }
 instances {
@@ -127,8 +127,8 @@ instances {
   id: "barrier4"
   prototype: "/levels/pieces/barrier.go"
   position {
-    x: 686.0
-    y: 508.0
+    x: 662.0
+    y: 506.0
   }
 }
 instances {
@@ -147,6 +147,22 @@ instances {
     y: 164.0
   }
 }
+instances {
+  id: "boulder4"
+  prototype: "/levels/pieces/boulder.go"
+  position {
+    x: 100.0
+    y: 483.0
+  }
+}
+instances {
+  id: "boulder5"
+  prototype: "/levels/pieces/boulder.go"
+  position {
+    x: 275.0
+    y: 442.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
@@ -161,6 +177,8 @@ embedded_instances {
   children: "boulder1"
   children: "boulder2"
   children: "boulder3"
+  children: "boulder4"
+  children: "boulder5"
   data: "components {\n"
   "  id: \"graveyard\"\n"
   "  component: \"/levels/graveyard.tilemap\"\n"

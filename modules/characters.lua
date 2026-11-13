@@ -44,14 +44,6 @@ local characters = {
         weapon = weapons.shotgun(),
         aim_delay = 0.125,
     },
-    shotgun2 = {
-        state = health(10),
-        aim_movement = 100,
-        normal_movement = 150,
-        reload_movement = 100,
-        weapon = weapons.shotgun(),
-        aim_delay = 0.125,
-    },
 }
 
 function M.initialize(character, name)

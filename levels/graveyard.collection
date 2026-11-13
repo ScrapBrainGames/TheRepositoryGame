@@ -92,22 +92,6 @@ instances {
   }
 }
 instances {
-  id: "enemy1"
-  prototype: "/main/spawn.go"
-  position {
-    x: 297.0
-    y: 58.0
-  }
-  component_properties {
-    id: "spawn"
-    properties {
-      id: "enemy"
-      value: "shotgun2"
-      type: PROPERTY_TYPE_TEXT
-    }
-  }
-}
-instances {
   id: "boulder1"
   prototype: "/levels/pieces/boulder.go"
   position {
@@ -175,7 +159,6 @@ embedded_instances {
 embedded_instances {
   id: "points"
   children: "enemy"
-  children: "enemy1"
   children: "mine_entrance"
   children: "mine_exit"
   data: ""

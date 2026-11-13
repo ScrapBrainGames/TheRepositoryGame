@@ -90,7 +90,7 @@ function gun:reload(time)
                 delay = delay + 0.5
             end
         end
-        if delay <= 0 then return end
+        if delay <= 0.5 then return end
     end
     self.reloading = true
     self.cocked = false

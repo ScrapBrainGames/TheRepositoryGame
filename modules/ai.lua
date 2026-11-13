@@ -124,7 +124,7 @@ end
 local actions = {}
 actions.movement = {
     move = function(agent)
-        local timer = 3
+        local timer = 2
         local destination = get_destination(agent)
         local next = math.random() < 0.5 and "wait" or "move"
         return function(dt, sighted)
@@ -141,7 +141,7 @@ actions.movement = {
         end
     end,
     wait = function(agent)
-        local timer = 2
+        local timer = 1
         local next = "move"
         agent.state.direction = vmath.vector3()
         return function(dt, sighted)

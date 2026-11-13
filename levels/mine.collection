@@ -58,8 +58,8 @@ instances {
   id: "enemy"
   prototype: "/main/spawn.go"
   position {
-    x: 720.0
-    y: 128.0
+    x: 601.0
+    y: 424.0
   }
   component_properties {
     id: "spawn"

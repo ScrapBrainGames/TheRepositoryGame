@@ -5,10 +5,12 @@ go.property("enemy", "sixgun")
 go.property("scene", hash(""))
 
 function init(self)
+	local position = go.get_position()
 	if transition.previous == self.scene then
-		factory.create("#factory", go.get_position(), nil, { character = characters.player, player = true })
+		factory.create("#factory", position, nil, { character = characters.player, player = true })
+		transition.start = position
 	elseif characters.check(self.enemy) then
-		factory.create("#factory", go.get_position(), nil, { character = self.enemy })
+		factory.create("#factory", position, nil, { character = self.enemy })
 	end
 end
 

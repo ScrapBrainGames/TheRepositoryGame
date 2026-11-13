@@ -1,7 +1,3 @@
-components {
-  id: "barrier"
-  component: "/levels/pieces/barrier.script"
-}
 embedded_components {
   id: "sprite"
   type: "sprite"

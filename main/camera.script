@@ -1,11 +1,44 @@
-function init(self)
+local transition = require "modules.transition"
 
+local function start(self)
+	-- Move to entry gate
+	go.set_position(transition.start)
+	-- Set bounds from tilemap
+	local tilesize = 32
+	local x, y, w, h = tilemap.get_bounds(transition.tilemap)
+	local ww, wh = window.get_size()
+	self.bounds = {
+		left = (x - 1) * tilesize + ww * 0.5,
+		right = (w - x - 1) * tilesize - ww * 0.5,
+		top = (h - y - 1) * tilesize - wh * 0.5,
+		bottom = (y - 1) * tilesize + wh * 0.5,
+	}
+	if self.bounds.left > self.bounds.right then
+		self.bounds.left = (self.bounds.left + self.bounds.right) * 0.5
+		self.bounds.right = self.bounds.left
+	end
+	if self.bounds.bottom > self.bounds.top then
+		self.bounds.bottom = (self.bounds.bottom + self.bounds.top) * 0.5
+		self.bounds.top = self.bounds.bottom
+	end
+	-- Limits before drawing a pointer to the enemy
+	self.limits = {
+		x = ww * 2 / 3 - 32,
+		y = wh * 2 / 3 - 32,
+		cx = ww * 0.5 - 32,
+		cy = wh * 0.5 - 32
+	}
+end
+
+function init(self)
+	-- Start at first gate
+	msg.post(".", "start")
+	-- Create the pointer
+	self.pointer = factory.create("#factory")
 end
 
 function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	transition.reset()
 end
 
 function update(self, dt)
@@ -13,15 +46,80 @@ function update(self, dt)
 end
 
 function late_update(self, dt)
-	local target
-	if go.exists(self.player) then
-		target = go.get_position(self.player)
+	-- Assume one enemy per level
+	local player, enemy
+	local target = vmath.vector3()
+	for char, play in pairs(transition.characters) do
+		local position = go.get_position(char)
+		if play then
+			player = position
+		else
+			enemy = position
+		end
+	end
+
+	if not enemy then
+		target = player
 	else
-		target = go.get_position()
+		local dx = enemy.x - player.x
+		local dy = enemy.y - player.y
+		local ox = math.abs(dx) > self.limits.x
+		local oy = math.abs(dy) > self.limits.y
+		if ox or oy then
+			local direction = enemy - player
+			local sx = math.abs(self.limits.x / dx)
+			local sy = math.abs(self.limits.y / dy)
+			if sx > sy then
+				-- Farther off in y-direction
+				direction = direction * sy
+			else
+				-- Farther in x-direction
+				direction = direction * sx
+			end
+			target = (player + player + player + direction) / 3
+		else
+			target = (player + player + enemy) / 3
+		end
 	end
 	target.z = 50
 
+	-- Constrain within level
+	if target.x < self.bounds.left then
+		target.x = self.bounds.left
+	elseif target.x > self.bounds.right then
+		target.x = self.bounds.right
+	end
+	if target.y < self.bounds.bottom then
+		target.y = self.bounds.bottom
+	elseif target.y > self.bounds.top then
+		target.y = self.bounds.top
+	end
 	go.set_position(target)
+
+	-- Show pointer if enemy off-screen
+	if enemy then
+		local dx = enemy.x - target.x
+		local dy = enemy.y - target.y
+		local ox = math.abs(dx) > self.limits.cx + 32
+		local oy = math.abs(dy) > self.limits.cy + 32
+		if ox or oy then
+			local direction = enemy - target
+			local sx = math.abs(self.limits.cx / dx)
+			local sy = math.abs(self.limits.cy / dy)
+			if sx > sy then
+				-- Farther off in y-direction
+				direction = direction * sy
+			else
+				-- Farther in x-direction
+				direction = direction * sx
+			end
+			go.set_position(target + direction, self.pointer)
+		else
+			go.set_position(vmath.vector3(-math.huge), self.pointer)
+		end
+	else
+		go.set_position(vmath.vector3(-math.huge), self.pointer)
+	end
 end
 
 function fixed_update(self, dt)
@@ -34,13 +132,8 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("set_player") then
-		self.player = message.id
-		if go.exists(self.player) then
-
-		else
-			print("Everybody dead.")
-		end
+	if message_id == hash("start") then
+		start(self)
 	end
 end
 

@@ -17,3 +17,9 @@ embedded_components {
   "orthographic_mode: ORTHO_MODE_AUTO_COVER\n"
   ""
 }
+embedded_components {
+  id: "factory"
+  type: "factory"
+  data: "prototype: \"/main/pointer.go\"\n"
+  ""
+}

@@ -1,6 +1,6 @@
-local weapons = require "modules.weapons"
 local characters = require "modules.characters"
 local ai = require "modules.ai"
+local transition = require "modules.transition"
 
 -- Which character is this?
 go.property("character", "default")
@@ -35,9 +35,12 @@ local function set_player(self)
 	msg.post(".", "acquire_input_focus")
 	msg.post("/camera#control", "set_player", { id = go.get_id() })
 	self.hud = msg.url("/camera#weapon")
+	msg.post(self.hud, "set", { weapon = self.weapon.name })
 	characters.player = self.character
 	-- Give the player a slight health advantage
 	self.state.max_health = 12
+	-- Register as player
+	transition.register(self.id, true)
 end
 
 function init(self)
@@ -71,6 +74,8 @@ function init(self)
 			go.set("#health", "scale.x", self.state.health / self.state.max_health)
 		end
 	end)
+	-- Register for camera tracking etc.
+	transition.register(self.id)
 end
 
 function update(self, dt)
@@ -157,6 +162,7 @@ function on_input(self, action_id, action)
 end
 
 function final(self)
+	transition.remove(self.id)
 	if self.player and self.reloadtimer then
 		local timer = timer.get_info(self.reloadtimer)
 		if timer then

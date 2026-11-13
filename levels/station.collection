@@ -3,16 +3,16 @@ instances {
   id: "barrier"
   prototype: "/levels/pieces/barrier.go"
   position {
-    x: 128.0
-    y: 284.0
+    x: 124.0
+    y: 416.0
   }
 }
 instances {
   id: "boulder"
   prototype: "/levels/pieces/boulder.go"
   position {
-    x: 369.0
-    y: 82.0
+    x: 349.0
+    y: 154.0
   }
 }
 instances {
@@ -26,8 +26,8 @@ instances {
   id: "mine_exit"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: 560.0
-    y: 176.0
+    x: 781.0
+    y: 271.0
   }
   component_properties {
     id: "gate"
@@ -42,8 +42,8 @@ instances {
   id: "title_exit"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: -48.0
-    y: 176.0
+    x: -46.0
+    y: 270.0
   }
   component_properties {
     id: "gate"
@@ -58,8 +58,8 @@ instances {
   id: "enemy"
   prototype: "/main/spawn.go"
   position {
-    x: 422.0
-    y: 72.0
+    x: 641.0
+    y: 444.0
   }
   component_properties {
     id: "spawn"
@@ -74,8 +74,8 @@ instances {
   id: "title_entrance"
   prototype: "/main/spawn.go"
   position {
-    x: 16.0
-    y: 176.0
+    x: 15.0
+    y: 273.0
   }
   component_properties {
     id: "spawn"
@@ -95,8 +95,8 @@ instances {
   id: "mine_entrance"
   prototype: "/main/spawn.go"
   position {
-    x: 496.0
-    y: 176.0
+    x: 719.0
+    y: 274.0
   }
   component_properties {
     id: "spawn"
@@ -116,16 +116,24 @@ instances {
   id: "barrier1"
   prototype: "/levels/pieces/barrier.go"
   position {
-    x: 352.0
-    y: 327.0
+    x: 544.0
+    y: 102.0
   }
 }
 instances {
   id: "boulder1"
   prototype: "/levels/pieces/boulder.go"
   position {
-    x: 176.0
-    y: 64.0
+    x: 150.0
+    y: 103.0
+  }
+}
+instances {
+  id: "barrier2"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 520.0
+    y: 434.0
   }
 }
 scale_along_z: 0
@@ -133,6 +141,7 @@ embedded_instances {
   id: "level"
   children: "barrier"
   children: "barrier1"
+  children: "barrier2"
   children: "boulder"
   children: "boulder1"
   data: "components {\n"
@@ -140,6 +149,15 @@ embedded_instances {
   "  component: \"/levels/station.tilemap\"\n"
   "  position {\n"
   "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "  properties {\n"
+  "    id: \"tilemap\"\n"
+  "    value: \"/level#station\"\n"
+  "    type: PROPERTY_TYPE_URL\n"
   "  }\n"
   "}\n"
   "embedded_components {\n"

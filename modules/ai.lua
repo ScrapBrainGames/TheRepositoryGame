@@ -124,7 +124,7 @@ end
 local actions = {}
 actions.movement = {
     move = function(agent)
-        local timer = 3
+        local timer = 2
         local destination = get_destination(agent)
         local next = math.random() < 0.5 and "wait" or "move"
         return function(dt, sighted)

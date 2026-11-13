@@ -3,16 +3,16 @@ instances {
   id: "barrier"
   prototype: "/levels/pieces/barrier.go"
   position {
-    x: 640.0
-    y: 320.0
+    x: 855.0
+    y: 198.0
   }
 }
 instances {
   id: "boulder"
   prototype: "/levels/pieces/boulder.go"
   position {
-    x: 640.0
-    y: 128.0
+    x: 652.0
+    y: 110.0
   }
 }
 instances {
@@ -26,16 +26,16 @@ instances {
   id: "barrier1"
   prototype: "/levels/pieces/barrier.go"
   position {
-    x: 480.0
-    y: 480.0
+    x: 517.0
+    y: 582.0
   }
 }
 instances {
   id: "barrier2"
   prototype: "/levels/pieces/barrier.go"
   position {
-    x: 320.0
-    y: 160.0
+    x: 442.0
+    y: 192.0
   }
 }
 instances {
@@ -95,56 +95,72 @@ instances {
   id: "boulder1"
   prototype: "/levels/pieces/boulder.go"
   position {
-    x: 456.0
-    y: 251.0
+    x: 739.0
+    y: 400.0
   }
 }
 instances {
   id: "boulder2"
   prototype: "/levels/pieces/boulder.go"
   position {
-    x: 606.0
-    y: 563.0
+    x: 596.0
+    y: 729.0
   }
 }
 instances {
   id: "boulder3"
   prototype: "/levels/pieces/boulder.go"
   position {
-    x: 123.0
-    y: 653.0
+    x: 160.0
+    y: 755.0
   }
 }
 instances {
   id: "barrier3"
   prototype: "/levels/pieces/barrier.go"
   position {
-    x: 159.0
-    y: 339.0
+    x: 182.0
+    y: 387.0
   }
 }
 instances {
   id: "barrier4"
   prototype: "/levels/pieces/barrier.go"
   position {
-    x: 686.0
-    y: 508.0
+    x: 829.0
+    y: 635.0
   }
 }
 instances {
   id: "barrier5"
   prototype: "/levels/pieces/barrier.go"
   position {
-    x: 274.0
-    y: 603.0
+    x: 325.0
+    y: 678.0
   }
 }
 instances {
   id: "barrier6"
   prototype: "/levels/pieces/barrier.go"
   position {
-    x: 161.0
-    y: 164.0
+    x: 190.0
+    y: 150.0
+  }
+}
+instances {
+  id: "boulder4"
+  prototype: "/levels/pieces/boulder.go"
+  position {
+    x: 137.0
+    y: 585.0
+  }
+}
+instances {
+  id: "boulder5"
+  prototype: "/levels/pieces/boulder.go"
+  position {
+    x: 453.0
+    y: 373.0
   }
 }
 scale_along_z: 0
@@ -161,11 +177,22 @@ embedded_instances {
   children: "boulder1"
   children: "boulder2"
   children: "boulder3"
+  children: "boulder4"
+  children: "boulder5"
   data: "components {\n"
   "  id: \"graveyard\"\n"
   "  component: \"/levels/graveyard.tilemap\"\n"
   "  position {\n"
   "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "  properties {\n"
+  "    id: \"tilemap\"\n"
+  "    value: \"/level#graveyard\"\n"
+  "    type: PROPERTY_TYPE_URL\n"
   "  }\n"
   "}\n"
   "embedded_components {\n"

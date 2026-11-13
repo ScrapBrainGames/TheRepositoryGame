@@ -13,11 +13,12 @@ nodes {
     y: 200.0
   }
   type: TYPE_BOX
-  id: "cylinder"
+  id: "sixgun"
   xanchor: XANCHOR_RIGHT
   yanchor: YANCHOR_BOTTOM
   alpha: 0.0
   size_mode: SIZE_MODE_AUTO
+  visible: false
 }
 nodes {
   position {
@@ -26,7 +27,7 @@ nodes {
   type: TYPE_BOX
   texture: "hud/loaded"
   id: "chamber1"
-  parent: "cylinder"
+  parent: "sixgun"
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
@@ -37,7 +38,7 @@ nodes {
   type: TYPE_BOX
   texture: "hud/loaded"
   id: "chamber2"
-  parent: "cylinder"
+  parent: "sixgun"
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
@@ -48,7 +49,7 @@ nodes {
   type: TYPE_BOX
   texture: "hud/loaded"
   id: "chamber3"
-  parent: "cylinder"
+  parent: "sixgun"
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
@@ -58,7 +59,7 @@ nodes {
   type: TYPE_BOX
   texture: "hud/loaded"
   id: "chamber4"
-  parent: "cylinder"
+  parent: "sixgun"
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
@@ -69,7 +70,7 @@ nodes {
   type: TYPE_BOX
   texture: "hud/loaded"
   id: "chamber5"
-  parent: "cylinder"
+  parent: "sixgun"
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
@@ -80,7 +81,62 @@ nodes {
   type: TYPE_BOX
   texture: "hud/loaded"
   id: "chamber6"
-  parent: "cylinder"
+  parent: "sixgun"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 732.0
+    y: 67.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "shotgun"
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -20.0
+  }
+  type: TYPE_BOX
+  texture: "hud/loaded"
+  id: "barrel1"
+  parent: "shotgun"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 20.0
+  }
+  type: TYPE_BOX
+  texture: "hud/loaded"
+  id: "barrel2"
+  parent: "shotgun"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 732.0
+    y: 67.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "singlegun"
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  type: TYPE_BOX
+  texture: "hud/loaded"
+  id: "single"
+  parent: "singlegun"
   size_mode: SIZE_MODE_AUTO
 }
 material: "/builtins/materials/gui.material"

@@ -1,20 +1,48 @@
-function init(self)
+local function set(self, type)
+	for _, node in pairs(self.containers) do
+		gui.set_enabled(node, false)
+	end
+	gui.set_enabled(self.containers[type], true)
+
 	self.nodes = {}
-	for i = 1, 6 do
-		self.nodes[i] = gui.get_node("chamber" .. i)
+	if type == "sixgun" then
+		for i = 1, 6 do
+			self.nodes[i] = gui.get_node("chamber" .. i)
+		end
+	elseif type == "shotgun" then
+		for i = 1, 2 do
+			self.nodes[i] = gui.get_node("barrel" .. i)
+		end
+	elseif type == "singlegun" then
+		self.nodes[1] = gui.get_node("single")
 	end
 end
 
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
+function init(self)
+	self.containers = {
+		sixgun = gui.get_node("sixgun"),
+		shotgun = gui.get_node("shotgun"),
+		singlegun = gui.get_node("singlegun")
+	}
 
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	self.weapon = {}
+	--self.sixgun = gui.get_node("sixgun")
+	--self.shotgun = gui.get_node("shotgun")
+	self.weapon.shotgun = function()
+		self.nodes = {}
+		for i = 1, 2 do
+			self.nodes[i] = gui.get_node("barrel" .. i)
+		end
+		set(self, "shotgun")
+	end
+
+	self.weapon.sixgun = function()
+		self.nodes = {}
+		for i = 1, 6 do
+			self.nodes[i] = gui.get_node("chamber" .. i)
+		end
+		set(self, "shotgun")
+	end
 end
 
 function on_message(self, message_id, message, sender)
@@ -22,23 +50,7 @@ function on_message(self, message_id, message, sender)
 		for i, loaded in ipairs(message.chambers) do
 			gui.play_flipbook(self.nodes[i], loaded and "loaded" or "empty")
 		end
+	elseif message_id == hash("set") then
+		set(self, message.weapon)
 	end
-end
-
-function on_input(self, action_id, action)
-	-- Add input-handling code here. The game object this script is attached to
-	-- must have acquired input focus:
-	--
-	--    msg.post(".", "acquire_input_focus")
-	--
-	-- All mapped input bindings will be received. Mouse and touch input will
-	-- be received regardless of where on the screen it happened.
-	-- Learn more: https://defold.com/manuals/input/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

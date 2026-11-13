@@ -13,12 +13,12 @@ end
 
 local characters = {
     default = {
-        state = health(10),
+        -- Player
+        state = health(12),
         aim_movement = 50,
         normal_movement = 250,
         reload_movement = 100,
         weapon = weapons.sixgun(),
-        aim_delay = 0.125,
     },
     sixgun = {
         state = health(10),
@@ -31,8 +31,8 @@ local characters = {
     singlegun = {
         state = health(10),
         aim_movement = 0,
-        normal_movement = 250,
-        reload_movement = 100,
+        normal_movement = 300,
+        reload_movement = 150,
         weapon = weapons.singlegun(),
         aim_delay = 0.25,
     },
@@ -40,7 +40,7 @@ local characters = {
         state = health(10),
         aim_movement = 100,
         normal_movement = 300,
-        reload_movement = 100,
+        reload_movement = 200,
         weapon = weapons.shotgun(),
         aim_delay = 0.25,
     },

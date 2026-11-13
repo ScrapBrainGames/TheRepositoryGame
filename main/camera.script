@@ -13,6 +13,14 @@ local function start(self)
 		top = (h - y - 1) * tilesize - wh * 0.5,
 		bottom = (y - 1) * tilesize + wh * 0.5,
 	}
+	if self.bounds.left > self.bounds.right then
+		self.bounds.left = (self.bounds.left + self.bounds.right) * 0.5
+		self.bounds.right = self.bounds.left
+	end
+	if self.bounds.bottom > self.bounds.top then
+		self.bounds.bottom = (self.bounds.bottom + self.bounds.top) * 0.5
+		self.bounds.top = self.bounds.bottom
+	end
 end
 
 function init(self)

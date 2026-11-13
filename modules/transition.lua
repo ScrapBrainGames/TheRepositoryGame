@@ -1,5 +1,6 @@
 local M = {
     previous = hash("title"),
+    start = vmath.vector3(),
 }
 
 M.characters = {}

@@ -1,7 +1,11 @@
 local transition = require "modules.transition"
 
 function init(self)
+	-- Get level bounds
+	--self.bounds = ???
 
+	-- Start at first gate
+	msg.post(".", "start")
 end
 
 function final(self)
@@ -31,6 +35,8 @@ function late_update(self, dt)
 	end
 
 	target.z = 50
+	local current = go.get_position()
+	--target = (target + 9 * current) * 0.1
 	go.set_position(target)
 end
 
@@ -44,13 +50,8 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("set_player") then
-		self.player = message.id
-		if go.exists(self.player) then
-
-		else
-			print("Everybody dead.")
-		end
+	if message_id == hash("start") then
+		go.set_position(transition.start)
 	end
 end
 

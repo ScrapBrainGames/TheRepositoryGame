@@ -21,11 +21,20 @@ local function start(self)
 		self.bounds.bottom = (self.bounds.bottom + self.bounds.top) * 0.5
 		self.bounds.top = self.bounds.bottom
 	end
+	-- Limits before drawing a pointer to the enemy
+	self.limits = {
+		x = ww * 2 / 3 - 32,
+		y = wh * 2 / 3 - 32,
+		cx = ww * 0.5 - 32,
+		cy = wh * 0.5 - 32
+	}
 end
 
 function init(self)
 	-- Start at first gate
 	msg.post(".", "start")
+	-- Create the pointer
+	self.pointer = factory.create("#factory")
 end
 
 function final(self)
@@ -37,26 +46,42 @@ function update(self, dt)
 end
 
 function late_update(self, dt)
-	local player
+	-- Assume one enemy per level
+	local player, enemy
 	local target = vmath.vector3()
-	local count = 0
 	for char, play in pairs(transition.characters) do
-		count = count + 1
 		local position = go.get_position(char)
-		target = target + position
 		if play then
 			player = position
-			count = count + 1
-			target = target + position
+		else
+			enemy = position
 		end
 	end
-	if count > 0 then
-		target = target / count
-	end
 
+	if not enemy then
+		target = player
+	else
+		local dx = enemy.x - player.x
+		local dy = enemy.y - player.y
+		local ox = math.abs(dx) > self.limits.x
+		local oy = math.abs(dy) > self.limits.y
+		if ox or oy then
+			local direction = enemy - player
+			local sx = math.abs(self.limits.x / dx)
+			local sy = math.abs(self.limits.y / dy)
+			if sx > sy then
+				-- Farther off in y-direction
+				direction = direction * sy
+			else
+				-- Farther in x-direction
+				direction = direction * sx
+			end
+			target = (player + player + player + direction) / 3
+		else
+			target = (player + player + enemy) / 3
+		end
+	end
 	target.z = 50
-	--local current = go.get_position()
-	--target = (target + 9 * current) * 0.1
 
 	-- Constrain within level
 	if target.x < self.bounds.left then
@@ -69,8 +94,32 @@ function late_update(self, dt)
 	elseif target.y > self.bounds.top then
 		target.y = self.bounds.top
 	end
-
 	go.set_position(target)
+
+	-- Show pointer if enemy off-screen
+	if enemy then
+		local dx = enemy.x - target.x
+		local dy = enemy.y - target.y
+		local ox = math.abs(dx) > self.limits.cx + 32
+		local oy = math.abs(dy) > self.limits.cy + 32
+		if ox or oy then
+			local direction = enemy - target
+			local sx = math.abs(self.limits.cx / dx)
+			local sy = math.abs(self.limits.cy / dy)
+			if sx > sy then
+				-- Farther off in y-direction
+				direction = direction * sy
+			else
+				-- Farther in x-direction
+				direction = direction * sx
+			end
+			go.set_position(target + direction, self.pointer)
+		else
+			go.set_position(vmath.vector3(-math.huge), self.pointer)
+		end
+	else
+		go.set_position(vmath.vector3(-math.huge), self.pointer)
+	end
 end
 
 function fixed_update(self, dt)

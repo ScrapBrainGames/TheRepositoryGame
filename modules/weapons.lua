@@ -159,7 +159,7 @@ singlegun.__index = singlegun
 function singlegun:new()
     local instance = gun.new(self)
     instance.name = "singlegun"
-    instance.speed = 1200
+    instance.speed = 1500
     instance.noise = 0.01
     instance.damage = 9
     return instance

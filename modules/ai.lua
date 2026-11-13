@@ -141,7 +141,7 @@ actions.movement = {
         end
     end,
     wait = function(agent)
-        local timer = 1
+        local timer = 2
         local next = "move"
         agent.state.direction = vmath.vector3()
         return function(dt, sighted)

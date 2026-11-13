@@ -1,11 +1,11 @@
+local transition = require "modules.transition"
+
 function init(self)
 
 end
 
 function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	transition.reset()
 end
 
 function update(self, dt)
@@ -13,14 +13,20 @@ function update(self, dt)
 end
 
 function late_update(self, dt)
-	local target
-	if go.exists(self.player) then
-		target = go.get_position(self.player)
-	else
-		target = go.get_position()
+	local player
+	local target = vmath.vector3()
+	local count = 0
+	for char, play in pairs(transition.characters) do
+		count = count + 1
+		local position = go.get_position(char)
+		target = target + position
+		if play then player = position end
 	end
-	target.z = 50
+	if count > 0 then
+		target = target / count
+	end
 
+	target.z = 50
 	go.set_position(target)
 end
 

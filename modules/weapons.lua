@@ -81,7 +81,7 @@ end
 
 function gun:reload(time)
     if self.reloading and not time then return end
-    local delay = 0
+    local delay = 0.5
     if time then
         delay = time
     else

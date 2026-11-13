@@ -42,7 +42,7 @@ local characters = {
         normal_movement = 150,
         reload_movement = 100,
         weapon = weapons.shotgun(),
-        aim_delay = 0.125,
+        aim_delay = 0.25,
     },
 }
 

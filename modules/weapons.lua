@@ -87,7 +87,7 @@ function gun:reload(time)
     else
         for index, _ in ipairs(self.chambers) do
             if self.chambers[index] == false then
-                delay = delay + 1
+                delay = delay + 0.5
             end
         end
         if delay <= 0 then return end
@@ -122,7 +122,7 @@ sixgun.__index = sixgun
 
 function sixgun:new()
     local instance = gun.new(self)
-    instance.speed = 600
+    instance.speed = 900
     instance.chambers = { true, true, true, true, true, true }
     instance.noise = 0.1
     instance.damage = 5
@@ -168,9 +168,9 @@ shotgun.__index = shotgun
 
 function shotgun:new()
     local instance = gun.new(self)
-    instance.speed = 500
+    instance.speed = 800
     instance.chambers = { true, true }
-    instance.noise = 0.25
+    instance.noise = 0.2
     instance.damage = 2
     instance.factory = "#shotgun"
     return instance

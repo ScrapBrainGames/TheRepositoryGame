@@ -123,6 +123,30 @@ instances {
     y: 339.0
   }
 }
+instances {
+  id: "barrier4"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 686.0
+    y: 508.0
+  }
+}
+instances {
+  id: "barrier5"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 274.0
+    y: 603.0
+  }
+}
+instances {
+  id: "barrier6"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 161.0
+    y: 164.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
@@ -130,6 +154,9 @@ embedded_instances {
   children: "barrier1"
   children: "barrier2"
   children: "barrier3"
+  children: "barrier4"
+  children: "barrier5"
+  children: "barrier6"
   children: "boulder"
   children: "boulder1"
   children: "boulder2"

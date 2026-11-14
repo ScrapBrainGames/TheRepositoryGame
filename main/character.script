@@ -157,7 +157,11 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("reload") and action.pressed then
 		self.reloadtimer = self.weapon:reload() or self.reloadtimer
 	elseif action_id == hash("spin") and action.pressed then
-		self.weapon:spin()
+		if self.aiming then
+			if not self.weapon.timer then self.weapon:cycle() end
+		else
+			self.weapon:spin()
+		end
 	end
 end
 

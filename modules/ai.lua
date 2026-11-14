@@ -185,7 +185,7 @@ actions.combat = {
         agent.state.weapon:cycle()
         return function(dt, sighted)
             local t = vmath.length(player.position - agent.state.position) / agent.state.weapon.speed
-            agent.state.target = player.position + t * player.velocity
+            agent.state.target = player.position + t * player.velocity * math.random()
             timer = timer - dt
             if timer <= 0 then
                 agent.state.aiming = false

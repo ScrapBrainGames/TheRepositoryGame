@@ -198,8 +198,13 @@ actions.combat = {
         end
     end,
     fire = function(agent)
+        local target = agent.state.target
         local position = agent.state.position
-        local direction = agent.state.target - position
+        -- Add some inaccuracy
+        target = target +
+            vmath.vector3(math.random() * 2 - 1, math.random() * 2 - 1, 0) * vmath.length(target - position) *
+            (1 - agent.state.accuracy)
+        local direction = target - position
         agent.state.weapon:fire(position, direction)
         return function()
             if agent.state.weapon:ready() then
@@ -251,6 +256,10 @@ function M.update(agent, dt, sighted)
         print("Combat: ", next)
         agent.action.combat = actions.combat[next](agent)
     end
+end
+
+function M.react(agent)
+    agent.action.movement = actions.movement.move(agent)
 end
 
 return M

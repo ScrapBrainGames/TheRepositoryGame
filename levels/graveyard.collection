@@ -217,3 +217,7 @@ embedded_instances {
   children: "mine_exit"
   data: ""
 }
+embedded_instances {
+  id: "go"
+  data: ""
+}

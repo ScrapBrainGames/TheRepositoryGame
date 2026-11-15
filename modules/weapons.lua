@@ -25,7 +25,7 @@ function gun:new()
         factory = "#factory",
         noise = 0.0,
         reloading = false,
-        cycletime = 0.125,
+        cycletime = 0.25,
     }
     return setmetatable(instance, self)
 end
@@ -35,22 +35,11 @@ function gun:set(id)
 end
 
 function gun:cycle()
-    if self.reloading then return end
-    if self.timer then
-        timer.cancel(self.timer)
-    end
+    if self.reloading or self.timer or self.cocked then return end
     self.timer = timer.delay(self.cycletime, false, function()
         self.cocked = true
         self.timer = nil
     end)
-end
-
-function gun:decock()
-    if self.timer then
-        timer.cancel(self.timer)
-    end
-    self.timer = nil
-    self.cocked = false
 end
 
 function gun:spin() end
@@ -133,9 +122,7 @@ function sixgun:new()
 end
 
 function sixgun:cycle()
-    if self.timer then
-        timer.cancel(self.timer)
-    end
+    if self.reloading or self.timer or self.cocked then return end
     self.timer = timer.delay(self.cycletime, false, function()
         table.insert(self.chambers, 7, self.chambers[1])
         table.remove(self.chambers, 1)

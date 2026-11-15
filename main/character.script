@@ -165,6 +165,10 @@ end
 
 function final(self)
 	transition.remove(self.id)
+	if self.weapon.timer then
+		timer.trigger(self.weapon.timer)
+		self.weapon.timer = nil
+	end
 	if self.player and self.reloadtimer then
 		local timer = timer.get_info(self.reloadtimer)
 		if timer then

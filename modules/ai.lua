@@ -253,4 +253,8 @@ function M.update(agent, dt, sighted)
     end
 end
 
+function M.react(agent)
+    agent.action.movement = actions.movement.move(agent)
+end
+
 return M

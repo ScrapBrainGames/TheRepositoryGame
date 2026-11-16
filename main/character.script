@@ -41,7 +41,7 @@ local function set_player(self)
 	msg.post(self.hud, "set", { weapon = self.weapon.name })
 	characters.player = self.character
 	-- Give the player a slight health advantage
-	self.state.max_health = 12
+	self.state.max_health = self.state.handicap
 	-- Register as player
 	transition.register(self.id, true)
 end

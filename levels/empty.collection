@@ -1,0 +1,123 @@
+name: "station"
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+}
+instances {
+  id: "default_exit"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 781.0
+    y: 271.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "level"
+      value: "mine"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
+instances {
+  id: "empty_entrance"
+  prototype: "/main/spawn.go"
+  position {
+    x: 366.0
+    y: 199.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: ""
+      type: PROPERTY_TYPE_TEXT
+    }
+    properties {
+      id: "scene"
+      value: "empty"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
+instances {
+  id: "default_entrance"
+  prototype: "/main/spawn.go"
+  position {
+    x: 719.0
+    y: 274.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: ""
+      type: PROPERTY_TYPE_TEXT
+    }
+    properties {
+      id: "scene"
+      value: "mine"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
+instances {
+  id: "cart"
+  prototype: "/levels/pieces/cart.go"
+  position {
+    x: 290.74805
+    y: 304.8375
+  }
+  component_properties {
+    id: "cart"
+    properties {
+      id: "anchor"
+      value: "/level#collisionobject"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  children: "cart"
+  data: "components {\n"
+  "  id: \"station\"\n"
+  "  component: \"/levels/empty.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "  properties {\n"
+  "    id: \"tilemap\"\n"
+  "    value: \"/level#station\"\n"
+  "    type: PROPERTY_TYPE_URL\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/empty.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "points"
+  children: "default_entrance"
+  children: "default_exit"
+  children: "empty_entrance"
+  data: ""
+}

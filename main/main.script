@@ -1,6 +1,6 @@
 local transition = require "modules.transition"
 
-local level = hash("station")
+local level = hash("empty")
 
 local function load_level(self, level)
 	local url = msg.url()

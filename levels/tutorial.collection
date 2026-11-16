@@ -94,7 +94,7 @@ embedded_instances {
   children: "cart"
   data: "components {\n"
   "  id: \"station\"\n"
-  "  component: \"/levels/station.tilemap\"\n"
+  "  component: \"/levels/tutorial.tilemap\"\n"
   "  position {\n"
   "    z: -10.0\n"
   "  }\n"

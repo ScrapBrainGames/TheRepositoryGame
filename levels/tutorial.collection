@@ -26,8 +26,8 @@ instances {
   id: "enemy"
   prototype: "/main/spawn.go"
   position {
-    x: 641.0
-    y: 444.0
+    x: 188.0
+    y: 171.0
   }
   component_properties {
     id: "spawn"
@@ -96,7 +96,7 @@ instances {
     }
     properties {
       id: "scene"
-      value: "title"
+      value: "empty"
       type: PROPERTY_TYPE_HASH
     }
   }
@@ -112,7 +112,7 @@ instances {
     id: "gate"
     properties {
       id: "level"
-      value: "title"
+      value: "empty"
       type: PROPERTY_TYPE_HASH
     }
   }
@@ -140,7 +140,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"collisionobject\"\n"
   "  type: \"collisionobject\"\n"
-  "  data: \"collision_shape: \\\"/levels/station.tilemap\\\"\\n"
+  "  data: \"collision_shape: \\\"/levels/tutorial.tilemap\\\"\\n"
   "type: COLLISION_OBJECT_TYPE_STATIC\\n"
   "mass: 0.0\\n"
   "friction: 0.0\\n"

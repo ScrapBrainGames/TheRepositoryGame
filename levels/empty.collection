@@ -17,7 +17,7 @@ instances {
     id: "gate"
     properties {
       id: "level"
-      value: "mine"
+      value: "tutorial"
       type: PROPERTY_TYPE_HASH
     }
   }
@@ -59,7 +59,7 @@ instances {
     }
     properties {
       id: "scene"
-      value: "mine"
+      value: "tutorial"
       type: PROPERTY_TYPE_HASH
     }
   }

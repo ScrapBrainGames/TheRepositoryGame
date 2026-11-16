@@ -198,16 +198,22 @@ function shotgun:fire(position, direction)
 end
 
 -- Empty (no weapons)
----@class Empty
-local empty = setmetatable({}, { __index = function() return function() end end })
+---@class Empty : Gun
+local empty = setmetatable({}, { __index = gun })
 empty.__index = empty
 
 function empty:new()
-    local instance = {}
+    local instance = gun.new(self)
     instance.name = "empty"
-    setmetatable(instance, empty)
+    instance.chambers = {}
     return instance
 end
+
+function empty:cycle() end
+
+function empty:fire() end
+
+function empty:reload() end
 
 -- The weapons module
 local M = {}

@@ -7,7 +7,7 @@ instances {
   }
 }
 instances {
-  id: "default_exit"
+  id: "title_exit"
   prototype: "/levels/pieces/gate.go"
   position {
     x: 781.0
@@ -17,7 +17,7 @@ instances {
     id: "gate"
     properties {
       id: "level"
-      value: "mine"
+      value: "title"
       type: PROPERTY_TYPE_HASH
     }
   }
@@ -32,35 +32,19 @@ instances {
   component_properties {
     id: "spawn"
     properties {
-      id: "scene"
-      value: ""
-      type: PROPERTY_TYPE_HASH
-    }
-  }
-}
-instances {
-  id: "tutorial_entrance"
-  prototype: "/main/spawn.go"
-  position {
-    x: 366.0
-    y: 199.0
-  }
-  component_properties {
-    id: "spawn"
-    properties {
       id: "enemy"
-      value: ""
+      value: "default"
       type: PROPERTY_TYPE_TEXT
     }
     properties {
       id: "scene"
-      value: "tutorial"
+      value: ""
       type: PROPERTY_TYPE_HASH
     }
   }
 }
 instances {
-  id: "default_entrance"
+  id: "title_entrance"
   prototype: "/main/spawn.go"
   position {
     x: 719.0
@@ -75,7 +59,7 @@ instances {
     }
     properties {
       id: "scene"
-      value: "mine"
+      value: "title"
       type: PROPERTY_TYPE_HASH
     }
   }
@@ -86,6 +70,51 @@ instances {
   position {
     x: 290.74805
     y: 304.8375
+  }
+  component_properties {
+    id: "cart"
+    properties {
+      id: "anchor"
+      value: "/level#collisionobject"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+}
+instances {
+  id: "empty_entrance"
+  prototype: "/main/spawn.go"
+  position {
+    x: 34.0
+    y: 273.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: ""
+      type: PROPERTY_TYPE_TEXT
+    }
+    properties {
+      id: "scene"
+      value: "title"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
+instances {
+  id: "empty_exit"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: -49.0
+    y: 268.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "level"
+      value: "title"
+      type: PROPERTY_TYPE_HASH
+    }
   }
 }
 scale_along_z: 0
@@ -124,9 +153,10 @@ embedded_instances {
 }
 embedded_instances {
   id: "points"
-  children: "default_entrance"
-  children: "default_exit"
+  children: "empty_entrance"
+  children: "empty_exit"
   children: "enemy"
-  children: "tutorial_entrance"
+  children: "title_entrance"
+  children: "title_exit"
   data: ""
 }

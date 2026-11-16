@@ -37,7 +37,7 @@ local characters = {
         normal_movement = 300,
         reload_movement = 150,
         weapon = weapons.singlegun(),
-        aim_delay = 0.5,
+        aim_delay = 0.375,
         accuracy = 0.95
     },
     shotgun = {

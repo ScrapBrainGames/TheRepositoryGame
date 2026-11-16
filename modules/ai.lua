@@ -27,6 +27,15 @@ function M.add_barrier(id, params)
     end
 end
 
+-- Add nodes without a barrier
+function M.add_node(id, position)
+    barriers[id] = {
+        nodes = {
+            position
+        }
+    }
+end
+
 function M.remove_barrier(id)
     barriers[id] = nil
 end
@@ -64,22 +73,24 @@ local function sightline(from, to)
         top = from.y
     end
     for _, barrier in pairs(barriers) do
-        local x = barrier.position.x
-        local y = barrier.position.y
-        if left < x and x < right then
-            local t = (x - from.x) / (to.x - from.x)
-            local yt = from.y + t * (to.y - from.y)
-            if math.abs(yt - y) < barrier.height * 0.5 then
-                -- Sight line blocked by barrier
-                return false
+        if barrier.position then
+            local x = barrier.position.x
+            local y = barrier.position.y
+            if left < x and x < right then
+                local t = (x - from.x) / (to.x - from.x)
+                local yt = from.y + t * (to.y - from.y)
+                if math.abs(yt - y) < barrier.height * 0.5 then
+                    -- Sight line blocked by barrier
+                    return false
+                end
             end
-        end
-        if bottom < y and y < top then
-            local t = (y - from.y) / (to.y - from.y)
-            local xt = from.x + t * (to.x - from.x)
-            if math.abs(xt - x) < barrier.width * 0.5 then
-                -- Sight line blocked by barrier
-                return false
+            if bottom < y and y < top then
+                local t = (y - from.y) / (to.y - from.y)
+                local xt = from.x + t * (to.x - from.x)
+                if math.abs(xt - x) < barrier.width * 0.5 then
+                    -- Sight line blocked by barrier
+                    return false
+                end
             end
         end
     end

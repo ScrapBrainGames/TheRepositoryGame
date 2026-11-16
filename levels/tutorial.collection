@@ -26,8 +26,8 @@ instances {
   id: "enemy"
   prototype: "/main/spawn.go"
   position {
-    x: 188.0
-    y: 171.0
+    x: 385.0
+    y: 272.0
   }
   component_properties {
     id: "spawn"
@@ -61,22 +61,6 @@ instances {
       id: "scene"
       value: "title"
       type: PROPERTY_TYPE_HASH
-    }
-  }
-}
-instances {
-  id: "cart"
-  prototype: "/levels/pieces/cart.go"
-  position {
-    x: 290.74805
-    y: 304.8375
-  }
-  component_properties {
-    id: "cart"
-    properties {
-      id: "anchor"
-      value: "/level#collisionobject"
-      type: PROPERTY_TYPE_URL
     }
   }
 }
@@ -117,12 +101,43 @@ instances {
     }
   }
 }
+instances {
+  id: "node"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 513.0
+    y: 273.0
+  }
+}
+instances {
+  id: "node1"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 366.0
+    y: 179.0
+  }
+}
+instances {
+  id: "node2"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 267.0
+    y: 273.0
+  }
+}
+instances {
+  id: "node3"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 400.0
+    y: 401.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
-  children: "cart"
   data: "components {\n"
-  "  id: \"station\"\n"
+  "  id: \"tutorial\"\n"
   "  component: \"/levels/tutorial.tilemap\"\n"
   "  position {\n"
   "    z: -10.0\n"
@@ -133,7 +148,7 @@ embedded_instances {
   "  component: \"/levels/level.script\"\n"
   "  properties {\n"
   "    id: \"tilemap\"\n"
-  "    value: \"/level#station\"\n"
+  "    value: \"/level#tutorial\"\n"
   "    type: PROPERTY_TYPE_URL\n"
   "  }\n"
   "}\n"
@@ -156,6 +171,10 @@ embedded_instances {
   children: "empty_entrance"
   children: "empty_exit"
   children: "enemy"
+  children: "node"
+  children: "node1"
+  children: "node2"
+  children: "node3"
   children: "title_entrance"
   children: "title_exit"
   data: ""

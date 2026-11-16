@@ -1,0 +1,12 @@
+local ai = require "modules.ai"
+
+function init(self)
+	local id = go.get_id()
+	local position = go.get_position()
+	ai.add_node(id, position)
+end
+
+function final(self)
+	local id = go.get_id()
+	ai.remove_barrier(id)
+end

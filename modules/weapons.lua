@@ -163,7 +163,7 @@ function shotgun:new()
     instance.speed = 800
     instance.chambers = { true, true }
     instance.noise = 0.2
-    instance.damage = 1
+    instance.damage = 2
     instance.factory = "#shotgun"
     return instance
 end
@@ -197,6 +197,24 @@ function shotgun:fire(position, direction)
     end
 end
 
+-- Empty (no weapons)
+---@class Empty : Gun
+local empty = setmetatable({}, { __index = gun })
+empty.__index = empty
+
+function empty:new()
+    local instance = gun.new(self)
+    instance.name = "empty"
+    instance.chambers = {}
+    return instance
+end
+
+function empty:cycle() end
+
+function empty:fire() end
+
+function empty:reload() end
+
 -- The weapons module
 local M = {}
 
@@ -205,5 +223,7 @@ function M.sixgun() return sixgun:new() end
 function M.singlegun() return singlegun:new() end
 
 function M.shotgun() return shotgun:new() end
+
+function M.empty() return empty:new() end
 
 return M

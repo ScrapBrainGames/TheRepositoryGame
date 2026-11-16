@@ -1,5 +1,5 @@
 local M = {
-    previous = hash("title"),
+    previous = hash("empty"),
     start = vmath.vector3(),
     tilemap = msg.url(),
 }

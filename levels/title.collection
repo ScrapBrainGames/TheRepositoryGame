@@ -11,7 +11,7 @@ instances {
   prototype: "/levels/pieces/gate.go"
   position {
     x: 909.0
-    y: 496.0
+    y: 49.0
   }
   component_properties {
     id: "gate"
@@ -23,11 +23,11 @@ instances {
   }
 }
 instances {
-  id: "spawn"
+  id: "station_enter"
   prototype: "/main/spawn.go"
   position {
     x: 846.0
-    y: 496.0
+    y: 49.0
   }
   component_properties {
     id: "spawn"
@@ -39,6 +39,43 @@ instances {
     properties {
       id: "scene"
       value: "station"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
+instances {
+  id: "tutorial_enter"
+  prototype: "/main/spawn.go"
+  position {
+    x: 14.0
+    y: 560.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: ""
+      type: PROPERTY_TYPE_TEXT
+    }
+    properties {
+      id: "scene"
+      value: "tutorial"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+}
+instances {
+  id: "tutorial_exit"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: -47.0
+    y: 562.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "level"
+      value: "tutorial"
       type: PROPERTY_TYPE_HASH
     }
   }
@@ -78,7 +115,9 @@ embedded_instances {
 }
 embedded_instances {
   id: "points"
-  children: "spawn"
+  children: "station_enter"
   children: "station_exit"
+  children: "tutorial_enter"
+  children: "tutorial_exit"
   data: ""
 }

@@ -2,16 +2,26 @@ local weapons = require "modules.weapons"
 
 local M = {}
 
-M.player = "default"
+M.player = "empty"
 
-local health = function(health, max)
+local health = function(health, max, handicap)
     return {
         health = health,
-        max_health = max or health
+        max_health = max or health,
+        handicap = handicap or 12
     }
 end
 
 local characters = {
+    empty = {
+        state = health(1, 1, 1),
+        aim_movement = 50,
+        normal_movement = 250,
+        reload_movement = 100,
+        weapon = weapons.empty(),
+        aim_delay = 0.25,
+        accuracy = 0.85
+    },
     default = {
         -- Player
         state = health(12),

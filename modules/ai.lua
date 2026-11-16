@@ -104,7 +104,7 @@ local function get_destination(agent)
     local target
     for _, point in ipairs(nodes) do
         -- Skip any node we're already on
-        if vmath.length_sqr(point - agent.state.position) > 1000 then
+        if vmath.length_sqr(point - agent.state.position) > 1000 and vmath.length_sqr(point - player.position) > 10000 then
             -- Check that agent can see the node
             if sightline(agent.state.position, point) then
                 -- Check that player can't see the node

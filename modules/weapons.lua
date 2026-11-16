@@ -163,7 +163,7 @@ function shotgun:new()
     instance.speed = 800
     instance.chambers = { true, true }
     instance.noise = 0.2
-    instance.damage = 1
+    instance.damage = 2
     instance.factory = "#shotgun"
     return instance
 end

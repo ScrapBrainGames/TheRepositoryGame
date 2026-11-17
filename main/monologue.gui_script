@@ -1,0 +1,69 @@
+local monologue = require "modules.monologue"
+local state = require "modules.state"
+
+local delay = 0.025
+
+local function start(self)
+	msg.post(state.current, "set_time_step", { factor = 0, mode = 0 })
+	gui.set_enabled(self.node, true)
+	self.active = true
+
+	local message = monologue.empty.intro
+	local index = 0
+	self.time = 0
+	self.draw = function()
+		index = index + 1
+		local printed = string.sub(message, 1, index)
+		gui.set_text(self.text, printed)
+		if index == #message then self.time = nil end
+	end
+end
+
+local function stop(self)
+	msg.post(state.current, "set_time_step", { factor = 1, mode = 0 })
+	gui.set_enabled(self.node, false)
+	self.active = false
+end
+
+function init(self)
+	self.node = gui.get_node("box")
+	self.portrait = gui.get_node("portrait")
+	self.text = gui.get_node("text")
+	gui.set_enabled(self.node, false)
+
+	timer.delay(2, false, start)
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	if self.time then
+		self.time = self.time - dt
+		if self.time <= 0 then
+			self.time = self.time + delay
+			self.draw()
+		end
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	if self.active and action.pressed then
+		stop(self)
+	end
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end

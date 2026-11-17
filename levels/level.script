@@ -1,11 +1,11 @@
-local transition = require "modules.transition"
+local state = require "modules.state"
 
 go.property("tilemap", msg.url())
 
 function init(self)
-	transition.tilemap = self.tilemap
+	state.tilemap = self.tilemap
 end
 
 function final(self)
-	transition.tilemap = nil
+	state.tilemap = nil
 end

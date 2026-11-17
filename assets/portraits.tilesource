@@ -1,0 +1,40 @@
+image: "/assets/images/PC _ Computer - Final Fantasy VII - Miscellaneous - Portraits.png"
+tile_width: 78
+tile_height: 90
+tile_margin: 4
+animations {
+  id: "default"
+  start_tile: 1
+  end_tile: 1
+  playback: PLAYBACK_NONE
+  fps: 0
+}
+animations {
+  id: "empty"
+  start_tile: 4
+  end_tile: 4
+  playback: PLAYBACK_NONE
+  fps: 0
+}
+animations {
+  id: "shotgun"
+  start_tile: 6
+  end_tile: 6
+  playback: PLAYBACK_NONE
+  fps: 0
+}
+animations {
+  id: "singlegun"
+  start_tile: 8
+  end_tile: 8
+  playback: PLAYBACK_NONE
+  fps: 0
+}
+animations {
+  id: "sixgun"
+  start_tile: 2
+  end_tile: 2
+  playback: PLAYBACK_NONE
+  fps: 0
+}
+extrude_borders: 2

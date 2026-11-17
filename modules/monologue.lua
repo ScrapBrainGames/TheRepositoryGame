@@ -1,11 +1,11 @@
 local M = {}
 
 M.empty = {
-    intro = [[Boy it sure is nice to be a main character and not have to worry about dying.]]
+    intro = [[Boy it sure is nice to be a main character and not have to worry about dying.]],
 }
 
 M.default = {
-    empty = [[Shoulda armed himself.]],
+    empty = [[Yeah, I did this.]],
     sixgun = [[lol git gud]],
 }
 

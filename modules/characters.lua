@@ -23,7 +23,6 @@ local characters = {
         accuracy = 0.85
     },
     default = {
-        -- Player
         state = health(12),
         aim_movement = 50,
         normal_movement = 250,

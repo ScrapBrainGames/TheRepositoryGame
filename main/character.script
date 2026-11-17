@@ -75,7 +75,7 @@ function init(self)
 		end
 	end)
 	-- Register for camera tracking etc.
-	state.register(self.id)
+	state.register(self.id, nil, self.character)
 end
 
 function update(self, dt)
@@ -119,8 +119,9 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("damage") then
 		self.state.health = self.state.health - message.damage
 		if self.state.health <= 0 then
+			state.kill(self.id, self.player or not self.lesser)
 			go.delete()
-			if self.player then
+			if self.player and (state.characters[message.sender] ~= nil) then
 				msg.post(message.sender, "set_player")
 			end
 		else

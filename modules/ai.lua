@@ -10,10 +10,10 @@ function M.add_barrier(id, params)
     barriers[id].nodes = {}
     for i = -1, 1, 2 do
         table.insert(barriers[id].nodes,
-            params.position + vmath.vector3(0, i * (params.height * 0.5 + 32), 0)
+            params.position + vmath.vector3(0, i * (params.height * 0.5 + 48), 0)
         )
         table.insert(barriers[id].nodes,
-            params.position + vmath.vector3(i * (params.width * 0.5 + 32), 0, 0)
+            params.position + vmath.vector3(i * (params.width * 0.5 + 48), 0, 0)
         )
     end
 
@@ -56,49 +56,6 @@ function M.get_player_position()
     return player.position, player.velocity
 end
 
-local function sightline(from, to)
-    local left, right, top, bottom
-    if from.x < to.x then
-        left = from.x
-        right = to.x
-    else
-        left = to.x
-        right = from.x
-    end
-    if from.y < to.y then
-        bottom = from.y
-        top = to.y
-    else
-        bottom = to.y
-        top = from.y
-    end
-    for _, barrier in pairs(barriers) do
-        if barrier.position then
-            local x = barrier.position.x
-            local y = barrier.position.y
-            local w = barrier.width * 0.5
-            local h = barrier.height * 0.5
-            if left < x + w and x - w < right then
-                local t = (x - from.x) / (to.x - from.x)
-                local yt = from.y + t * (to.y - from.y)
-                if math.abs(yt - y) < barrier.height * 0.5 then
-                    -- Sight line blocked by barrier
-                    return false
-                end
-            end
-            if bottom < y + h and y - h < top then
-                local t = (y - from.y) / (to.y - from.y)
-                local xt = from.x + t * (to.x - from.x)
-                if math.abs(xt - x) < barrier.width * 0.5 then
-                    -- Sight line blocked by barrier
-                    return false
-                end
-            end
-        end
-    end
-    return true
-end
-
 local function get_destination(agent)
     -- Get all nodes, in random order
     local nodes = {}
@@ -119,13 +76,13 @@ local function get_destination(agent)
         -- Skip any node we're already on or too close to the player
         if vmath.length_sqr(point - agent.state.position) > 1000 and vmath.length_sqr(point - player.position) > 100000 then
             -- Check that agent can see the node
-            if sightline(agent.state.position, point) then
+            if not physics.raycast(agent.state.position, point, { hash("level") }) then
                 -- Check that player can't see the node
-                if sightline(player.position, point) then
-                    table.insert(backup, point)
-                else
+                if physics.raycast(player.position, point, { hash("level") }) then
                     target = point
                     break
+                else
+                    table.insert(backup, point)
                 end
             end
         end
@@ -263,13 +220,13 @@ function M.update(agent, dt, sighted)
     -- Movement
     next = agent.action.movement(dt, sighted)
     if next then
-        --print("Movement: ", next)
+        print("Movement: ", next)
         agent.action.movement = actions.movement[next](agent)
     end
     -- Combat
     next = agent.action.combat(dt, sighted)
     if next then
-        print("Combat: ", next)
+        --print("Combat: ", next)
         agent.action.combat = actions.combat[next](agent)
     end
 end

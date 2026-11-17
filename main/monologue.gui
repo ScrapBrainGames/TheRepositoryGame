@@ -33,7 +33,7 @@ nodes {
     y: 160.0
   }
   type: TYPE_BOX
-  texture: "portraits/empty"
+  texture: "portraits/sixgun"
   id: "portrait"
   xanchor: XANCHOR_LEFT
   yanchor: YANCHOR_BOTTOM

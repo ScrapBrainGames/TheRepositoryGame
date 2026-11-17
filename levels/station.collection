@@ -26,7 +26,7 @@ instances {
   id: "mine_exit"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: 781.0
+    x: 800.0
     y: 271.0
   }
   component_properties {
@@ -42,7 +42,7 @@ instances {
   id: "title_exit"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: -46.0
+    x: -64.0
     y: 270.0
   }
   component_properties {

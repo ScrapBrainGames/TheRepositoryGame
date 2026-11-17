@@ -10,7 +10,7 @@ instances {
   id: "default_exit"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: 781.0
+    x: 799.0
     y: 271.0
   }
   component_properties {

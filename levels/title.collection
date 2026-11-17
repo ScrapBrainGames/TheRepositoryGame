@@ -24,7 +24,7 @@ instances {
 }
 instances {
   id: "station_enter"
-  prototype: "/main/spawn.go"
+  prototype: "/levels/pieces/spawn.go"
   position {
     x: 846.0
     y: 49.0
@@ -45,7 +45,7 @@ instances {
 }
 instances {
   id: "tutorial_enter"
-  prototype: "/main/spawn.go"
+  prototype: "/levels/pieces/spawn.go"
   position {
     x: 14.0
     y: 560.0

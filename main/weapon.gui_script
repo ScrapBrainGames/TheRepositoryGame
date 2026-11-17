@@ -25,25 +25,6 @@ function init(self)
 		shotgun = gui.get_node("shotgun"),
 		singlegun = gui.get_node("singlegun")
 	}
-
-	self.weapon = {}
-	--self.sixgun = gui.get_node("sixgun")
-	--self.shotgun = gui.get_node("shotgun")
-	self.weapon.shotgun = function()
-		self.nodes = {}
-		for i = 1, 2 do
-			self.nodes[i] = gui.get_node("barrel" .. i)
-		end
-		set(self, "shotgun")
-	end
-
-	self.weapon.sixgun = function()
-		self.nodes = {}
-		for i = 1, 6 do
-			self.nodes[i] = gui.get_node("chamber" .. i)
-		end
-		set(self, "shotgun")
-	end
 end
 
 function on_message(self, message_id, message, sender)

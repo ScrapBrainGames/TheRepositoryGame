@@ -2,7 +2,7 @@ local ai = require "modules.ai"
 
 function init(self)
 	local id = go.get_id()
-	local position = go.get_position()
+	local position = go.get_world_position()
 	ai.add_node(id, position)
 end
 

@@ -42,8 +42,6 @@ function gun:cycle()
     end)
 end
 
-function gun:spin() end
-
 function gun:fire(position, direction)
     if self.chambers[1] and self.cocked then
         self.chambers[1] = false
@@ -124,18 +122,10 @@ end
 function sixgun:cycle()
     if self.reloading or self.timer or self.cocked then return end
     self.timer = timer.delay(self.cycletime, false, function()
-        table.insert(self.chambers, 7, self.chambers[1])
-        table.remove(self.chambers, 1)
+        table.insert(self.chambers, table.remove(self.chambers, 1))
         self.cocked = true
         self.timer = nil
     end)
-end
-
-function sixgun:spin()
-    if not self.cocked then
-        table.insert(self.chambers, 7, self.chambers[1])
-        table.remove(self.chambers, 1)
-    end
 end
 
 -- Singlegun (single shot rifle)
@@ -191,8 +181,7 @@ function shotgun:fire(position, direction)
         for i = 1, 8 do
             props.direction = direction +
                 self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
-            local pellet = factory.create(self.factory, position, nil, props)
-            sprite.play_flipbook(pellet, "pellet")
+            factory.create(self.factory, position, nil, props)
         end
     end
 end

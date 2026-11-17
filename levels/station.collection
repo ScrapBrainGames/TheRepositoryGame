@@ -56,7 +56,7 @@ instances {
 }
 instances {
   id: "enemy"
-  prototype: "/main/spawn.go"
+  prototype: "/levels/pieces/spawn.go"
   position {
     x: 641.0
     y: 444.0
@@ -72,7 +72,7 @@ instances {
 }
 instances {
   id: "title_entrance"
-  prototype: "/main/spawn.go"
+  prototype: "/levels/pieces/spawn.go"
   position {
     x: 15.0
     y: 273.0
@@ -93,7 +93,7 @@ instances {
 }
 instances {
   id: "mine_entrance"
-  prototype: "/main/spawn.go"
+  prototype: "/levels/pieces/spawn.go"
   position {
     x: 719.0
     y: 274.0

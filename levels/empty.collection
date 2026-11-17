@@ -24,7 +24,7 @@ instances {
 }
 instances {
   id: "empty_entrance"
-  prototype: "/main/spawn.go"
+  prototype: "/levels/pieces/spawn.go"
   position {
     x: 366.0
     y: 199.0
@@ -45,7 +45,7 @@ instances {
 }
 instances {
   id: "default_entrance"
-  prototype: "/main/spawn.go"
+  prototype: "/levels/pieces/spawn.go"
   position {
     x: 719.0
     y: 274.0

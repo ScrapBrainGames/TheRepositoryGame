@@ -9,8 +9,8 @@ local function start(self)
 	local ww, wh = window.get_size()
 	self.bounds = {
 		left = (x - 1) * tilesize + ww * 0.5,
-		right = (w - x - 1) * tilesize - ww * 0.5,
-		top = (h - y - 1) * tilesize - wh * 0.5,
+		right = (x - 1 + w) * tilesize - ww * 0.5,
+		top = (y - 1 + h) * tilesize - wh * 0.5,
 		bottom = (y - 1) * tilesize + wh * 0.5,
 	}
 	if self.bounds.left > self.bounds.right then
@@ -30,11 +30,30 @@ local function start(self)
 	}
 end
 
+local pointers = {
+	count = 0,
+	offscreen = vmath.vector3(-math.huge)
+}
+function pointers:get(n)
+	-- Return a bunch of pointers
+	local batch = {}
+	for i = 1, n do
+		self[i] = self[i] or factory.create("#factory")
+		batch[i] = self[i]
+	end
+	-- Remove unused pointers
+	if self.count > n then
+		for i = self.count, n do
+			self[i] = nil
+		end
+	end
+	self.count = n
+	return batch
+end
+
 function init(self)
 	-- Start at first gate
 	msg.post(".", "start")
-	-- Create the pointer
-	self.pointer = factory.create("#factory")
 end
 
 function final(self)
@@ -46,21 +65,27 @@ function update(self, dt)
 end
 
 function late_update(self, dt)
-	-- Assume one enemy per level
-	local player, enemy
+	local player = go.get_position()
+	local enemies = {}
 	local target = vmath.vector3()
 	for char, play in pairs(transition.characters) do
 		local position = go.get_position(char)
 		if play then
 			player = position
 		else
-			enemy = position
+			table.insert(enemies, position)
 		end
 	end
-
-	if not enemy then
+	-- No enemies, center on player or stay put
+	if #enemies <= 0 then
 		target = player
 	else
+		-- Use midpoint of all enemies as single other point
+		local enemy = vmath.vector3()
+		for _, value in ipairs(enemies) do
+			enemy = enemy + value
+		end
+		enemy = enemy / #enemies
 		local dx = enemy.x - player.x
 		local dy = enemy.y - player.y
 		local ox = math.abs(dx) > self.limits.x
@@ -96,8 +121,10 @@ function late_update(self, dt)
 	end
 	go.set_position(target)
 
-	-- Show pointer if enemy off-screen
-	if enemy then
+	-- Show pointers if enemies off-screen
+	local pointer = pointers:get(#enemies)
+	for index, enemy in ipairs(enemies) do
+		local pointer = pointer[index]
 		local dx = enemy.x - target.x
 		local dy = enemy.y - target.y
 		local ox = math.abs(dx) > self.limits.cx + 32
@@ -113,12 +140,10 @@ function late_update(self, dt)
 				-- Farther in x-direction
 				direction = direction * sx
 			end
-			go.set_position(target + direction, self.pointer)
+			go.set_position(target + direction, pointer)
 		else
-			go.set_position(vmath.vector3(-math.huge), self.pointer)
+			go.set_position(pointers.offscreen, pointer)
 		end
-	else
-		go.set_position(vmath.vector3(-math.huge), self.pointer)
 	end
 end
 

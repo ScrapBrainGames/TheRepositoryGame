@@ -137,7 +137,7 @@ actions.movement = {
     move = function(agent)
         local timer = 2
         local destination = get_destination(agent)
-        local next = math.random() < 0.5 and "wait" or "move"
+        local next = agent.state.weapon.reloading and "wait" or math.random() < 0.5 and "wait" or "move"
         return function(dt, sighted)
             if not destination then
                 return "wait"
@@ -156,11 +156,11 @@ actions.movement = {
     end,
     wait = function(agent)
         local timer = 2
-        local next = "move"
+        local next = agent.state.weapon.reloading and "wait" or "move"
         agent.state.direction = vmath.vector3()
         return function(dt, sighted)
             if sighted then
-                return next
+                return "move"
             end
             timer = timer - dt
             if timer <= 0 then

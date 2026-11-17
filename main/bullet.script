@@ -43,8 +43,11 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("contact_point_response") then
 		-- Hit a character?
 		if message.other_group == hash("player") then
-			msg.post(message.other_id, "damage", { damage = self.damage, sender = self.sender })
-			go.delete()
+			if not self.disabled then
+				self.disabled = true
+				msg.post(message.other_id, "damage", { damage = self.damage, sender = self.sender })
+				go.delete()
+			end
 		elseif message.other_id ~= self.last then
 			-- Check for deflection
 			local normal = message.normal

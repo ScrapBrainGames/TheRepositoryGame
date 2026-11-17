@@ -6,12 +6,34 @@ M.empty = {
 
 M.default = {
     empty = [[Yeah, I did this.]],
+    default = [[lol git gud]],
     sixgun = [[lol git gud]],
+    shotgun = [[lol git gud]],
+    singlegun = [[lol git gud]],
 }
 
 M.sixgun = {
-    empty = [[sucks to suck]],
-    default = [[scrub]],
+    empty = [[lol git gud]],
+    default = [[lol git gud]],
+    sixgun = [[lol git gud]],
+    shotgun = [[lol git gud]],
+    singlegun = [[lol git gud]],
+}
+
+M.shotgun = {
+    empty = [[This is my shootygun...]],
+    default = [[This is my shootygun...]],
+    sixgun = [[This is my shootygun...]],
+    shotgun = [[This is my shootygun...]],
+    singlegun = [[This is my shootygun...]],
+}
+
+M.singlegun = {
+    empty = [[BOOM! Headshot!]],
+    default = [[BOOM! Headshot!]],
+    sixgun = [[BOOM! Headshot!]],
+    shotgun = [[BOOM! Headshot!]],
+    singlegun = [[BOOM! Headshot!]],
 }
 
 return M

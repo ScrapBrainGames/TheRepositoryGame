@@ -6,6 +6,12 @@ local state = require "modules.state"
 go.property("character", "default")
 go.property("player", false)
 
+-- Sprite sheets
+go.property("empty_body", resource.tile_source("/assets/characters/empty/body.tilesource"))
+go.property("empty_hat", resource.tile_source("/assets/characters/empty/hat.tilesource"))
+go.property("empty_hand", resource.tile_source("/assets/characters/empty/hand.tilesource"))
+go.property("empty_gun", resource.tile_source("/assets/characters/empty/gun.tilesource"))
+
 local function update_hud(self)
 	if self.player then
 		msg.post(self.hud, "chambers", { chambers = self.weapon.chambers })
@@ -45,6 +51,13 @@ local function set_player(self)
 	state.register(self.id, true)
 end
 
+local function set_sprite(self)
+	go.set("#body", "image", self.empty_body)
+	go.set("#hat", "image", self.empty_hat)
+	go.set("#hand", "image", self.empty_hand)
+	go.set("#gun", "image", self.empty_gun)
+end
+
 function init(self)
 	-- self state is used by both player and AI control
 	self.id = go.get_id()
@@ -76,6 +89,8 @@ function init(self)
 	end)
 	-- Register for camera tracking etc.
 	state.register(self.id, nil, self.character)
+	-- Set animations
+	set_sprite(self)
 end
 
 function update(self, dt)

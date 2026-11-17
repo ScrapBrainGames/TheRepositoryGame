@@ -1,4 +1,4 @@
-image: "/assets/characters/cleef/cleefHandSheet.png"
+image: "/assets/characters/empty/cleefHandSheet.png"
 tile_width: 144
 tile_height: 128
 animations {

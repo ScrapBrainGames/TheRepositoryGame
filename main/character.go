@@ -9,7 +9,7 @@ embedded_components {
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/cleef/body.tilesource\"\n"
+  "  texture: \"/assets/characters/empty/body.tilesource\"\n"
   "}\n"
   ""
   position {
@@ -57,7 +57,7 @@ embedded_components {
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/cleef/hand.tilesource\"\n"
+  "  texture: \"/assets/characters/empty/hand.tilesource\"\n"
   "}\n"
   ""
   position {
@@ -71,11 +71,12 @@ embedded_components {
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/cleef/gun.tilesource\"\n"
+  "  texture: \"/assets/characters/empty/gun.tilesource\"\n"
   "}\n"
   ""
   position {
     y: 12.0
+    z: 1.0
   }
 }
 embedded_components {
@@ -85,7 +86,7 @@ embedded_components {
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/cleef/hat.tilesource\"\n"
+  "  texture: \"/assets/characters/empty/hat.tilesource\"\n"
   "}\n"
   ""
   position {

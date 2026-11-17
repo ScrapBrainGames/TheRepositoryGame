@@ -76,7 +76,9 @@ local function sightline(from, to)
         if barrier.position then
             local x = barrier.position.x
             local y = barrier.position.y
-            if left < x and x < right then
+            local w = barrier.width * 0.5
+            local h = barrier.height * 0.5
+            if left < x + w and x - w < right then
                 local t = (x - from.x) / (to.x - from.x)
                 local yt = from.y + t * (to.y - from.y)
                 if math.abs(yt - y) < barrier.height * 0.5 then
@@ -84,7 +86,7 @@ local function sightline(from, to)
                     return false
                 end
             end
-            if bottom < y and y < top then
+            if bottom < y + h and y - h < top then
                 local t = (y - from.y) / (to.y - from.y)
                 local xt = from.x + t * (to.x - from.x)
                 if math.abs(xt - x) < barrier.width * 0.5 then

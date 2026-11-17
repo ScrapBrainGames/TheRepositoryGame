@@ -220,7 +220,7 @@ function M.update(agent, dt, sighted)
     -- Movement
     next = agent.action.movement(dt, sighted)
     if next then
-        print("Movement: ", next)
+        --print("Movement: ", next)
         agent.action.movement = actions.movement[next](agent)
     end
     -- Combat

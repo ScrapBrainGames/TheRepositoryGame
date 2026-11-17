@@ -5,7 +5,7 @@ M.empty = {
 }
 
 M.default = {
-    empty = [[Yeah, I did this.]],
+    empty = [[...]],
     default = [[lol git gud]],
     sixgun = [[lol git gud]],
     shotgun = [[lol git gud]],

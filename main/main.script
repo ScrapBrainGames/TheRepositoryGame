@@ -1,4 +1,4 @@
-local transition = require "modules.transition"
+local state = require "modules.state"
 
 local level = hash("empty")
 
@@ -6,6 +6,7 @@ local function load_level(self, level)
 	local url = msg.url()
 	url.fragment = level
 	self.current = url
+	state.current = url
 	msg.post(url, "load")
 end
 
@@ -21,7 +22,7 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("change_level") then
 		if self.next then return end
 		self.next = message.level
-		transition.previous = self.current.fragment
+		state.previous = self.current.fragment
 		msg.post(self.current, "disable")
 		msg.post(self.current, "final")
 		msg.post(self.current, "unload")

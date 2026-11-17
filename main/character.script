@@ -1,6 +1,6 @@
 local characters = require "modules.characters"
 local ai = require "modules.ai"
-local transition = require "modules.transition"
+local state = require "modules.state"
 
 -- Which character is this?
 go.property("character", "default")
@@ -42,7 +42,7 @@ local function set_player(self)
 	-- Give the player a slight health advantage
 	self.state.max_health = self.state.handicap
 	-- Register as player
-	transition.register(self.id, true)
+	state.register(self.id, true)
 end
 
 function init(self)
@@ -75,7 +75,7 @@ function init(self)
 		end
 	end)
 	-- Register for camera tracking etc.
-	transition.register(self.id)
+	state.register(self.id, nil, self.character)
 end
 
 function update(self, dt)
@@ -119,8 +119,9 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("damage") then
 		self.state.health = self.state.health - message.damage
 		if self.state.health <= 0 then
+			state.kill(self.id, self.player or not self.lesser)
 			go.delete()
-			if self.player then
+			if self.player and (state.characters[message.sender] ~= nil) then
 				msg.post(message.sender, "set_player")
 			end
 		else
@@ -169,5 +170,5 @@ function on_input(self, action_id, action)
 end
 
 function final(self)
-	transition.remove(self.id)
+	state.remove(self.id)
 end

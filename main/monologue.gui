@@ -1,0 +1,68 @@
+script: "/main/monologue.gui_script"
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+textures {
+  name: "portraits"
+  texture: "/assets/portraits.tilesource"
+}
+nodes {
+  position {
+    x: 400.0
+    y: 20.0
+  }
+  size {
+    x: 760.0
+    y: 160.0
+  }
+  type: TYPE_BOX
+  id: "box"
+  yanchor: YANCHOR_BOTTOM
+  pivot: PIVOT_S
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -380.0
+    y: 160.0
+  }
+  size {
+    x: 160.0
+    y: 160.0
+  }
+  type: TYPE_BOX
+  texture: "portraits/empty"
+  id: "portrait"
+  xanchor: XANCHOR_LEFT
+  yanchor: YANCHOR_BOTTOM
+  pivot: PIVOT_NW
+  adjust_mode: ADJUST_MODE_STRETCH
+  parent: "box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -211.0
+    y: 148.0
+  }
+  size {
+    x: 580.0
+    y: 140.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  font: "default"
+  id: "text"
+  pivot: PIVOT_NW
+  line_break: true
+  parent: "box"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

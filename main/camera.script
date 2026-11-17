@@ -1,11 +1,11 @@
-local transition = require "modules.transition"
+local state = require "modules.state"
 
 local function start(self)
 	-- Move to entry gate
-	go.set_position(transition.start)
+	go.set_position(state.start)
 	-- Set bounds from tilemap
 	local tilesize = 32
-	local x, y, w, h = tilemap.get_bounds(transition.tilemap)
+	local x, y, w, h = tilemap.get_bounds(state.tilemap)
 	local ww, wh = window.get_size()
 	self.bounds = {
 		left = (x - 1) * tilesize + ww * 0.5,
@@ -57,7 +57,7 @@ function init(self)
 end
 
 function final(self)
-	transition.reset()
+	state.reset()
 end
 
 function update(self, dt)
@@ -68,7 +68,7 @@ function late_update(self, dt)
 	local player = go.get_position()
 	local enemies = {}
 	local target = vmath.vector3()
-	for char, play in pairs(transition.characters) do
+	for char, play in pairs(state.characters) do
 		local position = go.get_position(char)
 		if play then
 			player = position

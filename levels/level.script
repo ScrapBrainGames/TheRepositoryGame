@@ -1,11 +1,27 @@
-local transition = require "modules.transition"
+local state = require "modules.state"
 
 go.property("tilemap", msg.url())
 
 function init(self)
-	transition.tilemap = self.tilemap
+	state.tilemap = self.tilemap
 end
 
 function final(self)
-	transition.tilemap = nil
+	state.tilemap = nil
+end
+
+function update(self, dt)
+	local count, id = state.count()
+	if count >= 2 then
+		self.combat = true
+	elseif self.combat then
+		self.combat = false
+		if count == 1 then
+			-- One survivor
+			state.ending(id)
+		elseif count == 0 then
+			-- No survivors
+			print("No survivors")
+		end
+	end
 end

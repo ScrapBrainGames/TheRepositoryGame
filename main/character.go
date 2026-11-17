@@ -5,11 +5,11 @@ components {
 embedded_components {
   id: "body"
   type: "sprite"
-  data: "default_animation: \"body\"\n"
+  data: "default_animation: \"idle\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/clint/clint_walk.tilesource\"\n"
+  "  texture: \"/assets/characters/cleef/body.tilesource\"\n"
   "}\n"
   ""
   position {
@@ -53,11 +53,11 @@ embedded_components {
 embedded_components {
   id: "hand"
   type: "sprite"
-  data: "default_animation: \"hand\"\n"
+  data: "default_animation: \"idle\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/clint/clint_walk.tilesource\"\n"
+  "  texture: \"/assets/characters/cleef/hand.tilesource\"\n"
   "}\n"
   ""
   position {
@@ -67,11 +67,11 @@ embedded_components {
 embedded_components {
   id: "gun"
   type: "sprite"
-  data: "default_animation: \"gun\"\n"
+  data: "default_animation: \"idle\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/clint/clint_walk.tilesource\"\n"
+  "  texture: \"/assets/characters/cleef/gun.tilesource\"\n"
   "}\n"
   ""
   position {
@@ -81,11 +81,11 @@ embedded_components {
 embedded_components {
   id: "hat"
   type: "sprite"
-  data: "default_animation: \"hat\"\n"
+  data: "default_animation: \"idle\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/clint/clint_walk.tilesource\"\n"
+  "  texture: \"/assets/characters/cleef/hat.tilesource\"\n"
   "}\n"
   ""
   position {

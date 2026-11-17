@@ -57,7 +57,6 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "Test test test"
   font: "default"
   id: "text"
   pivot: PIVOT_NW

@@ -51,21 +51,6 @@ embedded_components {
   ""
 }
 embedded_components {
-  id: "hand"
-  type: "sprite"
-  data: "default_animation: \"idle\"\n"
-  "material: \"/builtins/materials/sprite.material\"\n"
-  "textures {\n"
-  "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/clint/hand.tilesource\"\n"
-  "}\n"
-  ""
-  position {
-    y: 12.0
-    z: 2.0
-  }
-}
-embedded_components {
   id: "hat"
   type: "sprite"
   data: "default_animation: \"idle\"\n"
@@ -101,5 +86,11 @@ embedded_components {
   id: "shotgun"
   type: "factory"
   data: "prototype: \"/main/pellet.go\"\n"
+  ""
+}
+embedded_components {
+  id: "arm"
+  type: "factory"
+  data: "prototype: \"/main/arm.go\"\n"
   ""
 }

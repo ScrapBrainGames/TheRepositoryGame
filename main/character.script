@@ -14,11 +14,14 @@ go.property("cleef_hand", resource.atlas("/assets/characters/cleef/hand.atlas"))
 -- Clint
 go.property("clint_body", resource.tile_source("/assets/characters/clint/body.tilesource"))
 go.property("clint_hat", resource.tile_source("/assets/characters/clint/hat.tilesource"))
-go.property("clint_hand", resource.tile_source("/assets/characters/clint/hand.tilesource"))
+go.property("clint_hand", resource.atlas("/assets/characters/clint/hand.atlas"))
 -- Snuffy
 go.property("snuffy_body", resource.tile_source("/assets/characters/snuffy/body.tilesource"))
 go.property("snuffy_hat", resource.tile_source("/assets/characters/snuffy/hat.tilesource"))
-go.property("snuffy_hand", resource.tile_source("/assets/characters/snuffy/hand.tilesource"))
+go.property("snuffy_hand", resource.atlas("/assets/characters/snuffy/hand.atlas"))
+-- Sixgun
+go.property("weapon", resource.atlas("/assets/weapons/weapons.atlas"))
+
 
 local function update_hud(self)
 	if self.player then
@@ -60,27 +63,26 @@ local function set_player(self)
 end
 
 local function set_sprite(self)
-	print(self.character)
 	if self.character == "empty" then
 		go.set("#body", "image", self.cleef_body)
 		go.set("#hat", "image", self.cleef_hat)
-		go.set("#hand", "image", self.cleef_hand)
+		go.set(self.hand_url, "image", self.cleef_hand)
 	elseif self.character == "default" then
 		go.set("#body", "image", self.clint_body)
 		go.set("#hat", "image", self.clint_hat)
-		go.set("#hand", "image", self.clint_hand)
+		go.set(self.hand_url, "image", self.clint_hand)
 	elseif self.character == "sixgun" then
 		go.set("#body", "image", self.cleef_body)
 		go.set("#hat", "image", self.cleef_hat)
-		go.set("#hand", "image", self.cleef_hand)
+		go.set(self.hand_url, "image", self.cleef_hand)
 	elseif self.character == "singlegun" then
 		go.set("#body", "image", self.clint_body)
 		go.set("#hat", "image", self.clint_hat)
-		go.set("#hand", "image", self.clint_hand)
+		go.set(self.hand_url, "image", self.clint_hand)
 	elseif self.character == "shotgun" then
 		go.set("#body", "image", self.snuffy_body)
 		go.set("#hat", "image", self.snuffy_hat)
-		go.set("#hand", "image", self.snuffy_hand)
+		go.set(self.hand_url, "image", self.snuffy_hand)
 	end
 end
 
@@ -123,6 +125,28 @@ local function animation(self)
 	end
 end
 
+local function pointing(self)
+	sprite.play_flipbook(self.gun_url, self.weapon.name)
+	local flipped = false
+	return function()
+		local direction = self.target - self.position
+		if direction.x > 0 then
+			if flipped then
+				flipped = false
+				sprite.set_hflip(self.arm, false)
+			end
+		elseif direction.x < 0 then
+			if not flipped then
+				flipped = true
+				sprite.set_hflip(self.arm, true)
+			end
+			direction = -direction
+		end
+		local q = vmath.quat_rotation_z(math.atan2(direction.y, direction.x))
+		go.set_rotation(q, self.arm)
+	end
+end
+
 function init(self)
 	-- self state is used by both player and AI control
 	self.id = go.get_id()
@@ -130,6 +154,12 @@ function init(self)
 	self.direction = vmath.vector3()
 	self.target = vmath.vector3()
 	self.aiming = false
+	-- Add an arm
+	self.arm = factory.create("#arm")
+	go.set_parent(self.arm, self.id)
+	go.set_position(vmath.vector3(0, 0, 0), self.arm)
+	self.hand_url = msg.url(nil, self.arm, "hand")
+	self.gun_url = msg.url(nil, self.arm, "gun")
 	-- Initialize per-character parameters like health, speed, and weapon
 	characters.initialize(self, self.character)
 	-- Set camera to follow or AI to control
@@ -156,6 +186,7 @@ function init(self)
 	state.register(self.id, nil, self.character)
 	-- Set animations
 	self.animation = animation(self)
+	self.pointing = pointing(self)
 end
 
 function update(self, dt)
@@ -192,6 +223,7 @@ function update(self, dt)
 	end
 	-- Animate
 	self.animation(velocity)
+	self.pointing()
 	-- Reset move direction
 	self.direction.x = 0
 	self.direction.y = 0
@@ -202,7 +234,7 @@ function on_message(self, message_id, message, sender)
 		self.state.health = self.state.health - message.damage
 		if self.state.health <= 0 then
 			state.kill(self.id, self.player or not self.lesser)
-			go.delete()
+			go.delete(self.id, true)
 			if self.player and (state.characters[message.sender] ~= nil) then
 				msg.post(message.sender, "set_player")
 			end

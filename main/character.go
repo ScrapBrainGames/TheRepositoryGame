@@ -62,21 +62,7 @@ embedded_components {
   ""
   position {
     y: 12.0
-  }
-}
-embedded_components {
-  id: "gun"
-  type: "sprite"
-  data: "default_animation: \"idle\"\n"
-  "material: \"/builtins/materials/sprite.material\"\n"
-  "textures {\n"
-  "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/clint/gun.tilesource\"\n"
-  "}\n"
-  ""
-  position {
-    y: 12.0
-    z: 1.0
+    z: 2.0
   }
 }
 embedded_components {

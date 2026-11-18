@@ -3,23 +3,25 @@ tile_width: 144
 tile_height: 128
 animations {
   id: "dead"
+  playback: PLAYBACK_NONE
   fps: 8
-  frames: 13
+  frames: 16
 }
 animations {
   id: "hit"
+  playback: PLAYBACK_NONE
   fps: 8
-  frames: 9
+  frames: 12
 }
 animations {
   id: "idle"
   playback: PLAYBACK_NONE
   fps: 8
-  frames: 1
+  frames: 4
 }
 animations {
   id: "walk"
-  playback: PLAYBACK_LOOP_FORWARD
+  playback: PLAYBACK_LOOP_BACKWARD
   fps: 8
   frames: 5
   frames: 6

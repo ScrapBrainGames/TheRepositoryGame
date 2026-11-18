@@ -11,9 +11,9 @@ local map = {
     },
     title = {
         "tutorial",
-        "station",
+        "square",
     },
-    station = {
+    square = {
         "title",
         "mine",
     },

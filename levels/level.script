@@ -1,6 +1,6 @@
 local state = require "modules.state"
 
-go.property("tilemap", msg.url())
+go.property("tilemap", msg.url("/level#tilemap"))
 
 function init(self)
 	state.tilemap = self.tilemap

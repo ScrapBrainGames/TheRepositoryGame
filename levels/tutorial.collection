@@ -7,11 +7,11 @@ instances {
   }
 }
 instances {
-  id: "title_exit"
+  id: "exit2"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: 799.0
-    y: 271.0
+    x: 49.0
+    y: -64.0
   }
   component_properties {
     id: "gate"
@@ -26,8 +26,8 @@ instances {
   id: "enemy"
   prototype: "/levels/pieces/spawn.go"
   position {
-    x: 642.0
-    y: 272.0
+    x: 50.0
+    y: 271.0
   }
   component_properties {
     id: "spawn"
@@ -44,11 +44,11 @@ instances {
   }
 }
 instances {
-  id: "title_entrance"
+  id: "enter2"
   prototype: "/levels/pieces/spawn.go"
   position {
-    x: 719.0
-    y: 274.0
+    x: 48.0
+    y: 16.0
   }
   component_properties {
     id: "spawn"
@@ -65,11 +65,11 @@ instances {
   }
 }
 instances {
-  id: "empty_entrance"
+  id: "enter1"
   prototype: "/levels/pieces/spawn.go"
   position {
-    x: 34.0
-    y: 273.0
+    x: 720.0
+    y: 272.0
   }
   component_properties {
     id: "spawn"
@@ -81,11 +81,11 @@ instances {
   }
 }
 instances {
-  id: "empty_exit"
+  id: "exit1"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: -64.0
-    y: 268.0
+    x: 799.0
+    y: 271.0
   }
 }
 instances {
@@ -123,6 +123,10 @@ instances {
 scale_along_z: 0
 embedded_instances {
   id: "level"
+  children: "node"
+  children: "node1"
+  children: "node2"
+  children: "node3"
   data: "components {\n"
   "  id: \"tutorial\"\n"
   "  component: \"/levels/tutorial.tilemap\"\n"
@@ -155,14 +159,10 @@ embedded_instances {
 }
 embedded_instances {
   id: "points"
-  children: "empty_entrance"
-  children: "empty_exit"
   children: "enemy"
-  children: "node"
-  children: "node1"
-  children: "node2"
-  children: "node3"
-  children: "title_entrance"
-  children: "title_exit"
+  children: "enter1"
+  children: "enter2"
+  children: "exit1"
+  children: "exit2"
   data: ""
 }

@@ -1,4 +1,4 @@
-name: "station"
+name: "empty"
 instances {
   id: "camera"
   prototype: "/main/camera.go"
@@ -7,15 +7,15 @@ instances {
   }
 }
 instances {
-  id: "default_exit"
+  id: "exit"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: 799.0
-    y: 271.0
+    x: -64.0
+    y: 274.0
   }
 }
 instances {
-  id: "empty_entrance"
+  id: "player_start"
   prototype: "/levels/pieces/spawn.go"
   position {
     x: 366.0
@@ -36,11 +36,11 @@ instances {
   }
 }
 instances {
-  id: "default_entrance"
+  id: "enter"
   prototype: "/levels/pieces/spawn.go"
   position {
-    x: 719.0
-    y: 274.0
+    x: 17.0
+    y: 273.0
   }
   component_properties {
     id: "spawn"
@@ -72,7 +72,7 @@ embedded_instances {
   id: "level"
   children: "cart"
   data: "components {\n"
-  "  id: \"station\"\n"
+  "  id: \"tilemap\"\n"
   "  component: \"/levels/empty.tilemap\"\n"
   "  position {\n"
   "    z: -10.0\n"
@@ -81,11 +81,6 @@ embedded_instances {
   "components {\n"
   "  id: \"level\"\n"
   "  component: \"/levels/level.script\"\n"
-  "  properties {\n"
-  "    id: \"tilemap\"\n"
-  "    value: \"/level#station\"\n"
-  "    type: PROPERTY_TYPE_URL\n"
-  "  }\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"collisionobject\"\n"
@@ -103,8 +98,8 @@ embedded_instances {
 }
 embedded_instances {
   id: "points"
-  children: "default_entrance"
-  children: "default_exit"
-  children: "empty_entrance"
+  children: "enter"
+  children: "exit"
+  children: "player_start"
   data: ""
 }

@@ -15,7 +15,11 @@ local map = {
     },
     square = {
         "title",
-        "mine",
+        "pots",
+    },
+    pots = {
+        "square",
+        "town",
     },
     mine = {
         "station",

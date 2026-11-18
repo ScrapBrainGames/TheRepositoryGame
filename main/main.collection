@@ -48,6 +48,12 @@ embedded_instances {
   "  data: \"collection: \\\"/levels/square.collection\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"pots\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/levels/pots.collection\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }
 embedded_instances {

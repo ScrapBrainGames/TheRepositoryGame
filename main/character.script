@@ -115,6 +115,7 @@ local function animation(self)
 			last = current
 		end
 		if current == "walk" then
+			-- Scale the animation rate to |velocity|/max_speed
 			local rate = vmath.length(velocity) / self.normal_movement
 			go.set("#body", "playback_rate", rate)
 			go.set("#hat", "playback_rate", rate)

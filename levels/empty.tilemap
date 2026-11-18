@@ -2159,7 +2159,7 @@ layers {
 }
 layers {
   id: "boundary"
-  z: 0.0
+  z: 1.0
   cell {
     x: 0
     y: -1

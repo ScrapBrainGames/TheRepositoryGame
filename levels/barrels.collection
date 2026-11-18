@@ -38,43 +38,6 @@ instances {
     }
   }
 }
-instances {
-  id: "enter2"
-  prototype: "/levels/pieces/spawn.go"
-  position {
-    x: 368.0
-    y: 16.0
-  }
-  component_properties {
-    id: "spawn"
-    properties {
-      id: "enemy"
-      value: ""
-      type: PROPERTY_TYPE_TEXT
-    }
-    properties {
-      id: "index"
-      value: "2.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-  }
-}
-instances {
-  id: "exit2"
-  prototype: "/levels/pieces/gate.go"
-  position {
-    x: 369.0
-    y: -64.0
-  }
-  component_properties {
-    id: "gate"
-    properties {
-      id: "index"
-      value: "2.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-  }
-}
 scale_along_z: 0
 embedded_instances {
   id: "level"
@@ -106,8 +69,6 @@ embedded_instances {
 embedded_instances {
   id: "points"
   children: "enter1"
-  children: "enter2"
   children: "exit1"
-  children: "exit2"
   data: ""
 }

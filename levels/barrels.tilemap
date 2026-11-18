@@ -3,21 +3,6 @@ layers {
   id: "ground"
   z: 0.0
   cell {
-    x: 10
-    y: -1
-    tile: 0
-  }
-  cell {
-    x: 11
-    y: -1
-    tile: 3
-  }
-  cell {
-    x: 12
-    y: -1
-    tile: 0
-  }
-  cell {
     x: 0
     y: 0
     tile: 0
@@ -2153,6 +2138,21 @@ layers {
   }
   cell {
     x: 9
+    y: -1
+    tile: 1
+  }
+  cell {
+    x: 10
+    y: -1
+    tile: 1
+  }
+  cell {
+    x: 11
+    y: -1
+    tile: 1
+  }
+  cell {
+    x: 12
     y: -1
     tile: 1
   }

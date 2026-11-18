@@ -28,7 +28,6 @@ local map = {
     },
     barrels = {
         "town",
-        "town", -- wut
     },
     graveyard = {
         "town",
@@ -37,6 +36,9 @@ local map = {
     tomb = {
         "graveyard",
         "mine",
+    },
+    mine = {
+        "tomb",
     },
 }
 

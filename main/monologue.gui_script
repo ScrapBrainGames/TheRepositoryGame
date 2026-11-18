@@ -6,7 +6,7 @@ local delay = 0.025
 local function start(self, speaker, context)
 	gui.play_flipbook(self.portrait, speaker or "empty")
 	msg.post(".", "acquire_input_focus")
-	msg.post(state.current, "set_time_step", { factor = 0, mode = 0 })
+	msg.post(state.level_url, "set_time_step", { factor = 0, mode = 0 })
 	gui.set_enabled(self.node, true)
 	self.active = true
 	self.ready = false
@@ -32,7 +32,7 @@ end
 
 local function stop(self)
 	msg.post(".", "release_input_focus")
-	msg.post(state.current, "set_time_step", { factor = 1, mode = 0 })
+	msg.post(state.level_url, "set_time_step", { factor = 1, mode = 0 })
 	gui.set_enabled(self.node, false)
 	self.active = false
 end

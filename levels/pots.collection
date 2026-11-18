@@ -1,0 +1,113 @@
+name: "empty"
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+}
+instances {
+  id: "exit1"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 799.0
+    y: 272.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "index"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "enter1"
+  prototype: "/levels/pieces/spawn.go"
+  position {
+    x: 718.0
+    y: 274.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: ""
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+instances {
+  id: "enter2"
+  prototype: "/levels/pieces/spawn.go"
+  position {
+    x: 368.0
+    y: 16.0
+  }
+  component_properties {
+    id: "spawn"
+    properties {
+      id: "enemy"
+      value: ""
+      type: PROPERTY_TYPE_TEXT
+    }
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "exit2"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 369.0
+    y: -64.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  data: "components {\n"
+  "  id: \"tilemap\"\n"
+  "  component: \"/levels/pots.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/pots.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "points"
+  children: "enter1"
+  children: "enter2"
+  children: "exit1"
+  children: "exit2"
+  data: ""
+}

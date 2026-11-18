@@ -1,18 +1,18 @@
 local state = require "modules.state"
-
-local level = hash("empty")
+local map = require "modules.map"
 
 local function load_level(self, level)
 	local url = msg.url()
 	url.fragment = level
 	self.current = url
-	state.current = url
+	state.current = level
+	state.level_url = url
 	msg.post(url, "load")
 end
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	load_level(self, level)
+	load_level(self, hash("empty"))
 end
 
 function on_message(self, message_id, message, sender)
@@ -21,7 +21,7 @@ function on_message(self, message_id, message, sender)
 		msg.post(sender, "enable")
 	elseif message_id == hash("change_level") then
 		if self.next then return end
-		self.next = message.level
+		self.next = map.get(state.current, message.index)
 		state.previous = self.current.fragment
 		msg.post(self.current, "disable")
 		msg.post(self.current, "final")
@@ -33,13 +33,5 @@ function on_message(self, message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
-	-- Add input-handling code here. The game object this script is attached to
-	-- must have acquired input focus:
-	--
-	--    msg.post(".", "acquire_input_focus")
-	--
-	-- All mapped input bindings will be received. Mouse and touch input will
-	-- be received regardless of where on the screen it happened.
-	-- Learn more: https://defold.com/manuals/input/
-	-- Remove this function if not needed
+	-- Eventually, add a pause menu
 end

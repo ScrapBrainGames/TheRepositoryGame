@@ -1,15 +1,17 @@
 local characters = require "modules.characters"
 local state = require "modules.state"
+local map = require "modules.map"
 
-go.property("enemy", "sixgun")
-go.property("scene", hash(""))
+go.property("enemy", "")
+go.property("index", 1)
 
 function init(self)
 	local position = go.get_position()
-	if state.previous == self.scene then
+	if characters.check(self.enemy) then
+		factory.create("#factory", position, nil, { character = self.enemy })
+	elseif
+		state.previous == map.get(state.current, self.index) then
 		factory.create("#factory", position, nil, { character = characters.player, player = true })
 		state.start = position
-	elseif characters.check(self.enemy) then
-		factory.create("#factory", position, nil, { character = self.enemy })
 	end
 end

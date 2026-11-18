@@ -21,14 +21,6 @@ instances {
     x: -63.0
     y: 172.0
   }
-  component_properties {
-    id: "gate"
-    properties {
-      id: "level"
-      value: "station"
-      type: PROPERTY_TYPE_HASH
-    }
-  }
 }
 instances {
   id: "graveyard_exit"
@@ -40,9 +32,9 @@ instances {
   component_properties {
     id: "gate"
     properties {
-      id: "level"
-      value: "graveyard"
-      type: PROPERTY_TYPE_HASH
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
     }
   }
 }
@@ -60,6 +52,11 @@ instances {
       value: "singlegun"
       type: PROPERTY_TYPE_TEXT
     }
+    properties {
+      id: "index"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
   }
 }
 instances {
@@ -75,11 +72,6 @@ instances {
       id: "enemy"
       value: ""
       type: PROPERTY_TYPE_TEXT
-    }
-    properties {
-      id: "scene"
-      value: "station"
-      type: PROPERTY_TYPE_HASH
     }
   }
 }
@@ -98,9 +90,9 @@ instances {
       type: PROPERTY_TYPE_TEXT
     }
     properties {
-      id: "scene"
-      value: "graveyard"
-      type: PROPERTY_TYPE_HASH
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
     }
   }
 }

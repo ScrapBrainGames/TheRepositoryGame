@@ -7,27 +7,27 @@ instances {
   }
 }
 instances {
-  id: "station_exit"
+  id: "exit2"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: 927.0
-    y: 49.0
+    x: 818.0
+    y: -64.0
   }
   component_properties {
     id: "gate"
     properties {
-      id: "level"
-      value: "station"
-      type: PROPERTY_TYPE_HASH
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
     }
   }
 }
 instances {
-  id: "station_enter"
+  id: "enter2"
   prototype: "/levels/pieces/spawn.go"
   position {
-    x: 846.0
-    y: 49.0
+    x: 816.0
+    y: 15.0
   }
   component_properties {
     id: "spawn"
@@ -37,18 +37,18 @@ instances {
       type: PROPERTY_TYPE_TEXT
     }
     properties {
-      id: "scene"
-      value: "station"
-      type: PROPERTY_TYPE_HASH
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
     }
   }
 }
 instances {
-  id: "tutorial_enter"
+  id: "enter1"
   prototype: "/levels/pieces/spawn.go"
   position {
-    x: 14.0
-    y: 560.0
+    x: 48.0
+    y: 590.0
   }
   component_properties {
     id: "spawn"
@@ -57,34 +57,21 @@ instances {
       value: ""
       type: PROPERTY_TYPE_TEXT
     }
-    properties {
-      id: "scene"
-      value: "tutorial"
-      type: PROPERTY_TYPE_HASH
-    }
   }
 }
 instances {
-  id: "tutorial_exit"
+  id: "exit1"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: -63.0
-    y: 562.0
-  }
-  component_properties {
-    id: "gate"
-    properties {
-      id: "level"
-      value: "tutorial"
-      type: PROPERTY_TYPE_HASH
-    }
+    x: 45.0
+    y: 671.0
   }
 }
 scale_along_z: 0
 embedded_instances {
   id: "level"
   data: "components {\n"
-  "  id: \"title\"\n"
+  "  id: \"tilemap\"\n"
   "  component: \"/levels/title.tilemap\"\n"
   "  position {\n"
   "    z: -10.0\n"
@@ -93,11 +80,6 @@ embedded_instances {
   "components {\n"
   "  id: \"level\"\n"
   "  component: \"/levels/level.script\"\n"
-  "  properties {\n"
-  "    id: \"tilemap\"\n"
-  "    value: \"/level#title\"\n"
-  "    type: PROPERTY_TYPE_URL\n"
-  "  }\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"collisionobject\"\n"
@@ -115,9 +97,9 @@ embedded_instances {
 }
 embedded_instances {
   id: "points"
-  children: "station_enter"
-  children: "station_exit"
-  children: "tutorial_enter"
-  children: "tutorial_exit"
+  children: "enter1"
+  children: "enter2"
+  children: "exit1"
+  children: "exit2"
   data: ""
 }

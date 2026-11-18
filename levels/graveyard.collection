@@ -39,23 +39,15 @@ instances {
   }
 }
 instances {
-  id: "mine_exit"
+  id: "exit1"
   prototype: "/levels/pieces/gate.go"
   position {
     x: 688.0
     y: 928.0
   }
-  component_properties {
-    id: "gate"
-    properties {
-      id: "level"
-      value: "mine"
-      type: PROPERTY_TYPE_HASH
-    }
-  }
 }
 instances {
-  id: "mine_entrance"
+  id: "enter1"
   prototype: "/levels/pieces/spawn.go"
   position {
     x: 688.0
@@ -67,11 +59,6 @@ instances {
       id: "enemy"
       value: ""
       type: PROPERTY_TYPE_TEXT
-    }
-    properties {
-      id: "scene"
-      value: "mine"
-      type: PROPERTY_TYPE_HASH
     }
   }
 }
@@ -88,6 +75,11 @@ instances {
       id: "enemy"
       value: "shotgun"
       type: PROPERTY_TYPE_TEXT
+    }
+    properties {
+      id: "index"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
     }
   }
 }
@@ -180,7 +172,7 @@ embedded_instances {
   children: "boulder4"
   children: "boulder5"
   data: "components {\n"
-  "  id: \"graveyard\"\n"
+  "  id: \"tilemap\"\n"
   "  component: \"/levels/graveyard.tilemap\"\n"
   "  position {\n"
   "    z: -10.0\n"
@@ -189,11 +181,6 @@ embedded_instances {
   "components {\n"
   "  id: \"level\"\n"
   "  component: \"/levels/level.script\"\n"
-  "  properties {\n"
-  "    id: \"tilemap\"\n"
-  "    value: \"/level#graveyard\"\n"
-  "    type: PROPERTY_TYPE_URL\n"
-  "  }\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"collisionobject\"\n"
@@ -213,8 +200,8 @@ embedded_instances {
 embedded_instances {
   id: "points"
   children: "enemy"
-  children: "mine_entrance"
-  children: "mine_exit"
+  children: "enter1"
+  children: "exit1"
   data: ""
 }
 embedded_instances {

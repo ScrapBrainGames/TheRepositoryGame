@@ -128,8 +128,12 @@ end
 local function pointing(self)
 	sprite.play_flipbook(self.gun_url, self.weapon.name)
 	local flipped = false
+	local last = vmath.vector3(1, 0, 0)
 	return function()
 		local direction = self.target - self.position
+		direction = vmath.normalize(direction)
+		direction = vmath.slerp(0.1, last, direction)
+		last = direction
 		if direction.x > 0 then
 			if flipped then
 				flipped = false

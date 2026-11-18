@@ -26,7 +26,7 @@ instances {
   id: "enemy"
   prototype: "/levels/pieces/spawn.go"
   position {
-    x: 385.0
+    x: 642.0
     y: 272.0
   }
   component_properties {
@@ -105,32 +105,32 @@ instances {
   id: "node"
   prototype: "/levels/pieces/node.go"
   position {
-    x: 513.0
-    y: 273.0
+    x: 143.0
+    y: 396.0
   }
 }
 instances {
   id: "node1"
   prototype: "/levels/pieces/node.go"
   position {
-    x: 366.0
-    y: 179.0
+    x: 170.0
+    y: 175.0
   }
 }
 instances {
   id: "node2"
   prototype: "/levels/pieces/node.go"
   position {
-    x: 267.0
-    y: 273.0
+    x: 562.0
+    y: 368.0
   }
 }
 instances {
   id: "node3"
   prototype: "/levels/pieces/node.go"
   position {
-    x: 400.0
-    y: 401.0
+    x: 562.0
+    y: 145.0
   }
 }
 scale_along_z: 0

@@ -45,14 +45,6 @@ instances {
     x: 688.0
     y: 928.0
   }
-  component_properties {
-    id: "gate"
-    properties {
-      id: "level"
-      value: "mine"
-      type: PROPERTY_TYPE_HASH
-    }
-  }
 }
 instances {
   id: "mine_entrance"
@@ -67,11 +59,6 @@ instances {
       id: "enemy"
       value: ""
       type: PROPERTY_TYPE_TEXT
-    }
-    properties {
-      id: "scene"
-      value: "mine"
-      type: PROPERTY_TYPE_HASH
     }
   }
 }
@@ -88,6 +75,11 @@ instances {
       id: "enemy"
       value: "shotgun"
       type: PROPERTY_TYPE_TEXT
+    }
+    properties {
+      id: "index"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
     }
   }
 }

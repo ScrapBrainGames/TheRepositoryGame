@@ -16,9 +16,9 @@ instances {
   component_properties {
     id: "gate"
     properties {
-      id: "level"
-      value: "station"
-      type: PROPERTY_TYPE_HASH
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
     }
   }
 }
@@ -37,9 +37,9 @@ instances {
       type: PROPERTY_TYPE_TEXT
     }
     properties {
-      id: "scene"
-      value: "station"
-      type: PROPERTY_TYPE_HASH
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
     }
   }
 }
@@ -57,11 +57,6 @@ instances {
       value: ""
       type: PROPERTY_TYPE_TEXT
     }
-    properties {
-      id: "scene"
-      value: "tutorial"
-      type: PROPERTY_TYPE_HASH
-    }
   }
 }
 instances {
@@ -70,14 +65,6 @@ instances {
   position {
     x: -63.0
     y: 562.0
-  }
-  component_properties {
-    id: "gate"
-    properties {
-      id: "level"
-      value: "tutorial"
-      type: PROPERTY_TYPE_HASH
-    }
   }
 }
 scale_along_z: 0

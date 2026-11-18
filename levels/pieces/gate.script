@@ -1,7 +1,7 @@
-go.property("level", hash(""))
+go.property("index", 1)
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("trigger_response") and message.enter then
-		msg.post("main:/main#main", "change_level", { level = self.level })
+		msg.post("main:/main#main", "change_level", { index = self.index })
 	end
 end

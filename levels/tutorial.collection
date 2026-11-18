@@ -16,9 +16,9 @@ instances {
   component_properties {
     id: "gate"
     properties {
-      id: "level"
-      value: "title"
-      type: PROPERTY_TYPE_HASH
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
     }
   }
 }
@@ -37,9 +37,9 @@ instances {
       type: PROPERTY_TYPE_TEXT
     }
     properties {
-      id: "scene"
-      value: ""
-      type: PROPERTY_TYPE_HASH
+      id: "index"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
     }
   }
 }
@@ -58,9 +58,9 @@ instances {
       type: PROPERTY_TYPE_TEXT
     }
     properties {
-      id: "scene"
-      value: "title"
-      type: PROPERTY_TYPE_HASH
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
     }
   }
 }
@@ -78,11 +78,6 @@ instances {
       value: ""
       type: PROPERTY_TYPE_TEXT
     }
-    properties {
-      id: "scene"
-      value: "empty"
-      type: PROPERTY_TYPE_HASH
-    }
   }
 }
 instances {
@@ -91,14 +86,6 @@ instances {
   position {
     x: -64.0
     y: 268.0
-  }
-  component_properties {
-    id: "gate"
-    properties {
-      id: "level"
-      value: "empty"
-      type: PROPERTY_TYPE_HASH
-    }
   }
 }
 instances {

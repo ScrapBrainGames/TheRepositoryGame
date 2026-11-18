@@ -7,10 +7,10 @@ go.property("character", "default")
 go.property("player", false)
 
 -- Sprite sheets
-go.property("empty_body", resource.tile_source("/assets/characters/empty/body.tilesource"))
-go.property("empty_hat", resource.tile_source("/assets/characters/empty/hat.tilesource"))
-go.property("empty_hand", resource.tile_source("/assets/characters/empty/hand.tilesource"))
-go.property("empty_gun", resource.tile_source("/assets/characters/empty/gun.tilesource"))
+go.property("cleef_body", resource.tile_source("/assets/characters/cleef/body.tilesource"))
+go.property("cleef_hat", resource.tile_source("/assets/characters/cleef/hat.tilesource"))
+go.property("cleef_hand", resource.tile_source("/assets/characters/cleef/hand.tilesource"))
+go.property("cleef_gun", resource.tile_source("/assets/characters/cleef/gun.tilesource"))
 
 local function update_hud(self)
 	if self.player then
@@ -52,10 +52,10 @@ local function set_player(self)
 end
 
 local function set_sprite(self)
-	go.set("#body", "image", self.empty_body)
-	go.set("#hat", "image", self.empty_hat)
-	go.set("#hand", "image", self.empty_hand)
-	go.set("#gun", "image", self.empty_gun)
+	go.set("#body", "image", self.cleef_body)
+	go.set("#hat", "image", self.cleef_hat)
+	go.set("#hand", "image", self.cleef_hand)
+	go.set("#gun", "image", self.cleef_gun)
 end
 
 function init(self)

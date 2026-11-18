@@ -5,24 +5,24 @@ animations {
   id: "dead"
   playback: PLAYBACK_NONE
   fps: 8
-  frames: 10
+  frames: 12
 }
 animations {
   id: "hit"
   playback: PLAYBACK_NONE
   fps: 8
-  frames: 7
+  frames: 9
 }
 animations {
   id: "idle"
   playback: PLAYBACK_NONE
   fps: 8
-  frames: 1
+  frames: 3
 }
 animations {
   id: "walk"
-  playback: PLAYBACK_LOOP_FORWARD
-  fps: 8
+  playback: PLAYBACK_LOOP_BACKWARD
+  fps: 12
   frames: 4
   frames: 5
   frames: 6

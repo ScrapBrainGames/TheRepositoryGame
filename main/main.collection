@@ -54,6 +54,18 @@ embedded_instances {
   "  data: \"collection: \\\"/levels/pots.collection\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"town\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/levels/town.collection\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"barrels\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/levels/barrels.collection\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }
 embedded_instances {

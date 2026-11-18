@@ -21,13 +21,23 @@ local map = {
         "square",
         "town",
     },
-    mine = {
-        "station",
+    town = {
+        "pots",
         "graveyard",
+        "barrels",
+    },
+    barrels = {
+        "town",
+        "town", -- wut
     },
     graveyard = {
+        "town",
+        "tomb",
+    },
+    tomb = {
+        "graveyard",
         "mine",
-    }
+    },
 }
 
 -- Convert the map to hashes

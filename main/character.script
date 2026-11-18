@@ -11,17 +11,14 @@ go.property("player", false)
 go.property("cleef_body", resource.tile_source("/assets/characters/cleef/body.tilesource"))
 go.property("cleef_hat", resource.tile_source("/assets/characters/cleef/hat.tilesource"))
 go.property("cleef_hand", resource.tile_source("/assets/characters/cleef/hand.tilesource"))
-go.property("cleef_gun", resource.tile_source("/assets/characters/cleef/gun.tilesource"))
 -- Clint
 go.property("clint_body", resource.tile_source("/assets/characters/clint/body.tilesource"))
 go.property("clint_hat", resource.tile_source("/assets/characters/clint/hat.tilesource"))
 go.property("clint_hand", resource.tile_source("/assets/characters/clint/hand.tilesource"))
-go.property("clint_gun", resource.tile_source("/assets/characters/clint/gun.tilesource"))
 -- Snuffy
 go.property("snuffy_body", resource.tile_source("/assets/characters/snuffy/body.tilesource"))
 go.property("snuffy_hat", resource.tile_source("/assets/characters/snuffy/hat.tilesource"))
 go.property("snuffy_hand", resource.tile_source("/assets/characters/snuffy/hand.tilesource"))
-go.property("snuffy_gun", resource.tile_source("/assets/characters/snuffy/gun.tilesource"))
 
 local function update_hud(self)
 	if self.player then
@@ -68,27 +65,22 @@ local function set_sprite(self)
 		go.set("#body", "image", self.cleef_body)
 		go.set("#hat", "image", self.cleef_hat)
 		go.set("#hand", "image", self.cleef_hand)
-		go.set("#gun", "image", self.cleef_gun)
 	elseif self.character == "default" then
 		go.set("#body", "image", self.clint_body)
 		go.set("#hat", "image", self.clint_hat)
 		go.set("#hand", "image", self.clint_hand)
-		go.set("#gun", "image", self.clint_gun)
 	elseif self.character == "sixgun" then
 		go.set("#body", "image", self.cleef_body)
 		go.set("#hat", "image", self.cleef_hat)
 		go.set("#hand", "image", self.cleef_hand)
-		go.set("#gun", "image", self.cleef_gun)
 	elseif self.character == "singlegun" then
 		go.set("#body", "image", self.clint_body)
 		go.set("#hat", "image", self.clint_hat)
 		go.set("#hand", "image", self.clint_hand)
-		go.set("#gun", "image", self.clint_gun)
 	elseif self.character == "shotgun" then
 		go.set("#body", "image", self.snuffy_body)
 		go.set("#hat", "image", self.snuffy_hat)
 		go.set("#hand", "image", self.snuffy_hand)
-		go.set("#gun", "image", self.snuffy_gun)
 	end
 end
 

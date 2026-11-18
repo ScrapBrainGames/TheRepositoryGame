@@ -5,35 +5,35 @@ M.empty = {
 }
 
 M.default = {
-    empty = [[...]],
-    default = [[lol git gud]],
-    sixgun = [[lol git gud]],
-    shotgun = [[lol git gud]],
-    singlegun = [[lol git gud]],
+    empty = [[Killed Empty]],
+    default = [[Killed Default]],
+    sixgun = [[Killed Sixgun]],
+    shotgun = [[Killed Shotgun]],
+    singlegun = [[Killed Singlegun]],
 }
 
 M.sixgun = {
-    empty = [[lol git gud]],
-    default = [[lol git gud]],
-    sixgun = [[lol git gud]],
-    shotgun = [[lol git gud]],
-    singlegun = [[lol git gud]],
+    empty = [[Killed Empty]],
+    default = [[Killed Default]],
+    sixgun = [[Killed Sixgun]],
+    shotgun = [[Killed Shotgun]],
+    singlegun = [[Killed Singlegun]],
 }
 
 M.shotgun = {
-    empty = [[This is my shootygun...]],
-    default = [[This is my shootygun...]],
-    sixgun = [[This is my shootygun...]],
-    shotgun = [[This is my shootygun...]],
-    singlegun = [[This is my shootygun...]],
+    empty = [[Killed Empty]],
+    default = [[Killed Default]],
+    sixgun = [[Killed Sixgun]],
+    shotgun = [[Killed Shotgun]],
+    singlegun = [[Killed Singlegun]],
 }
 
 M.singlegun = {
-    empty = [[BOOM! Headshot!]],
-    default = [[BOOM! Headshot!]],
-    sixgun = [[BOOM! Headshot!]],
-    shotgun = [[BOOM! Headshot!]],
-    singlegun = [[BOOM! Headshot!]],
+    empty = [[Killed Empty]],
+    default = [[Killed Default]],
+    sixgun = [[Killed Sixgun]],
+    shotgun = [[Killed Shotgun]],
+    singlegun = [[Killed Singlegun]],
 }
 
 return M

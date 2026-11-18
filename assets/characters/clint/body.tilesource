@@ -1,0 +1,29 @@
+image: "/assets/characters/clint/clintBodySheet.png"
+tile_width: 144
+tile_height: 128
+animations {
+  id: "dead"
+  fps: 8
+  frames: 16
+}
+animations {
+  id: "hit"
+  fps: 8
+  frames: 12
+}
+animations {
+  id: "idle"
+  playback: PLAYBACK_NONE
+  fps: 8
+  frames: 4
+}
+animations {
+  id: "walk"
+  playback: PLAYBACK_LOOP_BACKWARD
+  fps: 8
+  frames: 5
+  frames: 6
+  frames: 7
+  frames: 8
+}
+extrude_borders: 2

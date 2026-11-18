@@ -1,0 +1,30 @@
+image: "/assets/characters/snuffy/snuffyBodySheet.png"
+tile_width: 136
+tile_height: 127
+animations {
+  id: "dead"
+  playback: PLAYBACK_NONE
+  fps: 8
+  frames: 12
+}
+animations {
+  id: "hit"
+  playback: PLAYBACK_NONE
+  fps: 8
+  frames: 9
+}
+animations {
+  id: "idle"
+  playback: PLAYBACK_NONE
+  fps: 8
+  frames: 3
+}
+animations {
+  id: "walk"
+  playback: PLAYBACK_LOOP_BACKWARD
+  fps: 12
+  frames: 4
+  frames: 5
+  frames: 6
+}
+extrude_borders: 2

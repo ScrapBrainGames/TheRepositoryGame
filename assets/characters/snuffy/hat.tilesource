@@ -1,0 +1,28 @@
+image: "/assets/characters/snuffy/snuffyHatSheet.png"
+tile_width: 136
+tile_height: 127
+animations {
+  id: "dead"
+  fps: 8
+  frames: 10
+}
+animations {
+  id: "hit"
+  fps: 8
+  frames: 7
+}
+animations {
+  id: "idle"
+  playback: PLAYBACK_NONE
+  fps: 8
+  frames: 1
+}
+animations {
+  id: "walk"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  frames: 4
+  frames: 5
+  frames: 6
+}
+extrude_borders: 2

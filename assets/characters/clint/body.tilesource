@@ -1,4 +1,4 @@
-image: "/assets/characters/cleef/cleefBodySheet.png"
+image: "/assets/characters/clint/clintBodySheet.png"
 tile_width: 144
 tile_height: 128
 animations {

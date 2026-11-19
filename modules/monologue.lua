@@ -64,6 +64,20 @@ M.singlegun = {
     singlegun = [[Singlegun killed Singlegun]],
 }
 
+M.mook = {
+    -- Interludes
+    intro = [[Mook.]],
+    pots = [[Mook mook.]],
+    barrels = [[Mook mook mook.]],
+    -- Kills
+    mook = [[Mook killed Mook]],
+    empty = [[Mook killed Empty]],
+    default = [[Mook killed Default]],
+    sixgun = [[Mook killed Sixgun]],
+    shotgun = [[Mook killed Shotgun]],
+    singlegun = [[Mook killed Singlegun]],
+}
+
 function M.get(speaker, context)
     if M[speaker][context] then
         local text = M[speaker][context]

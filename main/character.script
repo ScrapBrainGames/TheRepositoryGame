@@ -202,6 +202,7 @@ function update(self, dt)
 	-- Player has a HUD and sends info to AI, enemy listens to AI
 	if self.player then
 		update_hud(self)
+		state.player.position = self.position
 		ai.set_player_position(self.position, velocity)
 		-- If holding trigger, fire when ready (input buffer)
 		if self.trigger and self.weapon.cocked then

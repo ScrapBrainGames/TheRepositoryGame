@@ -9,6 +9,10 @@ M.characters = {}
 M.names = {}
 M.killed = {}
 
+M.player = {
+    position = vmath.vector3()
+}
+
 function M.register(id, player, name)
     M.characters[id] = player or M.characters[id] or false
     if name then M.names[id] = name end
@@ -22,6 +26,9 @@ function M.reset()
     M.characters = {}
     M.names = {}
     M.killed = {}
+    M.player = {
+        position = vmath.vector3()
+    }
 end
 
 function M.count()

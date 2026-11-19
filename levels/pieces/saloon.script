@@ -1,5 +1,5 @@
 function init(self)
-	local position = go.get_position()
+	local position = go.get_world_position()
 	msg.post("main:/jukebox#jukebox", "start_saloon", { position = position })
 end
 

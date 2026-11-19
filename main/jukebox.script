@@ -1,6 +1,10 @@
+local state = require "modules.state"
+
 local saloon = {
+	playing = false,
 	position = vmath.vector3(),
 	music = -1,
+	gain = 0,
 }
 
 function init(self)
@@ -16,9 +20,19 @@ function final(self)
 end
 
 function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	if saloon.playing then
+		local player = state.player.position
+		local direction = saloon.position - player
+		saloon.gain = 10000 / (vmath.length_sqr(direction) + 1)
+		local pan = direction.x / (math.abs(direction.y) + math.abs(direction.x) + 1)
+		sound.set_gain("#saloon", saloon.gain)
+		sound.set_pan("#saloon", pan)
+	elseif saloon.gain >= 0 then
+		saloon.gain = saloon.gain - (dt * 0.25)
+		sound.set_gain("#saloon", saloon.gain)
+	else
+		sound.stop("#saloon")
+	end
 end
 
 function late_update(self, dt)
@@ -39,10 +53,11 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start_saloon") then
 		print("Saloon at " .. message.position)
+		saloon.playing = true
 		saloon.position = message.position
 		saloon.music = sound.play("#saloon")
 	elseif message_id == hash("stop_saloon") then
-		sound.stop("#saloon")
+		saloon.playing = false
 	end
 end
 

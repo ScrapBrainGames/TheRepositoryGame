@@ -112,9 +112,58 @@ instances {
     }
   }
 }
+instances {
+  id: "building"
+  prototype: "/levels/pieces/building.go"
+  position {
+    x: 770.0
+    y: 576.0
+  }
+}
+instances {
+  id: "building1"
+  prototype: "/levels/pieces/building.go"
+  position {
+    x: 355.0
+    y: 581.0
+  }
+}
+instances {
+  id: "building2"
+  prototype: "/levels/pieces/building.go"
+  position {
+    x: 1048.0
+    y: 563.0
+  }
+}
+instances {
+  id: "building3"
+  prototype: "/levels/pieces/building.go"
+  position {
+    x: 918.0
+    y: 178.0
+  }
+}
+instances {
+  id: "building4"
+  prototype: "/levels/pieces/building.go"
+  position {
+    x: 169.0
+    y: 365.0
+  }
+}
+instances {
+  id: "building5"
+  prototype: "/levels/pieces/building.go"
+  position {
+    x: 355.0
+    y: 157.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
+  children: "buildings"
   data: "components {\n"
   "  id: \"tilemap\"\n"
   "  component: \"/levels/town.tilemap\"\n"
@@ -148,5 +197,15 @@ embedded_instances {
   children: "exit1"
   children: "exit2"
   children: "exit3"
+  data: ""
+}
+embedded_instances {
+  id: "buildings"
+  children: "building"
+  children: "building1"
+  children: "building2"
+  children: "building3"
+  children: "building4"
+  children: "building5"
   data: ""
 }

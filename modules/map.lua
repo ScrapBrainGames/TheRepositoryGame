@@ -43,12 +43,15 @@ local map = {
 }
 
 -- Convert the map to hashes
+local hashed = {}
 for key, value in pairs(map) do
-    map[hash(key)] = {}
+    local h = {}
     for index, value in ipairs(value) do
-        map[hash(key)][index] = hash(value)
+        h[index] = hash(value)
     end
+    hashed[hash(key)] = h
 end
+map = hashed
 
 function M.get(current, index)
     return map[current][index]

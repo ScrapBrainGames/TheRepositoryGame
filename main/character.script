@@ -88,6 +88,7 @@ end
 
 local function animation(self)
 	set_sprite(self)
+	sprite.play_flipbook(self.gun_url, self.weapon.name)
 	local last = "idle"
 	local flip = false
 	local pointing = vmath.vector3(1, 0, 0)

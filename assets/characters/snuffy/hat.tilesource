@@ -2,6 +2,14 @@ image: "/assets/characters/snuffy/snuffyHatSheet.png"
 tile_width: 136
 tile_height: 127
 animations {
+  id: "back"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  frames: 4
+  frames: 5
+  frames: 6
+}
+animations {
   id: "dead"
   playback: PLAYBACK_NONE
   fps: 8

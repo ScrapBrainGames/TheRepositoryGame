@@ -4,26 +4,34 @@ local M = {}
 
 M.player = "empty"
 
-local health = function(health, max, handicap)
+local health = function(health, handicap)
     return {
-        health = health,
-        max_health = max or health,
+        health = health or 10,
+        max_health = health or 10,
         handicap = handicap or 12
     }
 end
 
+local character = function(params)
+    local char = params or {}
+    char.aim_delay = char.aim_delay or 0.25
+    char.state = char.health and (char.handicap and health(char.health, char.handicap) or health(char.health)) or
+        health(10)
+    char.aim_movement = char.aim_movement or 50
+    char.normal_movement = char.normal_movement or 250
+    char.reload_movement = char.reload_movement or 100
+    char.accuracy = char.accuracy or 0.85
+    return char
+end
+
 local characters = {
-    empty = {
-        state = health(1, 1, 1),
-        aim_movement = 50,
-        normal_movement = 250,
-        reload_movement = 100,
+    empty =
+    {
+        health = 1,
+        handicap = 1,
         weapon = weapons.empty(),
-        aim_delay = 0.25,
-        accuracy = 0.85
     },
     default = {
-        state = health(10),
         aim_movement = 50,
         normal_movement = 250,
         reload_movement = 100,
@@ -32,7 +40,6 @@ local characters = {
         accuracy = 0.85
     },
     sixgun = {
-        state = health(10),
         aim_movement = 50,
         normal_movement = 250,
         reload_movement = 100,
@@ -41,7 +48,6 @@ local characters = {
         accuracy = 0.85
     },
     singlegun = {
-        state = health(10),
         aim_movement = 0,
         normal_movement = 300,
         reload_movement = 150,
@@ -50,7 +56,6 @@ local characters = {
         accuracy = 0.95
     },
     shotgun = {
-        state = health(10),
         aim_movement = 100,
         normal_movement = 300,
         reload_movement = 200,
@@ -60,19 +65,21 @@ local characters = {
     },
 }
 
-function M.initialize(character, name)
-    local params = characters[name] or characters.default
-    character.state = params.state
-    character.aim_movement = params.aim_movement
-    character.normal_movement = params.normal_movement
-    character.reload_movement = params.reload_movement
-    character.weapon = params.weapon
-    character.aim_delay = params.aim_delay
-    character.accuracy = params.accuracy
+local obituaries = {}
+
+function M.initialize(self, name)
+    local character = character(characters[name])
+    for key, value in pairs(character) do
+        self[key] = value
+    end
 end
 
 function M.check(name)
-    return characters[name] and name ~= M.player and characters[name].state.health > 0
+    return characters[name] and name ~= M.player and not obituaries[name]
+end
+
+function M.died(name)
+    obituaries[name] = true
 end
 
 return M

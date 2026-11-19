@@ -238,6 +238,7 @@ function on_message(self, message_id, message, sender)
 		self.state.health = self.state.health - message.damage
 		if self.state.health <= 0 then
 			state.kill(self.id, self.player or not self.lesser)
+			characters.died(self.character)
 			go.delete(self.id, true)
 			if self.player and (state.characters[message.sender] ~= nil) then
 				msg.post(message.sender, "set_player")

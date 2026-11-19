@@ -1,3 +1,7 @@
+components {
+  id: "pot"
+  component: "/levels/pieces/pot.script"
+}
 embedded_components {
   id: "sprite"
   type: "sprite"
@@ -18,7 +22,7 @@ embedded_components {
   type: "collisionobject"
   data: "type: COLLISION_OBJECT_TYPE_STATIC\n"
   "mass: 0.0\n"
-  "friction: 0.1\n"
+  "friction: 0.0\n"
   "restitution: 0.0\n"
   "group: \"level\"\n"
   "mask: \"bullets\"\n"
@@ -36,5 +40,6 @@ embedded_components {
   "  }\n"
   "  data: 24.0\n"
   "}\n"
+  "locked_rotation: true\n"
   ""
 }

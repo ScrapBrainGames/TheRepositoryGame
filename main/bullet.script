@@ -28,6 +28,8 @@ function on_message(self, message_id, message, sender)
 				go.delete()
 			end
 		elseif message.other_id ~= self.last then
+			-- Send damage message for destructibles
+			msg.post(message.other_id, "damage", { damage = self.damage })
 			-- Check for deflection
 			local normal = message.normal
 			local dot = vmath.dot(self.direction, normal)

@@ -3,6 +3,12 @@ tile_width: 164
 tile_height: 151
 collision_groups: "default"
 animations {
+  id: "dead"
+  fps: 8
+  frames: 3
+  frames: 2
+}
+animations {
   id: "idle"
   playback: PLAYBACK_NONE
   frames: 1

@@ -1,7 +1,10 @@
 local monologue = require "modules.monologue"
 local state = require "modules.state"
 
+-- Delay between characters
 local delay = 0.025
+-- Delay before showing the monologue
+local startup = 0.5
 
 local function start(self, speaker, context)
 	gui.play_flipbook(self.portrait, speaker or "empty")
@@ -58,7 +61,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start") then
-		timer.delay(1, false, function(self) start(self, message.speaker, message.victim) end)
+		timer.delay(startup, false, function(self) start(self, message.speaker, message.victim) end)
 	end
 end
 

@@ -174,7 +174,7 @@ instances {
 scale_along_z: 0
 embedded_instances {
   id: "level"
-  children: "obstacles"
+  children: "objects"
   data: "components {\n"
   "  id: \"tilemap\"\n"
   "  component: \"/levels/pots.tilemap\"\n"
@@ -210,7 +210,7 @@ embedded_instances {
   data: ""
 }
 embedded_instances {
-  id: "obstacles"
+  id: "objects"
   children: "pot"
   children: "pot1"
   children: "pot2"
@@ -222,4 +222,7 @@ embedded_instances {
   children: "pot8"
   children: "pot9"
   data: ""
+  position {
+    z: 5.0
+  }
 }

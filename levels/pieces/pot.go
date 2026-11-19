@@ -38,7 +38,7 @@ embedded_components {
   "    count: 1\n"
   "    id: \"outline\"\n"
   "  }\n"
-  "  data: 24.0\n"
+  "  data: 26.0\n"
   "}\n"
   "locked_rotation: true\n"
   ""

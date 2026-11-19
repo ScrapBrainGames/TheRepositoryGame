@@ -19,7 +19,15 @@ go.property("clint_hand", resource.atlas("/assets/characters/clint/hand.atlas"))
 go.property("snuffy_body", resource.tile_source("/assets/characters/snuffy/body.tilesource"))
 go.property("snuffy_hat", resource.tile_source("/assets/characters/snuffy/hat.tilesource"))
 go.property("snuffy_hand", resource.atlas("/assets/characters/snuffy/hand.atlas"))
--- Sixgun
+-- Jessie
+go.property("jessie_body", resource.tile_source("/assets/characters/jessie/body.tilesource"))
+go.property("jessie_hat", resource.tile_source("/assets/characters/jessie/hat.tilesource"))
+go.property("jessie_hand", resource.atlas("/assets/characters/jessie/hand.atlas"))
+-- Mooks
+go.property("white_body", resource.tile_source("/assets/characters/mook/white_body.tilesource"))
+go.property("white_hat", resource.tile_source("/assets/characters/mook/white_hat.tilesource"))
+go.property("white_hand", resource.atlas("/assets/characters/mook/hand.atlas"))
+-- Weapons
 go.property("weapon", resource.atlas("/assets/weapons/weapons.atlas"))
 
 
@@ -83,6 +91,10 @@ local function set_sprite(self)
 		go.set("#body", "image", self.snuffy_body)
 		go.set("#hat", "image", self.snuffy_hat)
 		go.set(self.hand_url, "image", self.snuffy_hand)
+	elseif self.character == "mook" then
+		go.set("#body", "image", self.white_body)
+		go.set("#hat", "image", self.white_hat)
+		go.set(self.hand_url, "image", self.white_hand)
 	end
 end
 

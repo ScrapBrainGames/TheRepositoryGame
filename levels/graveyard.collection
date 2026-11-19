@@ -48,34 +48,21 @@ instances {
 }
 instances {
   id: "enter1"
-  prototype: "/levels/pieces/spawn.go"
+  prototype: "/levels/pieces/enter.go"
   position {
     x: 688.0
     y: 851.0
   }
-  component_properties {
-    id: "spawn"
-    properties {
-      id: "enemy"
-      value: ""
-      type: PROPERTY_TYPE_TEXT
-    }
-  }
 }
 instances {
   id: "enemy"
-  prototype: "/levels/pieces/spawn.go"
+  prototype: "/levels/pieces/enter.go"
   position {
     x: 480.0
     y: 320.0
   }
   component_properties {
-    id: "spawn"
-    properties {
-      id: "enemy"
-      value: "shotgun"
-      type: PROPERTY_TYPE_TEXT
-    }
+    id: "script"
     properties {
       id: "index"
       value: "0.0"

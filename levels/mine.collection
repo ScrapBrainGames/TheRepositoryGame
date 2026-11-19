@@ -40,18 +40,13 @@ instances {
 }
 instances {
   id: "enemy"
-  prototype: "/levels/pieces/spawn.go"
+  prototype: "/levels/pieces/enter.go"
   position {
     x: 864.0
     y: 256.0
   }
   component_properties {
-    id: "spawn"
-    properties {
-      id: "enemy"
-      value: "singlegun"
-      type: PROPERTY_TYPE_TEXT
-    }
+    id: "script"
     properties {
       id: "index"
       value: "0.0"
@@ -61,34 +56,21 @@ instances {
 }
 instances {
   id: "station_entrance"
-  prototype: "/levels/pieces/spawn.go"
+  prototype: "/levels/pieces/enter.go"
   position {
     x: 16.0
     y: 176.0
   }
-  component_properties {
-    id: "spawn"
-    properties {
-      id: "enemy"
-      value: ""
-      type: PROPERTY_TYPE_TEXT
-    }
-  }
 }
 instances {
   id: "graveyard_entrance"
-  prototype: "/levels/pieces/spawn.go"
+  prototype: "/levels/pieces/enter.go"
   position {
     x: 1199.0
     y: 16.0
   }
   component_properties {
-    id: "spawn"
-    properties {
-      id: "enemy"
-      value: ""
-      type: PROPERTY_TYPE_TEXT
-    }
+    id: "script"
     properties {
       id: "index"
       value: "2.0"

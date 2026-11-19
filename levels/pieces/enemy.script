@@ -1,0 +1,12 @@
+local characters = require "modules.characters"
+
+go.property("enemy", "")
+
+function init(self)
+	local position = go.get_position()
+	if characters.check(self.enemy) then
+		factory.create("#factory", position, nil, { character = self.enemy })
+	else
+		factory.create("#factory", position, nil, { character = "mook" })
+	end
+end

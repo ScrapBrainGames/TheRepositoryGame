@@ -24,6 +24,22 @@ local character = function(params)
     return char
 end
 
+local mook = function()
+    local char = character(
+        {
+            health = 1,
+            handicap = 1,
+        }
+    )
+    local p = math.random()
+    if p < 0.8 then
+        char.weapon = weapons.sixgun()
+    else
+        char.weapon = weapons.shotgun()
+    end
+    return char
+end
+
 local characters = {
     empty =
     {
@@ -68,13 +84,19 @@ local characters = {
 local obituaries = {}
 
 function M.initialize(self, name)
-    local character = character(characters[name])
-    for key, value in pairs(character) do
+    local char
+    if name == "mook" then
+        char = mook()
+    else
+        char = character(characters[name])
+    end
+    for key, value in pairs(char) do
         self[key] = value
     end
 end
 
 function M.check(name)
+    if name == "mook" then return true end
     return characters[name] and name ~= M.player and not obituaries[name]
 end
 

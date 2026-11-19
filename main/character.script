@@ -90,67 +90,45 @@ local function animation(self)
 	set_sprite(self)
 	local last = "idle"
 	local flip = false
-	local epsilon = 12
+	local pointing = vmath.vector3(1, 0, 0)
+	local epsilon = 144
 	return function(velocity)
-		local current = "idle"
-		if velocity.x > epsilon then
-			current = "walk"
-		elseif velocity.x < -epsilon then
-			current = "walk"
-		end
+		-- Update pointing direction
 		local direction = self.target - self.position
+		direction = vmath.normalize(direction)
+		direction = vmath.slerp(0.2, pointing, direction)
+		pointing = direction
 		if direction.x > 0 then
 			if flip then
 				sprite.set_hflip("#body", false)
 				sprite.set_hflip("#hat", false)
+				sprite.set_vflip(self.arm, false)
 				flip = false
 			end
 		elseif direction.x < 0 then
 			if not flip then
 				sprite.set_hflip("#body", true)
 				sprite.set_hflip("#hat", true)
+				sprite.set_vflip(self.arm, true)
 				flip = true
 			end
 		end
-
-		if velocity.y > epsilon or velocity.y < -epsilon then
+		-- Set current animation
+		local current = "idle"
+		if vmath.length_sqr(velocity) > epsilon then
 			current = "walk"
-		end
-		if last ~= current then
-			sprite.play_flipbook("#body", current)
-			sprite.play_flipbook("#hat", current)
-			last = current
-		end
-		if current == "walk" then
 			-- Scale the animation rate to |velocity|/max_speed
 			local rate = vmath.length(velocity) / self.normal_movement
 			go.set("#body", "playback_rate", rate)
 			go.set("#hat", "playback_rate", rate)
 		end
-	end
-end
-
-local function pointing(self)
-	sprite.play_flipbook(self.gun_url, self.weapon.name)
-	local flipped = false
-	local last = vmath.vector3(1, 0, 0)
-	return function()
-		local direction = self.target - self.position
-		direction = vmath.normalize(direction)
-		direction = vmath.slerp(0.2, last, direction)
-		last = direction
-		if direction.x > 0 then
-			if flipped then
-				flipped = false
-				sprite.set_hflip(self.arm, false)
-			end
-		elseif direction.x < 0 then
-			if not flipped then
-				flipped = true
-				sprite.set_hflip(self.arm, true)
-			end
-			direction = -direction
+		-- Change animation
+		if last ~= current then
+			sprite.play_flipbook("#body", current)
+			sprite.play_flipbook("#hat", current)
+			last = current
 		end
+		-- Point arm/gun
 		local q = vmath.quat_rotation_z(math.atan2(direction.y, direction.x))
 		go.set_rotation(q, self.arm)
 	end
@@ -195,7 +173,6 @@ function init(self)
 	state.register(self.id, nil, self.character)
 	-- Set animations
 	self.animation = animation(self)
-	self.pointing = pointing(self)
 end
 
 function update(self, dt)
@@ -232,7 +209,6 @@ function update(self, dt)
 	end
 	-- Animate
 	self.animation(velocity)
-	self.pointing()
 	-- Reset move direction
 	self.direction.x = 0
 	self.direction.y = 0

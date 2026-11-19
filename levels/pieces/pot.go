@@ -1,6 +1,6 @@
 components {
-  id: "pot"
-  component: "/levels/pieces/pot.script"
+  id: "script"
+  component: "/levels/pieces/destructible.script"
 }
 embedded_components {
   id: "sprite"

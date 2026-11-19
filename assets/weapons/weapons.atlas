@@ -10,4 +10,7 @@ images {
 images {
   image: "/assets/weapons/empty.png"
 }
+images {
+  image: "/assets/weapons/dynamite.png"
+}
 extrude_borders: 2

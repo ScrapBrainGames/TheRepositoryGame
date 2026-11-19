@@ -76,3 +76,19 @@ embedded_instances {
   "}\n"
   ""
 }
+embedded_instances {
+  id: "jukebox"
+  data: "components {\n"
+  "  id: \"jukebox\"\n"
+  "  component: \"/main/jukebox.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"saloon\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/music/cowboy rag.wav\\\"\\n"
+  "looping: 1\\n"
+  "group: \\\"saloon\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}

@@ -2,6 +2,10 @@ components {
   id: "barrier"
   component: "/levels/pieces/barrier.script"
 }
+components {
+  id: "saloon"
+  component: "/levels/pieces/saloon.script"
+}
 embedded_components {
   id: "sprite"
   type: "sprite"

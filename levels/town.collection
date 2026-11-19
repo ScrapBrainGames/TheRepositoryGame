@@ -140,8 +140,8 @@ instances {
   id: "building3"
   prototype: "/levels/pieces/building.go"
   position {
-    x: 918.0
-    y: 178.0
+    x: 1068.0
+    y: 183.0
   }
 }
 instances {
@@ -158,6 +158,14 @@ instances {
   position {
     x: 355.0
     y: 157.0
+  }
+}
+instances {
+  id: "saloon"
+  prototype: "/levels/pieces/saloon.go"
+  position {
+    x: 738.0
+    y: 192.0
   }
 }
 scale_along_z: 0
@@ -207,5 +215,6 @@ embedded_instances {
   children: "building3"
   children: "building4"
   children: "building5"
+  children: "saloon"
   data: ""
 }

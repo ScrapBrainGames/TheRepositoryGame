@@ -12,7 +12,10 @@ end
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	load_level(self, hash("empty"))
+	-- debugging
+	state.previous = hash("pots")
+	state.current = hash("pots")
+	load_level(self, hash("town"))
 end
 
 function on_message(self, message_id, message, sender)

@@ -5,6 +5,7 @@ M.empty = {
 }
 
 M.default = {
+    intro = [[Your hero, Default.]],
     empty = [[Default killed Empty]],
     default = [[Default killed Default]],
     sixgun = [[Default killed Sixgun]],
@@ -13,6 +14,7 @@ M.default = {
 }
 
 M.sixgun = {
+    intro = [[Your hero, Sixgun.]],
     empty = [[Sixgun killed Empty]],
     default = [[Sixgun killed Default]],
     sixgun = [[Sixgun killed Sixgun]],
@@ -21,6 +23,7 @@ M.sixgun = {
 }
 
 M.shotgun = {
+    intro = [[Your hero, Shotgun.]],
     empty = [[Shotgun killed Empty]],
     default = [[Shotgun killed Default]],
     sixgun = [[Shotgun killed Sixgun]],
@@ -29,6 +32,7 @@ M.shotgun = {
 }
 
 M.singlegun = {
+    intro = [[Your hero, Singlegun.]],
     empty = [[Singlegun killed Empty]],
     default = [[Singlegun killed Default]],
     sixgun = [[Singlegun killed Sixgun]],

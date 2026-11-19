@@ -33,6 +33,7 @@ embedded_components {
   "mask: \"level\"\n"
   "mask: \"player\"\n"
   "mask: \"bullets\"\n"
+  "mask: \"trigger\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_SPHERE\n"

@@ -1,11 +1,17 @@
 local M = {}
 
 M.empty = {
+    -- Interludes
     intro = [[Boy it sure is nice to be a main character and not have to worry about dying.]],
+    pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
+    -- Kills
 }
 
 M.default = {
+    -- Interludes
     intro = [[Your hero, Default.]],
+    pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
+    -- Kills
     empty = [[Default killed Empty]],
     default = [[Default killed Default]],
     sixgun = [[Default killed Sixgun]],
@@ -14,7 +20,10 @@ M.default = {
 }
 
 M.sixgun = {
+    -- Interludes
     intro = [[Your hero, Sixgun.]],
+    pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
+    -- Kills
     empty = [[Sixgun killed Empty]],
     default = [[Sixgun killed Default]],
     sixgun = [[Sixgun killed Sixgun]],
@@ -23,7 +32,10 @@ M.sixgun = {
 }
 
 M.shotgun = {
+    -- Interludes
     intro = [[Your hero, Shotgun.]],
+    pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
+    -- Kills
     empty = [[Shotgun killed Empty]],
     default = [[Shotgun killed Default]],
     sixgun = [[Shotgun killed Sixgun]],
@@ -32,12 +44,23 @@ M.shotgun = {
 }
 
 M.singlegun = {
+    -- Interludes
     intro = [[Your hero, Singlegun.]],
+    pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
+    -- Kills
     empty = [[Singlegun killed Empty]],
     default = [[Singlegun killed Default]],
     sixgun = [[Singlegun killed Sixgun]],
     shotgun = [[Singlegun killed Shotgun]],
     singlegun = [[Singlegun killed Singlegun]],
 }
+
+function M.get(speaker, context)
+    if M[speaker][context] then
+        local text = M[speaker][context]
+        M[speaker][context] = nil
+        return text
+    end
+end
 
 return M

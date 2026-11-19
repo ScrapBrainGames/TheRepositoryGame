@@ -155,6 +155,22 @@ instances {
     y: 101.0
   }
 }
+instances {
+  id: "monologue"
+  prototype: "/levels/pieces/monologue.go"
+  position {
+    x: 262.0
+    y: 260.0
+  }
+  component_properties {
+    id: "monologue"
+    properties {
+      id: "context"
+      value: "pots"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
@@ -190,6 +206,7 @@ embedded_instances {
   children: "enter2"
   children: "exit1"
   children: "exit2"
+  children: "monologue"
   data: ""
 }
 embedded_instances {

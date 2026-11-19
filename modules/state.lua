@@ -51,7 +51,7 @@ end
 function M.ending(id)
     local survivor = M.names[id]
     local victim = M.killed[#M.killed]
-    msg.post("main:/monologue#monologue", "start", { speaker = survivor, victim = victim })
+    msg.post("main:/monologue#monologue", "start", { speaker = survivor, context = victim })
 end
 
 return M

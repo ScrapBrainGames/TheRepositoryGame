@@ -7,6 +7,8 @@ local delay = 0.025
 local startup = 0.5
 
 local function start(self, speaker, context)
+	local message = monologue.get(speaker, context)
+	if not message then return end
 	gui.play_flipbook(self.portrait, speaker or "empty")
 	msg.post(".", "acquire_input_focus")
 	msg.post(state.level_url, "set_time_step", { factor = 0, mode = 0 })
@@ -14,8 +16,6 @@ local function start(self, speaker, context)
 	self.active = true
 	self.ready = false
 
-	local lines = monologue[speaker] or {}
-	local message = (context and lines[context]) or "..."
 	local index = 0
 	self.time = 0
 	self.draw = function(finish)
@@ -46,7 +46,7 @@ function init(self)
 	self.text = gui.get_node("text")
 	gui.set_enabled(self.node, false)
 
-	timer.delay(1, false, function(self) start(self, "empty", "intro") end)
+	--timer.delay(1, false, function(self) start(self, "empty", "intro") end)
 end
 
 function update(self, dt)
@@ -61,7 +61,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start") then
-		timer.delay(startup, false, function(self) start(self, message.speaker, message.victim) end)
+		timer.delay(startup, false, function(self) start(self, message.speaker, message.context) end)
 	end
 end
 

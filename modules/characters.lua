@@ -3,6 +3,7 @@ local weapons = require "modules.weapons"
 local M = {}
 
 M.player = "empty"
+M.loadout = nil
 
 local health = function(health, handicap)
     return {
@@ -24,7 +25,7 @@ local character = function(params)
     return char
 end
 
-local mook = function()
+local mook = function(loadout)
     local char = character(
         {
             health = 1,
@@ -32,11 +33,11 @@ local mook = function()
         }
     )
     local p = math.random()
-    if p < 0.8 then
-        char.weapon = weapons.sixgun()
-    else
-        char.weapon = weapons.shotgun()
-    end
+    char.loadout = loadout or {
+        weapon = math.random() < 0.8 and "sixgun" or "shotgun",
+        color = "white"
+    }
+    char.weapon = weapons[char.loadout.weapon]()
     return char
 end
 
@@ -86,7 +87,7 @@ local obituaries = {}
 function M.initialize(self, name)
     local char
     if name == "mook" then
-        char = mook()
+        char = mook(self.player and M.loadout or nil)
     else
         char = character(characters[name])
     end

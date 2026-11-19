@@ -64,6 +64,8 @@ local function set_player(self)
 	self.hud = msg.url("/camera#weapon")
 	msg.post(self.hud, "set", { weapon = self.weapon.name })
 	characters.player = self.character
+	-- Track gear for mooks
+	characters.loadout = self.loadout
 	-- Give the player a slight health advantage
 	self.state.max_health = self.state.handicap
 	-- Register as player

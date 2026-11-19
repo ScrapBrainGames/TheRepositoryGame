@@ -47,22 +47,6 @@ instances {
   }
 }
 instances {
-  id: "enemy"
-  prototype: "/levels/pieces/enter.go"
-  position {
-    x: 137.0
-    y: 273.0
-  }
-  component_properties {
-    id: "script"
-    properties {
-      id: "index"
-      value: "0.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-  }
-}
-instances {
   id: "enter1"
   prototype: "/levels/pieces/enter.go"
   position {
@@ -116,6 +100,22 @@ instances {
   position {
     x: 154.0
     y: 138.0
+  }
+}
+instances {
+  id: "enemy"
+  prototype: "/levels/pieces/enemy.go"
+  position {
+    x: 547.0
+    y: 269.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "enemy"
+      value: "sixgun"
+      type: PROPERTY_TYPE_TEXT
+    }
   }
 }
 scale_along_z: 0

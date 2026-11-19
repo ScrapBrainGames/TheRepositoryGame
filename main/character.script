@@ -117,7 +117,17 @@ local function animation(self)
 		-- Set current animation
 		local current = "idle"
 		if vmath.length_sqr(velocity) > epsilon then
-			current = "walk"
+			if velocity.y < velocity.x and velocity.y < -velocity.x then
+				current = "walk"
+			elseif velocity.y > velocity.x and velocity.y > -velocity.x then
+				current = "back"
+			elseif velocity.x * direction.x < 0 then
+				current = "back"
+			elseif velocity.x * direction.x > 0 then
+				current = "walk"
+			else
+				current = last
+			end
 			-- Scale the animation rate to |velocity|/max_speed
 			local rate = vmath.length(velocity) / self.normal_movement
 			go.set("#body", "playback_rate", rate)

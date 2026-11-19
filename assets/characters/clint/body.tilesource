@@ -2,6 +2,15 @@ image: "/assets/characters/clint/clintBodySheet.png"
 tile_width: 144
 tile_height: 128
 animations {
+  id: "back"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  frames: 5
+  frames: 6
+  frames: 7
+  frames: 8
+}
+animations {
   id: "dead"
   fps: 8
   frames: 16

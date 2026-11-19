@@ -1,0 +1,9 @@
+image: "/assets/objects/potSheet.png"
+tile_width: 164
+tile_height: 151
+collision_groups: "default"
+animations {
+  id: "anim"
+  frames: 1
+}
+extrude_borders: 2

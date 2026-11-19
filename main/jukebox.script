@@ -52,7 +52,6 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start_saloon") then
-		print("Saloon at " .. message.position)
 		saloon.playing = true
 		saloon.position = message.position
 		saloon.music = sound.play("#saloon")

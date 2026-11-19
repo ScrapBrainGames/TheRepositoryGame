@@ -1,0 +1,11 @@
+local state = require "modules.state"
+
+go.property("context", "")
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("trigger_response") and message.enter then
+		local character = state.names[message.other_id]
+		msg.post("main:/monologue#monologue", "start", { speaker = character, context = self.context })
+		go.delete()
+	end
+end

@@ -28,7 +28,7 @@ local function start(self, speaker, context)
 		gui.set_text(self.text, printed)
 		if index >= #message then
 			self.time = nil
-			self.ready = true
+			timer.delay(0.25, false, function() self.ready = true end)
 		end
 	end
 end

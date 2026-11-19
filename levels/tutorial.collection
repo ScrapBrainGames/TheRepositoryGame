@@ -120,6 +120,62 @@ instances {
     y: 145.0
   }
 }
+instances {
+  id: "pot"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 590.0
+    y: 489.0
+  }
+}
+instances {
+  id: "pot1"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 682.0
+    y: 431.0
+  }
+}
+instances {
+  id: "pot2"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 423.0
+    y: 440.0
+  }
+}
+instances {
+  id: "pot3"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 39.0
+    y: 493.0
+  }
+}
+instances {
+  id: "pot4"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 36.0
+    y: 414.0
+  }
+}
+instances {
+  id: "pot5"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 144.0
+    y: 472.0
+  }
+}
+instances {
+  id: "pot6"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 687.0
+    y: 42.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
@@ -127,6 +183,7 @@ embedded_instances {
   children: "node1"
   children: "node2"
   children: "node3"
+  children: "objects"
   data: "components {\n"
   "  id: \"tutorial\"\n"
   "  component: \"/levels/tutorial.tilemap\"\n"
@@ -165,4 +222,18 @@ embedded_instances {
   children: "exit1"
   children: "exit2"
   data: ""
+}
+embedded_instances {
+  id: "objects"
+  children: "pot"
+  children: "pot1"
+  children: "pot2"
+  children: "pot3"
+  children: "pot4"
+  children: "pot5"
+  children: "pot6"
+  data: ""
+  position {
+    z: 5.0
+  }
 }

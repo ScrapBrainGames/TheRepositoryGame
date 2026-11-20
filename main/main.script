@@ -13,6 +13,8 @@ end
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	load_level(self, hash("empty"))
+	-- Spin the randomizer
+	math.randomseed(os.time())
 end
 
 function on_message(self, message_id, message, sender)

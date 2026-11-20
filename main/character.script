@@ -1,6 +1,7 @@
 local characters = require "modules.characters"
 local ai = require "modules.ai"
 local state = require "modules.state"
+local random = require "modules.random"
 
 -- Which character is this?
 go.property("character", "default")
@@ -97,8 +98,8 @@ local function set_sprite(self)
 		go.set(self.hand_url, "image", self.snuffy_hand)
 	elseif self.character == "mook" then
 		go.set(self.hand_url, "image", self.white_hand)
-		go.set("#body", "image", self.white_body)
-		go.set("#hat", "image", self.white_hat)
+		go.set("#body", "image", random.choose(self.white_body, self.blue_body))
+		go.set("#hat", "image", random.choose(self.white_hat, self.blue_hat))
 	end
 end
 

@@ -2,43 +2,43 @@ local M = {}
 
 local map = {
     empty = {
-        "tutorial",
-        "empty",
+        [1] = "tutorial",
+        [2] = "empty",
     },
     tutorial = {
-        "empty",
-        "title",
+        [1] = "empty",
+        [2] = "title",
     },
     title = {
-        "tutorial",
-        "square",
+        [1] = "tutorial",
+        [2] = "square",
     },
     square = {
-        "title",
-        "pots",
+        [1] = "title",
+        [2] = "pots",
     },
     pots = {
-        "square",
-        "town",
+        [1] = "square",
+        [2] = "town",
     },
     town = {
-        "pots",
-        "graveyard",
-        "barrels",
+        [1] = "pots",
+        [2] = "graveyard",
+        [3] = "barrels",
     },
     barrels = {
-        "town",
+        [1] = "town",
     },
     graveyard = {
-        "town",
-        "tomb",
+        [1] = "town",
+        [2] = "tomb",
     },
     tomb = {
-        "graveyard",
-        "mine",
+        [1] = "graveyard",
+        [2] = "mine",
     },
     mine = {
-        "tomb",
+        [1] = "tomb",
     },
 }
 

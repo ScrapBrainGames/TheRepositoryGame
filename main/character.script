@@ -30,6 +30,13 @@ go.property("white_hat", resource.tile_source("/assets/characters/mook/white_hat
 go.property("white_hand", resource.atlas("/assets/characters/mook/hand.atlas"))
 go.property("blue_body", resource.tile_source("/assets/characters/mook/blue_body.tilesource"))
 go.property("blue_hat", resource.tile_source("/assets/characters/mook/blue_hat.tilesource"))
+go.property("green_body", resource.tile_source("/assets/characters/mook/green_body.tilesource"))
+go.property("green_hat", resource.tile_source("/assets/characters/mook/green_hat.tilesource"))
+go.property("orange_body", resource.tile_source("/assets/characters/mook/orange_body.tilesource"))
+go.property("orange_hat", resource.tile_source("/assets/characters/mook/orange_hat.tilesource"))
+go.property("red_body", resource.tile_source("/assets/characters/mook/red_body.tilesource"))
+go.property("red_hat", resource.tile_source("/assets/characters/mook/red_hat.tilesource"))
+
 -- Weapons
 go.property("weapon", resource.atlas("/assets/weapons/weapons.atlas"))
 
@@ -98,8 +105,10 @@ local function set_sprite(self)
 		go.set(self.hand_url, "image", self.snuffy_hand)
 	elseif self.character == "mook" then
 		go.set(self.hand_url, "image", self.white_hand)
-		go.set("#body", "image", random.choose(self.white_body, self.blue_body))
-		go.set("#hat", "image", random.choose(self.white_hat, self.blue_hat))
+		go.set("#body", "image",
+			random.choose(self.white_body, self.blue_body, self.green_body, self.orange_body, self.red_body))
+		go.set("#hat", "image",
+			random.choose(self.white_hat, self.blue_hat, self.green_hat, self.orange_hat, self.red_hat))
 	end
 end
 

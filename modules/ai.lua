@@ -40,6 +40,17 @@ function M.remove_barrier(id)
     barriers[id] = nil
 end
 
+local enemies = {}
+local destinations = {}
+function M.track_enemy(id, position)
+    enemies[id] = position
+end
+
+function M.remove_enemy(id)
+    enemies[id] = nil
+    destinations[id] = nil
+end
+
 local player =
 {
     position = vmath.vector3(),
@@ -54,6 +65,15 @@ end
 
 function M.get_player_position()
     return player.position, player.velocity
+end
+
+local function enemy_spread(point, id)
+    for key, position in pairs(destinations) do
+        if key ~= id and vmath.length_sqr(point - position) < 80000 then
+            return false
+        end
+    end
+    return true
 end
 
 local function get_destination(agent)
@@ -73,10 +93,10 @@ local function get_destination(agent)
     local backup = {}
     local target
     for _, point in ipairs(nodes) do
-        -- Skip any node we're already on or too close to the player
-        if vmath.length_sqr(point - agent.state.position) > 1000 and vmath.length_sqr(point - player.position) > 100000 then
+        -- Skip any node we're already on or too close to the player or other enemies
+        if vmath.length_sqr(point - agent.state.position) > 1000 and vmath.length_sqr(point - player.position) > 160000 and enemy_spread(point, agent.state.id) then
             -- Check that agent can see the node
-            if not physics.raycast(agent.state.position, point, { hash("level") }) then
+            if not physics.raycast(agent.state.position, point, { hash("level"), hash("player") }) then
                 -- Check that player can't see the node
                 if physics.raycast(player.position, point, { hash("level") }) then
                     target = point
@@ -87,8 +107,29 @@ local function get_destination(agent)
             end
         end
     end
+    target = target or backup[1]
+    destinations[agent.state.id] = target
     -- Return best node available
-    return target or backup[1]
+    return target
+end
+
+local function clear_shot(agent)
+    local from = agent.state.position
+    local target = player.position
+    local direction = vmath.normalize(target - from)
+    local range = vmath.length(target - from) + 100
+    local to = vmath.vector3()
+    for margin = 100, range, 100 do
+        to.x = target.x - margin * direction.y
+        to.y = target.y + margin * direction.x
+        if physics.raycast(from, to, { hash("player") }) then return false end
+        to.x = target.x + margin * direction.y
+        to.y = target.y - margin * direction.x
+        if physics.raycast(from, to, { hash("player") }) then return false end
+    end
+
+
+    return true
 end
 
 local actions = {}
@@ -163,7 +204,12 @@ actions.combat = {
             if timer <= 0 then
                 agent.state.aiming = false
                 if sighted then
-                    return "fire"
+                    if clear_shot(agent) then
+                        return "fire"
+                    else
+                        print("waiting for clear shot")
+                        timer = 0.25
+                    end
                 else
                     return "wait"
                 end

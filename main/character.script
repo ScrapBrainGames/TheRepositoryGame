@@ -80,6 +80,7 @@ local function set_player(self)
 	self.state.max_health = self.state.handicap
 	-- Register as player
 	state.register(self.id, true)
+	ai.remove_enemy(self.id)
 end
 
 local function set_sprite(self)
@@ -239,6 +240,7 @@ function update(self, dt)
 			fire(self)
 		end
 	else
+		ai.track_enemy(self.id, self.position)
 		local target = ai.get_player_position()
 		local cast = physics.raycast(self.position, target, { hash("level") })
 		local sighted = cast == nil
@@ -313,4 +315,5 @@ end
 
 function final(self)
 	state.remove(self.id)
+	ai.remove_enemy(self.id)
 end

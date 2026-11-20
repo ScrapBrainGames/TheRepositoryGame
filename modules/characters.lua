@@ -35,7 +35,8 @@ local mook = function(loadout)
     local p = math.random()
     char.loadout = loadout or {
         weapon = math.random() < 0.8 and "sixgun" or "shotgun",
-        color = "white"
+        body = "white",
+        hat = "white",
     }
     char.weapon = weapons[char.loadout.weapon]()
     return char

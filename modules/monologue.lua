@@ -2,7 +2,7 @@ local M = {}
 
 M.empty = {
     -- Interludes
-    --intro = [[Boy it sure is nice to be a main character and not have to worry about dying.]],
+    intro = [[Boy it sure is nice to be a main character and not have to worry about dying.]],
     pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
     barrels = [[There's nothing here yet...]],
     -- Kills

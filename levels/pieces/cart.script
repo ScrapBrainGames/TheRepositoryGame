@@ -1,9 +1,15 @@
 go.property("axis", vmath.vector3(1, 0, 0))
 go.property("anchor", msg.url("/level#collisionobject"))
 
+go.property("left_limit", 200)
+go.property("right_limit", 200)
+
 function init(self)
 	local offset = go.get_world_position() - go.get_world_position(self.anchor)
 	physics.create_joint(physics.JOINT_TYPE_SLIDER, "#collisionobject", "rail", vmath.vector3(), self.anchor, offset, {
 		local_axis_a = self.axis,
+		enable_limit = true,
+		lower_translation = -self.right_limit,
+		upper_translation = self.left_limit,
 	})
 end

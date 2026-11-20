@@ -44,6 +44,7 @@ function pointers:get(n)
 	-- Remove unused pointers
 	if self.count > n then
 		for i = self.count, n do
+			go.delete(self[i])
 			self[i] = nil
 		end
 	end
@@ -58,10 +59,6 @@ end
 
 function final(self)
 	state.reset()
-end
-
-function update(self, dt)
-
 end
 
 function late_update(self, dt)

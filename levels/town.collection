@@ -150,6 +150,54 @@ instances {
     y: 192.0
   }
 }
+instances {
+  id: "enemy"
+  prototype: "/levels/pieces/enemy.go"
+  position {
+    x: 126.0
+    y: 120.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "enemy"
+      value: "shotgun"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+instances {
+  id: "enemy1"
+  prototype: "/levels/pieces/enemy.go"
+  position {
+    x: 895.0
+    y: 180.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "enemy"
+      value: "mook"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+instances {
+  id: "enemy2"
+  prototype: "/levels/pieces/enemy.go"
+  position {
+    x: 562.0
+    y: 369.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "enemy"
+      value: "mook"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
@@ -181,6 +229,9 @@ embedded_instances {
 }
 embedded_instances {
   id: "points"
+  children: "enemy"
+  children: "enemy1"
+  children: "enemy2"
   children: "enter1"
   children: "enter2"
   children: "enter3"

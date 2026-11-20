@@ -130,14 +130,14 @@ instances {
   id: "enemy"
   prototype: "/levels/pieces/enemy.go"
   position {
-    x: 314.0
-    y: 536.0
+    x: 55.0
+    y: 813.0
   }
   component_properties {
     id: "script"
     properties {
       id: "enemy"
-      value: "shotgun"
+      value: "singlegun"
       type: PROPERTY_TYPE_TEXT
     }
   }

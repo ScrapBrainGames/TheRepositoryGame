@@ -94,11 +94,11 @@ local function get_destination(agent)
     local target
     for _, point in ipairs(nodes) do
         -- Skip any node we're already on or too close to the player or other enemies
-        if vmath.length_sqr(point - agent.state.position) > 1000 and vmath.length_sqr(point - player.position) > 160000 and enemy_spread(point, agent.state.id) then
+        if vmath.length_sqr(point - agent.state.position) > 1000 and (math.random() < agent.state.aggro or vmath.length_sqr(point - player.position) > 40000) and enemy_spread(point, agent.state.id) then
             -- Check that agent can see the node
             if not physics.raycast(agent.state.position, point, { hash("level"), hash("player") }) then
-                -- Check that player can't see the node
-                if physics.raycast(player.position, point, { hash("level") }) then
+                -- Check that player can't see the node, or random aggro check
+                if physics.raycast(player.position, point, { hash("level") }) or math.random() < agent.state.aggro then
                     target = point
                     break
                 else
@@ -122,13 +122,12 @@ local function clear_shot(agent)
     for margin = 100, range, 100 do
         to.x = target.x - margin * direction.y
         to.y = target.y + margin * direction.x
-        if physics.raycast(from, to, { hash("player") }) then return false end
+        local cast = physics.raycast(from, to, { hash("player"), hash("level") })
+        if cast and cast.group == hash("player") then return false end
         to.x = target.x + margin * direction.y
         to.y = target.y - margin * direction.x
         if physics.raycast(from, to, { hash("player") }) then return false end
     end
-
-
     return true
 end
 

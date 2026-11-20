@@ -2,8 +2,7 @@ local M = {}
 
 local map = {
     empty = {
-        --"tutorial",
-        "square",
+        "tutorial",
         "empty",
     },
     tutorial = {
@@ -15,8 +14,7 @@ local map = {
         "square",
     },
     square = {
-        --"title",
-        "empty",
+        "title",
         "pots",
     },
     pots = {

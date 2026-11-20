@@ -198,6 +198,38 @@ instances {
     }
   }
 }
+instances {
+  id: "node"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 52.0
+    y: 52.0
+  }
+}
+instances {
+  id: "node1"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 1188.0
+    y: 50.0
+  }
+}
+instances {
+  id: "node2"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 1183.0
+    y: 702.0
+  }
+}
+instances {
+  id: "node3"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 55.0
+    y: 711.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
@@ -238,6 +270,10 @@ embedded_instances {
   children: "exit1"
   children: "exit2"
   children: "exit3"
+  children: "node"
+  children: "node1"
+  children: "node2"
+  children: "node3"
   data: ""
 }
 embedded_instances {

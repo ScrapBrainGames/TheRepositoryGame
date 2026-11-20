@@ -27,6 +27,8 @@ go.property("jessie_hand", resource.atlas("/assets/characters/jessie/hand.atlas"
 go.property("white_body", resource.tile_source("/assets/characters/mook/white_body.tilesource"))
 go.property("white_hat", resource.tile_source("/assets/characters/mook/white_hat.tilesource"))
 go.property("white_hand", resource.atlas("/assets/characters/mook/hand.atlas"))
+go.property("blue_body", resource.tile_source("/assets/characters/mook/blue_body.tilesource"))
+go.property("blue_hat", resource.tile_source("/assets/characters/mook/blue_hat.tilesource"))
 -- Weapons
 go.property("weapon", resource.atlas("/assets/weapons/weapons.atlas"))
 
@@ -94,9 +96,9 @@ local function set_sprite(self)
 		go.set("#hat", "image", self.snuffy_hat)
 		go.set(self.hand_url, "image", self.snuffy_hand)
 	elseif self.character == "mook" then
+		go.set(self.hand_url, "image", self.white_hand)
 		go.set("#body", "image", self.white_body)
 		go.set("#hat", "image", self.white_hat)
-		go.set(self.hand_url, "image", self.white_hand)
 	end
 end
 

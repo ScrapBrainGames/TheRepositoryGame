@@ -1,6 +1,7 @@
 local characters = require "modules.characters"
 local ai = require "modules.ai"
 local state = require "modules.state"
+local random = require "modules.random"
 
 -- Which character is this?
 go.property("character", "default")
@@ -19,7 +20,24 @@ go.property("clint_hand", resource.atlas("/assets/characters/clint/hand.atlas"))
 go.property("snuffy_body", resource.tile_source("/assets/characters/snuffy/body.tilesource"))
 go.property("snuffy_hat", resource.tile_source("/assets/characters/snuffy/hat.tilesource"))
 go.property("snuffy_hand", resource.atlas("/assets/characters/snuffy/hand.atlas"))
--- Sixgun
+-- Jessie
+go.property("jessie_body", resource.tile_source("/assets/characters/jessie/body.tilesource"))
+go.property("jessie_hat", resource.tile_source("/assets/characters/jessie/hat.tilesource"))
+go.property("jessie_hand", resource.atlas("/assets/characters/jessie/hand.atlas"))
+-- Mooks
+go.property("white_body", resource.tile_source("/assets/characters/mook/white_body.tilesource"))
+go.property("white_hat", resource.tile_source("/assets/characters/mook/white_hat.tilesource"))
+go.property("white_hand", resource.atlas("/assets/characters/mook/hand.atlas"))
+go.property("blue_body", resource.tile_source("/assets/characters/mook/blue_body.tilesource"))
+go.property("blue_hat", resource.tile_source("/assets/characters/mook/blue_hat.tilesource"))
+go.property("green_body", resource.tile_source("/assets/characters/mook/green_body.tilesource"))
+go.property("green_hat", resource.tile_source("/assets/characters/mook/green_hat.tilesource"))
+go.property("orange_body", resource.tile_source("/assets/characters/mook/orange_body.tilesource"))
+go.property("orange_hat", resource.tile_source("/assets/characters/mook/orange_hat.tilesource"))
+go.property("red_body", resource.tile_source("/assets/characters/mook/red_body.tilesource"))
+go.property("red_hat", resource.tile_source("/assets/characters/mook/red_hat.tilesource"))
+
+-- Weapons
 go.property("weapon", resource.atlas("/assets/weapons/weapons.atlas"))
 
 
@@ -56,6 +74,8 @@ local function set_player(self)
 	self.hud = msg.url("/camera#weapon")
 	msg.post(self.hud, "set", { weapon = self.weapon.name })
 	characters.player = self.character
+	-- Track gear for mooks
+	characters.loadout = self.loadout
 	-- Give the player a slight health advantage
 	self.state.max_health = self.state.handicap
 	-- Register as player
@@ -83,6 +103,16 @@ local function set_sprite(self)
 		go.set("#body", "image", self.snuffy_body)
 		go.set("#hat", "image", self.snuffy_hat)
 		go.set(self.hand_url, "image", self.snuffy_hand)
+	elseif self.character == "mook" then
+		go.set(self.hand_url, "image", self.white_hand)
+		if not self.player then
+			self.loadout.body = random.choose(self.white_body, self.blue_body, self.green_body, self.orange_body,
+				self.red_body)
+			self.loadout.hat = random.choose(self.white_hat, self.blue_hat, self.green_hat, self.orange_hat, self
+				.red_hat)
+		end
+		go.set("#body", "image", self.loadout.body)
+		go.set("#hat", "image", self.loadout.hat)
 	end
 end
 

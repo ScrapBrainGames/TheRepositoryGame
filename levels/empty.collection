@@ -16,18 +16,13 @@ instances {
 }
 instances {
   id: "player_start"
-  prototype: "/levels/pieces/spawn.go"
+  prototype: "/levels/pieces/enter.go"
   position {
     x: 366.0
     y: 199.0
   }
   component_properties {
-    id: "spawn"
-    properties {
-      id: "enemy"
-      value: ""
-      type: PROPERTY_TYPE_TEXT
-    }
+    id: "script"
     properties {
       id: "index"
       value: "2.0"
@@ -37,18 +32,10 @@ instances {
 }
 instances {
   id: "enter"
-  prototype: "/levels/pieces/spawn.go"
+  prototype: "/levels/pieces/enter.go"
   position {
     x: 17.0
     y: 273.0
-  }
-  component_properties {
-    id: "spawn"
-    properties {
-      id: "enemy"
-      value: ""
-      type: PROPERTY_TYPE_TEXT
-    }
   }
 }
 instances {

@@ -4,37 +4,37 @@ tile_height: 90
 tile_margin: 4
 animations {
   id: "default"
-  start_tile: 12
-  end_tile: 12
   playback: PLAYBACK_NONE
   fps: 0
+  frames: 12
 }
 animations {
   id: "empty"
-  start_tile: 4
-  end_tile: 4
   playback: PLAYBACK_NONE
   fps: 0
+  frames: 4
+}
+animations {
+  id: "mook"
+  playback: PLAYBACK_NONE
+  frames: 7
 }
 animations {
   id: "shotgun"
-  start_tile: 9
-  end_tile: 9
   playback: PLAYBACK_NONE
   fps: 0
+  frames: 9
 }
 animations {
   id: "singlegun"
-  start_tile: 8
-  end_tile: 8
   playback: PLAYBACK_NONE
   fps: 0
+  frames: 8
 }
 animations {
   id: "sixgun"
-  start_tile: 2
-  end_tile: 2
   playback: PLAYBACK_NONE
   fps: 0
+  frames: 2
 }
 extrude_borders: 2

@@ -48,39 +48,10 @@ instances {
 }
 instances {
   id: "enter1"
-  prototype: "/levels/pieces/spawn.go"
+  prototype: "/levels/pieces/enter.go"
   position {
     x: 688.0
     y: 851.0
-  }
-  component_properties {
-    id: "spawn"
-    properties {
-      id: "enemy"
-      value: ""
-      type: PROPERTY_TYPE_TEXT
-    }
-  }
-}
-instances {
-  id: "enemy"
-  prototype: "/levels/pieces/spawn.go"
-  position {
-    x: 480.0
-    y: 320.0
-  }
-  component_properties {
-    id: "spawn"
-    properties {
-      id: "enemy"
-      value: "shotgun"
-      type: PROPERTY_TYPE_TEXT
-    }
-    properties {
-      id: "index"
-      value: "0.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
   }
 }
 instances {
@@ -155,6 +126,22 @@ instances {
     y: 265.0
   }
 }
+instances {
+  id: "enemy"
+  prototype: "/levels/pieces/enemy.go"
+  position {
+    x: 314.0
+    y: 536.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "enemy"
+      value: "shotgun"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
@@ -208,7 +195,4 @@ embedded_instances {
   children: "tombb"
   children: "tombb1"
   data: ""
-  position {
-    z: 5.0
-  }
 }

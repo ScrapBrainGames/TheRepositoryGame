@@ -14,6 +14,7 @@ M.default = {
     pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
     barrels = [[There's nothing here yet...]],
     -- Kills
+    mook = [[Who was that guy?]],
     empty = [[Default killed Empty]],
     default = [[Default killed Default]],
     sixgun = [[Default killed Sixgun]],
@@ -27,6 +28,7 @@ M.sixgun = {
     pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
     barrels = [[There's nothing here yet...]],
     -- Kills
+    mook = [[Who was that guy?]],
     empty = [[Sixgun killed Empty]],
     default = [[Sixgun killed Default]],
     sixgun = [[Sixgun killed Sixgun]],
@@ -40,6 +42,7 @@ M.shotgun = {
     pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
     barrels = [[There's nothing here yet...]],
     -- Kills
+    mook = [[Who was that guy?]],
     empty = [[Shotgun killed Empty]],
     default = [[Shotgun killed Default]],
     sixgun = [[Shotgun killed Sixgun]],
@@ -53,11 +56,26 @@ M.singlegun = {
     pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
     barrels = [[There's nothing here yet...]],
     -- Kills
+    mook = [[Who was that guy?]],
     empty = [[Singlegun killed Empty]],
     default = [[Singlegun killed Default]],
     sixgun = [[Singlegun killed Sixgun]],
     shotgun = [[Singlegun killed Shotgun]],
     singlegun = [[Singlegun killed Singlegun]],
+}
+
+M.mook = {
+    -- Interludes
+    intro = [[Mook.]],
+    pots = [[Mook mook.]],
+    barrels = [[Mook mook mook.]],
+    -- Kills
+    mook = [[Mook killed Mook]],
+    empty = [[Mook killed Empty]],
+    default = [[Mook killed Default]],
+    sixgun = [[Mook killed Sixgun]],
+    shotgun = [[Mook killed Shotgun]],
+    singlegun = [[Mook killed Singlegun]],
 }
 
 function M.get(speaker, context)

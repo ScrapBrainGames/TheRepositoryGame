@@ -1,6 +1,6 @@
 components {
-  id: "spawn"
-  component: "/levels/pieces/spawn.script"
+  id: "script"
+  component: "/levels/pieces/enter.script"
 }
 embedded_components {
   id: "factory"

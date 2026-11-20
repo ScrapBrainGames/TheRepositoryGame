@@ -1,8 +1,19 @@
 go.property("threshold", 1)
 
+function init(self)
+	-- Move in front of player
+	local position = go.get_position()
+	position.z = 10
+	go.set_position(position)
+end
+
 function on_message(self, message_id, message, sender)
 	if message_id == hash("damage") and message.damage > self.threshold then
 		sprite.play_flipbook("#sprite", "dead")
 		msg.post("#collisionobject", "disable")
+		-- Move to behind player
+		local position = go.get_position()
+		position.z = 0
+		go.set_position(position)
 	end
 end

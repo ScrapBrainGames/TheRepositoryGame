@@ -22,6 +22,7 @@ local character = function(params)
     char.normal_movement = char.normal_movement or 250
     char.reload_movement = char.reload_movement or 100
     char.accuracy = char.accuracy or 0.85
+    char.aggro = char.aggro or 0.5
     return char
 end
 
@@ -30,6 +31,7 @@ local mook = function(loadout)
         {
             health = 1,
             handicap = 1,
+            aggro = 0.9,
         }
     )
     char.loadout = loadout or {
@@ -70,7 +72,8 @@ local characters = {
         reload_movement = 150,
         weapon = weapons.singlegun(),
         aim_delay = 0.25,
-        accuracy = 0.95
+        accuracy = 0.95,
+        aggro = 0.1,
     },
     shotgun = {
         aim_movement = 100,

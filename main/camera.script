@@ -43,7 +43,7 @@ function pointers:get(n)
 	end
 	-- Remove unused pointers
 	if self.count > n then
-		for i = self.count, n do
+		for i = n + 1, self.count do
 			go.delete(self[i])
 			self[i] = nil
 		end

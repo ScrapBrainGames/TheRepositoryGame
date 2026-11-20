@@ -32,13 +32,12 @@ local mook = function(loadout)
             handicap = 1,
         }
     )
-    local p = math.random()
     char.loadout = loadout or {
-        weapon = math.random() < 0.8 and "sixgun" or "shotgun",
-        body = "white",
-        hat = "white",
+        weapon = math.random() < 0.8 and weapons.sixgun() or weapons.shotgun(),
+        body = nil,
+        hat = nil,
     }
-    char.weapon = weapons[char.loadout.weapon]()
+    char.weapon = char.loadout.weapon
     return char
 end
 

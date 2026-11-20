@@ -195,7 +195,4 @@ embedded_instances {
   children: "tombb"
   children: "tombb1"
   data: ""
-  position {
-    z: 5.0
-  }
 }

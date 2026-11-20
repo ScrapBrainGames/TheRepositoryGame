@@ -206,7 +206,6 @@ actions.combat = {
                     if clear_shot(agent) then
                         return "fire"
                     else
-                        print("waiting for clear shot")
                         timer = 0.25
                     end
                 else

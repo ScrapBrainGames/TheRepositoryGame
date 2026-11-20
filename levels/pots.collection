@@ -209,7 +209,4 @@ embedded_instances {
   children: "pot8"
   children: "pot9"
   data: ""
-  position {
-    z: 5.0
-  }
 }

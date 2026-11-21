@@ -35,7 +35,7 @@ local mook = function(loadout)
         }
     )
     char.loadout = loadout or {
-        weapon = math.random() < 0.8 and weapons.sixgun() or weapons.shotgun(),
+        weapon = math.random() < 0.9 and weapons.sixgun() or weapons.shotgun(),
         body = nil,
         hat = nil,
     }

@@ -120,7 +120,7 @@ sixgun.__index = sixgun
 function sixgun:new()
     local instance = gun.new(self)
     instance.name = "sixgun"
-    instance.speed = 400
+    instance.speed = 900
     instance.chambers = { true, true, true, true, true, true }
     instance.noise = 0.1
     instance.damage = 4

@@ -183,7 +183,7 @@ actions.combat = {
                     end
                 else
                     if sighted then
-                        return "wait"
+                        return math.random() < 0.875 and "wait" or "reload"
                     else
                         return agent.state.weapon.reloading and "wait" or "reload"
                     end

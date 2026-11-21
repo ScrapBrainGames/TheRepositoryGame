@@ -189,6 +189,7 @@ function init(self)
 	go.set_position(vmath.vector3(0, 0, 0), self.arm)
 	self.hand_url = msg.url(nil, self.arm, "hand")
 	self.gun_url = msg.url(nil, self.arm, "gun")
+	self.fx_url = msg.url(nil, self.arm, "blast")
 	-- Initialize per-character parameters like health, speed, and weapon
 	characters.initialize(self, self.character)
 	-- Set camera to follow or AI to control
@@ -199,7 +200,7 @@ function init(self)
 		self.weapon:reload(0)
 	end
 	-- Somewhere out there is a bullet with your name on it
-	self.weapon:set(self.id)
+	self.weapon:set(self.id, self.fx_url)
 	-- Refill health on start
 	if self.state.health > 0 then self.state.health = self.state.max_health end
 	-- Hide the health bar until hit?

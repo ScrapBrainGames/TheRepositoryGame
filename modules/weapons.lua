@@ -31,8 +31,9 @@ function gun:new()
     return setmetatable(instance, self)
 end
 
-function gun:set(id)
+function gun:set(id, url)
     self.id = id
+    self.fx = url
 end
 
 function gun:cycle()
@@ -61,6 +62,7 @@ function gun:fire(position, direction)
             (direction.x > -1 and math.sqrt(direction.x * 0.5 + 0.5) or 0)
         )
         factory.create(self.factory, position, rotation, props)
+        particlefx.play(self.fx)
     else
         self.cocked = false
     end
@@ -118,7 +120,7 @@ sixgun.__index = sixgun
 function sixgun:new()
     local instance = gun.new(self)
     instance.name = "sixgun"
-    instance.speed = 900
+    instance.speed = 400
     instance.chambers = { true, true, true, true, true, true }
     instance.noise = 0.1
     instance.damage = 4
@@ -200,6 +202,7 @@ function shotgun:fire(position, direction)
                 self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
             factory.create(self.factory, position, nil, props)
         end
+        particlefx.play(self.fx)
     end
 end
 

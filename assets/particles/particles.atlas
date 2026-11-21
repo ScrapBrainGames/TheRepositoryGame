@@ -1,0 +1,4 @@
+images {
+  image: "/assets/particles/smoke.png"
+}
+extrude_borders: 2

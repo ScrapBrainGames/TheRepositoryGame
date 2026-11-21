@@ -1,42 +1,44 @@
 emitters {
+  id: "narrow_smoke"
   mode: PLAY_MODE_ONCE
   duration: 0.125
   space: EMISSION_SPACE_WORLD
   tile_source: "/assets/particles/particles.atlas"
-  animation: "smoke"
+  animation: "white_smoke"
   material: "/builtins/materials/particlefx.material"
   max_particle_count: 128
   type: EMITTER_TYPE_2DCONE
   properties {
     key: EMITTER_KEY_SPAWN_RATE
     points {
-      y: 200.0
+      y: 400.0
     }
   }
   properties {
     key: EMITTER_KEY_SIZE_X
     points {
-      y: 8.0
+      y: 4.0
     }
   }
   properties {
     key: EMITTER_KEY_SIZE_Y
     points {
-      y: 12.0
+      y: 8.0
     }
   }
   properties {
     key: EMITTER_KEY_PARTICLE_LIFE_TIME
     points {
-      y: 3.0
+      y: 10.0
     }
+    spread: 2.0
   }
   properties {
     key: EMITTER_KEY_PARTICLE_SPEED
     points {
-      y: 200.0
+      y: 300.0
     }
-    spread: 50.0
+    spread: 100.0
   }
   properties {
     key: EMITTER_KEY_PARTICLE_SIZE
@@ -47,25 +49,25 @@ emitters {
   properties {
     key: EMITTER_KEY_PARTICLE_RED
     points {
-      y: 1.0
+      y: 0.5
     }
   }
   properties {
     key: EMITTER_KEY_PARTICLE_GREEN
     points {
-      y: 1.0
+      y: 0.5
     }
   }
   properties {
     key: EMITTER_KEY_PARTICLE_BLUE
     points {
-      y: 1.0
+      y: 0.5
     }
   }
   properties {
     key: EMITTER_KEY_PARTICLE_ALPHA
     points {
-      y: 0.5
+      y: 0.25
     }
   }
   properties {
@@ -79,10 +81,14 @@ emitters {
     key: PARTICLE_KEY_SCALE
     points {
       y: 0.253112
+      t_x: 0.22131877
+      t_y: 0.97520155
     }
     points {
       x: 1.0
-      y: 0.998768
+      y: 3.002065
+      t_x: 0.8961535
+      t_y: 0.44374415
     }
   }
   particle_properties {
@@ -128,16 +134,168 @@ emitters {
     properties {
       key: MODIFIER_KEY_MAGNITUDE
       points {
-        y: 1.0
+        y: 2.0
       }
+      spread: 1.0
     }
   }
   attributes {
     name: "color"
     double_values {
-      v: 0.0
-      v: 0.0
-      v: 0.0
+      v: 1.0
+      v: 1.0
+      v: 1.0
+      v: 1.0
+    }
+  }
+}
+emitters {
+  id: "wide_smoke"
+  mode: PLAY_MODE_ONCE
+  duration: 0.125
+  space: EMISSION_SPACE_WORLD
+  tile_source: "/assets/particles/particles.atlas"
+  animation: "white_smoke"
+  material: "/builtins/materials/particlefx.material"
+  max_particle_count: 128
+  type: EMITTER_TYPE_2DCONE
+  properties {
+    key: EMITTER_KEY_SPAWN_RATE
+    points {
+      y: 400.0
+    }
+  }
+  properties {
+    key: EMITTER_KEY_SIZE_X
+    points {
+      y: 8.0
+    }
+  }
+  properties {
+    key: EMITTER_KEY_SIZE_Y
+    points {
+      y: 4.0
+    }
+  }
+  properties {
+    key: EMITTER_KEY_PARTICLE_LIFE_TIME
+    points {
+      y: 10.0
+    }
+    spread: 2.0
+  }
+  properties {
+    key: EMITTER_KEY_PARTICLE_SPEED
+    points {
+      y: 300.0
+    }
+    spread: 100.0
+  }
+  properties {
+    key: EMITTER_KEY_PARTICLE_SIZE
+    points {
+      y: 64.0
+    }
+  }
+  properties {
+    key: EMITTER_KEY_PARTICLE_RED
+    points {
+      y: 0.5
+    }
+  }
+  properties {
+    key: EMITTER_KEY_PARTICLE_GREEN
+    points {
+      y: 0.5
+    }
+  }
+  properties {
+    key: EMITTER_KEY_PARTICLE_BLUE
+    points {
+      y: 0.5
+    }
+  }
+  properties {
+    key: EMITTER_KEY_PARTICLE_ALPHA
+    points {
+      y: 0.25
+    }
+  }
+  properties {
+    key: EMITTER_KEY_PARTICLE_ROTATION
+    points {
+      y: 0.0
+    }
+    spread: 360.0
+  }
+  particle_properties {
+    key: PARTICLE_KEY_SCALE
+    points {
+      y: 0.253112
+      t_x: 0.22131877
+      t_y: 0.97520155
+    }
+    points {
+      x: 1.0
+      y: 3.002065
+      t_x: 0.8961535
+      t_y: 0.44374415
+    }
+  }
+  particle_properties {
+    key: PARTICLE_KEY_RED
+    points {
+      y: 1.0
+    }
+  }
+  particle_properties {
+    key: PARTICLE_KEY_GREEN
+    points {
+      y: 1.0
+    }
+  }
+  particle_properties {
+    key: PARTICLE_KEY_BLUE
+    points {
+      y: 1.0
+    }
+  }
+  particle_properties {
+    key: PARTICLE_KEY_ALPHA
+    points {
+      y: 0.5025
+      t_x: 0.5022208
+      t_y: -0.8647394
+    }
+    points {
+      x: 1.0
+      y: 6.45E-4
+      t_x: 0.9998968
+      t_y: -0.014364415
+    }
+  }
+  particle_properties {
+    key: PARTICLE_KEY_ANGULAR_VELOCITY
+    points {
+      y: 1.0
+    }
+  }
+  modifiers {
+    type: MODIFIER_TYPE_DRAG
+    properties {
+      key: MODIFIER_KEY_MAGNITUDE
+      points {
+        y: 3.0
+      }
+      spread: 1.0
+    }
+  }
+  attributes {
+    name: "color"
+    double_values {
+      v: 1.0
+      v: 1.0
+      v: 1.0
       v: 1.0
     }
   }

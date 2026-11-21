@@ -29,7 +29,7 @@ emitters {
   properties {
     key: EMITTER_KEY_PARTICLE_LIFE_TIME
     points {
-      y: 8.0
+      y: 6.0
     }
     spread: 4.0
   }
@@ -139,6 +139,15 @@ emitters {
       spread: 1.0
     }
   }
+  modifiers {
+    type: MODIFIER_TYPE_ACCELERATION
+    properties {
+      key: MODIFIER_KEY_MAGNITUDE
+      points {
+        y: 50.0
+      }
+    }
+  }
   attributes {
     name: "color"
     double_values {
@@ -180,7 +189,7 @@ emitters {
   properties {
     key: EMITTER_KEY_PARTICLE_LIFE_TIME
     points {
-      y: 8.0
+      y: 6.0
     }
     spread: 4.0
   }
@@ -288,6 +297,15 @@ emitters {
         y: 3.0
       }
       spread: 1.0
+    }
+  }
+  modifiers {
+    type: MODIFIER_TYPE_ACCELERATION
+    properties {
+      key: MODIFIER_KEY_MAGNITUDE
+      points {
+        y: 50.0
+      }
     }
   }
   attributes {

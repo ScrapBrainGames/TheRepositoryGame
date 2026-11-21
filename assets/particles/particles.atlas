@@ -1,0 +1,10 @@
+images {
+  image: "/assets/particles/black_smoke.png"
+}
+images {
+  image: "/assets/particles/white_smoke.png"
+}
+images {
+  image: "/assets/particles/pixel.png"
+}
+extrude_borders: 2

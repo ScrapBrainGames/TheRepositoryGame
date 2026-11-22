@@ -7,6 +7,17 @@ local saloon = {
 	gain = 0,
 }
 
+local music = {
+	stings = {},
+	ambient = {},
+	combat = {},
+	finale = {},
+}
+
+local function queue()
+	local current = "stings"
+end
+
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/

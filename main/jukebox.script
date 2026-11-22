@@ -29,32 +29,33 @@ function queue:play(type)
 end
 
 function queue:next()
-	return function()
+	return function(_, message_id)
+		if message_id == hash("sound stopped") then
+			return
+		end
 		if self.current == "combat" then
 			if state.combat then
-				next = "combat"
+				self.current = "combat"
 				self.index = self.index % #music.combat + 1
 			else
-				next = "finale"
+				self.current = "finale"
 			end
 		else
-			local next
 			if self.current == "combat" then
 				if state.combat then
-					next = "combat"
+					self.current = "combat"
 					self.index = self.index % #music.combat + 1
 				else
-					next = "finale"
+					self.current = "finale"
 				end
 			elseif self.current == "ambient" then
-				next = math.random() < 0.5 and "ambient" or "sting"
-				self.index = math.random(#music[next])
+				self.current = math.random() < 0.5 and "ambient" or "sting"
+				self.index = math.random(#music[self.current])
 			else
-				next = "ambient"
+				self.current = "ambient"
 				self.index = math.random(#music.ambient)
 			end
-			print("next up:" .. next .. self.index)
-			self.current = next
+			print("next up:" .. self.current .. self.index)
 			sound.play(music[self.current][self.index], nil, self:next())
 		end
 	end

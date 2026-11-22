@@ -30,7 +30,7 @@ animations {
 animations {
   id: "walk"
   playback: PLAYBACK_LOOP_BACKWARD
-  fps: 12
+  fps: 17
   frames: 4
   frames: 5
   frames: 6

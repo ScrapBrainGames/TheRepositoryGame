@@ -30,9 +30,10 @@ end
 
 function queue:next()
 	return function(_, message_id)
-		if message_id == hash("sound stopped") then
+		if message_id == hash("sound_stopped") then
 			return
 		end
+
 		if self.current == "combat" then
 			if state.combat then
 				self.current = "combat"
@@ -40,32 +41,25 @@ function queue:next()
 			else
 				self.current = "finale"
 			end
+		elseif self.current == "ambient" then
+			self.current = math.random() < 0.5 and "ambient" or "sting"
+			self.index = math.random(#music[self.current])
 		else
-			if self.current == "combat" then
-				if state.combat then
-					self.current = "combat"
-					self.index = self.index % #music.combat + 1
-				else
-					self.current = "finale"
-				end
-			elseif self.current == "ambient" then
-				self.current = math.random() < 0.5 and "ambient" or "sting"
-				self.index = math.random(#music[self.current])
-			else
-				self.current = "ambient"
-				self.index = math.random(#music.ambient)
-			end
-			print("next up:" .. self.current .. self.index)
-			sound.play(music[self.current][self.index], nil, self:next())
+			self.current = "ambient"
+			self.index = math.random(#music.ambient)
 		end
+		print("next up:" .. self.current .. self.index)
+		sound.play(music[self.current][self.index], nil, self:next())
 	end
 end
 
 function init(self)
-	music.sting = { "#sting1", "#sting2", "#sting3", "#sting4", }
-	music.ambient = { "#ambient1" }
-	music.combat = { "#combat1", "#combat1", }
-	music.finale = { "#finale1", "#finale1" }
+	music.sting = { "#sting1", "#sting2", "#sting3", "#sting4", "#sting5", }
+	music.ambient = { "#ambient1", "#ambient2", "#ambient3", "#ambient4", }
+	music.combat = { "#combat1", "#combat2", "#combat3", "#combat4", "#combat5", "#combat6", "#combat7", "#combat8",
+		"#combat9", "#combat10", "#combat11", "#combat12", "#combat13", "#combat14", "#combat15", "#combat16", }
+	music.finale = { "#finale1", "#finale2", "#finale3", "#finale4", "#finale5", "#finale6", "#finale7", "#finale8",
+		"#finale9", "#finale10", "#finale11", "#finale12", "#finale13", "#finale14", "#finale15", "#finale16", }
 
 	queue:play("sting")
 end
@@ -81,35 +75,24 @@ function update(self, dt)
 		local player = state.player.position
 		local direction = saloon.position - player
 		saloon.gain = 10000 / (vmath.length_sqr(direction) + 1)
+		saloon.gain = math.min(saloon.gain, 1)
 		local pan = direction.x / (math.abs(direction.y) + math.abs(direction.x) + 1)
 		sound.set_gain("#saloon", saloon.gain)
 		sound.set_pan("#saloon", pan)
-	elseif saloon.gain >= 0 then
-		saloon.gain = saloon.gain - (dt * 0.25)
+	elseif saloon.gain > 0 then
+		saloon.gain = math.max(0, saloon.gain - (dt * 0.25))
 		sound.set_gain("#saloon", saloon.gain)
-	else
-		sound.stop("#saloon")
+		if saloon.gain == 0 then
+			sound.stop("#saloon")
+		end
 	end
-end
-
-function late_update(self, dt)
-	-- This function is called at the end of update cycle but before render
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function fixed_update(self, dt)
-	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
-	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
-	-- Physics section of game.project
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("combat") then
-		queue:play("combat")
+		if queue.current ~= "combet" then
+			queue:play("combat")
+		end
 	elseif message_id == hash("start_saloon") then
 		saloon.playing = true
 		saloon.position = message.position
@@ -117,22 +100,4 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("stop_saloon") then
 		saloon.playing = false
 	end
-end
-
-function on_input(self, action_id, action)
-	-- Add input-handling code here. The game object this script is attached to
-	-- must have acquired input focus:
-	--
-	--    msg.post(".", "acquire_input_focus")
-	--
-	-- All mapped input bindings will be received. Mouse and touch input will
-	-- be received regardless of where on the screen it happened.
-	-- Learn more: https://defold.com/manuals/input/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end

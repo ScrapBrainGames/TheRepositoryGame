@@ -25,19 +25,11 @@ function queue:play(type)
 	end
 	self.current = type
 	self.index = 1
-	self.last = sound.play(music[self.current][self.index])
+	sound.play(music[self.current][self.index], nil, self:next())
 end
 
 function queue:next()
-	if self.current == "combat" then
-		if state.combat then
-			next = "combat"
-			self.index = self.index % #music.combat + 1
-		else
-			next = "finale"
-		end
-	else
-		local next
+	return function()
 		if self.current == "combat" then
 			if state.combat then
 				next = "combat"
@@ -45,52 +37,25 @@ function queue:next()
 			else
 				next = "finale"
 			end
-		elseif self.current == "ambient" then
-			next = math.random() < 0.5 and "ambient" or "sting"
-			self.index = math.random(#music[next])
-		else
-			next = "ambient"
-			self.index = math.random(#music.ambient)
-		end
-		print("next up:" .. next)
-		self.current = next
-		-- Play the next track
-		sound.play(music[self.current][self.index], nil, self:next())
-	end
-end
-
-local function play(self)
-	local current
-	local index
-	return function(type)
-		if type then
-			-- Stop whatever's playing
-			if current and index then
-				sound.stop(music[current][index])
-			end
-			current = type
-			index = 1
-			sound.play(music[current][index], nil, self.play)
 		else
 			local next
-			if current == "combat" then
+			if self.current == "combat" then
 				if state.combat then
 					next = "combat"
-					index = index % #music.combat + 1
+					self.index = self.index % #music.combat + 1
 				else
 					next = "finale"
 				end
-			elseif current == "ambient" then
+			elseif self.current == "ambient" then
 				next = math.random() < 0.5 and "ambient" or "sting"
-				index = math.random(#music[next])
+				self.index = math.random(#music[next])
 			else
 				next = "ambient"
-				index = math.random(#music.ambient)
+				self.index = math.random(#music.ambient)
 			end
-			print("next up:" .. next)
-			current = next
-			-- Play the next track
-			sound.play(music[current][index], nil, self.play)
+			print("next up:" .. next .. self.index)
+			self.current = next
+			sound.play(music[self.current][self.index], nil, self:next())
 		end
 	end
 end
@@ -101,8 +66,7 @@ function init(self)
 	music.combat = { "#combat1", "#combat1", }
 	music.finale = { "#finale1", "#finale1" }
 
-	self.play = play(self)
-	self.play("sting")
+	queue:play("sting")
 end
 
 function final(self)
@@ -143,7 +107,9 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("start_saloon") then
+	if message_id == hash("combat") then
+		queue:play("combat")
+	elseif message_id == hash("start_saloon") then
 		saloon.playing = true
 		saloon.position = message.position
 		saloon.music = sound.play("#saloon")

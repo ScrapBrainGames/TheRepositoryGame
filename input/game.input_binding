@@ -34,6 +34,14 @@ key_trigger {
   input: KEY_R
   action: "reload"
 }
+key_trigger {
+  input: KEY_LSHIFT
+  action: "spin"
+}
+key_trigger {
+  input: KEY_SPACE
+  action: "spin"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_1
   action: "fire"

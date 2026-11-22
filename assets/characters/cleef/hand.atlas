@@ -1,5 +1,4 @@
 images {
   image: "/assets/characters/cleef/cleefHandSheet.png"
-  pivot_y: 0.65
 }
 extrude_borders: 2

@@ -12,14 +12,15 @@ components {
 embedded_components {
   id: "hand"
   type: "sprite"
-  data: "default_animation: \"clintHandSheet\"\n"
+  data: "default_animation: \"mookHandSheet\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/clint/hand.atlas\"\n"
+  "  texture: \"/assets/characters/mook/hand.atlas\"\n"
   "}\n"
   ""
   position {
+    y: 8.0
     z: 4.0
   }
 }
@@ -34,6 +35,7 @@ embedded_components {
   "}\n"
   ""
   position {
+    y: 7.0
     z: 3.0
   }
 }

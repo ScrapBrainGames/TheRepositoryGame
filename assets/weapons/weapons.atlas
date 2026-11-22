@@ -8,7 +8,6 @@ images {
 }
 images {
   image: "/assets/weapons/sixgun.png"
-  pivot_y: 0.55
 }
 images {
   image: "/assets/weapons/empty.png"

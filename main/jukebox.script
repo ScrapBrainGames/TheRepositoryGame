@@ -8,20 +8,101 @@ local saloon = {
 }
 
 local music = {
-	stings = {},
+	sting = {},
 	ambient = {},
 	combat = {},
 	finale = {},
 }
 
-local function queue()
-	local current = "stings"
+local queue = {
+	current = nil,
+	index = 1,
+}
+
+function queue:play(type)
+	if self.current and self.index then
+		sound.stop(music[self.current][self.index])
+	end
+	self.current = type
+	self.index = 1
+	self.last = sound.play(music[self.current][self.index])
+end
+
+function queue:next()
+	if self.current == "combat" then
+		if state.combat then
+			next = "combat"
+			self.index = self.index % #music.combat + 1
+		else
+			next = "finale"
+		end
+	else
+		local next
+		if self.current == "combat" then
+			if state.combat then
+				next = "combat"
+				self.index = self.index % #music.combat + 1
+			else
+				next = "finale"
+			end
+		elseif self.current == "ambient" then
+			next = math.random() < 0.5 and "ambient" or "sting"
+			self.index = math.random(#music[next])
+		else
+			next = "ambient"
+			self.index = math.random(#music.ambient)
+		end
+		print("next up:" .. next)
+		self.current = next
+		-- Play the next track
+		sound.play(music[self.current][self.index], nil, self:next())
+	end
+end
+
+local function play(self)
+	local current
+	local index
+	return function(type)
+		if type then
+			-- Stop whatever's playing
+			if current and index then
+				sound.stop(music[current][index])
+			end
+			current = type
+			index = 1
+			sound.play(music[current][index], nil, self.play)
+		else
+			local next
+			if current == "combat" then
+				if state.combat then
+					next = "combat"
+					index = index % #music.combat + 1
+				else
+					next = "finale"
+				end
+			elseif current == "ambient" then
+				next = math.random() < 0.5 and "ambient" or "sting"
+				index = math.random(#music[next])
+			else
+				next = "ambient"
+				index = math.random(#music.ambient)
+			end
+			print("next up:" .. next)
+			current = next
+			-- Play the next track
+			sound.play(music[current][index], nil, self.play)
+		end
+	end
 end
 
 function init(self)
-	-- Add initialization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	music.sting = { "#sting1", "#sting2", "#sting3", "#sting4", }
+	music.ambient = { "#ambient1" }
+	music.combat = { "#combat1", "#combat1", }
+	music.finale = { "#finale1", "#finale1" }
+
+	self.play = play(self)
+	self.play("sting")
 end
 
 function final(self)

@@ -3,7 +3,7 @@ local state = require "modules.state"
 go.property("index", 1)
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("trigger_response") and message.enter and state.count() == 1 then
+	if message_id == hash("trigger_response") and not state.combat then
 		msg.post("main:/main#main", "change_level", { index = self.index })
 	end
 end

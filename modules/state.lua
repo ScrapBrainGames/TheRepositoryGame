@@ -9,6 +9,9 @@ M.characters = {}
 M.names = {}
 M.killed = {}
 
+-- Track combat state
+M.combat = false
+
 M.player = {
     position = vmath.vector3()
 }

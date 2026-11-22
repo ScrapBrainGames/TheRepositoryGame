@@ -4,7 +4,7 @@ local state = require "modules.state"
 -- Delay between characters
 local delay = 0.025
 -- Delay before showing the monologue
-local startup = 0.5
+local startup = 0.25
 
 local function start(self, speaker, context)
 	local message = monologue.get(speaker, context)

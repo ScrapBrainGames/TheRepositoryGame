@@ -14,10 +14,7 @@ function update(self, dt)
 	local count, id = state.count()
 	if count >= 2 then
 		self.combat = true
-		if not state.combat then
-			state.combat = true
-			msg.post("main:/jukebox#jukebox", "combat")
-		end
+		state.combat = true
 	elseif self.combat then
 		self.combat = false
 		state.combat = false

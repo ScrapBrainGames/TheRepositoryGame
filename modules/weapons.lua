@@ -63,6 +63,8 @@ function gun:fire(position, direction)
         )
         factory.create(self.factory, position, rotation, props)
         particlefx.play(self.fx)
+        -- Kick off music, if not already going
+        msg.post("main:/jukebox#jukebox", "combat")
     else
         self.cocked = false
     end

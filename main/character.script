@@ -177,6 +177,7 @@ local function animation(self)
 end
 
 function init(self)
+	self.dead = false
 	-- self state is used by both player and AI control
 	self.id = go.get_id()
 	self.position = vmath.vector3()
@@ -219,6 +220,8 @@ function init(self)
 end
 
 function update(self, dt)
+	-- The dead don't talk
+	if self.dead then return end
 	-- Update weapon
 	self.weapon:update(dt)
 	-- Set speed dependent on aiming or not
@@ -262,13 +265,25 @@ function update(self, dt)
 	self.direction.y = 0
 end
 
+local function die(self)
+	self.dead = true
+	state.kill(self.id, self.player or not self.lesser)
+	characters.died(self.character)
+	self.dead = true
+	sprite.play_flipbook("#body", "dead")
+	sprite.play_flipbook("#hat", "dead")
+	go.delete(self.arm, true)
+	msg.post("#collisionobject", "disable")
+	msg.post("#health", "disable")
+	self.position.z = -1
+	go.set_position(self.position)
+end
+
 function on_message(self, message_id, message, sender)
 	if message_id == hash("damage") then
 		self.state.health = self.state.health - message.damage
 		if self.state.health <= 0 then
-			state.kill(self.id, self.player or not self.lesser)
-			characters.died(self.character)
-			go.delete(self.id, true)
+			die(self)
 			if self.player and (state.characters[message.sender] ~= nil) then
 				msg.post(message.sender, "set_player")
 			end

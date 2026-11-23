@@ -271,6 +271,8 @@ function on_message(self, message_id, message, sender)
 			end
 		else
 			go.set("#health", "scale.x", self.state.health / self.state.max_health)
+			factory.create("#popper", self.position + vmath.vector3(math.random(-12, 12), 36, 10), nil,
+				{ text = random.choose("OOF", "OW", "AHH", "OUCH") })
 			if self.player then
 				-- ???
 			else

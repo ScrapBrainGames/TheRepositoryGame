@@ -131,7 +131,8 @@ function sixgun:new()
     instance.speed = 900
     instance.chambers = { true, true, true, true, true, true }
     instance.noise = 0.1
-    instance.damage = 4
+    --instance.damage = 4
+    instance.damage = 1
     return instance
 end
 

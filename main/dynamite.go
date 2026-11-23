@@ -17,3 +17,9 @@ embedded_components {
     y: -7.0
   }
 }
+embedded_components {
+  id: "factory"
+  type: "factory"
+  data: "prototype: \"/main/explosion.go\"\n"
+  ""
+}

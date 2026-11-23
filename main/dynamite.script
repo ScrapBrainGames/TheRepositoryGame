@@ -28,7 +28,8 @@ function update(self, dt)
 		self.fuse = self.fuse - dt
 		if self.fuse <= 0 then
 			self.fuse = nil
-			print("kaboom!")
+			factory.create("#factory")
+			go.delete()
 		end
 	end
 	if self.fly then

@@ -277,8 +277,20 @@ function dynamite:update(dt)
     end
 end
 
-function dynamite:fire(position, direction)
+function dynamite:cycle()
+    if self.stick then
+        msg.post(self.stick, "light")
+        self.cocked = true
+    end
+end
 
+function dynamite:fire(position, direction)
+    if self.cocked then
+        print("throw")
+        -- Destroy the evidence
+        self.cocked = false
+        self.stick = nil
+    end
 end
 
 -- The weapons module

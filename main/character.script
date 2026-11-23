@@ -125,6 +125,15 @@ local function animation(self)
 	local pointing = vmath.vector3(1, 0, 0)
 	local epsilon = 144
 	return function(velocity)
+		-- Handle hit animation separately
+		if self.hit then
+			if last ~= "hit" then
+				sprite.play_flipbook("#body", "hit")
+				sprite.play_flipbook("#hat", "hit")
+				last = "hit"
+			end
+			return
+		end
 		-- Update pointing direction
 		local direction = self.target - self.position
 		direction = vmath.normalize(direction)
@@ -228,11 +237,9 @@ function update(self, dt)
 	local speed = self.normal_movement
 	if self.aiming then
 		speed = self.aim_movement
-		print("aiming")
 	end
 	if self.weapon.reloading then
 		speed = math.min(speed, self.reload_movement)
-		print("reloading")
 	end
 	-- Get current position and velocity
 	self.position = go.get_position()
@@ -298,11 +305,14 @@ function on_message(self, message_id, message, sender)
 			end
 		else
 			go.set("#health", "scale.x", self.state.health / self.state.max_health)
-			factory.create("#popper", self.position + vmath.vector3(math.random(-12, 12), 36, 10), nil,
-				{ text = random.choose("OOF", "OW", "AHH", "OUCH") })
-			if self.player then
-				-- ???
-			else
+			if not self.hit then
+				self.hit = true
+				timer.delay(0.125, false, function() self.hit = false end)
+
+				factory.create("#popper", self.position + vmath.vector3(math.random(-12, 12), 36, 10), nil,
+					{ text = random.choose("OOF", "OW", "AHH", "OUCH") })
+			end
+			if not self.player then
 				ai.react(self.ai)
 			end
 		end

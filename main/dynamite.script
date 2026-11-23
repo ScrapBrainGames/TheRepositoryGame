@@ -1,5 +1,27 @@
 local fuse = 5
 
+local g = 200
+
+local function fly(self, target, start)
+	local v = target
+	local d = vmath.length(v)
+	local t = 0
+	local T = math.sqrt(d / g)
+	local Tinv = 1 / T
+	return function(dt)
+		t = t + dt
+		if t > T then t = T end
+		local f = t * Tinv
+		local h = 2 * d * f * (1 - f)
+		local position = start + f * v
+		position.y = position.y + h
+		go.set_position(position)
+		if t == T then
+			self.fly = nil
+		end
+	end
+end
+
 function update(self, dt)
 	if self.fuse then
 		self.fuse = self.fuse - dt
@@ -8,10 +30,15 @@ function update(self, dt)
 			print("kaboom!")
 		end
 	end
+	if self.fly then
+		self.fly(dt)
+	end
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("light") and not self.fuse then
 		self.fuse = fuse
+	elseif message_id == hash("launch") then
+		self.fly = fly(self, message.direction, message.position)
 	end
 end

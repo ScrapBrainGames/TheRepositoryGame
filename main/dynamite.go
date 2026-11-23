@@ -12,4 +12,8 @@ embedded_components {
   "  texture: \"/assets/weapons/weapons.atlas\"\n"
   "}\n"
   ""
+  position {
+    x: -43.0
+    y: -7.0
+  }
 }

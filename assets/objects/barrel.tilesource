@@ -1,0 +1,14 @@
+image: "/assets/objects/explosiveBarrelSheet.png"
+tile_width: 164
+tile_height: 151
+animations {
+  id: "dead"
+  playback: PLAYBACK_NONE
+  frames: 2
+}
+animations {
+  id: "idle"
+  playback: PLAYBACK_NONE
+  frames: 1
+}
+extrude_borders: 2

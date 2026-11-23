@@ -80,9 +80,18 @@ instances {
     }
   }
 }
+instances {
+  id: "barrel"
+  prototype: "/levels/pieces/barrel.go"
+  position {
+    x: 611.0
+    y: 196.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
+  children: "barrel"
   children: "cart"
   data: "components {\n"
   "  id: \"tilemap\"\n"

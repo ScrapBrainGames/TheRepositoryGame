@@ -153,7 +153,7 @@ instances {
     id: "script"
     properties {
       id: "enemy"
-      value: "dynamite"
+      value: "default"
       type: PROPERTY_TYPE_TEXT
     }
   }

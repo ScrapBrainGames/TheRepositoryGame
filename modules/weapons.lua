@@ -18,7 +18,7 @@ gun.__index = gun
 function gun:new()
     local instance = {
         name = "",
-        speed = 100,
+        speed = 500,
         damage = 1,
         offset = 48,
         chambers = { true },

@@ -68,6 +68,7 @@ local function fire(self)
 end
 
 local function set_player(self)
+	state.heir = nil
 	self.player = true
 	msg.post(".", "acquire_input_focus")
 	msg.post("/camera#control", "set_player", { id = go.get_id() })
@@ -106,7 +107,7 @@ local function set_sprite(self)
 		go.set(self.hand_url, "image", self.snuffy_hand)
 	elseif self.character == "mook" then
 		go.set(self.hand_url, "image", self.white_hand)
-		if not self.player then
+		if not self.loadout.body then
 			self.loadout.body = random.choose(self.white_body, self.blue_body, self.green_body, self.orange_body,
 				self.red_body)
 			self.loadout.hat = random.choose(self.white_hat, self.blue_hat, self.green_hat, self.orange_hat, self
@@ -285,6 +286,7 @@ local function die(self)
 	-- Notify state and characters
 	state.kill(self.id, self.player or not self.lesser)
 	characters.died(self.character)
+	characters.loadout = nil
 	-- No more arm/weapon
 	go.delete(self.arm, true)
 	-- Disable collisions, health bar
@@ -311,8 +313,8 @@ function on_message(self, message_id, message, sender)
 		end
 		if self.state.health <= 0 then
 			die(self)
-			if self.player and (state.characters[message.sender] ~= nil) then
-				msg.post(message.sender, "set_player")
+			if self.player or state.heir == self.id then
+				state.pass(message.sender)
 			end
 		else
 			go.set("#health", "scale.x", self.state.health / self.state.max_health)
@@ -328,8 +330,10 @@ function on_message(self, message_id, message, sender)
 			ai.react(self.ai)
 		end
 	elseif message_id == hash("set_player") then
-		set_player(self)
-		self.aiming = false
+		if not self.player then
+			set_player(self)
+			self.aiming = false
+		end
 	end
 end
 

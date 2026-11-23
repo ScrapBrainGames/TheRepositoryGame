@@ -104,6 +104,8 @@ function late_update(self, dt)
 		end
 	end
 	target.z = 50
+	-- Smooth camera a bit
+	target = vmath.lerp(0.25, go.get_position(), target)
 
 	-- Constrain within level
 	if target.x < self.bounds.left then

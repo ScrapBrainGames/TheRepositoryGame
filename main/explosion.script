@@ -1,0 +1,12 @@
+function init(self)
+	particlefx.play("#particles")
+	timer.delay(0.125, false, function()
+		go.delete()
+	end)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("trigger_response") then
+		msg.post(message.other_id, "damage", { damage = 100 })
+	end
+end

@@ -363,7 +363,7 @@ emitters {
   properties {
     key: EMITTER_KEY_PARTICLE_SIZE
     points {
-      y: 1.0
+      y: 2.0
     }
   }
   properties {

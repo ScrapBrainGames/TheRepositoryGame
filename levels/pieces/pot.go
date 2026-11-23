@@ -28,6 +28,7 @@ embedded_components {
   "mask: \"bullets\"\n"
   "mask: \"pellets\"\n"
   "mask: \"player\"\n"
+  "mask: \"trigger\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_SPHERE\n"

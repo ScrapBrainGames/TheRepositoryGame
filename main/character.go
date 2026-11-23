@@ -79,7 +79,8 @@ embedded_components {
   "}\n"
   ""
   position {
-    y: 48.0
+    y: 64.0
+    z: 20.0
   }
   scale {
     y: 0.25
@@ -101,5 +102,11 @@ embedded_components {
   id: "popper"
   type: "factory"
   data: "prototype: \"/main/pop.go\"\n"
+  ""
+}
+embedded_components {
+  id: "dynamite"
+  type: "factory"
+  data: "prototype: \"/main/dynamite.go\"\n"
   ""
 }

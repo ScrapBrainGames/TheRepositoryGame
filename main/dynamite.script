@@ -1,0 +1,53 @@
+local fuse = 5
+
+local g = 200
+
+local function fly(self, target, start)
+	local v = target
+	v.z = start.z
+	local d = vmath.length(v)
+	local t = 0
+	local T = math.sqrt(d / g)
+	local Tinv = 1 / T
+	target.z = 0
+	return function(dt)
+		t = t + dt
+		if t > T then t = T end
+		local f = t * Tinv
+		local h = 2 * d * f * (1 - f)
+		local position = start + f * v
+		position.y = position.y + h
+		if t >= T then
+			self.fly = nil
+			position.z = 0
+		else
+			position.z = 10
+		end
+		go.set_position(position)
+	end
+end
+
+function update(self, dt)
+	if self.fuse then
+		self.fuse = self.fuse - dt
+		if self.fuse <= 0 then
+			self.fuse = nil
+			factory.create("#factory")
+			go.delete()
+		end
+	end
+	if self.fly then
+		self.fly(dt)
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("light") and not self.fuse then
+		self.fuse = fuse
+		particlefx.play("#fuse")
+	elseif message_id == hash("launch") then
+		self.fly = fly(self, message.direction, message.position)
+	elseif message_id == hash("damage") then
+		self.fuse = 0
+	end
+end

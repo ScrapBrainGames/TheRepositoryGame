@@ -23,8 +23,8 @@ local map = {
     },
     town = {
         [1] = "pots",
-        [2] = "graveyard",
-        [3] = "barrels",
+        [2] = "barrels",
+        [3] = "graveyard",
     },
     barrels = {
         [1] = "town",

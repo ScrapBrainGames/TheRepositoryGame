@@ -13,6 +13,7 @@ M.default = {
     intro = [[Your hero, Default.]],
     pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
     barrels = [[There's nothing here yet...]],
+    tomb = [[...]],
     -- Kills
     mook = [[Who was that guy?]],
     empty = [[Default killed Empty]],
@@ -27,6 +28,7 @@ M.sixgun = {
     intro = [[Your hero, Sixgun.]],
     pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
     barrels = [[There's nothing here yet...]],
+    tomb = [[...]],
     -- Kills
     mook = [[Who was that guy?]],
     empty = [[Sixgun killed Empty]],
@@ -41,6 +43,7 @@ M.shotgun = {
     intro = [[Your hero, Shotgun.]],
     pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
     barrels = [[There's nothing here yet...]],
+    tomb = [[...]],
     -- Kills
     mook = [[Who was that guy?]],
     empty = [[Shotgun killed Empty]],
@@ -55,6 +58,7 @@ M.singlegun = {
     intro = [[Your hero, Singlegun.]],
     pots = [[Sure are some nice lookin' pots. Be a shame if something were to happen to 'em.]],
     barrels = [[There's nothing here yet...]],
+    tomb = [[...]],
     -- Kills
     mook = [[Who was that guy?]],
     empty = [[Singlegun killed Empty]],
@@ -67,6 +71,7 @@ M.singlegun = {
 M.dynamite = {
     -- Interludes
     intro = [[Howdy y'all!]],
+    tomb = [[...]],
     -- Kills
     empty = [[lolol git gud]]
 }

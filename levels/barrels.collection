@@ -10,7 +10,7 @@ instances {
   id: "exit1"
   prototype: "/levels/pieces/gate.go"
   position {
-    x: 799.0
+    x: -64.0
     y: 272.0
   }
   component_properties {
@@ -26,16 +26,16 @@ instances {
   id: "enter1"
   prototype: "/levels/pieces/enter.go"
   position {
-    x: 718.0
-    y: 274.0
+    x: 15.0
+    y: 272.0
   }
 }
 instances {
   id: "monologue"
   prototype: "/levels/pieces/monologue.go"
   position {
-    x: 440.0
-    y: 286.0
+    x: 372.0
+    y: 280.0
   }
   component_properties {
     id: "monologue"
@@ -46,9 +46,50 @@ instances {
     }
   }
 }
+instances {
+  id: "barrel"
+  prototype: "/levels/pieces/barrel.go"
+  position {
+    x: 165.0
+    y: 99.0
+  }
+}
+instances {
+  id: "barrel1"
+  prototype: "/levels/pieces/barrel.go"
+  position {
+    x: 579.0
+    y: 437.0
+  }
+}
+instances {
+  id: "barrel2"
+  prototype: "/levels/pieces/barrel.go"
+  position {
+    x: 564.0
+    y: 134.0
+  }
+}
+instances {
+  id: "pot"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 39.0
+    y: 492.0
+  }
+}
+instances {
+  id: "pot1"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 685.0
+    y: 231.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
+  children: "objects"
   data: "components {\n"
   "  id: \"tilemap\"\n"
   "  component: \"/levels/barrels.tilemap\"\n"
@@ -79,5 +120,14 @@ embedded_instances {
   children: "enter1"
   children: "exit1"
   children: "monologue"
+  data: ""
+}
+embedded_instances {
+  id: "objects"
+  children: "barrel"
+  children: "barrel1"
+  children: "barrel2"
+  children: "pot"
+  children: "pot1"
   data: ""
 }

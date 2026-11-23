@@ -6,6 +6,10 @@ local function fly(self, target, start)
 	local v = target
 	v.z = start.z
 	local d = vmath.length(v)
+	if d > 400 then
+		d = 400
+		v = d * vmath.normalize(v)
+	end
 	local t = 0
 	local T = math.sqrt(d / g)
 	local Tinv = 1 / T

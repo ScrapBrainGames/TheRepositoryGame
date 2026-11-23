@@ -1,0 +1,126 @@
+name: "empty"
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+}
+instances {
+  id: "exit"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: -64.0
+    y: 274.0
+  }
+}
+instances {
+  id: "player_start"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 366.0
+    y: 199.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "enter"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 17.0
+    y: 273.0
+  }
+}
+instances {
+  id: "monologue"
+  prototype: "/levels/pieces/monologue.go"
+  position {
+    x: 517.0
+    y: 335.0
+  }
+  component_properties {
+    id: "monologue"
+    properties {
+      id: "context"
+      value: "tomb"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+instances {
+  id: "enter2"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 369.0
+    y: 15.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "exit2"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 365.0
+    y: -64.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  data: "components {\n"
+  "  id: \"tilemap\"\n"
+  "  component: \"/levels/tomb.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/tomb.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "points"
+  children: "enter"
+  children: "enter2"
+  children: "exit"
+  children: "exit2"
+  children: "monologue"
+  children: "player_start"
+  data: ""
+}

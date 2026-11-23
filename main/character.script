@@ -266,17 +266,26 @@ function update(self, dt)
 end
 
 local function die(self)
+	-- Disable update
 	self.dead = true
+	-- Notify state and characters
 	state.kill(self.id, self.player or not self.lesser)
 	characters.died(self.character)
-	self.dead = true
-	sprite.play_flipbook("#body", "dead")
-	sprite.play_flipbook("#hat", "dead")
+	-- No more arm/weapon
 	go.delete(self.arm, true)
+	-- Disable collisions, health bar
 	msg.post("#collisionobject", "disable")
 	msg.post("#health", "disable")
+	-- Move behind player/other characters
 	self.position.z = -1
 	go.set_position(self.position)
+	-- Play hit, then dead
+	sprite.play_flipbook("#body", "hit")
+	sprite.play_flipbook("#hat", "hit")
+	timer.delay(0.125, false, function()
+		sprite.play_flipbook("#body", "dead")
+		sprite.play_flipbook("#hat", "dead")
+	end)
 end
 
 function on_message(self, message_id, message, sender)

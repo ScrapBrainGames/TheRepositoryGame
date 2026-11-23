@@ -124,6 +124,7 @@ local function animation(self)
 	local flip = false
 	local pointing = vmath.vector3(1, 0, 0)
 	local epsilon = 144
+	local hat = true
 	return function(velocity)
 		-- Handle hit animation separately
 		if self.hit then
@@ -131,6 +132,12 @@ local function animation(self)
 				sprite.play_flipbook("#body", "hit")
 				sprite.play_flipbook("#hat", "hit")
 				last = "hit"
+			end
+			if hat then
+				hat = false
+				timer.delay(0.125, false, function()
+					msg.post("#hat", "disable")
+				end)
 			end
 			return
 		end

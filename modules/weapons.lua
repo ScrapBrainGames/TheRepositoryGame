@@ -250,7 +250,8 @@ dynamite.__index = dynamite
 function dynamite:new()
     local instance = gun.new(self)
     instance.name = "empty" -- don't draw anything in hand
-    instance.chambers = nil
+    instance.chambers = {}
+    instance:reload()       -- start by pulling one out
     return instance
 end
 
@@ -269,7 +270,6 @@ function dynamite:update(dt)
     if self.reloading then
         self.reloading = self.reloading - dt
         if self.reloading <= 0 then
-            print("dynamite!")
             self.reloading = nil
             self.stick = factory.create("#dynamite", vmath.vector3(0, 7, 3))
             go.set_parent(self.stick, self.fx.path)
@@ -293,6 +293,14 @@ function dynamite:fire(position, direction)
         self.cocked = false
         self.stick = nil
     end
+end
+
+function dynamite:set(id, url)
+    self.id = id
+    self.fx = url
+    self.stick = nil
+    self.cocked = false
+    self.reloading = 0.5
 end
 
 -- The weapons module

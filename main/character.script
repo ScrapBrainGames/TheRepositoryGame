@@ -315,7 +315,7 @@ function on_message(self, message_id, message, sender)
 		else
 			self.state.health = self.state.health - message.damage
 		end
-		if self.state.health <= 0 then
+		if self.state.health <= 0 and not self.dead then
 			die(self)
 			if self.player or state.heir == self.id then
 				state.pass(message.sender)

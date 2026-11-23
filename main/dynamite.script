@@ -4,11 +4,12 @@ local g = 200
 
 local function fly(self, target, start)
 	local v = target
-	v.z = 0
+	v.z = start.z
 	local d = vmath.length(v)
 	local t = 0
 	local T = math.sqrt(d / g)
 	local Tinv = 1 / T
+	target.z = 0
 	return function(dt)
 		t = t + dt
 		if t > T then t = T end
@@ -16,6 +17,7 @@ local function fly(self, target, start)
 		local h = 2 * d * f * (1 - f)
 		local position = start + f * v
 		position.y = position.y + h
+		position.z = h
 		go.set_position(position)
 		if t >= T then
 			self.fly = nil

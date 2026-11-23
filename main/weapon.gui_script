@@ -2,7 +2,7 @@ local function set(self, type)
 	for _, node in pairs(self.containers) do
 		gui.set_enabled(node, false)
 	end
-	if type == "empty" then return end
+	if type == "empty" or type == "dynamite" then return end
 	gui.set_enabled(self.containers[type], true)
 
 	self.nodes = {}

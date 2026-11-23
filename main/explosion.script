@@ -7,6 +7,6 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("trigger_response") then
-		print("explosion overlaps")
+		msg.post(message.other_id, "damage", { damage = 100 })
 	end
 end

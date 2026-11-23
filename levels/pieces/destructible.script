@@ -15,5 +15,7 @@ function on_message(self, message_id, message, sender)
 		local position = go.get_position()
 		position.z = 0
 		go.set_position(position)
+		-- Crack!
+		factory.create("#popper", nil, nil, { text = "CRACK" })
 	end
 end

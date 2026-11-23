@@ -26,6 +26,7 @@ embedded_components {
   "restitution: 0.0\n"
   "group: \"level\"\n"
   "mask: \"bullets\"\n"
+  "mask: \"pellets\"\n"
   "mask: \"player\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
@@ -41,5 +42,11 @@ embedded_components {
   "  data: 26.0\n"
   "}\n"
   "locked_rotation: true\n"
+  ""
+}
+embedded_components {
+  id: "popper"
+  type: "factory"
+  data: "prototype: \"/main/pop.go\"\n"
   ""
 }

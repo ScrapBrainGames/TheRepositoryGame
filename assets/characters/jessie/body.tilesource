@@ -22,9 +22,9 @@ animations {
 }
 animations {
   id: "idle"
-  playback: PLAYBACK_NONE
+  playback: PLAYBACK_LOOP_FORWARD
   fps: 8
-  frames: 4
+  frames: 1
 }
 animations {
   id: "walk"

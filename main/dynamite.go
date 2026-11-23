@@ -2,6 +2,18 @@ components {
   id: "dynamite"
   component: "/main/dynamite.script"
 }
+components {
+  id: "fuse"
+  component: "/particles/fuse.particlefx"
+  position {
+    x: 7.0
+    y: 8.0
+  }
+  rotation {
+    z: -0.37460658
+    w: 0.92718387
+  }
+}
 embedded_components {
   id: "sprite"
   type: "sprite"

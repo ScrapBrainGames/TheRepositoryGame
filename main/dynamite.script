@@ -17,11 +17,13 @@ local function fly(self, target, start)
 		local h = 2 * d * f * (1 - f)
 		local position = start + f * v
 		position.y = position.y + h
-		position.z = h
-		go.set_position(position)
 		if t >= T then
 			self.fly = nil
+			position.z = 0
+		else
+			position.z = 10
 		end
+		go.set_position(position)
 	end
 end
 
@@ -42,6 +44,7 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("light") and not self.fuse then
 		self.fuse = fuse
+		particlefx.play("#fuse")
 	elseif message_id == hash("launch") then
 		self.fly = fly(self, message.direction, message.position)
 	end

@@ -16,6 +16,7 @@ embedded_components {
   "group: \"trigger\"\n"
   "mask: \"player\"\n"
   "mask: \"level\"\n"
+  "mask: \"trigger\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_SPHERE\n"

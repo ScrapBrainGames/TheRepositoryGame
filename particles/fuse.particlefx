@@ -28,14 +28,14 @@ emitters {
   properties {
     key: EMITTER_KEY_PARTICLE_LIFE_TIME
     points {
-      y: 0.125
+      y: 0.25
     }
     spread: 0.125
   }
   properties {
     key: EMITTER_KEY_PARTICLE_SPEED
     points {
-      y: 100.0
+      y: 60.0
     }
     spread: 20.0
   }

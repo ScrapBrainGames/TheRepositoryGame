@@ -47,5 +47,7 @@ function on_message(self, message_id, message, sender)
 		particlefx.play("#fuse")
 	elseif message_id == hash("launch") then
 		self.fly = fly(self, message.direction, message.position)
+	elseif message_id == hash("damage") then
+		self.fuse = 0
 	end
 end

@@ -285,7 +285,7 @@ function dynamite:cycle()
 end
 
 function dynamite:fire(position, direction)
-    if self.cocked then
+    if self.stick then
         direction.z = 0
         go.set_parent(self.stick, nil, true)
         msg.post(self.stick, "launch", { position = position, direction = direction })

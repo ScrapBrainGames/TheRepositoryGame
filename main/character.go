@@ -33,6 +33,7 @@ embedded_components {
   "mask: \"level\"\n"
   "mask: \"player\"\n"
   "mask: \"bullets\"\n"
+  "mask: \"pellets\"\n"
   "mask: \"trigger\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
@@ -93,5 +94,11 @@ embedded_components {
   id: "arm"
   type: "factory"
   data: "prototype: \"/main/arm.go\"\n"
+  ""
+}
+embedded_components {
+  id: "popper"
+  type: "factory"
+  data: "prototype: \"/main/pop.go\"\n"
   ""
 }

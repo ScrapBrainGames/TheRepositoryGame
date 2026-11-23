@@ -42,14 +42,16 @@ function gun:cycle()
 end
 
 function gun:fire(position, direction)
-    if self.chambers[1] and self.cocked then
+    if not self.cocked then return end
+    self.cocked = false
+    direction.z = 0
+    direction = vmath.normalize(direction) +
+        self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
+    direction = vmath.normalize(direction)
+    position = position + direction * self.offset
+    if self.chambers[1] then
         self.chambers[1] = false
-        self.cocked = false
-        direction.z = 0
-        direction = vmath.normalize(direction) +
-            self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
-        direction = vmath.normalize(direction)
-        position = position + direction * self.offset
+
         local props = {
             direction = direction,
             speed = self.speed,
@@ -63,10 +65,17 @@ function gun:fire(position, direction)
         )
         factory.create(self.factory, position, rotation, props)
         particlefx.play(self.fx)
+        -- Bang!
+        position = position + direction * 18
+        position.z = 10
+        factory.create("#popper", position, nil, { text = "BANG" })
         -- Kick off music, if not already going
         msg.post("main:/jukebox#jukebox", "combat")
     else
-        self.cocked = false
+        -- Click!
+        position = position + direction * 18
+        position.z = 10
+        factory.create("#popper", position, nil, { text = "CLICK" })
     end
 end
 
@@ -180,32 +189,41 @@ function shotgun:new()
 end
 
 function shotgun:fire(position, direction)
-    if self.cocked then
-        if self.chambers[1] then
-            self.chambers[1] = false
-        elseif self.chambers[2] then
-            self.chambers[2] = false
-        else
-            self.cocked = false
-            return
-        end
-        self.cocked = false
-        direction.z = 0
-        direction = vmath.normalize(direction)
-        position = position + direction * self.offset
-        local props = {
-            direction = direction,
-            speed = self.speed,
-            damage = self.damage,
-            sender = self.id
-        }
-        for i = 1, 8 do
-            props.direction = direction +
-                self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
-            factory.create(self.factory, position, nil, props)
-        end
-        particlefx.play(self.fx)
+    if not self.cocked then return end
+    self.cocked = false
+    direction.z = 0
+    direction = vmath.normalize(direction)
+    position = position + direction * self.offset
+    if self.chambers[1] then
+        self.chambers[1] = false
+    elseif self.chambers[2] then
+        self.chambers[2] = false
+    else
+        -- Click!
+        position = position + direction * 18
+        position.z = 10
+        factory.create("#popper", position, nil, { text = "CLICK" })
+        return
     end
+
+    local props = {
+        direction = direction,
+        speed = self.speed,
+        damage = self.damage,
+        sender = self.id
+    }
+    for i = 1, 8 do
+        props.direction = direction +
+            self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
+        factory.create(self.factory, position, nil, props)
+    end
+    particlefx.play(self.fx)
+    -- Bang!
+    position = position + direction * 18
+    position.z = 10
+    factory.create("#popper", position, nil, { text = "BOOM" })
+    -- Kick off music, if not already going
+    msg.post("main:/jukebox#jukebox", "combat")
 end
 
 -- Empty (no weapons)

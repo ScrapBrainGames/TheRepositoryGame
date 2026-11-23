@@ -95,3 +95,9 @@ embedded_components {
   data: "prototype: \"/main/arm.go\"\n"
   ""
 }
+embedded_components {
+  id: "popper"
+  type: "factory"
+  data: "prototype: \"/main/pop.go\"\n"
+  ""
+}

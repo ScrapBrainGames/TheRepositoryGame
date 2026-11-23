@@ -42,14 +42,16 @@ function gun:cycle()
 end
 
 function gun:fire(position, direction)
-    if self.chambers[1] and self.cocked then
+    if not self.cocked then return end
+    direction.z = 0
+    direction = vmath.normalize(direction) +
+        self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
+    direction = vmath.normalize(direction)
+    position = position + direction * self.offset
+    if self.chambers[1] then
         self.chambers[1] = false
         self.cocked = false
-        direction.z = 0
-        direction = vmath.normalize(direction) +
-            self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
-        direction = vmath.normalize(direction)
-        position = position + direction * self.offset
+
         local props = {
             direction = direction,
             speed = self.speed,
@@ -66,6 +68,10 @@ function gun:fire(position, direction)
         -- Kick off music, if not already going
         msg.post("main:/jukebox#jukebox", "combat")
     else
+        -- Click!
+        position = position + direction * 18
+        position.z = 10
+        factory.create("#popper", position, nil, { text = "CLICK" })
         self.cocked = false
     end
 end

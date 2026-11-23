@@ -87,7 +87,7 @@ local characters = {
         aim_movement = 150,
         normal_movement = 250,
         reload_movement = 150,
-        weapon = weapons.sixgun(),
+        weapon = weapons.dynamite(),
         aim_delay = 0.25,
         accuracy = 0.85
     },

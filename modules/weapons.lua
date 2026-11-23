@@ -23,7 +23,6 @@ function gun:new()
         offset = 48,
         chambers = { true },
         cocked = false,
-        factory = "#factory",
         noise = 0.0,
         reloading = false,
         cycletime = 0.25,
@@ -63,7 +62,7 @@ function gun:fire(position, direction)
             (direction.y > 0 and 1 or -1) * (direction.x < 1 and math.sqrt(0.5 * (1 - direction.x)) or 0),
             (direction.x > -1 and math.sqrt(direction.x * 0.5 + 0.5) or 0)
         )
-        factory.create(self.factory, position, rotation, props)
+        factory.create("#factory", position, rotation, props)
         particlefx.play(self.fx)
         -- Bang!
         position = position + direction * 18
@@ -184,7 +183,6 @@ function shotgun:new()
     instance.chambers = { true, true }
     instance.noise = 0.2
     instance.damage = 2
-    instance.factory = "#shotgun"
     return instance
 end
 
@@ -215,7 +213,7 @@ function shotgun:fire(position, direction)
     for i = 1, 8 do
         props.direction = direction +
             self.noise * vmath.vector3(2 * math.random() - 1.0, 2 * math.random() - 1.0, 0)
-        factory.create(self.factory, position, nil, props)
+        factory.create("#shotgun", position, nil, props)
     end
     particlefx.play(self.fx)
     -- Bang!
@@ -244,8 +242,49 @@ function empty:fire() end
 
 function empty:reload() end
 
+-- Dynamite (telekinetic prophetic)
+--@class Dynamite : Gun
+local dynamite = setmetatable({}, { __index = gun })
+dynamite.__index = dynamite
+
+function dynamite:new()
+    local instance = gun.new(self)
+    instance.name = "empty" -- don't draw anything in hand
+    instance.chambers = nil
+    return instance
+end
+
+function dynamite:reload()
+    if self.reloading then return end
+    if self.stick then return end
+    self.reloading = 1
+    self.cocked = false
+end
+
+function dynamite:ready()
+    return self.stick and self.cocked and not self.reloading
+end
+
+function dynamite:update(dt)
+    if self.reloading then
+        self.reloading = self.reloading - dt
+        if self.reloading <= 0 then
+            print("dynamite!")
+            self.reloading = nil
+            self.stick = factory.create("#dynamite", vmath.vector3(0, 7, 3))
+            go.set_parent(self.stick, self.fx.path)
+        end
+    end
+end
+
+function dynamite:fire(position, direction)
+
+end
+
 -- The weapons module
 local M = {}
+
+function M.dynamite() return dynamite:new() end
 
 function M.sixgun() return sixgun:new() end
 

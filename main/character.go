@@ -103,3 +103,9 @@ embedded_components {
   data: "prototype: \"/main/pop.go\"\n"
   ""
 }
+embedded_components {
+  id: "dynamite"
+  type: "factory"
+  data: "prototype: \"/main/dynamite.go\"\n"
+  ""
+}

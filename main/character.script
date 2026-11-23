@@ -225,8 +225,11 @@ function update(self, dt)
 	local speed = self.normal_movement
 	if self.aiming then
 		speed = self.aim_movement
-	elseif self.weapon.reloading then
-		speed = self.reload_movement
+		print("aiming")
+	end
+	if self.weapon.reloading then
+		speed = math.min(speed, self.reload_movement)
+		print("reloading")
 	end
 	-- Get current position and velocity
 	self.position = go.get_position()

@@ -72,7 +72,7 @@ function on_input(self, action_id, action)
 		elseif self.ready then
 			stop(self)
 		end
+		-- Capture all input while open
+		return true
 	end
-	-- Capture all input while open
-	return true
 end

@@ -29,8 +29,8 @@ end
 local mook = function(loadout)
     local char = character(
         {
-            health = 1,
-            handicap = 1,
+            health = 2,
+            handicap = 2,
             aggro = 0.9,
         }
     )

@@ -9,6 +9,11 @@ animations {
   frames: 12
 }
 animations {
+  id: "dynamite"
+  playback: PLAYBACK_NONE
+  frames: 3
+}
+animations {
   id: "empty"
   playback: PLAYBACK_NONE
   fps: 0

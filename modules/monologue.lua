@@ -64,6 +64,13 @@ M.singlegun = {
     singlegun = [[Singlegun killed Singlegun]],
 }
 
+M.dynamite = {
+    -- Interludes
+    intro = [[Howdy y'all!]],
+    -- Kills
+    empty = [[lolol git gud]]
+}
+
 M.mook = {
     -- Interludes
     intro = [[Mook.]],

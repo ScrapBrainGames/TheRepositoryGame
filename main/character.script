@@ -105,6 +105,10 @@ local function set_sprite(self)
 		go.set("#body", "image", self.snuffy_body)
 		go.set("#hat", "image", self.snuffy_hat)
 		go.set(self.hand_url, "image", self.snuffy_hand)
+	elseif self.character == "dynamite" then
+		go.set("#body", "image", self.jessie_body)
+		go.set("#hat", "image", self.jessie_hat)
+		go.set(self.hand_url, "image", self.jessie_hand)
 	elseif self.character == "mook" then
 		go.set(self.hand_url, "image", self.white_hand)
 		if not self.loadout.body then

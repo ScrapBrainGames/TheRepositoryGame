@@ -83,6 +83,14 @@ local characters = {
         aim_delay = 0.25,
         accuracy = 0.85
     },
+    dynamite = {
+        aim_movement = 150,
+        normal_movement = 250,
+        reload_movement = 150,
+        weapon = weapons.sixgun(),
+        aim_delay = 0.25,
+        accuracy = 0.85
+    },
 }
 
 local obituaries = {}

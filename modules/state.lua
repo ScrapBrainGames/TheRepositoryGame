@@ -32,6 +32,7 @@ function M.reset()
     M.player = {
         position = vmath.vector3()
     }
+    M.heir = nil
 end
 
 function M.count()
@@ -54,7 +55,21 @@ end
 function M.ending(id)
     local survivor = M.names[id]
     local victim = M.killed[#M.killed]
+    msg.post(id, "set_player")
     msg.post("main:/monologue#monologue", "start", { speaker = survivor, context = victim })
+end
+
+M.heir = nil
+
+function M.pass(id)
+    if id and M.characters[id] ~= nil then
+        M.heir = id
+    else
+        M.heir = next(M.characters)
+    end
+    if M.heir then
+        msg.post(M.heir, "set_player")
+    end
 end
 
 return M

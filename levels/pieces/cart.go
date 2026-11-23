@@ -27,6 +27,7 @@ embedded_components {
   "group: \"level\"\n"
   "mask: \"player\"\n"
   "mask: \"bullets\"\n"
+  "mask: \"pellets\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"

@@ -3,8 +3,6 @@ local state = require "modules.state"
 
 -- Delay between characters
 local delay = 0.025
--- Delay before showing the monologue
-local startup = 0.25
 
 local function start(self, speaker, context)
 	local message = monologue.get(speaker, context)
@@ -45,8 +43,6 @@ function init(self)
 	self.portrait = gui.get_node("portrait")
 	self.text = gui.get_node("text")
 	gui.set_enabled(self.node, false)
-
-	--timer.delay(1, false, function(self) start(self, "empty", "intro") end)
 end
 
 function update(self, dt)
@@ -61,7 +57,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start") then
-		timer.delay(startup, false, function(self) start(self, message.speaker, message.context) end)
+		start(self, message.speaker, message.context)
 	end
 end
 
@@ -72,7 +68,7 @@ function on_input(self, action_id, action)
 		elseif self.ready then
 			stop(self)
 		end
-		-- Capture all input while open
+		-- Capture all (pressed) input while open
 		return true
 	end
 end

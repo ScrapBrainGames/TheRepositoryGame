@@ -11,19 +11,22 @@ function final(self)
 end
 
 function update(self, dt)
-	local count, id = state.count()
+	local count = state.count()
 	if count >= 2 then
 		self.combat = true
 		state.combat = true
 	elseif self.combat then
 		self.combat = false
-		state.combat = false
-		if count == 1 then
-			-- One survivor
-			state.ending(id)
-		elseif count == 0 then
-			-- No survivors
-			print("No survivors")
-		end
+		timer.delay(1, false, function()
+			state.combat = false
+			local count, id = state.count()
+			if count == 1 then
+				-- One survivor
+				state.ending(id)
+			elseif count == 0 then
+				-- No survivors
+				msg.post(state.entrance, "respawn")
+			end
+		end)
 	end
 end

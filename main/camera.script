@@ -1,4 +1,5 @@
 local state = require "main.state"
+local camera = require "main.camera"
 
 local function start(self)
 	-- Move to entry gate

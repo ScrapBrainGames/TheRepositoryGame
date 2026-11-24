@@ -1,0 +1,133 @@
+name: "empty"
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+}
+instances {
+  id: "exit1"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: -64.0
+    y: 272.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "index"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "enter1"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 15.0
+    y: 272.0
+  }
+}
+instances {
+  id: "monologue"
+  prototype: "/levels/pieces/monologue.go"
+  position {
+    x: 372.0
+    y: 280.0
+  }
+  component_properties {
+    id: "monologue"
+    properties {
+      id: "context"
+      value: "barrels"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+instances {
+  id: "barrel"
+  prototype: "/levels/pieces/barrel.go"
+  position {
+    x: 165.0
+    y: 99.0
+  }
+}
+instances {
+  id: "barrel1"
+  prototype: "/levels/pieces/barrel.go"
+  position {
+    x: 579.0
+    y: 437.0
+  }
+}
+instances {
+  id: "barrel2"
+  prototype: "/levels/pieces/barrel.go"
+  position {
+    x: 564.0
+    y: 134.0
+  }
+}
+instances {
+  id: "pot"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 39.0
+    y: 492.0
+  }
+}
+instances {
+  id: "pot1"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 685.0
+    y: 231.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  children: "objects"
+  data: "components {\n"
+  "  id: \"tilemap\"\n"
+  "  component: \"/levels/tilemaps/barrels.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/tilemaps/barrels.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "points"
+  children: "enter1"
+  children: "exit1"
+  children: "monologue"
+  data: ""
+}
+embedded_instances {
+  id: "objects"
+  children: "barrel"
+  children: "barrel1"
+  children: "barrel2"
+  children: "pot"
+  children: "pot1"
+  data: ""
+}

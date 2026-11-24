@@ -1,5 +1,5 @@
-local state = require "modules.state"
-local map = require "modules.map"
+local state = require "main.state"
+local map = require "levels.map"
 
 local function load_level(self, level)
 	local url = msg.url()

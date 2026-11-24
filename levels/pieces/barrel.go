@@ -48,12 +48,12 @@ embedded_components {
 embedded_components {
   id: "popper"
   type: "factory"
-  data: "prototype: \"/main/pop.go\"\n"
+  data: "prototype: \"/effects/pop.go\"\n"
   ""
 }
 embedded_components {
   id: "explosion"
   type: "factory"
-  data: "prototype: \"/main/explosion.go\"\n"
+  data: "prototype: \"/weapons/explosion.go\"\n"
   ""
 }

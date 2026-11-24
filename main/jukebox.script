@@ -1,4 +1,4 @@
-local state = require "modules.state"
+local state = require "main.state"
 
 local saloon = {
 	playing = false,

@@ -5,6 +5,6 @@ components {
 embedded_components {
   id: "factory"
   type: "factory"
-  data: "prototype: \"/main/character.go\"\n"
+  data: "prototype: \"/characters/character.go\"\n"
   ""
 }

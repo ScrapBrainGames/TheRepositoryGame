@@ -4,7 +4,7 @@ components {
 }
 components {
   id: "weapon"
-  component: "/main/weapon.gui"
+  component: "/characters/weapon.gui"
 }
 embedded_components {
   id: "camera"
@@ -19,6 +19,6 @@ embedded_components {
 embedded_components {
   id: "factory"
   type: "factory"
-  data: "prototype: \"/main/pointer.go\"\n"
+  data: "prototype: \"/effects/pointer.go\"\n"
   ""
 }

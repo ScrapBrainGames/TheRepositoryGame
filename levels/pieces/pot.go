@@ -48,6 +48,6 @@ embedded_components {
 embedded_components {
   id: "popper"
   type: "factory"
-  data: "prototype: \"/main/pop.go\"\n"
+  data: "prototype: \"/effects/pop.go\"\n"
   ""
 }

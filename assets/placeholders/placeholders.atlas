@@ -1,0 +1,13 @@
+images {
+  image: "/assets/placeholders/square_round_32.png"
+}
+images {
+  image: "/assets/placeholders/circle_24.png"
+}
+images {
+  image: "/assets/placeholders/square_sharp_32.png"
+}
+images {
+  image: "/assets/placeholders/circle_32.png"
+}
+extrude_borders: 2

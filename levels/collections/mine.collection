@@ -1,0 +1,131 @@
+name: "mine"
+instances {
+  id: "barrier"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 1007.0
+    y: 325.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+}
+instances {
+  id: "station_exit"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: -63.0
+    y: 172.0
+  }
+}
+instances {
+  id: "station_entrance"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 16.0
+    y: 176.0
+  }
+}
+instances {
+  id: "cart"
+  prototype: "/levels/pieces/cart.go"
+  position {
+    x: 123.0
+    y: 208.0
+  }
+  component_properties {
+    id: "cart"
+    properties {
+      id: "anchor"
+      value: "/level#collisionobject"
+      type: PROPERTY_TYPE_URL
+    }
+    properties {
+      id: "left_limit"
+      value: "36.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "right_limit"
+      value: "1003.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "barrier2"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 786.0
+    y: 441.0
+  }
+}
+instances {
+  id: "barrier1"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 974.0
+    y: 95.0
+  }
+}
+instances {
+  id: "enemy1"
+  prototype: "/levels/pieces/enemy.go"
+  component_properties {
+    id: "script"
+    properties {
+      id: "enemy"
+      value: "singlegun"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  children: "barrier"
+  children: "barrier1"
+  children: "barrier2"
+  children: "cart"
+  data: "components {\n"
+  "  id: \"mine\"\n"
+  "  component: \"/levels/tilemaps/mine.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "  properties {\n"
+  "    id: \"tilemap\"\n"
+  "    value: \"/level#mine\"\n"
+  "    type: PROPERTY_TYPE_URL\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/tilemaps/mine.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "locked_rotation: true\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "points"
+  children: "enemy1"
+  children: "station_entrance"
+  children: "station_exit"
+  data: ""
+}

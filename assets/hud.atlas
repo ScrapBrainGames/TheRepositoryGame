@@ -1,14 +1,14 @@
 animations {
   id: "loaded"
   images {
-    image: "/assets/images/circle_32.png"
+    image: "/assets/placeholders/circle_32.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
 animations {
   id: "empty"
   images {
-    image: "/assets/images/donut_32.png"
+    image: "/assets/placeholders/donut_32.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }

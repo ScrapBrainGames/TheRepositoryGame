@@ -15,7 +15,7 @@ M.default = {
     barrels = [[There's nothing here yet...]],
     tomb = [[...]],
     -- Kills
-    mook = [[Who was that guy?]],
+    mook = [[unreachable]],
     empty = [[Default killed Empty]],
     default = [[Default killed Default]],
     sixgun = [[Default killed Sixgun]],
@@ -30,7 +30,7 @@ M.sixgun = {
     barrels = [[There's nothing here yet...]],
     tomb = [[...]],
     -- Kills
-    mook = [[Who was that guy?]],
+    mook = [[unreachable]],
     empty = [[Sixgun killed Empty]],
     default = [[Sixgun killed Default]],
     sixgun = [[Sixgun killed Sixgun]],
@@ -60,7 +60,7 @@ M.singlegun = {
     barrels = [[There's nothing here yet...]],
     tomb = [[...]],
     -- Kills
-    mook = [[Who was that guy?]],
+    mook = [[unreachable]],
     empty = [[Singlegun killed Empty]],
     default = [[Singlegun killed Default]],
     sixgun = [[Singlegun killed Sixgun]],
@@ -82,7 +82,7 @@ M.mook = {
     pots = [[Mook mook.]],
     barrels = [[Mook mook mook.]],
     -- Kills
-    mook = [[Mook killed Mook]],
+    mook = [[unreachable]],
     empty = [[Mook killed Empty]],
     default = [[Mook killed Default]],
     sixgun = [[Mook killed Sixgun]],

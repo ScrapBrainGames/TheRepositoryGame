@@ -2,6 +2,8 @@ local M = {}
 setmetatable(M, M)
 M.__index = camera
 
+local max = 25
+
 local camera = nil
 
 local shakes = {}
@@ -36,6 +38,9 @@ function M.shake(dt)
         else
             total = total + add
         end
+    end
+    if total > max then
+        total = max
     end
     return vmath.vector3((math.random() - 0.5) * 2 * total, (math.random() - 0.5) * 2 * total, 0)
 end

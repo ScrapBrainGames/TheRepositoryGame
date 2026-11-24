@@ -19,43 +19,30 @@ local queue = {
 	index = 1,
 }
 
-function queue:play(type)
-	if self.current and self.index then
-		sound.stop(music[self.current][self.index])
-	end
-	self.current = type
-	self.index = 1
-	sound.play(music[self.current][self.index], nil, self:next())
+function queue:combat()
+
 end
 
-function queue:next()
-	return function(_, message_id)
-		if message_id == hash("sound_stopped") then
-			return
+function queue:sting()
+	local index = math.random(#music.sting)
+	sound.play(music.sting[index], nil, function()
+		if not self.current then
+			queue:ambient()
 		end
+	end)
+end
 
-		if self.current == "combat" then
-			if state.combat then
-				self.current = "combat"
-				self.index = self.index % #music.combat + 1
-			else
-				self.current = "finale"
-			end
-		elseif self.current == "ambient" then
-			self.current = math.random() < 0.5 and "ambient" or "sting"
-			self.index = math.random(#music[self.current])
-		else
-			self.current = "ambient"
-			self.index = math.random(#music.ambient)
-		end
-		print("next up:" .. self.current .. self.index)
-		sound.play(music[self.current][self.index], nil, self:next())
-	end
+function queue:ambient()
+	local index = math.random(#music.ambient)
+	self.current = music.ambient[index]
+	sound.play(self.current, nil, function()
+		queue:ambient()
+	end)
 end
 
 function init(self)
 	-- Silence for debugging
-	sound.set_group_gain("master", 0)
+	--sound.set_group_gain("master", 0)
 
 	music.sting = { "#sting1", "#sting2", "#sting3", "#sting4", "#sting5", }
 	music.ambient = { "#ambient1", "#ambient2" }
@@ -63,7 +50,7 @@ function init(self)
 	music.finale = { "#finale1", "#finale2", "#finale3", "#finale4", "#finale5", "#finale6", "#finale7", "#finale8",
 		"#finale9", "#finale10", "#finale11", "#finale12", "#finale13", "#finale14", "#finale15", "#finale16", }
 
-	queue:play("sting")
+	queue:ambient()
 end
 
 function final(self)
@@ -93,7 +80,7 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("combat") then
 		if state.combat and queue.current ~= "combat" then
-			queue:play("combat")
+			queue:combat()
 		end
 	elseif message_id == hash("start_saloon") then
 		saloon.playing = true

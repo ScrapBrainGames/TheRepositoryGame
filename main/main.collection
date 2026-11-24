@@ -66,6 +66,12 @@ embedded_instances {
   "  data: \"collection: \\\"/levels/barrels.collection\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"tomb\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/levels/tomb.collection\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }
 embedded_instances {

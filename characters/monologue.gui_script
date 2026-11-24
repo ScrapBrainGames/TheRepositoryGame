@@ -1,0 +1,74 @@
+local monologue = require "characters.monologue"
+local state = require "main.state"
+
+-- Delay between characters
+local delay = 0.025
+
+local function start(self, speaker, context)
+	local message = monologue.get(speaker, context)
+	if not message then return end
+	gui.play_flipbook(self.portrait, speaker or "empty")
+	msg.post(".", "acquire_input_focus")
+	msg.post(state.level_url, "set_time_step", { factor = 0, mode = 0 })
+	gui.set_enabled(self.node, true)
+	self.active = true
+	self.ready = false
+
+	local index = 0
+	self.time = 0
+	self.draw = function(finish)
+		if finish then
+			index = #message
+		else
+			index = index + 1
+		end
+		local printed = string.sub(message, 1, index)
+		gui.set_text(self.text, printed)
+		if index >= #message then
+			self.time = nil
+			timer.delay(0.25, false, function() self.ready = true end)
+		end
+	end
+end
+
+local function stop(self)
+	msg.post(".", "release_input_focus")
+	msg.post(state.level_url, "set_time_step", { factor = 1, mode = 0 })
+	gui.set_enabled(self.node, false)
+	self.active = false
+end
+
+function init(self)
+	self.node = gui.get_node("box")
+	self.portrait = gui.get_node("portrait")
+	self.text = gui.get_node("text")
+	gui.set_enabled(self.node, false)
+end
+
+function update(self, dt)
+	if self.time then
+		self.time = self.time - dt
+		if self.time <= 0 then
+			self.time = self.time + delay
+			self.draw()
+		end
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("start") then
+		start(self, message.speaker, message.context)
+	end
+end
+
+function on_input(self, action_id, action)
+	if self.active and action.pressed then
+		if self.time then
+			self.draw(true)
+		elseif self.ready then
+			stop(self)
+		end
+		-- Capture all (pressed) input while open
+		return true
+	end
+end

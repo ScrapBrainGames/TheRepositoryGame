@@ -1,0 +1,16 @@
+images {
+  image: "/assets/weapons/shotgun.png"
+}
+images {
+  image: "/assets/weapons/singlegun.png"
+}
+images {
+  image: "/assets/weapons/sixgun.png"
+}
+images {
+  image: "/assets/weapons/empty.png"
+}
+images {
+  image: "/assets/weapons/dynamite.png"
+}
+extrude_borders: 2

@@ -1,0 +1,128 @@
+name: "empty"
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+}
+instances {
+  id: "exit"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: -64.0
+    y: 274.0
+  }
+}
+instances {
+  id: "player_start"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 366.0
+    y: 199.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "enter"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 17.0
+    y: 273.0
+  }
+}
+instances {
+  id: "cart"
+  prototype: "/levels/pieces/cart.go"
+  position {
+    x: 200.0
+    y: 304.0
+  }
+  component_properties {
+    id: "cart"
+    properties {
+      id: "anchor"
+      value: "/level#collisionobject"
+      type: PROPERTY_TYPE_URL
+    }
+    properties {
+      id: "left_limit"
+      value: "112.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "right_limit"
+      value: "450.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "monologue"
+  prototype: "/levels/pieces/monologue.go"
+  position {
+    x: -7.0
+    y: 269.0
+  }
+  component_properties {
+    id: "monologue"
+    properties {
+      id: "context"
+      value: "intro"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+instances {
+  id: "barrel"
+  prototype: "/levels/pieces/barrel.go"
+  position {
+    x: 611.0
+    y: 196.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  children: "barrel"
+  children: "cart"
+  data: "components {\n"
+  "  id: \"tilemap\"\n"
+  "  component: \"/levels/tilemaps/empty.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/tilemaps/empty.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "points"
+  children: "enter"
+  children: "exit"
+  children: "monologue"
+  children: "player_start"
+  data: ""
+}

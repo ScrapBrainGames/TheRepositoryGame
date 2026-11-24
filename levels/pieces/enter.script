@@ -1,6 +1,6 @@
-local characters = require "modules.characters"
-local state = require "modules.state"
-local map = require "modules.map"
+local characters = require "characters.characters"
+local state = require "main.state"
+local map = require "levels.map"
 
 go.property("index", 1)
 

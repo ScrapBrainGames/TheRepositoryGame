@@ -1,4 +1,4 @@
-local ai = require "modules.ai"
+local ai = require "characters.ai"
 
 function init(self)
 	local id = go.get_id()

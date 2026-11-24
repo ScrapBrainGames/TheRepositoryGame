@@ -1,0 +1,289 @@
+name: "empty"
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+}
+instances {
+  id: "exit1"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 559.0
+    y: 832.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "index"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "enter1"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 560.0
+    y: 746.0
+  }
+}
+instances {
+  id: "enter2"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 1233.0
+    y: 367.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "exit2"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 1313.0
+    y: 371.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "enter3"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 977.0
+    y: 16.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "index"
+      value: "3.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "exit3"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 976.0
+    y: -64.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "index"
+      value: "3.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "building"
+  prototype: "/levels/pieces/building.go"
+  position {
+    x: 770.0
+    y: 576.0
+  }
+}
+instances {
+  id: "building1"
+  prototype: "/levels/pieces/building.go"
+  position {
+    x: 355.0
+    y: 581.0
+  }
+}
+instances {
+  id: "building2"
+  prototype: "/levels/pieces/building.go"
+  position {
+    x: 1048.0
+    y: 563.0
+  }
+}
+instances {
+  id: "building3"
+  prototype: "/levels/pieces/building.go"
+  position {
+    x: 1106.0
+    y: 183.0
+  }
+}
+instances {
+  id: "building4"
+  prototype: "/levels/pieces/building.go"
+  position {
+    x: 169.0
+    y: 365.0
+  }
+}
+instances {
+  id: "building5"
+  prototype: "/levels/pieces/building.go"
+  position {
+    x: 355.0
+    y: 157.0
+  }
+}
+instances {
+  id: "saloon"
+  prototype: "/levels/pieces/saloon.go"
+  position {
+    x: 738.0
+    y: 192.0
+  }
+}
+instances {
+  id: "enemy"
+  prototype: "/levels/pieces/enemy.go"
+  position {
+    x: 126.0
+    y: 120.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "enemy"
+      value: "shotgun"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+instances {
+  id: "enemy1"
+  prototype: "/levels/pieces/enemy.go"
+  position {
+    x: 895.0
+    y: 180.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "enemy"
+      value: "mook"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+instances {
+  id: "enemy2"
+  prototype: "/levels/pieces/enemy.go"
+  position {
+    x: 562.0
+    y: 369.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "enemy"
+      value: "mook"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+instances {
+  id: "node"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 52.0
+    y: 52.0
+  }
+}
+instances {
+  id: "node1"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 1188.0
+    y: 50.0
+  }
+}
+instances {
+  id: "node2"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 1183.0
+    y: 702.0
+  }
+}
+instances {
+  id: "node3"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 55.0
+    y: 711.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  children: "buildings"
+  data: "components {\n"
+  "  id: \"tilemap\"\n"
+  "  component: \"/levels/tilemaps/town.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/tilemaps/town.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "points"
+  children: "enemy"
+  children: "enemy1"
+  children: "enemy2"
+  children: "enter1"
+  children: "enter2"
+  children: "enter3"
+  children: "exit1"
+  children: "exit2"
+  children: "exit3"
+  children: "node"
+  children: "node1"
+  children: "node2"
+  children: "node3"
+  data: ""
+}
+embedded_instances {
+  id: "buildings"
+  children: "building"
+  children: "building1"
+  children: "building2"
+  children: "building3"
+  children: "building4"
+  children: "building5"
+  children: "saloon"
+  data: ""
+}

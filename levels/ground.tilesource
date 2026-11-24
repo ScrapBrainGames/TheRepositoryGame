@@ -1,0 +1,30 @@
+image: "/assets/placeholders/tilemap.png"
+tile_width: 32
+tile_height: 32
+collision: "/assets/placeholders/tilemap_collision.png"
+convex_hulls {
+  index: 0
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 0
+  count: 4
+  collision_group: "level"
+}
+convex_hulls {
+  index: 4
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 4
+  count: 0
+  collision_group: ""
+}
+collision_groups: "level"
+animations {
+  id: "anim"
+  frames: 1
+}
+extrude_borders: 2

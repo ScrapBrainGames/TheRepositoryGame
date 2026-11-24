@@ -1,4 +1,4 @@
-local characters = require "modules.characters"
+local characters = require "characters.characters"
 
 go.property("enemy", "")
 

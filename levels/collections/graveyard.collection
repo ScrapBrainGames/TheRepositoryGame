@@ -1,0 +1,322 @@
+name: "mine"
+instances {
+  id: "boulder"
+  prototype: "/levels/pieces/boulder.go"
+  position {
+    x: 652.0
+    y: 110.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+}
+instances {
+  id: "exit1"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 688.0
+    y: 928.0
+  }
+}
+instances {
+  id: "enter1"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 688.0
+    y: 851.0
+  }
+}
+instances {
+  id: "boulder1"
+  prototype: "/levels/pieces/boulder.go"
+  position {
+    x: 739.0
+    y: 400.0
+  }
+}
+instances {
+  id: "tomba"
+  prototype: "/levels/pieces/tomba.go"
+  position {
+    x: 124.0
+    y: 540.0
+  }
+}
+instances {
+  id: "tombb"
+  prototype: "/levels/pieces/tombb.go"
+  position {
+    x: 532.0
+    y: 397.0
+  }
+}
+instances {
+  id: "tomba1"
+  prototype: "/levels/pieces/tomba.go"
+  position {
+    x: 652.0
+    y: 409.0
+  }
+}
+instances {
+  id: "tombb1"
+  prototype: "/levels/pieces/tombb.go"
+  position {
+    x: 322.0
+    y: 265.0
+  }
+}
+instances {
+  id: "enemy"
+  prototype: "/levels/pieces/enemy.go"
+  position {
+    x: 55.0
+    y: 813.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "enemy"
+      value: "dynamite"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+instances {
+  id: "enter2"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 944.0
+    y: 144.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "exit2"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 1024.0
+    y: 144.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "tomba2"
+  prototype: "/levels/pieces/tomba.go"
+  position {
+    x: 268.0
+    y: 706.0
+  }
+}
+instances {
+  id: "tomba3"
+  prototype: "/levels/pieces/tomba.go"
+  position {
+    x: 490.0
+    y: 106.0
+  }
+}
+instances {
+  id: "tombb2"
+  prototype: "/levels/pieces/tombb.go"
+  position {
+    x: 140.0
+    y: 341.0
+  }
+}
+instances {
+  id: "tombb3"
+  prototype: "/levels/pieces/tombb.go"
+  position {
+    x: 154.0
+    y: 135.0
+  }
+}
+instances {
+  id: "tombb4"
+  prototype: "/levels/pieces/tombb.go"
+  position {
+    x: 331.0
+    y: 463.0
+  }
+}
+instances {
+  id: "pot"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 809.0
+    y: 684.0
+  }
+}
+instances {
+  id: "pot1"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 466.0
+    y: 616.0
+  }
+}
+instances {
+  id: "pot2"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 842.0
+    y: 250.0
+  }
+}
+instances {
+  id: "pot3"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 311.0
+    y: 86.0
+  }
+}
+instances {
+  id: "node"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 55.0
+    y: 53.0
+  }
+}
+instances {
+  id: "node1"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 891.0
+    y: 61.0
+  }
+}
+instances {
+  id: "node2"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 883.0
+    y: 792.0
+  }
+}
+instances {
+  id: "node3"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 83.0
+    y: 762.0
+  }
+}
+instances {
+  id: "node4"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 601.0
+    y: 250.0
+  }
+}
+instances {
+  id: "node5"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 502.0
+    y: 774.0
+  }
+}
+instances {
+  id: "node6"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 216.0
+    y: 268.0
+  }
+}
+instances {
+  id: "node7"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 389.0
+    y: 372.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  children: "boulder"
+  children: "boulder1"
+  children: "objects"
+  data: "components {\n"
+  "  id: \"tilemap\"\n"
+  "  component: \"/levels/tilemaps/graveyard.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/tilemaps/graveyard.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "locked_rotation: true\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "points"
+  children: "enemy"
+  children: "enter1"
+  children: "enter2"
+  children: "exit1"
+  children: "exit2"
+  children: "node"
+  children: "node1"
+  children: "node2"
+  children: "node3"
+  children: "node4"
+  children: "node5"
+  children: "node6"
+  children: "node7"
+  data: ""
+}
+embedded_instances {
+  id: "objects"
+  children: "pot"
+  children: "pot1"
+  children: "pot2"
+  children: "pot3"
+  children: "tomba"
+  children: "tomba1"
+  children: "tomba2"
+  children: "tomba3"
+  children: "tombb"
+  children: "tombb1"
+  children: "tombb2"
+  children: "tombb3"
+  children: "tombb4"
+  data: ""
+}

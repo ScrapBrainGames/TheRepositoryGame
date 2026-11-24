@@ -1,0 +1,163 @@
+name: "station"
+instances {
+  id: "barrier"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 155.0
+    y: 406.0
+  }
+}
+instances {
+  id: "boulder"
+  prototype: "/levels/pieces/boulder.go"
+  position {
+    x: 399.0
+    y: 335.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+}
+instances {
+  id: "exit2"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: -64.0
+    y: 275.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "exit1"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 337.0
+    y: 608.0
+  }
+}
+instances {
+  id: "enter1"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 335.0
+    y: 527.0
+  }
+}
+instances {
+  id: "enter2"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 16.0
+    y: 272.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "barrier1"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 544.0
+    y: 133.0
+  }
+}
+instances {
+  id: "boulder1"
+  prototype: "/levels/pieces/boulder.go"
+  position {
+    x: 326.0
+    y: 179.0
+  }
+}
+instances {
+  id: "barrier2"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 549.0
+    y: 411.0
+  }
+}
+instances {
+  id: "barrier3"
+  prototype: "/levels/pieces/barrier.go"
+  position {
+    x: 154.0
+    y: 138.0
+  }
+}
+instances {
+  id: "enemy"
+  prototype: "/levels/pieces/enemy.go"
+  position {
+    x: 547.0
+    y: 269.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "enemy"
+      value: "sixgun"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  children: "barrier"
+  children: "barrier1"
+  children: "barrier2"
+  children: "barrier3"
+  children: "boulder"
+  children: "boulder1"
+  data: "components {\n"
+  "  id: \"tilemap\"\n"
+  "  component: \"/levels/tilemaps/square.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/tilemaps/square.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "points"
+  children: "enemy"
+  children: "enter1"
+  children: "enter2"
+  children: "exit1"
+  children: "exit2"
+  data: ""
+}

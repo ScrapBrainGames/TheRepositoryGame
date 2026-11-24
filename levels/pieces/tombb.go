@@ -50,3 +50,9 @@ embedded_components {
   "locked_rotation: true\n"
   ""
 }
+embedded_components {
+  id: "popper"
+  type: "factory"
+  data: "prototype: \"/effects/pop.go\"\n"
+  ""
+}

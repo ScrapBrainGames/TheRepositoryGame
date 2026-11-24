@@ -1,0 +1,218 @@
+name: "station"
+instances {
+  id: "camera"
+  prototype: "/main/camera.go"
+  position {
+    z: 10.0
+  }
+}
+instances {
+  id: "exit2"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 49.0
+    y: -64.0
+  }
+  component_properties {
+    id: "gate"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "enter2"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 48.0
+    y: 16.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "enter1"
+  prototype: "/levels/pieces/enter.go"
+  position {
+    x: 720.0
+    y: 272.0
+  }
+}
+instances {
+  id: "exit1"
+  prototype: "/levels/pieces/gate.go"
+  position {
+    x: 799.0
+    y: 271.0
+  }
+}
+instances {
+  id: "node"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 143.0
+    y: 396.0
+  }
+}
+instances {
+  id: "node1"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 170.0
+    y: 175.0
+  }
+}
+instances {
+  id: "node2"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 562.0
+    y: 368.0
+  }
+}
+instances {
+  id: "node3"
+  prototype: "/levels/pieces/node.go"
+  position {
+    x: 562.0
+    y: 145.0
+  }
+}
+instances {
+  id: "pot"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 590.0
+    y: 489.0
+  }
+}
+instances {
+  id: "pot1"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 682.0
+    y: 431.0
+  }
+}
+instances {
+  id: "pot2"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 423.0
+    y: 440.0
+  }
+}
+instances {
+  id: "pot3"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 39.0
+    y: 493.0
+  }
+}
+instances {
+  id: "pot4"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 36.0
+    y: 414.0
+  }
+}
+instances {
+  id: "pot5"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 144.0
+    y: 472.0
+  }
+}
+instances {
+  id: "pot6"
+  prototype: "/levels/pieces/pot.go"
+  position {
+    x: 687.0
+    y: 42.0
+  }
+}
+instances {
+  id: "enemy"
+  prototype: "/levels/pieces/enemy.go"
+  position {
+    x: 53.0
+    y: 270.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "enemy"
+      value: "default"
+      type: PROPERTY_TYPE_TEXT
+    }
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "level"
+  children: "node"
+  children: "node1"
+  children: "node2"
+  children: "node3"
+  children: "objects"
+  data: "components {\n"
+  "  id: \"tutorial\"\n"
+  "  component: \"/levels/tilemaps/tutorial.tilemap\"\n"
+  "  position {\n"
+  "    z: -10.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"level\"\n"
+  "  component: \"/levels/level.script\"\n"
+  "  properties {\n"
+  "    id: \"tilemap\"\n"
+  "    value: \"/level#tutorial\"\n"
+  "    type: PROPERTY_TYPE_URL\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/levels/tilemaps/tutorial.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "points"
+  children: "enemy"
+  children: "enter1"
+  children: "enter2"
+  children: "exit1"
+  children: "exit2"
+  data: ""
+}
+embedded_instances {
+  id: "objects"
+  children: "pot"
+  children: "pot1"
+  children: "pot2"
+  children: "pot3"
+  children: "pot4"
+  children: "pot5"
+  children: "pot6"
+  data: ""
+}

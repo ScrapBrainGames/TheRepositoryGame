@@ -58,9 +58,8 @@ function init(self)
 	sound.set_group_gain("master", 0)
 
 	music.sting = { "#sting1", "#sting2", "#sting3", "#sting4", "#sting5", }
-	music.ambient = { "#ambient1", "#ambient2", "#ambient3", "#ambient4", }
-	music.combat = { "#combat1", "#combat2", "#combat3", "#combat4", "#combat5", "#combat6", "#combat7", "#combat8",
-		"#combat9", "#combat10", "#combat11", "#combat12", "#combat13", "#combat14", "#combat15", "#combat16", }
+	music.ambient = { "#ambient1", "#ambient2" }
+	music.combat = { "#combat" }
 	music.finale = { "#finale1", "#finale2", "#finale3", "#finale4", "#finale5", "#finale6", "#finale7", "#finale8",
 		"#finale9", "#finale10", "#finale11", "#finale12", "#finale13", "#finale14", "#finale15", "#finale16", }
 

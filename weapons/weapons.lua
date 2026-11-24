@@ -1,3 +1,6 @@
+local camera = require "main.camera"
+local state = require "main.state"
+
 -- Parent gun with default methods and properties
 ---@class Gun
 ---@field name string
@@ -68,6 +71,9 @@ function gun:fire(position, direction)
         position = position + direction * 18
         position.z = 10
         factory.create("#popper", position, nil, { text = "BANG" })
+        -- Shake
+        local shake = 40000 / (vmath.length_sqr(position - state.player.position) + 10000)
+        camera.add_shake(shake, 0.125)
         -- Kick off music, if not already going
         msg.post("main:/jukebox#jukebox", "combat")
     else
@@ -220,6 +226,9 @@ function shotgun:fire(position, direction)
     position = position + direction * 18
     position.z = 10
     factory.create("#popper", position, nil, { text = "BOOM" })
+    -- Shake
+    local shake = 80000 / (vmath.length_sqr(position - state.player.position) + 10000)
+    camera.add_shake(shake, 0.125)
     -- Kick off music, if not already going
     msg.post("main:/jukebox#jukebox", "combat")
 end

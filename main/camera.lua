@@ -10,9 +10,6 @@ local function shake(intensity, duration)
     local m = intensity / duration
     return function(dt)
         intensity = intensity - m * dt
-        if intensity < 0 then
-            intensity = 0
-        end
         return intensity
     end
 end
@@ -27,7 +24,7 @@ function M.get()
 end
 
 function M.add_shake(intensity, duration)
-    table.insert(shakes, shake(intensity, duration))
+    table.insert(shakes, 1, shake(intensity, duration))
 end
 
 function M.shake(dt)

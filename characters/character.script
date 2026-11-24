@@ -2,6 +2,7 @@ local characters = require "characters.characters"
 local ai = require "characters.ai"
 local state = require "main.state"
 local random = require "utilities.random"
+local camera = require "main.camera"
 
 -- Which character is this?
 go.property("character", "default")
@@ -327,7 +328,9 @@ function on_message(self, message_id, message, sender)
 					{ text = random.choose("OOF", "OW", "AHH", "OUCH") })
 			end
 		end
-		if not self.player then
+		if self.player then
+			camera.add_shake(2, 0.25)
+		else
 			ai.react(self.ai)
 		end
 	elseif message_id == hash("set_player") then

@@ -1,8 +1,14 @@
+local camera = require "main.camera"
+local state = require "main.state"
+
 function init(self)
 	particlefx.play("#particles")
 	timer.delay(0.125, false, function()
 		go.delete()
 	end)
+	-- Shake the camera
+	local shake = 1000000 / (vmath.length_sqr(go.get_position() - state.player.position) + 100000)
+	camera.add_shake(shake, 1)
 end
 
 function on_message(self, message_id, message, sender)

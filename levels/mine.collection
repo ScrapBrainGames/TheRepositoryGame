@@ -23,22 +23,6 @@ instances {
   }
 }
 instances {
-  id: "enemy"
-  prototype: "/levels/pieces/enter.go"
-  position {
-    x: 864.0
-    y: 256.0
-  }
-  component_properties {
-    id: "script"
-    properties {
-      id: "index"
-      value: "0.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-  }
-}
-instances {
   id: "station_entrance"
   prototype: "/levels/pieces/enter.go"
   position {
@@ -60,6 +44,16 @@ instances {
       value: "/level#collisionobject"
       type: PROPERTY_TYPE_URL
     }
+    properties {
+      id: "left_limit"
+      value: "36.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "right_limit"
+      value: "1003.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
   }
 }
 instances {
@@ -77,6 +71,10 @@ instances {
     x: 974.0
     y: 95.0
   }
+}
+instances {
+  id: "enemy1"
+  prototype: "/levels/pieces/enemy.go"
 }
 scale_along_z: 0
 embedded_instances {
@@ -118,7 +116,7 @@ embedded_instances {
 }
 embedded_instances {
   id: "points"
-  children: "enemy"
+  children: "enemy1"
   children: "station_entrance"
   children: "station_exit"
   data: ""

@@ -1,0 +1,28 @@
+images {
+  image: "/assets/characters/mook/mookHandBlue.png"
+}
+images {
+  image: "/assets/characters/mook/mookHandGreen.png"
+}
+images {
+  image: "/assets/characters/mook/mookHandOrange.png"
+}
+images {
+  image: "/assets/characters/mook/mookHandRed.png"
+}
+images {
+  image: "/assets/characters/mook/mookHandSheet.png"
+}
+images {
+  image: "/assets/characters/cleef/cleefHandSheet.png"
+}
+images {
+  image: "/assets/characters/clint/clintHandSheet.png"
+}
+images {
+  image: "/assets/characters/jessie/jessieHand.png"
+}
+images {
+  image: "/assets/characters/snuffy/snuffyHandSheet.png"
+}
+extrude_borders: 2

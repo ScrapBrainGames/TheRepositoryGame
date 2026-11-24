@@ -1,7 +1,7 @@
 script: "/characters/weapon.gui_script"
 textures {
   name: "hud"
-  texture: "/assets/hud.atlas"
+  texture: "/main/hud.atlas"
 }
 nodes {
   position {

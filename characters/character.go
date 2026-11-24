@@ -9,7 +9,7 @@ embedded_components {
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/clint/body.tilesource\"\n"
+  "  texture: \"/characters/clint/body.tilesource\"\n"
   "}\n"
   ""
   position {
@@ -60,7 +60,7 @@ embedded_components {
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/clint/hat.tilesource\"\n"
+  "  texture: \"/characters/clint/hat.tilesource\"\n"
   "}\n"
   ""
   position {

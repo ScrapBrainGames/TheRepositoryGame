@@ -1,10 +1,8 @@
 images {
   image: "/assets/weapons/shotgun.png"
-  pivot_y: 0.65
 }
 images {
   image: "/assets/weapons/singlegun.png"
-  pivot_y: 0.6
 }
 images {
   image: "/assets/weapons/sixgun.png"

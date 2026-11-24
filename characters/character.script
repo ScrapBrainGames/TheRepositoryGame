@@ -9,33 +9,28 @@ go.property("player", false)
 
 -- Sprite sheets
 -- Cleef
-go.property("cleef_body", resource.tile_source("/assets/characters/cleef/body.tilesource"))
-go.property("cleef_hat", resource.tile_source("/assets/characters/cleef/hat.tilesource"))
-go.property("cleef_hand", resource.atlas("/assets/characters/cleef/hand.atlas"))
+go.property("cleef_body", resource.tile_source("/characters/cleef/body.tilesource"))
+go.property("cleef_hat", resource.tile_source("/characters/cleef/hat.tilesource"))
 -- Clint
-go.property("clint_body", resource.tile_source("/assets/characters/clint/body.tilesource"))
-go.property("clint_hat", resource.tile_source("/assets/characters/clint/hat.tilesource"))
-go.property("clint_hand", resource.atlas("/assets/characters/clint/hand.atlas"))
+go.property("clint_body", resource.tile_source("/characters/clint/body.tilesource"))
+go.property("clint_hat", resource.tile_source("/characters/clint/hat.tilesource"))
 -- Snuffy
-go.property("snuffy_body", resource.tile_source("/assets/characters/snuffy/body.tilesource"))
-go.property("snuffy_hat", resource.tile_source("/assets/characters/snuffy/hat.tilesource"))
-go.property("snuffy_hand", resource.atlas("/assets/characters/snuffy/hand.atlas"))
+go.property("snuffy_body", resource.tile_source("/characters/snuffy/body.tilesource"))
+go.property("snuffy_hat", resource.tile_source("/characters/snuffy/hat.tilesource"))
 -- Jessie
-go.property("jessie_body", resource.tile_source("/assets/characters/jessie/body.tilesource"))
-go.property("jessie_hat", resource.tile_source("/assets/characters/jessie/hat.tilesource"))
-go.property("jessie_hand", resource.atlas("/assets/characters/jessie/hand.atlas"))
+go.property("jessie_body", resource.tile_source("/characters/jessie/body.tilesource"))
+go.property("jessie_hat", resource.tile_source("/characters/jessie/hat.tilesource"))
 -- Mooks
-go.property("white_body", resource.tile_source("/assets/characters/mook/white_body.tilesource"))
-go.property("white_hat", resource.tile_source("/assets/characters/mook/white_hat.tilesource"))
-go.property("white_hand", resource.atlas("/assets/characters/mook/hand.atlas"))
-go.property("blue_body", resource.tile_source("/assets/characters/mook/blue_body.tilesource"))
-go.property("blue_hat", resource.tile_source("/assets/characters/mook/blue_hat.tilesource"))
-go.property("green_body", resource.tile_source("/assets/characters/mook/green_body.tilesource"))
-go.property("green_hat", resource.tile_source("/assets/characters/mook/green_hat.tilesource"))
-go.property("orange_body", resource.tile_source("/assets/characters/mook/orange_body.tilesource"))
-go.property("orange_hat", resource.tile_source("/assets/characters/mook/orange_hat.tilesource"))
-go.property("red_body", resource.tile_source("/assets/characters/mook/red_body.tilesource"))
-go.property("red_hat", resource.tile_source("/assets/characters/mook/red_hat.tilesource"))
+go.property("white_body", resource.tile_source("/characters/mooks/white_body.tilesource"))
+go.property("white_hat", resource.tile_source("/characters/mooks/white_hat.tilesource"))
+go.property("blue_body", resource.tile_source("/characters/mooks/blue_body.tilesource"))
+go.property("blue_hat", resource.tile_source("/characters/mooks/blue_hat.tilesource"))
+go.property("green_body", resource.tile_source("characters/mooks/green_body.tilesource"))
+go.property("green_hat", resource.tile_source("/characters/mooks/green_hat.tilesource"))
+go.property("orange_body", resource.tile_source("/characters/mooks/orange_body.tilesource"))
+go.property("orange_hat", resource.tile_source("/characters/mooks/orange_hat.tilesource"))
+go.property("red_body", resource.tile_source("/characters/mooks/red_body.tilesource"))
+go.property("red_hat", resource.tile_source("/characters/mooks/red_hat.tilesource"))
 
 -- Weapons
 go.property("weapon", resource.atlas("/weapons/weapons.atlas"))
@@ -90,29 +85,29 @@ local function set_sprite(self)
 	if self.character == "empty" then
 		go.set("#body", "image", self.cleef_body)
 		go.set("#hat", "image", self.cleef_hat)
-		go.set(self.hand_url, "image", self.cleef_hand)
+		sprite.play_flipbook(self.hand_url, "mookHandSheet") -- placeholder
 	elseif self.character == "default" then
 		go.set("#body", "image", self.clint_body)
 		go.set("#hat", "image", self.clint_hat)
-		go.set(self.hand_url, "image", self.clint_hand)
+		sprite.play_flipbook(self.hand_url, "mookHandSheet") -- placeholder
 	elseif self.character == "sixgun" then
 		go.set("#body", "image", self.cleef_body)
 		go.set("#hat", "image", self.cleef_hat)
-		go.set(self.hand_url, "image", self.cleef_hand)
+		sprite.play_flipbook(self.hand_url, "cleefHandSheet")
 	elseif self.character == "singlegun" then
 		go.set("#body", "image", self.clint_body)
 		go.set("#hat", "image", self.clint_hat)
-		go.set(self.hand_url, "image", self.clint_hand)
+		sprite.play_flipbook(self.hand_url, "clintHandSheet")
 	elseif self.character == "shotgun" then
 		go.set("#body", "image", self.snuffy_body)
 		go.set("#hat", "image", self.snuffy_hat)
-		go.set(self.hand_url, "image", self.snuffy_hand)
+		sprite.play_flipbook(self.hand_url, "snuffyHandSheet")
 	elseif self.character == "dynamite" then
 		go.set("#body", "image", self.jessie_body)
 		go.set("#hat", "image", self.jessie_hat)
-		go.set(self.hand_url, "image", self.jessie_hand)
+		sprite.play_flipbook(self.hand_url, "jessieHandSheet")
 	elseif self.character == "mook" then
-		go.set(self.hand_url, "image", self.white_hand)
+		sprite.play_flipbook(self.hand_url, "mookHandSheet")
 		if not self.loadout.body then
 			self.loadout.body = random.choose(self.white_body, self.blue_body, self.green_body, self.orange_body,
 				self.red_body)

@@ -2,7 +2,7 @@ components {
   id: "blast"
   component: "/effects/blast.particlefx"
   position {
-    x: 40.0
+    x: 52.0
   }
   rotation {
     z: -0.70710677
@@ -16,11 +16,10 @@ embedded_components {
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/characters/mook/hand.atlas\"\n"
+  "  texture: \"/characters/hands.atlas\"\n"
   "}\n"
   ""
   position {
-    y: 8.0
     z: 4.0
   }
 }
@@ -35,7 +34,6 @@ embedded_components {
   "}\n"
   ""
   position {
-    y: 7.0
     z: 3.0
   }
 }

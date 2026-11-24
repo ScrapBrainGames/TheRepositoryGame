@@ -54,6 +54,7 @@ function pointers:get(n)
 end
 
 function init(self)
+	camera.register(go.get_id())
 	-- Start at first gate
 	msg.post(".", "start")
 end
@@ -119,6 +120,11 @@ function late_update(self, dt)
 	elseif target.y > self.bounds.top then
 		target.y = self.bounds.top
 	end
+
+	-- Shakey shakey
+	target = target + camera.shake(dt)
+
+	-- Move the camera
 	go.set_position(target)
 
 	-- Show pointers if enemies off-screen

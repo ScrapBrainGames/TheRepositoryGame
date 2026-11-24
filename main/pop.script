@@ -1,10 +1,11 @@
 go.property("text", "POP!")
+go.property("duration", 0.125)
 
 function init(self)
 	local q = vmath.quat_rotation_z(math.rad(math.random(-15, 15)))
 	go.set_rotation(q)
 	go.set("#label", "text", self.text)
-	timer.delay(0.125, false, function()
+	timer.delay(self.duration, false, function()
 		go.delete()
 	end)
 end

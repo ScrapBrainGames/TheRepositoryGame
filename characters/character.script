@@ -78,7 +78,7 @@ local function set_player(self)
 	state.register(self.id, true)
 	ai.remove_enemy(self.id)
 	-- Text pop
-	factory.create("#popper", self.position + vmath.vector3(0, 50, 10), nil, { text = "!", duration = 0.5 })
+	factory.create("#popper", self.position + vmath.vector3(0, 36, 10), nil, { text = "!", duration = 0.5 })
 end
 
 local function set_sprite(self)
@@ -105,7 +105,7 @@ local function set_sprite(self)
 	elseif self.character == "dynamite" then
 		go.set("#body", "image", self.jessie_body)
 		go.set("#hat", "image", self.jessie_hat)
-		sprite.play_flipbook(self.hand_url, "jessieHandSheet")
+		sprite.play_flipbook(self.hand_url, "jessieHand") -- why is this one different :(
 	elseif self.character == "mook" then
 		sprite.play_flipbook(self.hand_url, "mookHandSheet")
 		if not self.loadout.body then

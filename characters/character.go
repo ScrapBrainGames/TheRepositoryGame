@@ -13,7 +13,6 @@ embedded_components {
   "}\n"
   ""
   position {
-    y: 12.0
     z: 1.0
   }
 }
@@ -64,7 +63,6 @@ embedded_components {
   "}\n"
   ""
   position {
-    y: 12.0
     z: 2.0
   }
 }
@@ -79,7 +77,7 @@ embedded_components {
   "}\n"
   ""
   position {
-    y: 64.0
+    y: 48.0
     z: 20.0
   }
   scale {

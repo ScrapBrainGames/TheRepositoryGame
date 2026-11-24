@@ -40,6 +40,8 @@ local mook = function(loadout)
         hat = nil,
     }
     char.weapon = char.loadout.weapon
+    -- For the post-fight monologue
+    char.lesser = true
     return char
 end
 

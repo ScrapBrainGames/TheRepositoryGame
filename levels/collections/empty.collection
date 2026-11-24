@@ -88,10 +88,19 @@ instances {
     y: 196.0
   }
 }
+instances {
+  id: "barrel1"
+  prototype: "/levels/pieces/barrel.go"
+  position {
+    x: 67.0
+    y: 470.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
   children: "barrel"
+  children: "barrel1"
   children: "cart"
   data: "components {\n"
   "  id: \"tilemap\"\n"

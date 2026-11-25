@@ -32,7 +32,7 @@ end
 function M.shake(dt)
     local total = 0
     for i = #shakes, 1, -1 do
-        local add = s(dt) or 0
+        local add = shakes[i](dt) or 0
         if add <= 0 then
             table.remove(shakes, i)
         else

@@ -122,11 +122,13 @@ local function clear_shot(agent)
     for margin = 100, range, 100 do
         to.x = target.x - margin * direction.y
         to.y = target.y + margin * direction.x
-        local cast = physics.raycast(from, to, { hash("player"), hash("level") })
+        local cast
+        cast = physics.raycast(from, to, { hash("player"), hash("level") })
         if cast and cast.group == hash("player") then return false end
         to.x = target.x + margin * direction.y
         to.y = target.y - margin * direction.x
-        if physics.raycast(from, to, { hash("player") }) then return false end
+        cast = physics.raycast(from, to, { hash("player"), hash("level") })
+        if cast and cast.group == hash("player") then return false end
     end
     return true
 end

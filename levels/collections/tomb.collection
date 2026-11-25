@@ -1,4 +1,4 @@
-name: "empty"
+name: "tomb"
 instances {
   id: "camera"
   prototype: "/main/camera.go"

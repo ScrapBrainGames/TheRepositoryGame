@@ -1,4 +1,4 @@
-name: "mine"
+name: "graveyard"
 instances {
   id: "boulder"
   prototype: "/levels/pieces/boulder.go"

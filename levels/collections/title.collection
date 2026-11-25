@@ -1,4 +1,4 @@
-name: "station"
+name: "title"
 instances {
   id: "camera"
   prototype: "/main/camera.go"

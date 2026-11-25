@@ -288,7 +288,9 @@ local function die(self)
 	-- Notify state and characters
 	state.kill(self.id, self.player or not self.lesser)
 	characters.died(self.character)
-	characters.loadout = nil
+	if self.player then
+		characters.loadout = nil
+	end
 	-- No more arm/weapon
 	go.delete(self.arm, true)
 	-- Disable collisions, health bar

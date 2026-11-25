@@ -6,7 +6,7 @@ local saloon = {
 }
 
 local music = {
-	sting = { "#sting1", "#sting2", "#sting3", "#sting4", "#sting5", },
+	sting = { "#sting1", "#sting2", "#sting3", "#sting4", "#sting5", "#sting6", "#sting7", "#sting8", "#sting9", "#sting10" },
 	ambient = { "#ambient1", "#ambient2" },
 	combat = "#combat",
 	finale = { "#finale1", "#finale2", "#finale3", "#finale4", "#finale5", "#finale6", "#finale7", "#finale8",
@@ -14,18 +14,9 @@ local music = {
 	saloon = "#saloon"
 }
 
-local queue = {
-	current = nil,
-	index = 1,
-}
+local queue = {}
 
-local current = {
-	ambient = nil,
-	sting = nil,
-	combat = nil,
-	finale = nil,
-	saloon = nil,
-}
+local current = {}
 
 -- Length of a single bar
 local bar = 60 * 4 / 147
@@ -167,12 +158,6 @@ function init(self)
 	--sound.set_group_gain("master", 0)
 
 	queue:ambient()
-end
-
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
 end
 
 function update(self, dt)

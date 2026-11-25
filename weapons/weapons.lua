@@ -268,7 +268,6 @@ function dynamite:reload()
     if self.reloading then return end
     if self.stick then return end
     self.reloading = 1
-    self.cocked = false
 end
 
 function dynamite:ready()
@@ -282,6 +281,7 @@ function dynamite:update(dt)
             self.reloading = nil
             self.stick = factory.create("#dynamite", vmath.vector3(0, 7, 3))
             go.set_parent(self.stick, self.fx.path)
+            self.cocked = true
         end
     end
 end
@@ -289,7 +289,6 @@ end
 function dynamite:cycle()
     if self.stick then
         msg.post(self.stick, "light")
-        self.cocked = true
     end
 end
 

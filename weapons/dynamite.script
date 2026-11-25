@@ -3,12 +3,15 @@ local fuse = 5
 local g = 200
 
 local function fly(self, target, start)
-	local v = target
-	v.z = start.z
-	local d = vmath.length(v)
+	target.z = start.z
+	local d = vmath.length(target)
+	if d == 0 then
+		d = 1
+		target = vmath.vector3(1, 0, 0)
+	end
 	if d > 400 then
 		d = 400
-		v = d * vmath.normalize(v)
+		target = d * vmath.normalize(target)
 	end
 	local t = 0
 	local T = math.sqrt(d / g)
@@ -19,7 +22,7 @@ local function fly(self, target, start)
 		if t > T then t = T end
 		local f = t * Tinv
 		local h = 2 * d * f * (1 - f)
-		local position = start + f * v
+		local position = start + f * target
 		position.y = position.y + h
 		if t >= T then
 			self.fly = nil

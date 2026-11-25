@@ -26,7 +26,7 @@ go.property("white_body", resource.tile_source("/characters/mooks/white_body.til
 go.property("white_hat", resource.tile_source("/characters/mooks/white_hat.tilesource"))
 go.property("blue_body", resource.tile_source("/characters/mooks/blue_body.tilesource"))
 go.property("blue_hat", resource.tile_source("/characters/mooks/blue_hat.tilesource"))
-go.property("green_body", resource.tile_source("characters/mooks/green_body.tilesource"))
+go.property("green_body", resource.tile_source("/characters/mooks/green_body.tilesource"))
 go.property("green_hat", resource.tile_source("/characters/mooks/green_hat.tilesource"))
 go.property("orange_body", resource.tile_source("/characters/mooks/orange_body.tilesource"))
 go.property("orange_hat", resource.tile_source("/characters/mooks/orange_hat.tilesource"))

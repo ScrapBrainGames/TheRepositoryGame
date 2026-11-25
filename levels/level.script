@@ -22,7 +22,8 @@ function update(self, dt)
 		state.combat = true
 	elseif count == 0 then
 		-- No survivors
-		if not respawning and not state.combat then
+		state.combat = false
+		if not respawning then
 			msg.post(state.entrance, "respawn")
 			respawning = true
 			timer.delay(2, false, function() respawning = false end)

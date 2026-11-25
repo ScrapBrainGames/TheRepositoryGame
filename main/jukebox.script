@@ -3,8 +3,6 @@ local state = require "main.state"
 local saloon = {
 	playing = false,
 	position = vmath.vector3(),
-	music = -1,
-	gain = 0,
 }
 
 local music = {
@@ -13,6 +11,7 @@ local music = {
 	combat = "#combat",
 	finale = { "#finale1", "#finale2", "#finale3", "#finale4", "#finale5", "#finale6", "#finale7", "#finale8",
 		"#finale9", "#finale10", "#finale11", "#finale12", "#finale13", "#finale14", "#finale15", "#finale16", },
+	saloon = "#saloon"
 }
 
 local queue = {
@@ -25,13 +24,13 @@ local current = {
 	sting = nil,
 	combat = nil,
 	finale = nil,
+	saloon = nil,
 }
 
 -- Length of a single bar
 local bar = 60 * 4 / 147
 
 function queue:combat()
-	print("combat")
 	if current.ambient then
 		sound.stop(current.ambient)
 		current.ambient = nil
@@ -55,25 +54,26 @@ function queue:combat()
 			index = index % 16 + 1
 			current.finale = music.finale[index]
 			sound.play(current.finale, { gain = 0 }, function(self, message_id)
-				if message_id == hash("sound_done") and not current.ambient then
-					queue:ambient()
+				if message_id == hash("sound_done") then
+					if saloon.playing then
+						queue:saloon()
+					else
+						queue:ambient()
+					end
 				end
 			end)
 		else
-			print("finale")
-			go.animate(current.combat, "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.25)
-			go.animate(current.finale, "gain", go.PLAYBACK_ONCE_FORWARD, 1, go.EASING_LINEAR, 0.25)
-			timer.delay(0.25, false, function()
+			go.animate(current.combat, "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.25, 0, function()
 				sound.stop(current.combat)
 				current.combat = nil
 			end)
+			go.animate(current.finale, "gain", go.PLAYBACK_ONCE_FORWARD, 1, go.EASING_LINEAR, 0.25)
 			timer.cancel(_t)
 		end
 	end)
 end
 
 function queue:sting()
-	print("sting")
 	local index = math.random(#music.sting)
 	current.sting = music.sting[index]
 	sound.play(current.sting, nil, function()
@@ -84,7 +84,9 @@ function queue:sting()
 end
 
 function queue:ambient()
-	print("ambient")
+	-- Don't overlap
+	if current.ambient then return end
+	-- Play random ambient
 	local index = math.random(#music.ambient)
 	current.ambient = music.ambient[index]
 	sound.play(current.ambient, nil, function(self, message_id)
@@ -92,6 +94,11 @@ function queue:ambient()
 			queue:ambient()
 		end
 	end)
+end
+
+function queue:saloon()
+	sound.play("#saloon")
+	current.saloon = music.saloon
 end
 
 function init(self)
@@ -108,20 +115,14 @@ function final(self)
 end
 
 function update(self, dt)
-	if saloon.playing then
+	if saloon.playing and current.saloon then
 		local player = state.player.position
 		local direction = saloon.position - player
-		saloon.gain = 10000 / (vmath.length_sqr(direction) + 1)
-		saloon.gain = math.min(saloon.gain, 1)
+		local gain = 10000 / (vmath.length_sqr(direction) + 1)
+		gain = math.min(gain, 1)
 		local pan = direction.x / (math.abs(direction.y) + math.abs(direction.x) + 1)
-		sound.set_gain("#saloon", saloon.gain)
+		sound.set_gain("#saloon", gain)
 		sound.set_pan("#saloon", pan)
-	elseif saloon.gain > 0 then
-		saloon.gain = math.max(0, saloon.gain - (dt * 0.25))
-		sound.set_gain("#saloon", saloon.gain)
-		if saloon.gain == 0 then
-			sound.stop("#saloon")
-		end
 	end
 end
 
@@ -133,8 +134,12 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("start_saloon") then
 		saloon.playing = true
 		saloon.position = message.position
-		saloon.music = sound.play("#saloon")
 	elseif message_id == hash("stop_saloon") then
 		saloon.playing = false
+		go.animate("#saloon", "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 1, 0,
+			function()
+				sound.stop("#saloon")
+				queue:ambient()
+			end)
 	end
 end

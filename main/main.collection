@@ -94,6 +94,7 @@ embedded_instances {
   "  data: \"sound: \\\"/assets/music/cowboy rag.wav\\\"\\n"
   "looping: 1\\n"
   "group: \\\"saloon\\\"\\n"
+  "gain: 0.5\\n"
   "\"\n"
   "}\n"
   "embedded_components {\n"

@@ -26,15 +26,15 @@ function M.get()
 end
 
 function M.add_shake(intensity, duration)
-    table.insert(shakes, 1, shake(intensity, duration))
+    table.insert(shakes, shake(intensity, duration))
 end
 
 function M.shake(dt)
     local total = 0
-    for i, s in ipairs(shakes) do
+    for i = #shakes, 1, -1 do
         local add = s(dt) or 0
         if add <= 0 then
-            shakes[i] = nil
+            table.remove(shakes, i)
         else
             total = total + add
         end

@@ -23,15 +23,52 @@ local queue = {
 local current = {
 	ambient = nil,
 	sting = nil,
+	combat = nil,
+	finale = nil,
 }
 
+-- Length of a single bar
+local bar = 60 * 4 / 147
+
 function queue:combat()
+	print("combat")
 	if current.ambient then
 		sound.stop(current.ambient)
 	end
+	if current.sting then
+		sound.stop(current.sting)
+	end
+	-- Play the combat loop
+	current.combat = music.combat
+	sound.play(music.combat)
+	-- Play the corresponding finale, real quiet-like
+	sound.set_group_gain("finale", 0)
+	local index = 1
+	current.finale = music.finale[index]
+	sound.play(current.finale)
+	-- Every bar, check combat state and either switch finales or fade out
+	local t = timer.delay(bar, true, function()
+		if state.combat then
+			sound.stop(current.finale)
+			index = index % 16 + 1
+			current.finale = music.finale[index]
+			sound.play(current.finale, nil, function(self, message_id)
+				if message_id == hash("sound_done") and not current.ambient then
+					queue:ambient()
+				end
+			end)
+		else
+			print("finale")
+			sound.set_group_gain("finale", 1)
+			sound.set_group_gain("combat", 0)
+			sound.stop(current.combat)
+			current.combat = nil
+		end
+	end)
 end
 
 function queue:sting()
+	print("sting")
 	local index = math.random(#music.sting)
 	current.sting = music.sting[index]
 	sound.play(current.sting, nil, function()
@@ -42,6 +79,7 @@ function queue:sting()
 end
 
 function queue:ambient()
+	print("ambient")
 	local index = math.random(#music.ambient)
 	self.current = music.ambient[index]
 	sound.play(self.current, nil, function()
@@ -82,7 +120,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("combat") then
-		if state.combat and queue.current ~= "combat" then
+		if state.combat and not current.combat then
 			queue:combat()
 		end
 	elseif message_id == hash("start_saloon") then

@@ -33,8 +33,9 @@ function update(self, dt)
 			state.combat = false
 			local count, id = state.count()
 			if count == 1 then
+				state.ending(id)
 				if self.major then
-					state.ending(id)
+					--
 				else
 					-- Play music sting
 					msg.post("main:/jukebox#jukebox", "sting")

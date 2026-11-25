@@ -8,6 +8,7 @@ local M = {
 M.characters = {}
 M.names = {}
 M.killed = {}
+M.lesser = {}
 
 -- Track combat state
 M.combat = false
@@ -16,9 +17,10 @@ M.player = {
     position = vmath.vector3()
 }
 
-function M.register(id, player, name)
+function M.register(id, player, name, lesser)
     M.characters[id] = player or M.characters[id] or false
     if name then M.names[id] = name end
+    if lesser ~= nil then M.lesser[id] = lesser end
 end
 
 function M.remove(id)
@@ -33,6 +35,7 @@ function M.reset()
         position = vmath.vector3()
     }
     M.heir = nil
+    M.lesser = {}
 end
 
 function M.count()
@@ -43,6 +46,21 @@ function M.count()
         count = count + 1
     end
     return count, id
+end
+
+function M.major()
+    local count = 0
+    for id, player in pairs(M.characters) do
+        if player then
+            if M.names[id] ~= "empty" then
+                count = count + 1
+            end
+        elseif M.names[id] ~= "mook" then
+            count = count + 1
+        end
+        if count > 1 then return true end
+    end
+    return false
 end
 
 function M.kill(id, record)

@@ -10,22 +10,33 @@ function final(self)
 	state.tilemap = nil
 end
 
+local respawning = false
+
 function update(self, dt)
 	local count = state.count()
 	if count >= 2 then
-		self.combat = true
+		self.combat = self.combat or true
+		self.major = self.major or state.major()
 		state.combat = true
+	elseif count == 0 then
+		-- No survivors
+		if not respawning and not state.combat then
+			msg.post(state.entrance, "respawn")
+			respawning = true
+			timer.delay(2, false, function() respawning = false end)
+		end
 	elseif self.combat then
 		self.combat = false
 		timer.delay(1, false, function()
 			state.combat = false
 			local count, id = state.count()
 			if count == 1 then
-				-- One survivor
-				state.ending(id)
-			elseif count == 0 then
-				-- No survivors
-				msg.post(state.entrance, "respawn")
+				if self.major then
+					state.ending(id)
+				else
+					-- Play music sting
+					msg.post("main:/jukebox#jukebox", "sting")
+				end
 			end
 		end)
 	end

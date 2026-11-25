@@ -30,7 +30,8 @@ local current = {
 -- Length of a single bar
 local bar = 60 * 4 / 147
 
-local function finale(message_id)
+local function finale(message_id, id)
+	if current.finale ~= id then return end
 	current.finale = nil
 	if message_id == hash("sound_done") then
 		if saloon.playing then
@@ -56,8 +57,9 @@ function queue:combat()
 	sound.play(music.combat)
 	-- Play the corresponding finale, real quiet-like
 	local index = 1
-	current.finale = music.finale[index]
-	sound.play(current.finale, { gain = 0 }, function(self, message_id) finale(message_id) end)
+	local id = music.finale[index]
+	current.finale = id
+	sound.play(id, { gain = 0 }, function(self, message_id) finale(message_id, id) end)
 	-- Every bar, check combat state and either switch finales or fade out
 	timer.delay(bar, true, function(self, _t)
 		if state.combat then
@@ -66,10 +68,12 @@ function queue:combat()
 			current.finale = music.finale[index]
 			sound.play(current.finale, { gain = 0 }, function(self, message_id) finale(message_id) end)
 		else
+			print(current.combat)
 			go.animate(current.combat, "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.25, 0, function()
 				sound.stop(current.combat)
 				current.combat = nil
 			end)
+			print(current.finale)
 			go.animate(current.finale, "gain", go.PLAYBACK_ONCE_FORWARD, 1, go.EASING_LINEAR, 0.25)
 			timer.cancel(_t)
 		end
@@ -78,11 +82,16 @@ end
 
 function queue:sting()
 	-- Don't overlap
-	if current.sting then return end
 	if current.combat then return end
+	if current.sting then
+		sound.stop(current.sting)
+	end
+
 	local index = math.random(#music.sting)
-	current.sting = music.sting[index]
+	local id = music.sting[index]
+	current.sting = id
 	sound.play(current.sting, nil, function(self, message_id)
+		if current.sting ~= id then return end
 		current.sting = nil
 		if message_id == hash("sound_done") then
 			if not saloon.playing then
@@ -137,7 +146,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("combat") then
-		if state.combat and not current.combat then
+		if state.combat and state.major() and not current.combat then
 			queue:combat()
 		end
 	elseif message_id == hash("start_saloon") then

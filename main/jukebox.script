@@ -169,12 +169,6 @@ function init(self)
 	queue:ambient()
 end
 
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
 function update(self, dt)
 	if saloon.playing and current.saloon then
 		local player = state.player.position

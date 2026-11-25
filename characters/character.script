@@ -67,7 +67,6 @@ local function set_player(self)
 	state.heir = nil
 	self.player = true
 	msg.post(".", "acquire_input_focus")
-	msg.post("/camera#control", "set_player", { id = go.get_id() })
 	self.hud = msg.url("/camera#weapon")
 	msg.post(self.hud, "set", { weapon = self.weapon.name })
 	characters.player = self.character

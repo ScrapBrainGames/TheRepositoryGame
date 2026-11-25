@@ -63,7 +63,9 @@ end
 
 function M.kill(id, record)
     if record then
-        table.insert(M.killed, M.names[id])
+        table.insert(M.killed, 1, M.names[id])
+    else
+        table.insert(M.killed, #M.killed, M.names[id])
     end
     M.characters[id] = nil
 end
@@ -73,6 +75,7 @@ function M.ending(id)
     local victim = M.killed[#M.killed]
     msg.post(id, "set_player")
     msg.post("main:/monologue#monologue", "start", { speaker = survivor, context = victim })
+    M.killed = {}
 end
 
 M.heir = nil

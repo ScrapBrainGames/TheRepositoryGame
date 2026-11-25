@@ -8,10 +8,11 @@ local saloon = {
 }
 
 local music = {
-	sting = {},
-	ambient = {},
-	combat = {},
-	finale = {},
+	sting = { "#sting1", "#sting2", "#sting3", "#sting4", "#sting5", },
+	ambient = { "#ambient1", "#ambient2" },
+	combat = "#combat",
+	finale = { "#finale1", "#finale2", "#finale3", "#finale4", "#finale5", "#finale6", "#finale7", "#finale8",
+		"#finale9", "#finale10", "#finale11", "#finale12", "#finale13", "#finale14", "#finale15", "#finale16", },
 }
 
 local queue = {
@@ -19,14 +20,22 @@ local queue = {
 	index = 1,
 }
 
-function queue:combat()
+local current = {
+	ambient = nil,
+	sting = nil,
+}
 
+function queue:combat()
+	if current.ambient then
+		sound.stop(current.ambient)
+	end
 end
 
 function queue:sting()
 	local index = math.random(#music.sting)
-	sound.play(music.sting[index], nil, function()
-		if not self.current then
+	current.sting = music.sting[index]
+	sound.play(current.sting, nil, function()
+		if not current.ambient then
 			queue:ambient()
 		end
 	end)
@@ -43,12 +52,6 @@ end
 function init(self)
 	-- Silence for debugging
 	--sound.set_group_gain("master", 0)
-
-	music.sting = { "#sting1", "#sting2", "#sting3", "#sting4", "#sting5", }
-	music.ambient = { "#ambient1", "#ambient2" }
-	music.combat = { "#combat" }
-	music.finale = { "#finale1", "#finale2", "#finale3", "#finale4", "#finale5", "#finale6", "#finale7", "#finale8",
-		"#finale9", "#finale10", "#finale11", "#finale12", "#finale13", "#finale14", "#finale15", "#finale16", }
 
 	queue:ambient()
 end

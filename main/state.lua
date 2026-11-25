@@ -8,7 +8,6 @@ local M = {
 M.characters = {}
 M.names = {}
 M.killed = {}
-M.lesser = {}
 
 -- Track combat state
 M.combat = false
@@ -20,7 +19,6 @@ M.player = {
 function M.register(id, player, name, lesser)
     M.characters[id] = player or M.characters[id] or false
     if name then M.names[id] = name end
-    if lesser ~= nil then M.lesser[id] = lesser end
 end
 
 function M.remove(id)

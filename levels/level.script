@@ -8,6 +8,8 @@ end
 
 function final(self)
 	state.tilemap = nil
+	self.combat = false
+	self.major = false
 end
 
 local respawning = false

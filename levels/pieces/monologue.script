@@ -1,9 +1,16 @@
 local state = require "main.state"
 
 go.property("context", "")
+go.property("sting", true)
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("trigger_response") and message.enter then
+		print("test")
+		if self.sting then
+			-- Play music sting
+			msg.post("main:/jukebox#jukebox", "sting")
+		end
+		-- Show the corresponding monologue
 		local character = state.names[message.other_id]
 		msg.post("main:/monologue#monologue", "start", { speaker = character, context = self.context })
 		go.delete()

@@ -3,15 +3,15 @@ local state = require "main.state"
 local saloon = {
 	playing = false,
 	position = vmath.vector3(),
-	music = -1,
-	gain = 0,
 }
 
 local music = {
-	sting = {},
-	ambient = {},
-	combat = {},
-	finale = {},
+	sting = { "#sting1", "#sting2", "#sting3", "#sting4", "#sting5", },
+	ambient = { "#ambient1", "#ambient2" },
+	combat = "#combat",
+	finale = { "#finale1", "#finale2", "#finale3", "#finale4", "#finale5", "#finale6", "#finale7", "#finale8",
+		"#finale9", "#finale10", "#finale11", "#finale12", "#finale13", "#finale14", "#finale15", "#finale16", },
+	saloon = "#saloon"
 }
 
 local queue = {
@@ -19,52 +19,102 @@ local queue = {
 	index = 1,
 }
 
-function queue:play(type)
-	if self.current and self.index then
-		sound.stop(music[self.current][self.index])
+local current = {
+	ambient = nil,
+	sting = nil,
+	combat = nil,
+	finale = nil,
+	saloon = nil,
+}
+
+-- Length of a single bar
+local bar = 60 * 4 / 147
+
+local function finale(message_id)
+	current.finale = nil
+	if message_id == hash("sound_done") then
+		if saloon.playing then
+			queue:saloon()
+		else
+			queue:ambient()
+		end
 	end
-	self.current = type
-	self.index = 1
-	sound.play(music[self.current][self.index], nil, self:next())
 end
 
-function queue:next()
-	return function(_, message_id)
-		if message_id == hash("sound_stopped") then
-			return
-		end
-
-		if self.current == "combat" then
-			if state.combat then
-				self.current = "combat"
-				self.index = self.index % #music.combat + 1
-			else
-				self.current = "finale"
-			end
-		elseif self.current == "ambient" then
-			self.current = math.random() < 0.5 and "ambient" or "sting"
-			self.index = math.random(#music[self.current])
-		else
-			self.current = "ambient"
-			self.index = math.random(#music.ambient)
-		end
-		print("next up:" .. self.current .. self.index)
-		sound.play(music[self.current][self.index], nil, self:next())
+function queue:combat()
+	if current.ambient then
+		sound.stop(current.ambient)
+		current.ambient = nil
 	end
+	if current.sting then
+		sound.stop(current.sting)
+		current.sting = nil
+	end
+	-- Play the combat loop
+	current.combat = music.combat
+	sound.set_gain(current.combat, 1)
+	sound.play(music.combat)
+	-- Play the corresponding finale, real quiet-like
+	local index = 1
+	current.finale = music.finale[index]
+	sound.play(current.finale, { gain = 0 }, function(self, message_id) finale(message_id) end)
+	-- Every bar, check combat state and either switch finales or fade out
+	timer.delay(bar, true, function(self, _t)
+		if state.combat then
+			sound.stop(current.finale)
+			index = index % 16 + 1
+			current.finale = music.finale[index]
+			sound.play(current.finale, { gain = 0 }, function(self, message_id) finale(message_id) end)
+		else
+			go.animate(current.combat, "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.25, 0, function()
+				sound.stop(current.combat)
+				current.combat = nil
+			end)
+			go.animate(current.finale, "gain", go.PLAYBACK_ONCE_FORWARD, 1, go.EASING_LINEAR, 0.25)
+			timer.cancel(_t)
+		end
+	end)
+end
+
+function queue:sting()
+	-- Don't overlap
+	if current.sting then return end
+	if current.combat then return end
+	local index = math.random(#music.sting)
+	current.sting = music.sting[index]
+	sound.play(current.sting, nil, function(self, message_id)
+		current.sting = nil
+		if message_id == hash("sound_done") then
+			if not saloon.playing then
+				queue:ambient()
+			end
+		end
+	end)
+end
+
+function queue:ambient()
+	-- Don't overlap
+	if current.ambient then return end
+	-- Play random ambient
+	local index = math.random(#music.ambient)
+	current.ambient = music.ambient[index]
+	sound.play(current.ambient, nil, function(self, message_id)
+		if message_id == hash("sound_done") and not current.ambient then
+			queue:ambient()
+		end
+	end)
+end
+
+function queue:saloon()
+	sound.play("#saloon")
+	current.saloon = music.saloon
 end
 
 function init(self)
 	-- Silence for debugging
-	sound.set_group_gain("master", 0)
+	--sound.set_group_gain("master", 0)
 
-	music.sting = { "#sting1", "#sting2", "#sting3", "#sting4", "#sting5", }
-	music.ambient = { "#ambient1", "#ambient2", "#ambient3", "#ambient4", }
-	music.combat = { "#combat1", "#combat2", "#combat3", "#combat4", "#combat5", "#combat6", "#combat7", "#combat8",
-		"#combat9", "#combat10", "#combat11", "#combat12", "#combat13", "#combat14", "#combat15", "#combat16", }
-	music.finale = { "#finale1", "#finale2", "#finale3", "#finale4", "#finale5", "#finale6", "#finale7", "#finale8",
-		"#finale9", "#finale10", "#finale11", "#finale12", "#finale13", "#finale14", "#finale15", "#finale16", }
-
-	queue:play("sting")
+	queue:ambient()
 end
 
 function final(self)
@@ -74,33 +124,34 @@ function final(self)
 end
 
 function update(self, dt)
-	if saloon.playing then
+	if saloon.playing and current.saloon then
 		local player = state.player.position
 		local direction = saloon.position - player
-		saloon.gain = 10000 / (vmath.length_sqr(direction) + 1)
-		saloon.gain = math.min(saloon.gain, 1)
+		local gain = 10000 / (vmath.length_sqr(direction) + 1)
+		gain = math.min(gain, 1)
 		local pan = direction.x / (math.abs(direction.y) + math.abs(direction.x) + 1)
-		sound.set_gain("#saloon", saloon.gain)
+		sound.set_gain("#saloon", gain)
 		sound.set_pan("#saloon", pan)
-	elseif saloon.gain > 0 then
-		saloon.gain = math.max(0, saloon.gain - (dt * 0.25))
-		sound.set_gain("#saloon", saloon.gain)
-		if saloon.gain == 0 then
-			sound.stop("#saloon")
-		end
 	end
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("combat") then
-		if state.combat and queue.current ~= "combat" then
-			queue:play("combat")
+		if state.combat and not current.combat then
+			queue:combat()
 		end
 	elseif message_id == hash("start_saloon") then
 		saloon.playing = true
 		saloon.position = message.position
-		saloon.music = sound.play("#saloon")
 	elseif message_id == hash("stop_saloon") then
 		saloon.playing = false
+		go.animate("#saloon", "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 1, 0,
+			function()
+				sound.stop("#saloon")
+				queue:ambient()
+			end)
+	elseif message_id == hash("sting") then
+		-- Play stings
+		queue:sting()
 	end
 end

@@ -51,6 +51,7 @@ local characters = {
         health = 1,
         handicap = 1,
         weapon = weapons.empty(),
+        lesser = true
     },
     default = {
         aim_movement = 50,

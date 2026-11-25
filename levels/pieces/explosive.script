@@ -8,7 +8,8 @@ function init(self)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("damage") and message.damage > self.threshold then
+	if message_id == hash("damage") and message.damage > self.threshold and not self.dead then
+		self.dead = true
 		sprite.play_flipbook("#sprite", "dead")
 		msg.post("#collisionobject", "disable")
 		-- Move to behind player

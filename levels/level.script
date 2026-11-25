@@ -4,6 +4,7 @@ go.property("tilemap", msg.url("/level#tilemap"))
 
 function init(self)
 	state.tilemap = self.tilemap
+	self.respawning = false
 end
 
 function final(self)
@@ -11,8 +12,6 @@ function final(self)
 	self.combat = false
 	self.major = false
 end
-
-local respawning = false
 
 function update(self, dt)
 	local count = state.count()
@@ -23,10 +22,10 @@ function update(self, dt)
 	elseif count == 0 then
 		-- No survivors
 		state.combat = false
-		if not respawning then
+		if not self.respawning then
 			msg.post(state.entrance, "respawn")
-			respawning = true
-			timer.delay(2, false, function() respawning = false end)
+			self.respawning = true
+			timer.delay(2, false, function() self.respawning = false end)
 		end
 	elseif self.combat then
 		self.combat = false

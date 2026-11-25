@@ -61,6 +61,10 @@ end
 
 function final(self)
 	state.reset()
+	pointers = {
+		count = 0,
+		offscreen = vmath.vector3(-math.huge)
+	}
 end
 
 function late_update(self, dt)
@@ -100,7 +104,7 @@ function late_update(self, dt)
 				-- Farther in x-direction
 				direction = direction * sx
 			end
-			target = (player + player + player + direction) / 3
+			target = player + direction / 3
 		else
 			target = (player + player + enemy) / 3
 		end

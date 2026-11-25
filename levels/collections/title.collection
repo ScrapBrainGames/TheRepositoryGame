@@ -54,6 +54,22 @@ instances {
     y: 671.0
   }
 }
+instances {
+  id: "monologue"
+  prototype: "/levels/pieces/monologue.go"
+  position {
+    x: 282.0
+    y: 303.0
+  }
+}
+instances {
+  id: "monologue1"
+  prototype: "/levels/pieces/monologue.go"
+  position {
+    x: 637.0
+    y: 228.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "level"
@@ -88,5 +104,7 @@ embedded_instances {
   children: "enter2"
   children: "exit1"
   children: "exit2"
+  children: "monologue"
+  children: "monologue1"
   data: ""
 }

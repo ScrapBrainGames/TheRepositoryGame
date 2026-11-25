@@ -30,6 +30,17 @@ local current = {
 -- Length of a single bar
 local bar = 60 * 4 / 147
 
+local function finale(message_id)
+	current.finale = nil
+	if message_id == hash("sound_done") then
+		if saloon.playing then
+			queue:saloon()
+		else
+			queue:ambient()
+		end
+	end
+end
+
 function queue:combat()
 	if current.ambient then
 		sound.stop(current.ambient)
@@ -46,22 +57,14 @@ function queue:combat()
 	-- Play the corresponding finale, real quiet-like
 	local index = 1
 	current.finale = music.finale[index]
-	sound.play(current.finale, { gain = 0 })
+	sound.play(current.finale, { gain = 0 }, function(self, message_id) finale(message_id) end)
 	-- Every bar, check combat state and either switch finales or fade out
 	timer.delay(bar, true, function(self, _t)
 		if state.combat then
 			sound.stop(current.finale)
 			index = index % 16 + 1
 			current.finale = music.finale[index]
-			sound.play(current.finale, { gain = 0 }, function(self, message_id)
-				if message_id == hash("sound_done") then
-					if saloon.playing then
-						queue:saloon()
-					else
-						queue:ambient()
-					end
-				end
-			end)
+			sound.play(current.finale, { gain = 0 }, function(self, message_id) finale(message_id) end)
 		else
 			go.animate(current.combat, "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.25, 0, function()
 				sound.stop(current.combat)
@@ -74,11 +77,17 @@ function queue:combat()
 end
 
 function queue:sting()
+	-- Don't overlap
+	if current.sting then return end
+	if current.combat then return end
 	local index = math.random(#music.sting)
 	current.sting = music.sting[index]
-	sound.play(current.sting, nil, function()
-		if not current.ambient then
-			queue:ambient()
+	sound.play(current.sting, nil, function(self, message_id)
+		current.sting = nil
+		if message_id == hash("sound_done") then
+			if not saloon.playing then
+				queue:ambient()
+			end
 		end
 	end)
 end
@@ -141,5 +150,8 @@ function on_message(self, message_id, message, sender)
 				sound.stop("#saloon")
 				queue:ambient()
 			end)
+	elseif message_id == hash("sting") then
+		-- Play stings
+		queue:sting()
 	end
 end

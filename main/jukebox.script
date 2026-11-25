@@ -14,18 +14,9 @@ local music = {
 	saloon = "#saloon"
 }
 
-local queue = {
-	current = nil,
-	index = 1,
-}
+local queue = {}
 
-local current = {
-	ambient = nil,
-	sting = nil,
-	combat = nil,
-	finale = nil,
-	saloon = nil,
-}
+local current = {}
 
 -- Length of a single bar
 local bar = 60 * 4 / 147

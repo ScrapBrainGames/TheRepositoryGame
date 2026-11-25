@@ -76,12 +76,12 @@ function queue:combat()
 			sound.play(id, nil, function(self, message_id) finale(message_id, id) end)
 		else
 			print(current.combat)
-			go.animate(current.combat, "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.25, 0, function()
+			go.animate(current.combat, "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.125, 0, function()
 				sound.stop(current.combat)
 				current.combat = nil
 			end)
 			print(current.finale)
-			go.animate(current.finale, "gain", go.PLAYBACK_ONCE_FORWARD, 1, go.EASING_LINEAR, 0.25)
+			go.animate(current.finale, "gain", go.PLAYBACK_ONCE_FORWARD, 1, go.EASING_LINEAR, 0.125)
 			timer.cancel(_t)
 		end
 	end)

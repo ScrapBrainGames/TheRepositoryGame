@@ -5,7 +5,6 @@ go.property("sting", true)
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("trigger_response") and message.enter then
-		print("test")
 		if self.sting then
 			-- Play music sting
 			msg.post("main:/jukebox#jukebox", "sting")

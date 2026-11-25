@@ -29,6 +29,7 @@ local current = {
 
 -- Length of a single bar
 local bar = 60 * 4 / 147
+local fade = 0.25
 
 local function finale(message_id, id)
 	if current.finale ~= id then return end
@@ -66,23 +67,43 @@ function queue:combat()
 	sound.set_gain(id, 0)
 	sound.play(id, nil, function(self, message_id) finale(message_id, id) end)
 	-- Every bar, check combat state and either switch finales or fade out
-	timer.delay(bar, true, function(self, _t)
+	timer.delay(bar - fade, false, function()
 		if state.combat then
-			sound.stop(current.finale)
-			index = index % 16 + 1
-			local id = music.finale[index]
-			current.finale = id
-			sound.set_gain(id, 0)
-			sound.play(id, nil, function(self, message_id) finale(message_id, id) end)
+			-- Play next finale at the end of the bar
+			timer.delay(fade, false, function()
+				sound.stop(current.finale)
+				index = index % 16 + 1
+				local id = music.finale[index]
+				current.finale = id
+				sound.set_gain(id, 0)
+				sound.play(id, nil, function(self, message_id) finale(message_id, id) end)
+			end)
+			-- Loop
+			timer.delay(bar, true, function(self, _t)
+				if state.combat then
+					timer.delay(fade, false, function()
+						sound.stop(current.finale)
+						index = index % 16 + 1
+						local id = music.finale[index]
+						current.finale = id
+						sound.set_gain(id, 0)
+						sound.play(id, nil, function(self, message_id) finale(message_id, id) end)
+					end)
+				else
+					go.animate(current.combat, "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, fade, 0, function()
+						sound.stop(current.combat)
+						current.combat = nil
+					end)
+					go.animate(current.finale, "gain", go.PLAYBACK_ONCE_FORWARD, 1, go.EASING_LINEAR, fade)
+					timer.cancel(_t)
+				end
+			end)
 		else
-			print(current.combat)
-			go.animate(current.combat, "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.125, 0, function()
+			go.animate(current.combat, "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, fade, 0, function()
 				sound.stop(current.combat)
 				current.combat = nil
 			end)
-			print(current.finale)
-			go.animate(current.finale, "gain", go.PLAYBACK_ONCE_FORWARD, 1, go.EASING_LINEAR, 0.125)
-			timer.cancel(_t)
+			go.animate(current.finale, "gain", go.PLAYBACK_ONCE_FORWARD, 1, go.EASING_LINEAR, fade)
 		end
 	end)
 end

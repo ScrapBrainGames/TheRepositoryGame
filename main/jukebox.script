@@ -41,31 +41,32 @@ function queue:combat()
 		current.sting = nil
 	end
 	-- Play the combat loop
-	sound.set_group_gain("combat", 1)
 	current.combat = music.combat
+	sound.set_gain(current.combat, 1)
 	sound.play(music.combat)
 	-- Play the corresponding finale, real quiet-like
-	sound.set_group_gain("finale", 0)
 	local index = 1
 	current.finale = music.finale[index]
-	sound.play(current.finale)
+	sound.play(current.finale, { gain = 0 })
 	-- Every bar, check combat state and either switch finales or fade out
 	timer.delay(bar, true, function(self, _t)
 		if state.combat then
 			sound.stop(current.finale)
 			index = index % 16 + 1
 			current.finale = music.finale[index]
-			sound.play(current.finale, nil, function(self, message_id)
+			sound.play(current.finale, { gain = 0 }, function(self, message_id)
 				if message_id == hash("sound_done") and not current.ambient then
 					queue:ambient()
 				end
 			end)
 		else
 			print("finale")
-			sound.set_group_gain("finale", 1)
-			sound.set_group_gain("combat", 0)
-			sound.stop(current.combat)
-			current.combat = nil
+			go.animate(current.combat, "gain", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.25)
+			go.animate(current.finale, "gain", go.PLAYBACK_ONCE_FORWARD, 1, go.EASING_LINEAR, 0.25)
+			timer.delay(0.25, false, function()
+				sound.stop(current.combat)
+				current.combat = nil
+			end)
 			timer.cancel(_t)
 		end
 	end)

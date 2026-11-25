@@ -16,7 +16,7 @@ M.player = {
     position = vmath.vector3()
 }
 
-function M.register(id, player, name, lesser)
+function M.register(id, player, name)
     M.characters[id] = player or M.characters[id] or false
     if name then M.names[id] = name end
 end
@@ -33,7 +33,6 @@ function M.reset()
         position = vmath.vector3()
     }
     M.heir = nil
-    M.lesser = {}
 end
 
 function M.count()

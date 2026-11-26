@@ -113,26 +113,34 @@ local function set_sprite(self)
 				(function()
 					sprite.play_flipbook(self.hand_url, "mookHandSheet")
 					self.loadout.body = self.white_body
+					self.loadout.hat = self.white_hat
 				end),
 				(function()
 					sprite.play_flipbook(self.hand_url, "mookHandBlue")
 					self.loadout.body = self.blue_body
+					self.loadout.hat = self.blue_hat
 				end),
 				(function()
 					sprite.play_flipbook(self.hand_url, "mookHandGreen")
 					self.loadout.body = self.green_body
+					self.loadout.hat = self.green_hat
 				end),
 				(function()
 					sprite.play_flipbook(self.hand_url, "mookHandOrange")
 					self.loadout.body = self.orange_body
+					self.loadout.hat = self.orange_hat
 				end),
 				(function()
 					sprite.play_flipbook(self.hand_url, "mookHandRed")
 					self.loadout.body = self.red_body
+					self.loadout.hat = self.red_hat
 				end)
 			)()
+			--[[
+			-- Random hats
 			self.loadout.hat = random.choose(self.white_hat, self.blue_hat, self.green_hat, self.orange_hat, self
-				.red_hat)
+				.red_hat)	
+			--]]
 		end
 		go.set("#body", "image", self.loadout.body)
 		go.set("#hat", "image", self.loadout.hat)

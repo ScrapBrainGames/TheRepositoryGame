@@ -20,7 +20,7 @@ local current = {}
 
 -- Length of a single bar
 local bar = 60 * 4 / 147
-local fade = 0.25
+local fade = 0.125
 
 local function finale(message_id, id)
 	if current.finale ~= id then return end

@@ -108,3 +108,9 @@ embedded_components {
   data: "prototype: \"/weapons/dynamite.go\"\n"
   ""
 }
+embedded_components {
+  id: "sound"
+  type: "sound"
+  data: "sound: \"/assets/sfx/meatyrifle1.wav\"\n"
+  ""
+}

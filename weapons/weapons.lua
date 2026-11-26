@@ -76,6 +76,8 @@ function gun:fire(position, direction)
         camera.add_shake(shake, 0.125)
         -- Kick off music, if not already going
         msg.post("main:/jukebox#jukebox", "combat")
+        -- Gunshot
+        sound.play("#sound")
     else
         -- Click!
         position = position + direction * 18

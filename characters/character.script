@@ -111,27 +111,22 @@ local function set_sprite(self)
 		if not self.loadout.body then
 			random.choose(
 				(function()
-					print("white")
 					sprite.play_flipbook(self.hand_url, "mookHandSheet")
 					self.loadout.body = self.white_body
 				end),
 				(function()
-					print("blue")
 					sprite.play_flipbook(self.hand_url, "mookHandBlue")
 					self.loadout.body = self.blue_body
 				end),
 				(function()
-					print("green")
 					sprite.play_flipbook(self.hand_url, "mookHandGreen")
 					self.loadout.body = self.green_body
 				end),
 				(function()
-					print("orange")
 					sprite.play_flipbook(self.hand_url, "mookHandOrange")
 					self.loadout.body = self.orange_body
 				end),
 				(function()
-					print("red")
 					sprite.play_flipbook(self.hand_url, "mookHandRed")
 					self.loadout.body = self.red_body
 				end)

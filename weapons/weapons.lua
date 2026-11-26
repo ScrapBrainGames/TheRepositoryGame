@@ -31,7 +31,7 @@ function gun:new()
         noise = 0.0,
         reloading = false,
         cycletime = 0.25,
-        sfx = "#gunshot1",
+        sfx = random.choose("#gunshot1", "#gunshot2", "#gunshot3")
     }
     return setmetatable(instance, self)
 end
@@ -151,7 +151,6 @@ function sixgun:new()
     instance.chambers = { true, true, true, true, true, true }
     instance.noise = 0.1
     instance.damage = 4
-    instance.sfx = "#gunshot2"
     return instance
 end
 
@@ -201,7 +200,6 @@ function shotgun:new()
     instance.chambers = { true, true }
     instance.noise = 0.2
     instance.damage = 2
-    instance.sfx = "#gunshot3"
     return instance
 end
 

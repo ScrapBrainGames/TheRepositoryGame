@@ -1,5 +1,6 @@
 local camera = require "main.camera"
 local state = require "main.state"
+local random = require "utilities.random"
 
 -- Parent gun with default methods and properties
 ---@class Gun
@@ -82,8 +83,9 @@ function gun:fire(position, direction)
         local v = position - state.player.position
         local d = math.abs(v.x) + math.abs(v.y)
         sound.play(self.sfx, {
-            gain = 1000 / (d + 1000),
-            pan = v.x / (d + 1000)
+            gain = 500 / (d + 500),
+            pan = v.x / (d + 500),
+            speed = random.range(0.9, 1.1)
         })
     else
         -- Click!
@@ -246,8 +248,9 @@ function shotgun:fire(position, direction)
     local v = position - state.player.position
     local d = math.abs(v.x) + math.abs(v.y)
     sound.play(self.sfx, {
-        gain = 1000 / (d + 1000),
-        pan = v.x / (d + 1000)
+        gain = 500 / (d + 500),
+        pan = v.x / (d + 500),
+        speed = random.range(0.9, 1.1)
     })
 end
 

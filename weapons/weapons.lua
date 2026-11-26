@@ -15,6 +15,7 @@ local state = require "main.state"
 ---@field reloading number
 ---@field cycling number
 ---@field cycletime number
+---@field sfx string
 local gun = {}
 gun.__index = gun
 
@@ -29,6 +30,7 @@ function gun:new()
         noise = 0.0,
         reloading = false,
         cycletime = 0.25,
+        sfx = "#gunshot1",
     }
     return setmetatable(instance, self)
 end
@@ -77,7 +79,12 @@ function gun:fire(position, direction)
         -- Kick off music, if not already going
         msg.post("main:/jukebox#jukebox", "combat")
         -- Gunshot
-        sound.play("#sound")
+        local v = position - state.player.position
+        local d = math.abs(v.x) + math.abs(v.y)
+        sound.play(self.sfx, {
+            gain = 1000 / (d + 1000),
+            pan = v.x / (d + 1000)
+        })
     else
         -- Click!
         position = position + direction * 18
@@ -142,6 +149,7 @@ function sixgun:new()
     instance.chambers = { true, true, true, true, true, true }
     instance.noise = 0.1
     instance.damage = 4
+    instance.sfx = "#gunshot2"
     return instance
 end
 
@@ -191,6 +199,7 @@ function shotgun:new()
     instance.chambers = { true, true }
     instance.noise = 0.2
     instance.damage = 2
+    instance.sfx = "#gunshot3"
     return instance
 end
 
@@ -233,6 +242,13 @@ function shotgun:fire(position, direction)
     camera.add_shake(shake, 0.125)
     -- Kick off music, if not already going
     msg.post("main:/jukebox#jukebox", "combat")
+    -- Gunshot
+    local v = position - state.player.position
+    local d = math.abs(v.x) + math.abs(v.y)
+    sound.play(self.sfx, {
+        gain = 1000 / (d + 1000),
+        pan = v.x / (d + 1000)
+    })
 end
 
 -- Empty (no weapons)

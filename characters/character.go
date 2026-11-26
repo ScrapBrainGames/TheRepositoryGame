@@ -109,8 +109,20 @@ embedded_components {
   ""
 }
 embedded_components {
-  id: "sound"
+  id: "gunshot1"
   type: "sound"
   data: "sound: \"/assets/sfx/meatyrifle1.wav\"\n"
+  ""
+}
+embedded_components {
+  id: "gunshot3"
+  type: "sound"
+  data: "sound: \"/assets/sfx/meatyrifle3.wav\"\n"
+  ""
+}
+embedded_components {
+  id: "gunshot2"
+  type: "sound"
+  data: "sound: \"/assets/sfx/meatyrifle2.wav\"\n"
   ""
 }

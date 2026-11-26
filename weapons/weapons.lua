@@ -1,5 +1,6 @@
 local camera = require "main.camera"
 local state = require "main.state"
+local random = require "utilities.random"
 
 -- Parent gun with default methods and properties
 ---@class Gun
@@ -15,6 +16,7 @@ local state = require "main.state"
 ---@field reloading number
 ---@field cycling number
 ---@field cycletime number
+---@field sfx string
 local gun = {}
 gun.__index = gun
 
@@ -29,6 +31,7 @@ function gun:new()
         noise = 0.0,
         reloading = false,
         cycletime = 0.25,
+        sfx = random.choose("#gunshot1", "#gunshot2", "#gunshot3")
     }
     return setmetatable(instance, self)
 end
@@ -77,7 +80,13 @@ function gun:fire(position, direction)
         -- Kick off music, if not already going
         msg.post("main:/jukebox#jukebox", "combat")
         -- Gunshot
-        sound.play("#sound")
+        local v = position - state.player.position
+        local d = math.abs(v.x) + math.abs(v.y)
+        sound.play(self.sfx, {
+            gain = 500 / (d + 500),
+            pan = v.x / (d + 500),
+            speed = random.range(0.9, 1.1)
+        })
     else
         -- Click!
         position = position + direction * 18
@@ -233,6 +242,14 @@ function shotgun:fire(position, direction)
     camera.add_shake(shake, 0.125)
     -- Kick off music, if not already going
     msg.post("main:/jukebox#jukebox", "combat")
+    -- Gunshot
+    local v = position - state.player.position
+    local d = math.abs(v.x) + math.abs(v.y)
+    sound.play(self.sfx, {
+        gain = 500 / (d + 500),
+        pan = v.x / (d + 500),
+        speed = random.range(0.9, 1.1)
+    })
 end
 
 -- Empty (no weapons)

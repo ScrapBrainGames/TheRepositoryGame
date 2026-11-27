@@ -45,6 +45,7 @@ function gun:cycle()
     if self.reloading or self.cycling or self.cocked then return end
     self.cycling = self.cycletime
     if self.fx then
+        print(self.fx)
         local position = go.get_world_position(self.fx) + vmath.vector3(0, 40, 10)
         local t = self.cycletime * .2
         for i = 1, 5 do
@@ -110,7 +111,7 @@ function gun:reload()
     local delay = 0.5
     for index, _ in ipairs(self.chambers) do
         if self.chambers[index] == false then
-            delay = delay + 0.5
+            delay = delay + 0.25
         end
     end
     if delay <= 0.5 then return end

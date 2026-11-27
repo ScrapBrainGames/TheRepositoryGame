@@ -27,7 +27,6 @@ function init(self)
 	}
 	self.crosshair = {
 		node = gui.get_node("crosshair"),
-		position = vmath.vector3(),
 		left = gui.get_node("left"),
 		right = gui.get_node("right"),
 	}
@@ -71,10 +70,6 @@ end
 
 function on_input(self, action_id, action)
 	if action.screen_x then
-		local position = self.crosshair.position
-		position.x = action.screen_x
-		position.y = action.screen_y
-		self.crosshair.position = position
-		gui.set_position(self.crosshair.node, position)
+		gui.set_screen_position(self.crosshair.node, vmath.vector3(action.screen_x, action.screen_y, 0))
 	end
 end

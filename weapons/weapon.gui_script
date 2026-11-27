@@ -33,11 +33,29 @@ function init(self)
 	}
 	msg.post(".", "acquire_input_focus")
 	defos.set_cursor_visible(false)
+
+	self.cocked = false
+	self.aiming = false
+	gui.set_visible(self.crosshair.left, false)
+	gui.set_visible(self.crosshair.right, false)
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("crosshair") then
-		-- Aiming, ready, etc.
+		if message.aiming and not self.aiming then
+			self.aiming = true
+		elseif self.aiming and not message.aiming then
+			self.aiming = false
+		end
+		if message.cocked and not self.cocked then
+			self.cocked = true
+			gui.set_visible(self.crosshair.left, true)
+			gui.set_visible(self.crosshair.right, true)
+		elseif self.cocked and not message.cocked then
+			self.cocked = false
+			gui.set_visible(self.crosshair.left, false)
+			gui.set_visible(self.crosshair.right, false)
+		end
 	elseif message_id == hash("chambers") then
 		for i, loaded in ipairs(message.chambers) do
 			gui.play_flipbook(self.nodes[i], loaded and "loaded" or "empty")

@@ -35,6 +35,7 @@ local function finale(message_id, id)
 end
 
 function queue:combat()
+	if current.combat then return end
 	if current.ambient then
 		sound.stop(current.ambient)
 		current.ambient = nil

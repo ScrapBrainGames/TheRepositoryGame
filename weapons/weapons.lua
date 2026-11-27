@@ -44,8 +44,7 @@ end
 function gun:cycle()
     if self.reloading or self.cycling or self.cocked then return end
     self.cycling = self.cycletime
-    if self.fx then
-        print(self.fx)
+    if go.exists(self.fx) then
         local position = go.get_world_position(self.fx) + vmath.vector3(0, 40, 10)
         local t = self.cycletime * .2
         for i = 1, 5 do

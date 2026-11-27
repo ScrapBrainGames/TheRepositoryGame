@@ -1,3 +1,12 @@
+images {
+  image: "/assets/weapons/crosshair_center.png"
+}
+images {
+  image: "/assets/weapons/crosshair_left.png"
+}
+images {
+  image: "/assets/weapons/crosshair_right.png"
+}
 animations {
   id: "loaded"
   images {

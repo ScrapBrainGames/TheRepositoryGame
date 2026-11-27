@@ -295,5 +295,11 @@ embedded_instances {
   "group: \\\"stings\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"gunshot\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/sfx/meatyrifle2.wav\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }

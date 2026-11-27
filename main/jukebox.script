@@ -48,6 +48,7 @@ function queue:combat()
 		current.finale = nil
 	end
 	-- Play the combat loop
+	sound.play("#gunshot")
 	current.combat = music.combat
 	sound.set_gain(current.combat, 1)
 	sound.play(music.combat)

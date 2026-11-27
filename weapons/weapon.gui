@@ -1,4 +1,4 @@
-script: "/characters/weapon.gui_script"
+script: "/weapons/weapon.gui_script"
 textures {
   name: "hud"
   texture: "/main/hud.atlas"
@@ -137,6 +137,35 @@ nodes {
   texture: "hud/loaded"
   id: "single"
   parent: "singlegun"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  type: TYPE_BOX
+  texture: "hud/crosshair_center"
+  id: "crosshair"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -8.0
+  }
+  type: TYPE_BOX
+  texture: "hud/crosshair_left"
+  id: "left"
+  parent: "crosshair"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 8.0
+  }
+  type: TYPE_BOX
+  texture: "hud/crosshair_right"
+  id: "right"
+  parent: "crosshair"
+  inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
 material: "/builtins/materials/gui.material"

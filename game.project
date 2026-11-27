@@ -17,10 +17,11 @@ gravity_y = 0.0
 scale = 0.01
 
 [html5]
-scale_mode = stretch
+scale_mode = fit
 
 [project]
 title = High Plains Grifter
+dependencies#0 = https://github.com/subsoap/defos/archive/refs/tags/v2.8.7.zip
 
 [graphics]
 default_texture_min_filter = nearest

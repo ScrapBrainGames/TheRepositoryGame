@@ -36,13 +36,6 @@ go.property("red_hat", resource.tile_source("/characters/mooks/red_hat.tilesourc
 -- Weapons
 go.property("weapon", resource.atlas("/weapons/weapons.atlas"))
 
-
-local function update_hud(self)
-	if self.player then
-		msg.post(self.hud, "chambers", { chambers = self.weapon.chambers })
-	end
-end
-
 local function aim(self)
 	self.aiming = true
 end
@@ -283,7 +276,8 @@ function update(self, dt)
 	local velocity = go.get("#collisionobject", "linear_velocity")
 	-- Player has a HUD and sends info to AI, enemy listens to AI
 	if self.player then
-		update_hud(self)
+		msg.post(self.hud, "chambers", { chambers = self.weapon.chambers })
+		msg.post(self.hud, "crosshair", { aiming = self.aiming, cocked = self.weapon.cocked })
 		state.player.position = self.position
 		ai.set_player_position(self.position, velocity)
 		-- If holding trigger, fire when ready (input buffer)

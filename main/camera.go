@@ -4,7 +4,7 @@ components {
 }
 components {
   id: "weapon"
-  component: "/characters/weapon.gui"
+  component: "/weapons/weapon.gui"
 }
 embedded_components {
   id: "camera"

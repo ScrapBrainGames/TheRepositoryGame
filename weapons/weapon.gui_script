@@ -44,8 +44,12 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("crosshair") then
 		if message.aiming and not self.aiming then
 			self.aiming = true
+			gui.animate(self.crosshair.left, "position", vmath.vector3(), gui.EASING_OUTQUAD, 0.125)
+			gui.animate(self.crosshair.right, "position", vmath.vector3(), gui.EASING_OUTQUAD, 0.125)
 		elseif self.aiming and not message.aiming then
 			self.aiming = false
+			gui.animate(self.crosshair.left, "position", vmath.vector3(-8, 0, 0), gui.EASING_OUTQUAD, 0.125)
+			gui.animate(self.crosshair.right, "position", vmath.vector3(8, 0, 0), gui.EASING_OUTQUAD, 0.125)
 		end
 		if message.cocked and not self.cocked then
 			self.cocked = true

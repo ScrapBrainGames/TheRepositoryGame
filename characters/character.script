@@ -78,7 +78,7 @@ local function set_player(self)
 	state.register(self.id, true)
 	ai.remove_enemy(self.id)
 	-- Text pop
-	factory.create("#popper", self.position + vmath.vector3(0, 36, 10), nil, { text = "!", duration = 0.5 })
+	factory.create("#popper", self.position + vmath.vector3(0, 40, 10), nil, { text = "!", duration = 0.5 })
 end
 
 local function set_sprite(self)

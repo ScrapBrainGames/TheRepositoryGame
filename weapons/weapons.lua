@@ -44,6 +44,14 @@ end
 function gun:cycle()
     if self.reloading or self.cycling or self.cocked then return end
     self.cycling = self.cycletime
+    local position = go.get_world_position(self.fx) + vmath.vector3(0, 40, 10)
+    local t = self.cycletime * .2
+    for i = 1, 5 do
+        timer.delay(i * t, false, function()
+            local text = string.sub("click", 1, i)
+            factory.create("#popper", position, nil, { text = text, duration = t, angled = false })
+        end)
+    end
 end
 
 function gun:fire(position, direction)

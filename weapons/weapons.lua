@@ -322,13 +322,15 @@ function dynamite:cycle()
 end
 
 function dynamite:fire(position, direction)
-    if self.stick then
+    if self.stick and go.exists(self.stick) then
         direction.z = 0
         go.set_parent(self.stick, nil, true)
         msg.post(self.stick, "launch", { position = position, direction = direction })
         -- Destroy the evidence
         self.cocked = false
         self.stick = nil
+    else
+        self:reload()
     end
 end
 
